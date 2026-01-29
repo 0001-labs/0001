@@ -226,7 +226,6 @@
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
-        cursor: pointer;
       }
 
       .home-footer__controls {
@@ -333,7 +332,7 @@
           <div class="home-footer__top">
             <div class="home-footer__brand">
               <span class="home-footer__brand-name">0001</span>
-              <span class="home-footer__tagline" id="footer-tagline">We deliver digital products</span>
+              <span class="home-footer__tagline">We deliver digital products</span>
             </div>
             <div class="home-footer__controls">
               <button class="home-footer__toggle">English</button>
@@ -403,13 +402,6 @@
       const heroImage = document.querySelector('.hero__image img');
       const decorativeImage = document.querySelector('.decorative-image img');
       const randomizeBtn = document.getElementById('randomize-btn');
-      const footerTagline = document.getElementById('footer-tagline');
-
-      // Load saved tagline from localStorage
-      const savedTagline = localStorage.getItem('footerTagline');
-      if (savedTagline && Object.values(sentences).includes(savedTagline)) {
-        footerTagline.textContent = savedTagline;
-      }
 
       // Randomize function
       function randomizeSentence() {
@@ -437,25 +429,6 @@
       // Hero randomize on click (title)
       const heroTitleWrapper = document.querySelector('.hero__title-wrapper');
       heroTitleWrapper.addEventListener('click', randomizeSentence);
-
-      // Footer tagline hover randomization
-      let flipInterval = null;
-
-      footerTagline.addEventListener('mouseenter', () => {
-        flipInterval = setInterval(() => {
-          const randomKey = sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
-          footerTagline.textContent = sentences[randomKey];
-        }, 800);
-      });
-
-      footerTagline.addEventListener('mouseleave', () => {
-        if (flipInterval) {
-          clearInterval(flipInterval);
-          flipInterval = null;
-        }
-        // Save current tagline to localStorage
-        localStorage.setItem('footerTagline', footerTagline.textContent);
-      });
     </script>
   </body>
 </html>
