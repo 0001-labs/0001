@@ -202,9 +202,8 @@
         position: absolute;
         left: 0;
         bottom: 50px;
-        width: 200px;
-        text-align: right;
-        padding-right: 60px;
+        width: 400px;
+        padding-left: 60px;
       }
 
       .home-footer__copyright {
@@ -212,6 +211,21 @@
         font-size: 12px;
         letter-spacing: -0.24px;
         color: rgba(101, 138, 8, 0.3);
+        display: flex;
+        gap: 12px;
+        margin: 0;
+      }
+
+      .home-footer__social-link {
+        font-family: var(--font-medium);
+        font-size: 12px;
+        letter-spacing: -0.24px;
+        color: rgba(101, 138, 8, 0.3);
+        text-decoration: none;
+      }
+
+      .home-footer__social-link:hover {
+        color: rgba(101, 138, 8, 0.6);
       }
     </style>
   </head>
@@ -344,7 +358,11 @@
         </nav>
 
         <div class="home-footer__bottom">
-          <p class="home-footer__copyright">0001 © <ds-date format="YYYY"></ds-date></p>
+          <p class="home-footer__copyright">
+            <span>0001 © <ds-date format="YYYY"></ds-date></span>
+            <a href="https://instagram.com/0001labs" class="home-footer__social-link">Instagram</a>
+            <a href="https://linkedin.com/company/0001labs" class="home-footer__social-link">LinkedIn</a>
+          </p>
         </div>
       </footer>
       </main>
