@@ -128,6 +128,22 @@
         padding-bottom: 8px;
       }
 
+      .services-item__inquiry {
+        font-family: var(--font-regular);
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        color: #979441;
+        background-color: #CCFF4D;
+        text-decoration: none;
+        padding: 4px 8px;
+        display: inline-block;
+        margin-top: 8px;
+      }
+
+      .services-item__inquiry:hover {
+        text-decoration: underline;
+      }
+
       .services-contact {
         margin-top: 20px;
       }
@@ -289,30 +305,35 @@
               <span class="services-item__title">SEO</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Search engine optimization to improve your visibility and organic traffic. We focus on technical SEO, content strategy, and performance metrics.</p>
+                <a href="/contact?topic=SEO" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600">
               <span class="services-item__title">Speed optimizing</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Performance audits and optimizations to achieve sub-second load times. Core Web Vitals, bundle optimization, and caching strategies.</p>
+                <a href="/contact?topic=Speed+optimizing" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600">
               <span class="services-item__title">Image delivery pipeline</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Automated image processing, CDN delivery, and responsive image serving. WebP/AVIF conversion and lazy loading implementation.</p>
+                <a href="/contact?topic=Image+delivery+pipeline" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600">
               <span class="services-item__title">Marketing sites</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">High-converting landing pages and marketing websites. Built for speed, accessibility, and conversion optimization.</p>
+                <a href="/contact?topic=Marketing+sites" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600">
               <span class="services-item__title">Design systems</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Component libraries and design tokens that scale. Documentation, versioning, and cross-platform consistency.</p>
+                <a href="/contact?topic=Design+systems" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
           </div>
@@ -326,30 +347,35 @@
               <span class="services-item__title">API development</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">RESTful and GraphQL APIs built for scale. Type-safe contracts, versioning, and comprehensive documentation.</p>
+                <a href="/contact?topic=API+development" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600">
               <span class="services-item__title">Database design</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Schema design, migrations, and query optimization. PostgreSQL, MongoDB, and real-time databases.</p>
+                <a href="/contact?topic=Database+design" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600">
               <span class="services-item__title">Cloud infrastructure</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">AWS, GCP, and Cloudflare deployment. Infrastructure as code, auto-scaling, and cost optimization.</p>
+                <a href="/contact?topic=Cloud+infrastructure" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600">
               <span class="services-item__title">Authentication</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Secure auth flows with OAuth, SSO, and passwordless options. Session management and token handling.</p>
+                <a href="/contact?topic=Authentication" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600">
               <span class="services-item__title">Security</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Security audits, penetration testing, and compliance. OWASP best practices and vulnerability management.</p>
+                <a href="/contact?topic=Security" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
           </div>
@@ -363,12 +389,14 @@
               <span class="services-item__title">Agents</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Autonomous AI agents for complex workflows. Task automation, decision-making, and human-in-the-loop systems.</p>
+                <a href="/contact?topic=AI+Agents" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
             <div class="services-item" data-image="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600">
               <span class="services-item__title">MCP</span>
               <div class="services-item__content"><div class="services-item__content-inner">
                 <p class="services-item__description">Model Context Protocol implementation for tool-using AI. Connect your systems to language models securely.</p>
+                <a href="/contact?topic=MCP" class="services-item__inquiry">Inquire about this</a>
               </div></div>
             </div>
           </div>
