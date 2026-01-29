@@ -92,6 +92,7 @@
 
       .hero__title-wrapper {
         position: relative;
+        cursor: pointer;
       }
 
       .hero__number {
@@ -360,8 +361,8 @@
         footerTagline.textContent = savedTagline;
       }
 
-      // Hero randomize on click
-      randomizeBtn.addEventListener('click', () => {
+      // Randomize function
+      function randomizeSentence() {
         const randomKey = sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
         const sentence = sentences[randomKey];
 
@@ -373,7 +374,14 @@
         const line1 = words.slice(0, midpoint).join(' ');
         const line2 = words.slice(midpoint).join(' ');
         heroTagline.innerHTML = line1 + '<br />' + line2;
-      });
+      }
+
+      // Hero randomize on click (decorative image)
+      randomizeBtn.addEventListener('click', randomizeSentence);
+
+      // Hero randomize on click (title)
+      const heroTitleWrapper = document.querySelector('.hero__title-wrapper');
+      heroTitleWrapper.addEventListener('click', randomizeSentence);
 
       // Footer tagline hover randomization
       let flipInterval = null;
