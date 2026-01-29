@@ -79,17 +79,6 @@
         display: flex;
         align-items: baseline;
         margin-bottom: 30px;
-        position: relative;
-        cursor: pointer;
-      }
-
-      .sentences-title__number {
-        position: absolute;
-        right: calc(100% + 10px);
-        font-family: var(--font-medium);
-        font-size: 48px;
-        letter-spacing: -0.96px;
-        color: var(--base-slate);
       }
 
       .sentences-title__text {
@@ -318,9 +307,8 @@
       <!-- Main content -->
       <main class="sentences-main">
         <div class="sentences-content">
-          <h1 class="sentences-title" id="title-randomize">
-            <span class="sentences-title__number" id="title-number">5000</span>
-            <span class="sentences-title__text" id="title-text">Craft is in the constraints</span>
+          <h1 class="sentences-title">
+            <span class="sentences-title__text">9999 sentences</span>
           </h1>
 
           <p class="sentences-description">A collection of thoughts, principles, and beliefs that guide how we work. Some slots are filled, most remain empty. The last sentence is never written.</p>
@@ -475,17 +463,6 @@
         compactIcon.setAttribute('type', isCompact ? 'row' : 'in');
       });
 
-      // Title click to randomize sentence
-      const titleNumber = document.getElementById('title-number');
-      const titleText = document.getElementById('title-text');
-      const titleRandomize = document.getElementById('title-randomize');
-      const sentenceKeys = Object.keys(sentences).map(Number).filter(k => k !== 9999);
-
-      titleRandomize.addEventListener('click', () => {
-        const randomKey = sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
-        titleNumber.textContent = String(randomKey).padStart(4, '0');
-        titleText.textContent = sentences[randomKey];
-      });
     </script>
   </body>
 </html>
