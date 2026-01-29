@@ -369,25 +369,28 @@
     </div>
 
     <script>
-      // Language cycling
+      // Language cycling - use ds-one's setLanguage for proper language switching
       const languages = ['en', 'da', 'ja'];
       const langToggle = document.getElementById('lang-toggle');
 
-      langToggle.addEventListener('click', () => {
-        const currentLang = document.documentElement.getAttribute('lang') || 'en';
+      langToggle.addEventListener('click', async () => {
+        const currentLang = localStorage.getItem('language') || 'en';
         const currentIndex = languages.indexOf(currentLang);
         const nextIndex = (currentIndex + 1) % languages.length;
         const nextLang = languages[nextIndex];
 
-        document.documentElement.setAttribute('lang', nextLang);
-        localStorage.setItem('language', nextLang);
-
-        window.dispatchEvent(new CustomEvent('language-changed', { detail: { language: nextLang } }));
+        const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
+        dsOne.setLanguage(nextLang);
       });
 
-      // Set initial language from localStorage
-      const savedLang = localStorage.getItem('language') || 'en';
-      document.documentElement.setAttribute('lang', savedLang);
+      // Set initial language from localStorage on page load
+      (async () => {
+        const savedLang = localStorage.getItem('language');
+        if (savedLang && savedLang !== 'en') {
+          const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
+          dsOne.setLanguage(savedLang);
+        }
+      })();
     </script>
   </body>
 </html>
