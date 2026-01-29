@@ -515,7 +515,7 @@
         localStorage.setItem('language', nextLang);
 
         // Dispatch event to update ds-text components
-        window.dispatchEvent(new CustomEvent('ds-language-change', { detail: { language: nextLang } }));
+        window.dispatchEvent(new CustomEvent('language-changed', { detail: { language: nextLang } }));
       });
 
       // Set initial language from localStorage
