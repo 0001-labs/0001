@@ -132,7 +132,11 @@
       .hero__image {
         width: 100%;
         height: 100%;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.5s ease;
+      }
+
+      .hero__image.hidden {
+        opacity: 0;
       }
 
       .hero__image img {
@@ -456,12 +460,14 @@
       const heroTitleWrapper = document.querySelector('.hero__title-wrapper');
       heroTitleWrapper.addEventListener('click', randomizeSentence);
 
-      // After 4 seconds: hide timer and reveal description
+      // After 4 seconds: hide timer and image, reveal description
       const heroTimer = document.getElementById('hero-timer');
       const heroDescription = document.querySelector('.hero__description');
+      const heroImageDiv = document.querySelector('.hero__image');
 
       setTimeout(() => {
         heroTimer.classList.add('hidden');
+        heroImageDiv.classList.add('hidden');
         heroDescription.classList.add('revealed');
       }, 4000);
     </script>
