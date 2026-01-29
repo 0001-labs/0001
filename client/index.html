@@ -453,23 +453,52 @@
         decorativeImage.src = image.replace('w=800', 'w=400');
       }
 
-      // Hero randomize on click (decorative image)
-      randomizeBtn.addEventListener('click', randomizeSentence);
-
-      // Hero randomize on click (title)
-      const heroTitleWrapper = document.querySelector('.hero__title-wrapper');
-      heroTitleWrapper.addEventListener('click', randomizeSentence);
-
-      // After 4 seconds: hide timer and image, reveal description
+      // Timer elements
       const heroTimer = document.getElementById('hero-timer');
       const heroDescription = document.querySelector('.hero__description');
       const heroImageDiv = document.querySelector('.hero__image');
+      let timerTimeout = null;
 
-      setTimeout(() => {
-        heroTimer.classList.add('hidden');
-        heroImageDiv.classList.add('hidden');
-        heroDescription.classList.add('revealed');
-      }, 4000);
+      // Start/restart timer function
+      function startTimer() {
+        // Clear existing timer
+        if (timerTimeout) {
+          clearTimeout(timerTimeout);
+        }
+
+        // Reset states
+        heroTimer.classList.remove('hidden');
+        heroImageDiv.classList.remove('hidden');
+        heroDescription.classList.remove('revealed');
+
+        // Restart animation by removing and re-adding element
+        heroTimer.style.animation = 'none';
+        heroTimer.offsetHeight; // Trigger reflow
+        heroTimer.style.animation = '';
+
+        // After 4 seconds: hide timer and image, reveal description
+        timerTimeout = setTimeout(() => {
+          heroTimer.classList.add('hidden');
+          heroImageDiv.classList.add('hidden');
+          heroDescription.classList.add('revealed');
+        }, 4000);
+      }
+
+      // Hero randomize on click (decorative image)
+      randomizeBtn.addEventListener('click', () => {
+        randomizeSentence();
+        startTimer();
+      });
+
+      // Hero randomize on click (title)
+      const heroTitleWrapper = document.querySelector('.hero__title-wrapper');
+      heroTitleWrapper.addEventListener('click', () => {
+        randomizeSentence();
+        startTimer();
+      });
+
+      // Start timer on page load
+      startTimer();
     </script>
   </body>
 </html>
