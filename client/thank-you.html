@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You - 0001</title>
+    <meta name="description" content="Thank you for contacting 0001. We'll get in touch with you." />
+
+    <!-- Prevent FOUC -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const theme = savedTheme || systemTheme;
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+
+    <!-- DS one CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+
+    <!-- DS one i18n setup -->
+    <script>
+      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
+    </script>
+
+    <!-- DS one bundle -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
+
+    <style>
+      .thankyou-page {
+        background-color: #FCFFF6;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .thankyou-logo {
+        position: absolute;
+        top: 85px;
+        left: 100px;
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        letter-spacing: -0.48px;
+        color: var(--base-slate);
+        text-decoration: none;
+      }
+
+      .thankyou-main {
+        padding: 200px 60px 150px 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 87px;
+      }
+
+      .thankyou-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .thankyou-title {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 64px;
+        letter-spacing: -1.28px;
+        color: var(--base-slate);
+        font-weight: normal;
+        margin: 0;
+      }
+
+      .thankyou-icon {
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+      }
+
+      .thankyou-description {
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+        line-height: 1.5;
+        max-width: 451px;
+        margin: 0;
+      }
+
+      .thankyou-footer {
+        background-color: #F2FFCF;
+        padding: 60px 100px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 400px;
+      }
+
+      .thankyou-footer__copyright {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: rgba(114, 156, 8, 0.2);
+      }
+
+      .thankyou-footer__nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .thankyou-footer__link {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #535353;
+        text-decoration: none;
+      }
+
+      .thankyou-footer__link:hover {
+        text-decoration: underline;
+      }
+
+      .thankyou-footer__link--highlight {
+        color: #858585;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thankyou-page">
+      <!-- Logo -->
+      <a href="/" class="thankyou-logo">0001</a>
+
+      <!-- Main content -->
+      <main class="thankyou-main">
+        <div class="thankyou-header">
+          <h1 class="thankyou-title">Thank you</h1>
+          <svg class="thankyou-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="19" height="19" stroke="#1e1e1e" stroke-opacity="0.2"/>
+            <text x="10" y="14" text-anchor="middle" font-family="var(--font-medium), GT America, sans-serif" font-size="12" fill="#1e1e1e">1</text>
+          </svg>
+        </div>
+
+        <p class="thankyou-description">We'll get in touch with you.</p>
+      </main>
+
+      <!-- Footer -->
+      <footer class="thankyou-footer">
+        <span class="thankyou-footer__copyright">2025 © 0001</span>
+        <nav class="thankyou-footer__nav">
+          <a href="/products" class="thankyou-footer__link thankyou-footer__link--highlight">Products</a>
+          <a href="/services" class="thankyou-footer__link">Services</a>
+          <a href="/about" class="thankyou-footer__link">About</a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>
