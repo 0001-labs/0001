@@ -88,42 +88,107 @@
         margin: 0;
       }
 
-      .thankyou-footer {
+      .home-footer {
         background-color: #F2FFCF;
-        padding: 60px 100px 50px;
+        padding: 60px 374px 50px 400px;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        gap: 70px;
+        position: relative;
         margin-top: 400px;
       }
 
-      .thankyou-footer__copyright {
+      .home-footer__top {
+        display: flex;
+        align-items: center;
+      }
+
+      .home-footer__brand {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 300px;
+      }
+
+      .home-footer__brand-name {
         font-family: var(--font-medium);
         font-size: 16px;
         letter-spacing: -0.32px;
-        color: rgba(114, 156, 8, 0.2);
+        color: var(--base-black);
       }
 
-      .thankyou-footer__nav {
+      .home-footer__tagline {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+      }
+
+      .home-footer__controls {
         display: flex;
-        align-items: center;
-        gap: 32px;
+        gap: 20px;
+        width: 150px;
       }
 
-      .thankyou-footer__link {
+      .home-footer__toggle {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        background-color: #CCFF4D;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .home-footer__nav {
+        display: flex;
+        padding-left: 150px;
+        height: 200px;
+      }
+
+      .home-footer__nav-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__link {
         font-family: var(--font-pantheon);
         font-size: 16px;
         letter-spacing: -0.32px;
-        color: #535353;
+        color: #979441;
         text-decoration: none;
       }
 
-      .thankyou-footer__link:hover {
+      .home-footer__link:hover {
         text-decoration: underline;
       }
 
-      .thankyou-footer__link--highlight {
-        color: #858585;
+      .home-footer__link--contact {
+        background-color: #CCFF4D;
+        display: inline-block;
+      }
+
+      .home-footer__link--product {
+        font-family: var(--font-medium);
+      }
+
+      .home-footer__bottom {
+        position: absolute;
+        left: 0;
+        bottom: 50px;
+        width: 200px;
+        text-align: right;
+        padding-right: 60px;
+      }
+
+      .home-footer__copyright {
+        font-family: var(--font-medium);
+        font-size: 12px;
+        letter-spacing: -0.24px;
+        color: rgba(101, 138, 8, 0.3);
       }
     </style>
   </head>
@@ -146,13 +211,35 @@
       </main>
 
       <!-- Footer -->
-      <footer class="thankyou-footer">
-        <span class="thankyou-footer__copyright">2025 © 0001</span>
-        <nav class="thankyou-footer__nav">
-          <a href="/products" class="thankyou-footer__link thankyou-footer__link--highlight">Products</a>
-          <a href="/services" class="thankyou-footer__link">Services</a>
-          <a href="/about" class="thankyou-footer__link">About</a>
+      <footer class="home-footer">
+        <div class="home-footer__top">
+          <div class="home-footer__brand">
+            <span class="home-footer__brand-name">0001</span>
+            <span class="home-footer__tagline">We deliver digital products</span>
+          </div>
+          <div class="home-footer__controls">
+            <button class="home-footer__toggle">English</button>
+            <button class="home-footer__toggle">Light</button>
+          </div>
+        </div>
+
+        <nav class="home-footer__nav">
+          <div class="home-footer__nav-column">
+            <a href="/services" class="home-footer__link">Services</a>
+            <a href="#" class="home-footer__link">Blog</a>
+            <a href="/sentences" class="home-footer__link">9999 sentences</a>
+            <a href="/about" class="home-footer__link">About</a>
+            <a href="/contact" class="home-footer__link home-footer__link--contact">Contact</a>
+          </div>
+          <div class="home-footer__nav-column">
+            <a href="/products" class="home-footer__link home-footer__link--product">Products</a>
+            <a href="#" class="home-footer__link home-footer__link--product">Architecture</a>
+          </div>
         </nav>
+
+        <div class="home-footer__bottom">
+          <p class="home-footer__copyright">0001 © 2025</p>
+        </div>
       </footer>
     </div>
   </body>
