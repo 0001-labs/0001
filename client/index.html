@@ -141,6 +141,13 @@
         line-height: 1.5;
         max-width: 451px;
         margin: 60px 0 0 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .hero__image:hover + .hero__description,
+      .hero__description:hover {
+        opacity: 1;
       }
 
       .home-footer {
