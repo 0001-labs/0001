@@ -496,26 +496,26 @@
       <footer class="home-footer">
         <div class="home-footer__top">
           <div class="home-footer__brand">
-            <span class="home-footer__brand-name">0001</span>
-            <span class="home-footer__tagline">We deliver digital products</span>
+            <span class="home-footer__brand-name"><ds-text>0001</ds-text></span>
+            <span class="home-footer__tagline"><ds-text>We deliver digital products</ds-text></span>
           </div>
           <div class="home-footer__controls">
-            <button class="home-footer__toggle">English</button>
-            <button class="home-footer__toggle">Light</button>
+            <button class="home-footer__toggle" id="lang-toggle"><ds-text>English</ds-text></button>
+            <button class="home-footer__toggle"><ds-text>Light</ds-text></button>
           </div>
         </div>
 
         <nav class="home-footer__nav">
           <div class="home-footer__nav-column">
-            <a href="/services" class="home-footer__link">Services</a>
-            <a href="#" class="home-footer__link">Blog</a>
-            <a href="/sentences" class="home-footer__link">9999 sentences</a>
-            <a href="/about" class="home-footer__link">About</a>
-            <a href="/contact" class="home-footer__link home-footer__link--contact">Contact</a>
+            <a href="/services" class="home-footer__link"><ds-text>Services</ds-text></a>
+            <a href="#" class="home-footer__link"><ds-text>Blog</ds-text></a>
+            <a href="/sentences" class="home-footer__link"><ds-text>9999 sentences</ds-text></a>
+            <a href="/about" class="home-footer__link"><ds-text>About</ds-text></a>
+            <a href="/contact" class="home-footer__link home-footer__link--contact"><ds-text>Contact</ds-text></a>
           </div>
           <div class="home-footer__nav-column">
-            <a href="/products" class="home-footer__link home-footer__link--product">Products</a>
-            <a href="#" class="home-footer__link home-footer__link--product">Architecture</a>
+            <a href="/products" class="home-footer__link home-footer__link--product"><ds-text>Products</ds-text></a>
+            <a href="#" class="home-footer__link home-footer__link--product"><ds-text>Architecture</ds-text></a>
           </div>
         </nav>
 
@@ -585,6 +585,26 @@
         // Redirect to thank you page
         window.location.href = '/thank-you';
       });
+
+      // Language cycling
+      const languages = ['en', 'da', 'ja'];
+      const langToggle = document.getElementById('lang-toggle');
+
+      langToggle.addEventListener('click', () => {
+        const currentLang = document.documentElement.getAttribute('lang') || 'en';
+        const currentIndex = languages.indexOf(currentLang);
+        const nextIndex = (currentIndex + 1) % languages.length;
+        const nextLang = languages[nextIndex];
+
+        document.documentElement.setAttribute('lang', nextLang);
+        localStorage.setItem('language', nextLang);
+
+        window.dispatchEvent(new CustomEvent('ds-language-change', { detail: { language: nextLang } }));
+      });
+
+      // Set initial language from localStorage
+      const savedLang = localStorage.getItem('language') || 'en';
+      document.documentElement.setAttribute('lang', savedLang);
     </script>
   </body>
 </html>

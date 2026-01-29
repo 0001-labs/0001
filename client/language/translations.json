@@ -1,7 +1,10 @@
 {
   "en": {
     "0001": "0001",
+    "We deliver digital products": "We deliver digital products",
     "We design digital products": "We design digital products",
+    "9999 sentences": "9999 sentences",
+    "English": "English",
     "Products": "Products",
     "Services": "Services",
     "About": "About",
@@ -45,7 +48,10 @@
   },
   "da": {
     "0001": "0001",
+    "We deliver digital products": "Vi leverer digitale produkter",
     "We design digital products": "Vi designer digitale produkter",
+    "9999 sentences": "9999 sætninger",
+    "English": "Dansk",
     "Products": "Produkter",
     "Services": "Ydelser",
     "About": "Om os",
@@ -91,7 +97,10 @@
   },
   "ja": {
     "0001": "0001",
+    "We deliver digital products": "デジタル製品を提供",
     "We design digital products": "デジタル製品をデザイン",
+    "9999 sentences": "9999の文章",
+    "English": "日本語",
     "Products": "製品",
     "Services": "サービス",
     "About": "会社概要",
