@@ -254,6 +254,14 @@
         color: rgba(42, 42, 42, 0.2);
       }
 
+      .contact-field__hint {
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        color: rgba(30, 30, 30, 0.5);
+        margin-top: 4px;
+      }
+
       .home-footer {
         background-color: #F2FFCF;
         padding: 60px 374px 50px 400px;
@@ -465,6 +473,11 @@
             <div class="contact-field">
               <label class="contact-field__label">Company name</label>
               <input type="text" class="contact-field__input" placeholder="Company name" name="company" />
+            </div>
+
+            <div class="contact-field">
+              <label class="contact-field__label">Your email</label>
+              <input type="email" class="contact-field__input" placeholder="your@email.com" name="email" required />
             </div>
 
             <div class="contact-field">
