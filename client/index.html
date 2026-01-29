@@ -17,7 +17,7 @@
     </script>
 
     <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/DS1/1-root/one.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
@@ -29,70 +29,333 @@
     </script>
 
     <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/dist/ds-one.bundle.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
+
+    <style>
+      .home-page {
+        background-color: #FCFFF6;
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+      }
+
+      .decorative-image {
+        width: 200px;
+        height: 150px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .decorative-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .decorative-image::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: #CCFF4D;
+        mix-blend-mode: screen;
+      }
+
+      .decorative-image::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(204, 255, 77, 0.3);
+        z-index: 1;
+      }
+
+      .home-content {
+        display: flex;
+        flex-direction: column;
+        gap: 150px;
+        width: 100%;
+      }
+
+      .hero {
+        padding-left: 400px;
+        padding-right: 300px;
+      }
+
+      .hero__inner {
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .hero__title-wrapper {
+        position: relative;
+      }
+
+      .hero__number {
+        position: absolute;
+        right: calc(100% + 10px);
+        width: 200px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 10px;
+        font-family: var(--font-medium);
+        font-size: 48px;
+        letter-spacing: -0.96px;
+        color: var(--base-slate);
+        text-align: right;
+      }
+
+      .hero__tagline {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 48px;
+        letter-spacing: -0.96px;
+        color: var(--base-slate);
+        line-height: normal;
+        font-weight: normal;
+        height: 120px;
+        width: 652px;
+        margin: 0;
+      }
+
+      .hero__image {
+        width: 400px;
+        height: 300px;
+      }
+
+      .hero__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .home-footer {
+        background-color: #F2FFCF;
+        padding: 60px 374px 50px 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+        position: relative;
+      }
+
+      .home-footer__top {
+        display: flex;
+        align-items: center;
+      }
+
+      .home-footer__brand {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 300px;
+      }
+
+      .home-footer__brand-name {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+      }
+
+      .home-footer__tagline {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+        cursor: pointer;
+      }
+
+      .home-footer__controls {
+        display: flex;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__toggle {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        background-color: #CCFF4D;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .home-footer__nav {
+        display: flex;
+        padding-left: 150px;
+        height: 200px;
+      }
+
+      .home-footer__nav-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__link {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        text-decoration: none;
+      }
+
+      .home-footer__link:hover {
+        text-decoration: underline;
+      }
+
+      .home-footer__link--contact {
+        background-color: #CCFF4D;
+        display: inline-block;
+      }
+
+      .home-footer__link--product {
+        font-family: var(--font-medium);
+      }
+
+      .home-footer__bottom {
+        position: absolute;
+        left: 0;
+        bottom: 50px;
+        width: 200px;
+        text-align: right;
+        padding-right: 60px;
+      }
+
+      .home-footer__copyright {
+        font-family: var(--font-medium);
+        font-size: 12px;
+        letter-spacing: -0.24px;
+        color: rgba(101, 138, 8, 0.3);
+      }
+    </style>
   </head>
   <body>
-    <div class="page">
+    <div class="home-page">
       <!-- Decorative image top-left -->
-      <div class="image-overlay image-overlay--green" style="position: absolute; top: 0; left: 0; width: 200px; height: 150px;">
-        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" alt="" />
+      <div class="decorative-image" id="randomize-btn">
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" alt="Click to randomize sentence" />
       </div>
 
-      <main class="main">
-        <!-- Hero section -->
-        <section class="section section--hero" style="padding-left: 400px; padding-right: 300px; padding-top: 100px;">
-          <div class="content" style="width: 600px;">
-            <div style="display: flex; flex-direction: column; gap: 30px;">
-              <div style="display: flex; align-items: flex-start;">
-                <span style="font-family: var(--font-medium); font-size: 48px; letter-spacing: -0.96px; color: var(--base-slate); margin-right: 10px;">
-                  <ds-text>0001</ds-text>
-                </span>
-                <h1 class="title title--medium" style="font-weight: normal;">
-                  <ds-text>Telling stories</ds-text><br /><ds-text>again and again</ds-text>
-                </h1>
-              </div>
+      <!-- Main content -->
+      <div class="home-content">
+        <main class="hero">
+          <div class="hero__inner">
+            <div class="hero__title-wrapper">
+              <span class="hero__number" id="hero-number">1241</span>
+              <h1 class="hero__tagline" id="hero-tagline">Telling stories<br />again and again</h1>
+            </div>
 
-              <!-- Hero image -->
-              <div style="width: 400px; height: 300px;">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800" alt="Vintage computers" style="width: 100%; height: 100%; object-fit: cover;" />
-              </div>
+            <div class="hero__image">
+              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800" alt="Vintage computers" />
             </div>
           </div>
-        </section>
+        </main>
 
-        <!-- Footer navigation section -->
-        <footer class="footer" style="margin-top: 150px;">
-          <div class="footer__top">
-            <div class="footer__brand">
-              <span class="footer__brand-name"><ds-text>0001</ds-text></span>
-              <span class="footer__tagline"><ds-text>We design digital products</ds-text></span>
+        <!-- Footer -->
+        <footer class="home-footer">
+          <div class="home-footer__top">
+            <div class="home-footer__brand">
+              <span class="home-footer__brand-name">0001</span>
+              <span class="home-footer__tagline" id="footer-tagline">We deliver digital products</span>
             </div>
-            <div class="footer__controls">
-              <ds-cycle type="language"></ds-cycle>
-              <ds-cycle type="theme"></ds-cycle>
+            <div class="home-footer__controls">
+              <button class="home-footer__toggle">English</button>
+              <button class="home-footer__toggle">Light</button>
             </div>
           </div>
 
-          <nav class="footer__nav">
-            <div class="footer__nav-column">
-              <a href="/services" class="footer__link"><ds-text>Services</ds-text></a>
-              <a href="#" class="footer__link"><ds-text>Blog</ds-text></a>
-              <a href="#" class="footer__link"><ds-text>9999 phrases</ds-text></a>
-              <a href="/about" class="footer__link"><ds-text>About</ds-text></a>
-              <ds-button primary href="/contact">Contact</ds-button>
+          <nav class="home-footer__nav">
+            <div class="home-footer__nav-column">
+              <a href="/services" class="home-footer__link">Services</a>
+              <a href="#" class="home-footer__link">Blog</a>
+              <a href="/sentences" class="home-footer__link">9999 sentences</a>
+              <a href="/about" class="home-footer__link">About</a>
+              <a href="/contact" class="home-footer__link home-footer__link--contact">Contact</a>
             </div>
-            <div class="footer__nav-column">
-              <a href="/products" class="footer__link"><ds-text>Products</ds-text></a>
-              <a href="#" class="footer__link"><ds-text>Architecture</ds-text></a>
+            <div class="home-footer__nav-column">
+              <a href="/products" class="home-footer__link home-footer__link--product">Products</a>
+              <a href="#" class="home-footer__link home-footer__link--product">Architecture</a>
             </div>
           </nav>
 
-          <div class="footer__bottom">
-            <p class="footer__copyright"><ds-text>© 2025 0001</ds-text></p>
+          <div class="home-footer__bottom">
+            <p class="home-footer__copyright">0001 © 2025</p>
           </div>
         </footer>
-      </main>
+      </div>
     </div>
 
-      </body>
+    <script>
+      const sentences = {
+        1: "We deliver digital products",
+        714: "Small teams, sharp edges",
+        1241: "Telling stories again and again",
+        1429: "Every pixel is a promise",
+        2143: "Built to outlast trends",
+        2857: "Shipping beats perfection",
+        3571: "Details that disappear when done right",
+        4286: "Systems over pages",
+        5000: "Craft is in the constraints",
+        5714: "Making tools feel like instincts",
+        6429: "Nothing decorative, everything deliberate",
+        7143: "We delete more than we keep",
+        7857: "Complexity absorbed, simplicity delivered",
+        9999: "The last sentence is never written"
+      };
+
+      const sentenceKeys = Object.keys(sentences);
+      const heroNumber = document.getElementById('hero-number');
+      const heroTagline = document.getElementById('hero-tagline');
+      const randomizeBtn = document.getElementById('randomize-btn');
+      const footerTagline = document.getElementById('footer-tagline');
+
+      // Load saved tagline from localStorage
+      const savedTagline = localStorage.getItem('footerTagline');
+      if (savedTagline && Object.values(sentences).includes(savedTagline)) {
+        footerTagline.textContent = savedTagline;
+      }
+
+      // Hero randomize on click
+      randomizeBtn.addEventListener('click', () => {
+        const randomKey = sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
+        const sentence = sentences[randomKey];
+
+        heroNumber.textContent = String(randomKey).padStart(4, '0');
+
+        // Split sentence into two lines if it's long
+        const words = sentence.split(' ');
+        const midpoint = Math.ceil(words.length / 2);
+        const line1 = words.slice(0, midpoint).join(' ');
+        const line2 = words.slice(midpoint).join(' ');
+        heroTagline.innerHTML = line1 + '<br />' + line2;
+      });
+
+      // Footer tagline hover randomization
+      let flipInterval = null;
+
+      footerTagline.addEventListener('mouseenter', () => {
+        flipInterval = setInterval(() => {
+          const randomKey = sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
+          footerTagline.textContent = sentences[randomKey];
+        }, 800);
+      });
+
+      footerTagline.addEventListener('mouseleave', () => {
+        if (flipInterval) {
+          clearInterval(flipInterval);
+          flipInterval = null;
+        }
+        // Save current tagline to localStorage
+        localStorage.setItem('footerTagline', footerTagline.textContent);
+      });
+    </script>
+  </body>
 </html>

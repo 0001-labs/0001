@@ -17,7 +17,7 @@
     </script>
 
     <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/DS1/1-root/one.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
@@ -29,14 +29,101 @@
     </script>
 
     <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/dist/ds-one.bundle.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
     <style>
-      .services-content {
-        padding: 300px 60px 120px;
-        background-color: var(--base-white);
-        border: var(--border-default);
+      .services-page {
+        background-color: #FCFFF6;
+        min-height: 100vh;
         position: relative;
+      }
+
+      .services-logo {
+        position: absolute;
+        top: 85px;
+        left: 100px;
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        letter-spacing: -0.48px;
+        color: var(--base-slate);
+        text-decoration: none;
+      }
+
+      .services-main {
+        padding: 200px 60px 150px 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 87px;
+      }
+
+      .services-title {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 64px;
+        letter-spacing: -1.28px;
+        color: var(--base-slate);
+        font-weight: normal;
+        margin: 0;
+      }
+
+      .services-category {
+        display: flex;
+        flex-direction: column;
+        gap: 23px;
+      }
+
+      .services-category__label {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+      }
+
+      .services-category__list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 411px;
+      }
+
+      .services-item {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 32px;
+        letter-spacing: -0.64px;
+        color: var(--base-slate);
+      }
+
+      .services-item--dimmed {
+        color: #797979;
+      }
+
+      .services-item__description {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+        line-height: 1.5;
+        max-width: 333px;
+        margin: 0;
+      }
+
+      .services-contact {
+        margin-top: 20px;
+      }
+
+      .services-contact a {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        background-color: #CCFF4D;
+        text-decoration: none;
+        padding: 2px 4px;
+        display: inline-block;
+      }
+
+      .services-contact a:hover {
+        text-decoration: underline;
       }
 
       .services-image {
@@ -46,75 +133,129 @@
         width: 200px;
         height: 150px;
       }
+
+      .services-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .services-footer {
+        background-color: #F2FFCF;
+        padding: 60px 100px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 150px;
+      }
+
+      .services-footer__copyright {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: rgba(114, 156, 8, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .services-footer__nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .services-footer__btn {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+        background-color: #CCFF4D;
+        text-decoration: none;
+        padding: 2px 4px;
+      }
+
+      .services-footer__link {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        text-decoration: none;
+      }
+
+      .services-footer__link:hover {
+        text-decoration: underline;
+      }
+
+      .services-footer__link--active {
+        color: #979441;
+      }
     </style>
   </head>
   <body>
-    <div class="page">
-      <!-- Header -->
-      <header class="header" style="position: absolute; top: 0; left: 0; right: 0; z-index: 100;">
-        <a href="/" class="header__logo"><ds-text>0001</ds-text></a>
-      </header>
+    <div class="services-page">
+      <!-- Logo -->
+      <a href="/" class="services-logo">0001</a>
 
-      <main class="main">
-        <section class="services-content">
-          <div class="content" style="max-width: 411px;">
-            <!-- Title -->
-            <h1 class="title" style="margin-bottom: 87px;"><ds-text>Services</ds-text></h1>
+      <!-- Decorative image -->
+      <div class="services-image">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400" alt="" />
+      </div>
 
-            <!-- Website services -->
-            <div class="services-category" style="margin-bottom: 87px;">
-              <span class="services-category__label"><ds-text>Website</ds-text></span>
-              <div class="services-list">
-                <span class="services-list__item"><ds-text>Image pipelines</ds-text></span>
-                <p class="services-list__description"><ds-text>Optimized image delivery pipelines for fast-loading websites.</ds-text></p>
-                <span class="services-list__item services-list__item--dimmed"><ds-text>CRM</ds-text></span>
-                <span class="services-list__item services-list__item--dimmed"><ds-text>Marketing sites</ds-text></span>
-                <span class="services-list__item services-list__item--dimmed"><ds-text>Website optimizations</ds-text></span>
-              </div>
-            </div>
+      <!-- Main content -->
+      <main class="services-main">
+        <h1 class="services-title">Services</h1>
 
-            <!-- Backend services -->
-            <div class="services-category" style="margin-bottom: 87px;">
-              <span class="services-category__label"><ds-text>Backend</ds-text></span>
-              <div class="services-list">
-                <span class="services-list__item"><ds-text>Cron jobs</ds-text></span>
-                <span class="services-list__item"><ds-text>CRM</ds-text></span>
-                <span class="services-list__item"><ds-text>Marketing sites</ds-text></span>
-                <span class="services-list__item"><ds-text>Website optimizations</ds-text></span>
-              </div>
-            </div>
-
-            <!-- AI services -->
-            <div class="services-category" style="margin-bottom: 87px;">
-              <span class="services-category__label"><ds-text>AI</ds-text></span>
-              <div class="services-list">
-                <span class="services-list__item"><ds-text>Agents</ds-text></span>
-                <span class="services-list__item"><ds-text>MCP</ds-text></span>
-              </div>
-            </div>
-
-            <!-- Contact CTA -->
-            <ds-button primary href="/contact">Contact</ds-button>
+        <!-- Website services -->
+        <div class="services-category">
+          <span class="services-category__label">Website</span>
+          <div class="services-category__list">
+            <span class="services-item">Image pipelines</span>
+            <p class="services-item__description">Our early projects focused on AI-driven solutions for local businesses in the Kepler region, ranging from optimizing supply chains to enhancing customer experiences.</p>
+            <span class="services-item services-item--dimmed">CRM</span>
+            <span class="services-item services-item--dimmed">Marketing sites</span>
+            <span class="services-item services-item--dimmed">Website optimizations</span>
           </div>
+        </div>
 
-          <!-- Decorative image -->
-          <div class="services-image">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400" alt="" style="width: 100%; height: 100%; object-fit: cover;" />
+        <!-- Backend services -->
+        <div class="services-category">
+          <span class="services-category__label">Backend</span>
+          <div class="services-category__list">
+            <span class="services-item">Cron jobs</span>
+            <span class="services-item">CRM</span>
+            <span class="services-item">Marketing sites</span>
+            <span class="services-item">Website optimizations</span>
           </div>
-        </section>
+        </div>
 
-        <!-- Footer -->
-        <footer class="footer" style="padding-top: 300px;">
-          <nav style="display: flex; justify-content: flex-end; gap: 32px; align-items: center;">
-            <ds-button primary href="/products">Products</ds-button>
-            <a href="/services" class="footer__link" style="color: var(--every-green);"><ds-text>Services</ds-text></a>
-            <a href="/about" class="footer__link"><ds-text>About</ds-text></a>
-          </nav>
-          <div class="footer__bottom" style="margin-top: 20px; display: flex; align-items: center; gap: 2px;">
-            <p class="footer__copyright"><ds-text>© 2025 0001</ds-text></p>
+        <!-- AI services -->
+        <div class="services-category">
+          <span class="services-category__label">AI</span>
+          <div class="services-category__list">
+            <span class="services-item">Agents</span>
+            <span class="services-item">MCP</span>
           </div>
-        </footer>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="services-contact">
+          <a href="/contact">Contact us</a>
+        </div>
       </main>
+
+      <!-- Footer -->
+      <footer class="services-footer">
+        <div class="services-footer__copyright">
+          <span>2025 ©</span>
+          <span>0001</span>
+        </div>
+        <nav class="services-footer__nav">
+          <a href="/products" class="services-footer__btn">Products</a>
+          <a href="/services" class="services-footer__link services-footer__link--active">Services</a>
+          <a href="/about" class="services-footer__link">About</a>
+        </nav>
+      </footer>
     </div>
   </body>
 </html>

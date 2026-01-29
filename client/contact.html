@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact - 0001</title>
-    <meta name="description" content="Contact 0001 - Get in touch with our team." />
+    <meta name="description" content="Contact 0001 - Get in touch about your project." />
 
     <!-- Prevent FOUC -->
     <script>
@@ -17,7 +17,7 @@
     </script>
 
     <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/DS1/1-root/one.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
@@ -29,108 +29,447 @@
     </script>
 
     <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/dist/ds-one.bundle.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
     <style>
-      .contact-content {
-        padding: 300px 60px 400px;
-        background-color: var(--base-white);
-        border: var(--border-default);
+      .contact-page {
+        background-color: #FCFFF6;
+        min-height: 100vh;
+        position: relative;
       }
 
-      .topic-selector {
+      .contact-logo {
+        position: absolute;
+        top: 85px;
+        left: 100px;
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        letter-spacing: -0.48px;
+        color: var(--base-slate);
+        text-decoration: none;
+      }
+
+      .contact-main {
+        padding: 200px 60px 150px 400px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 495px;
+        flex-direction: column;
+        gap: 87px;
       }
 
-      .topic-selector__label {
-        font-family: var(--font-medium);
+      .contact-title {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 64px;
+        letter-spacing: -1.28px;
+        color: var(--base-slate);
+        font-weight: normal;
+        margin: 0;
+      }
+
+      .contact-description {
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+        line-height: 1.5;
+        max-width: 451px;
+        margin: 0;
+      }
+
+      /* Step 1: Topic Selection */
+      .contact-step {
+        display: none;
+      }
+
+      .contact-step.active {
+        display: block;
+      }
+
+      .contact-form-box {
+        background: rgba(115, 217, 248, 0.1);
+        border-radius: 16px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        max-width: 443px;
+      }
+
+      .contact-category {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .contact-category__label {
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-weight: 500;
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-black);
       }
 
-      .topic-selector__icon {
-        width: 20px;
-        height: 20px;
-        background-color: var(--zenith-blue);
+      .contact-category__options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .contact-option {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+        cursor: pointer;
+        padding: 2px 4px;
+        margin: -2px -4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.15s ease;
+      }
+
+      .contact-option:hover {
+        background-color: rgba(204, 204, 255, 0.3);
+      }
+
+      .contact-option.selected {
+        background-color: #ccf;
+      }
+
+      .contact-option__selected-text {
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+        display: none;
+      }
+
+      .contact-option.selected .contact-option__selected-text {
+        display: block;
+      }
+
+      .contact-actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .contact-btn {
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: white;
+        background-color: var(--base-slate, #1e1e1e);
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: opacity 0.15s ease;
+      }
+
+      .contact-btn:hover {
+        opacity: 0.8;
+      }
+
+      .contact-btn--secondary {
+        background-color: #ccf;
+        color: #1c1c1c;
+      }
+
+      /* Step 2: Message Form */
+      .contact-topics-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 427px;
+        margin-bottom: 25px;
+      }
+
+      .contact-topics-label {
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+      }
+
+      .contact-selected-topics {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .contact-topic-tag {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+        background-color: #ccf;
+        padding: 2px 6px;
+      }
+
+      .contact-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .contact-field__label {
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+      }
+
+      .contact-field__input {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+        background-color: rgba(204, 204, 255, 0.3);
+        border: none;
+        padding: 8px 12px;
+        outline: none;
+      }
+
+      .contact-field__input::placeholder {
+        color: rgba(42, 42, 42, 0.2);
+      }
+
+      .contact-field__textarea {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+        background-color: rgba(204, 204, 255, 0.3);
+        border: none;
+        padding: 8px 12px;
+        outline: none;
+        resize: vertical;
+        min-height: 223px;
+      }
+
+      .contact-field__textarea::placeholder {
+        color: rgba(42, 42, 42, 0.2);
+      }
+
+      .contact-footer {
+        background-color: #F2FFCF;
+        padding: 60px 100px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 150px;
+      }
+
+      .contact-footer__copyright {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: rgba(114, 156, 8, 0.2);
+      }
+
+      .contact-footer__nav {
         display: flex;
         align-items: center;
-        justify-content: center;
-        cursor: pointer;
+        gap: 32px;
+      }
+
+      .contact-footer__link {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #272727;
+        text-decoration: none;
+      }
+
+      .contact-footer__link:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
   <body>
-    <div class="page">
-      <!-- Header -->
-      <header class="header" style="position: absolute; top: 0; left: 0; right: 0; z-index: 100; padding: 86px 100px;">
-        <a href="/" class="header__logo" style="background: var(--zenith-blue); padding: 4px 8px;"><ds-text>0001</ds-text></a>
-      </header>
+    <div class="contact-page">
+      <!-- Logo -->
+      <a href="/" class="contact-logo">0001</a>
 
-      <main class="main">
-        <section class="contact-content">
-          <div class="content" style="max-width: 495px;">
-            <!-- Title and form -->
-            <div style="display: flex; flex-direction: column; gap: 87px; margin-bottom: 600px;">
-              <h1 class="title"><ds-text>Contact us</ds-text></h1>
+      <!-- Main content -->
+      <main class="contact-main">
+        <h1 class="contact-title">Contact us</h1>
 
-              <!-- Topic selector -->
-              <div class="topic-selector">
-                <span class="topic-selector__label"><ds-text>Select one or more topics</ds-text></span>
-                <div class="topic-selector__icon">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5"/>
-                  </svg>
+        <!-- Step 1: Topic Selection -->
+        <div class="contact-step active" id="step-1">
+          <div class="contact-form-box">
+            <!-- Website options -->
+            <div class="contact-category">
+              <span class="contact-category__label">Website</span>
+              <div class="contact-category__options">
+                <div class="contact-option" data-value="Cron jobs">
+                  <span>Cron jobs</span>
+                  <span class="contact-option__selected-text">Selected</span>
                 </div>
-              </div>
-
-              <!-- Context message -->
-              <p class="text" style="max-width: 451px;"><ds-text>Please provide as much context as needed when contacting us.</ds-text></p>
-            </div>
-
-            <!-- Find us section -->
-            <div style="margin-bottom: 64px;">
-              <h2 class="title title--small" style="font-family: var(--font-medium); margin-bottom: 64px;"><ds-text>Find us in</ds-text></h2>
-              <div class="offices">
-                <div class="office">
-                  <h3 class="office__title"><ds-text>Copenhagen</ds-text></h3>
-                  <address class="office__address">
-                    Tomsgårdsvej 22A,<br />
-                    DK2400<br />
-                    København NV
-                  </address>
-                  <p class="office__phone"><ds-text>+45 5094 4434</ds-text></p>
+                <div class="contact-option" data-value="CRM">
+                  <span>CRM</span>
+                  <span class="contact-option__selected-text">Selected</span>
                 </div>
-                <div class="office" style="width: 235px;">
-                  <h3 class="office__title"><ds-text>Tokyo</ds-text></h3>
-                  <address class="office__address">
-                    1F, Takagi Building,<br />
-                    2-20-7 Azabujuban,<br />
-                    Minato-ku,<br />
-                    Tokyo 106-0045
-                  </address>
-                  <p class="office__phone"><ds-text>+81 70 9314 7227</ds-text></p>
+                <div class="contact-option" data-value="Marketing sites">
+                  <span>Marketing sites</span>
+                  <span class="contact-option__selected-text">Selected</span>
+                </div>
+                <div class="contact-option" data-value="Website optimizations">
+                  <span>Website optimizations</span>
+                  <span class="contact-option__selected-text">Selected</span>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        <!-- Footer -->
-        <footer class="footer" style="padding-top: 300px;">
-          <nav style="display: flex; justify-content: flex-end; gap: 32px;">
-            <a href="/products" class="footer__link" style="color: var(--base-light-grey);"><ds-text>Products</ds-text></a>
-            <a href="/services" class="footer__link" style="color: var(--base-darker-grey);"><ds-text>Services</ds-text></a>
-            <a href="/about" class="footer__link" style="color: var(--base-darker-grey);"><ds-text>About</ds-text></a>
-          </nav>
-          <div class="footer__bottom" style="margin-top: 20px;">
-            <p class="footer__copyright"><ds-text>© 2025 0001</ds-text></p>
+            <!-- Backend options -->
+            <div class="contact-category">
+              <span class="contact-category__label">Backend</span>
+              <div class="contact-category__options">
+                <div class="contact-option" data-value="Backend cron jobs">
+                  <span>Cron jobs</span>
+                  <span class="contact-option__selected-text">Selected</span>
+                </div>
+                <div class="contact-option" data-value="Backend CRM">
+                  <span>CRM</span>
+                  <span class="contact-option__selected-text">Selected</span>
+                </div>
+                <div class="contact-option" data-value="Backend marketing">
+                  <span>Marketing sites</span>
+                  <span class="contact-option__selected-text">Selected</span>
+                </div>
+                <div class="contact-option" data-value="Backend optimizations">
+                  <span>Website optimizations</span>
+                  <span class="contact-option__selected-text">Selected</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI options -->
+            <div class="contact-category">
+              <span class="contact-category__label">AI</span>
+              <div class="contact-category__options">
+                <div class="contact-option" data-value="AI Agents">
+                  <span>Agents</span>
+                  <span class="contact-option__selected-text">Selected</span>
+                </div>
+                <div class="contact-option" data-value="MCP">
+                  <span>MCP</span>
+                  <span class="contact-option__selected-text">Selected</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-actions">
+              <button type="button" class="contact-btn" id="next-btn">Next</button>
+            </div>
           </div>
-        </footer>
+        </div>
+
+        <!-- Step 2: Message Form -->
+        <div class="contact-step" id="step-2">
+          <p class="contact-description">Please provide as much context as needed when contacting us.</p>
+
+          <div class="contact-topics-header">
+            <span class="contact-topics-label">Write to us about:</span>
+            <div class="contact-selected-topics" id="selected-topics-display"></div>
+          </div>
+
+          <form class="contact-form-box" id="message-form">
+            <div class="contact-field">
+              <label class="contact-field__label">Your name</label>
+              <input type="text" class="contact-field__input" placeholder="First and last name" name="name" required />
+            </div>
+
+            <div class="contact-field">
+              <label class="contact-field__label">Company name</label>
+              <input type="text" class="contact-field__input" placeholder="Company name" name="company" />
+            </div>
+
+            <div class="contact-field">
+              <label class="contact-field__label">Your message</label>
+              <textarea class="contact-field__textarea" placeholder="Enter your message" name="message" required></textarea>
+            </div>
+
+            <div class="contact-actions">
+              <button type="submit" class="contact-btn contact-btn--secondary">Send inquiry</button>
+            </div>
+          </form>
+        </div>
       </main>
+
+      <!-- Footer -->
+      <footer class="contact-footer">
+        <span class="contact-footer__copyright">2025 © 0001</span>
+        <nav class="contact-footer__nav">
+          <a href="/products" class="contact-footer__link">Products</a>
+          <a href="/services" class="contact-footer__link">Services</a>
+          <a href="/about" class="contact-footer__link">About</a>
+        </nav>
+      </footer>
     </div>
+
+    <script>
+      // Topic selection functionality
+      const options = document.querySelectorAll('.contact-option');
+      const selectedTopics = new Set();
+      const nextBtn = document.getElementById('next-btn');
+      const step1 = document.getElementById('step-1');
+      const step2 = document.getElementById('step-2');
+      const selectedTopicsDisplay = document.getElementById('selected-topics-display');
+
+      options.forEach(option => {
+        option.addEventListener('click', () => {
+          const value = option.dataset.value;
+
+          if (option.classList.contains('selected')) {
+            option.classList.remove('selected');
+            selectedTopics.delete(value);
+          } else {
+            option.classList.add('selected');
+            selectedTopics.add(value);
+          }
+        });
+      });
+
+      // Next button - go to step 2
+      nextBtn.addEventListener('click', () => {
+        if (selectedTopics.size === 0) {
+          alert('Please select at least one topic.');
+          return;
+        }
+
+        // Display selected topics
+        selectedTopicsDisplay.innerHTML = '';
+        selectedTopics.forEach(topic => {
+          const tag = document.createElement('span');
+          tag.className = 'contact-topic-tag';
+          tag.textContent = topic;
+          selectedTopicsDisplay.appendChild(tag);
+        });
+
+        // Switch to step 2
+        step1.classList.remove('active');
+        step2.classList.add('active');
+      });
+
+      // Form submission
+      document.getElementById('message-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = {
+          topics: Array.from(selectedTopics),
+          name: formData.get('name'),
+          company: formData.get('company'),
+          message: formData.get('message')
+        };
+
+        console.log('Form submitted:', data);
+        alert('Thank you for your inquiry! We will get back to you soon.');
+      });
+    </script>
   </body>
 </html>

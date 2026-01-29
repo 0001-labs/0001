@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About - 0001</title>
-    <meta name="description" content="About 0001 - We design digital products." />
+    <meta name="description" content="About 0001 - We deliver digital products." />
 
     <!-- Prevent FOUC -->
     <script>
@@ -17,7 +17,7 @@
     </script>
 
     <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/DS1/1-root/one.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
@@ -29,77 +29,313 @@
     </script>
 
     <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/dist/ds-one.bundle.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
     <style>
-      .about-content {
-        padding: 300px 60px 120px;
-        background-color: var(--base-white);
-        border: var(--border-default);
+      .about-page {
+        background-color: #FCFFF6;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .about-logo {
+        position: absolute;
+        top: 85px;
+        left: 100px;
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        letter-spacing: -0.48px;
+        color: var(--base-slate);
+        text-decoration: none;
+      }
+
+      .about-main {
+        padding: 200px 60px 400px 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 232px;
+      }
+
+      .about-header {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .about-title {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 64px;
+        letter-spacing: -1.28px;
+        color: var(--base-slate);
+        font-weight: normal;
+        margin: 0;
+      }
+
+      .about-body {
+        width: 451px;
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+        line-height: 1.5;
+      }
+
+      .about-body p {
+        margin: 0 0 16px 0;
+      }
+
+      .about-body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .about-image {
+        width: 400px;
+        height: 300px;
+        margin-top: 30px;
+      }
+
+      .about-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .offices-title {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 24px;
+        letter-spacing: -0.48px;
+        color: var(--base-slate);
+        font-weight: normal;
+        margin: 0 0 30px 0;
+      }
+
+      .about-offices {
+        display: flex;
+        gap: 80px;
+      }
+
+      .office {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .office__title {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+      }
+
+      .office__address {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+        line-height: 1.5;
+        font-style: normal;
+      }
+
+      .about-contact {
+        margin-top: 60px;
+      }
+
+      .about-contact a {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        background-color: #CCFF4D;
+        text-decoration: none;
+        padding: 4px 8px;
+        display: inline-block;
+      }
+
+      .about-contact a:hover {
+        text-decoration: underline;
+      }
+
+      .home-footer {
+        background-color: #F2FFCF;
+        padding: 60px 374px 50px 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+        position: relative;
+      }
+
+      .home-footer__top {
+        display: flex;
+        align-items: center;
+      }
+
+      .home-footer__brand {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 300px;
+      }
+
+      .home-footer__brand-name {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+      }
+
+      .home-footer__tagline {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+      }
+
+      .home-footer__controls {
+        display: flex;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__toggle {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        background-color: #CCFF4D;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .home-footer__nav {
+        display: flex;
+        padding-left: 150px;
+        height: 200px;
+      }
+
+      .home-footer__nav-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__link {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        text-decoration: none;
+      }
+
+      .home-footer__link:hover {
+        text-decoration: underline;
+      }
+
+      .home-footer__link--contact {
+        background-color: #CCFF4D;
+        display: inline-block;
+      }
+
+      .home-footer__link--product {
+        font-family: var(--font-medium);
+      }
+
+      .home-footer__bottom {
+        position: absolute;
+        left: 0;
+        bottom: 50px;
+        width: 200px;
+        text-align: right;
+        padding-right: 60px;
+      }
+
+      .home-footer__copyright {
+        font-family: var(--font-medium);
+        font-size: 12px;
+        letter-spacing: -0.24px;
+        color: rgba(101, 138, 8, 0.3);
       }
     </style>
   </head>
   <body>
-    <div class="page">
-      <main class="main">
-        <section class="about-content">
-          <div class="content" style="max-width: 495px;">
-            <!-- Title and description -->
-            <div style="display: flex; flex-direction: column; gap: 32px; margin-bottom: 64px;">
-              <h1 class="title"><ds-text>About 0001</ds-text></h1>
-              <div class="text" style="max-width: 451px; line-height: 1.6;">
-                <p style="margin-bottom: 16px;"><ds-text>0001 was founded in 2024 with a simple mission: design digital products that tell stories.</ds-text></p>
-                <p style="margin-bottom: 16px;"><ds-text>We believe in component-first development, scaling through reuse, and building agentic-first software.</ds-text></p>
-                <p><ds-text>Our products enable solo builders to operate at the scale of small teams.</ds-text></p>
-              </div>
-            </div>
+    <div class="about-page">
+      <!-- Logo -->
+      <a href="/" class="about-logo">0001</a>
 
-            <!-- Photo -->
-            <div style="width: 400px; height: 300px; margin-bottom: 64px;">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" alt="Office" style="width: 100%; height: 100%; object-fit: cover;" />
-            </div>
-
-            <!-- Offices -->
-            <div style="margin-bottom: 64px;">
-              <h2 class="title title--small" style="margin-bottom: 64px;"><ds-text>Our offices</ds-text></h2>
-              <div class="offices">
-                <div class="office">
-                  <h3 class="office__title"><ds-text>Copenhagen</ds-text></h3>
-                  <address class="office__address">
-                    Tomsgårdsvej 22A,<br />
-                    DK2400<br />
-                    København NV
-                  </address>
-                </div>
-                <div class="office" style="width: 235px;">
-                  <h3 class="office__title"><ds-text>Tokyo</ds-text></h3>
-                  <address class="office__address">
-                    1F, Takagi Building,<br />
-                    2-20-7 Azabujuban,<br />
-                    Minato-ku,<br />
-                    Tokyo 106-0045
-                  </address>
-                </div>
-              </div>
-            </div>
-
-            <!-- Contact CTA -->
-            <ds-button primary href="/contact">Contact</ds-button>
+      <!-- Main content -->
+      <main class="about-main">
+        <section class="about-header">
+          <h1 class="about-title">About</h1>
+          <div class="about-body">
+            <p>0001 was founded in 2024 with a simple mission: build digital products that feel effortless. We believe great software should disappear into the background, letting people focus on what matters.</p>
+            <p>We're a small team that values craft over scale. Every pixel, every interaction, every line of code is intentional. We delete more than we keep.</p>
+            <p>Our products are built for solo builders and small teams who want to operate at scale without the overhead. Local-first, zero-latency, designed for the way people actually work.</p>
+          </div>
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" alt="0001 workspace" />
           </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="footer" style="padding-top: 300px;">
-          <nav style="display: flex; justify-content: flex-end; gap: 32px;">
-            <a href="/products" class="footer__link"><ds-text>Products</ds-text></a>
-            <a href="/services" class="footer__link"><ds-text>Services</ds-text></a>
-            <a href="/about" class="footer__link" style="color: var(--every-green);"><ds-text>About</ds-text></a>
-          </nav>
-          <div class="footer__bottom" style="margin-top: 20px;">
-            <p class="footer__copyright"><ds-text>© 2025 0001</ds-text></p>
+        <section class="about-offices-section">
+          <h2 class="offices-title">Offices</h2>
+          <div class="about-offices">
+            <div class="office">
+              <span class="office__title">Copenhagen</span>
+              <address class="office__address">
+                Tomsgårdsvej 22A,<br />
+                DK2400<br />
+                København NV
+              </address>
+            </div>
+            <div class="office">
+              <span class="office__title">Tokyo</span>
+              <address class="office__address">
+                1F, Takagi Building,<br />
+                2-20-7 Azabujuban,<br />
+                Minato-ku,<br />
+                Tokyo 106-0045
+              </address>
+            </div>
           </div>
-        </footer>
+          <div class="about-contact">
+            <a href="/contact">Contact us</a>
+          </div>
+        </section>
       </main>
+
+      <!-- Footer -->
+      <footer class="home-footer">
+        <div class="home-footer__top">
+          <div class="home-footer__brand">
+            <span class="home-footer__brand-name">0001</span>
+            <span class="home-footer__tagline">We deliver digital products</span>
+          </div>
+          <div class="home-footer__controls">
+            <button class="home-footer__toggle">English</button>
+            <button class="home-footer__toggle">Light</button>
+          </div>
+        </div>
+
+        <nav class="home-footer__nav">
+          <div class="home-footer__nav-column">
+            <a href="/services" class="home-footer__link">Services</a>
+            <a href="#" class="home-footer__link">Blog</a>
+            <a href="/sentences" class="home-footer__link">9999 sentences</a>
+            <a href="/about" class="home-footer__link">About</a>
+            <a href="/contact" class="home-footer__link home-footer__link--contact">Contact</a>
+          </div>
+          <div class="home-footer__nav-column">
+            <a href="/products" class="home-footer__link home-footer__link--product">Products</a>
+            <a href="#" class="home-footer__link home-footer__link--product">Architecture</a>
+          </div>
+        </nav>
+
+        <div class="home-footer__bottom">
+          <p class="home-footer__copyright">0001 © 2025</p>
+        </div>
+      </footer>
     </div>
   </body>
 </html>

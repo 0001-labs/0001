@@ -17,7 +17,7 @@
     </script>
 
     <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/DS1/1-root/one.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
@@ -29,11 +29,11 @@
     </script>
 
     <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.7/dist/ds-one.bundle.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
     <style>
       .products-page {
-        background-color: var(--chartreuse-green);
+        background-color: #FCFFF6;
         min-height: 100vh;
         position: relative;
       }
@@ -44,15 +44,15 @@
         left: 0;
         right: 0;
         height: 100px;
-        background-color: var(--chartreuse-green);
+        background-color: #CCFF4D;
         z-index: 10;
       }
 
       .products-content {
         position: relative;
-        background-color: #fcfff6;
+        background-color: #FCFFF6;
         margin-top: 100px;
-        padding: 180px 60px 120px;
+        padding: 80px 60px 120px;
         min-height: calc(100vh - 100px);
       }
 
@@ -62,32 +62,156 @@
       }
 
       .table__column--product {
-        width: 240px;
+        width: 180px;
       }
 
       .table__column--users,
       .table__column--retention,
       .table__column--status {
-        width: 120px;
+        width: 100px;
       }
 
-      .table__cell--link {
+      /* Override border to 1px */
+      .table__cell {
+        border: 1px solid var(--base-slate);
+        border-top: none;
+        border-left: none;
+      }
+
+      .table__column--product .table__cell {
+        border-left: 1px solid var(--base-slate);
+      }
+
+      .table__column .table__cell:nth-child(2) {
+        border-top: 1px solid var(--base-slate);
+      }
+
+      .table__header {
+        border: none;
+      }
+
+      /* Status colors */
+      .table__cell--ga {
+        background-color: var(--apple-green);
+      }
+
+      .table__cell--alpha {
+        background-color: var(--yellow);
+      }
+
+      .table__cell--in-progress {
+        background-color: var(--pink);
+      }
+
+      .table__cell--on-hold {
+        background-color: var(--orange);
+      }
+
+      .table__cell--planned {
+        background-color: #f2ffcf;
+      }
+
+      .home-footer {
+        background-color: #F2FFCF;
+        padding: 60px 374px 50px 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+        position: relative;
+        margin-top: 120px;
+      }
+
+      .home-footer__top {
         display: flex;
         align-items: center;
-        justify-content: space-between;
       }
 
-      .external-link-icon {
-        width: 24px;
-        height: 24px;
+      .home-footer__brand {
         display: flex;
         align-items: center;
-        justify-content: center;
+        gap: 5px;
+        width: 300px;
       }
 
-      .external-link-icon svg {
-        width: 16px;
-        height: 16px;
+      .home-footer__brand-name {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+      }
+
+      .home-footer__tagline {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+      }
+
+      .home-footer__controls {
+        display: flex;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__toggle {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        background-color: #CCFF4D;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .home-footer__nav {
+        display: flex;
+        padding-left: 150px;
+        height: 200px;
+      }
+
+      .home-footer__nav-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__link {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        text-decoration: none;
+      }
+
+      .home-footer__link:hover {
+        text-decoration: underline;
+      }
+
+      .home-footer__link--contact {
+        background-color: #CCFF4D;
+        display: inline-block;
+      }
+
+      .home-footer__link--product {
+        font-family: var(--font-medium);
+      }
+
+      .home-footer__bottom {
+        position: absolute;
+        left: 0;
+        bottom: 50px;
+        width: 200px;
+        text-align: right;
+        padding-right: 60px;
+      }
+
+      .home-footer__copyright {
+        font-family: var(--font-medium);
+        font-size: 12px;
+        letter-spacing: -0.24px;
+        color: rgba(101, 138, 8, 0.3);
       }
     </style>
   </head>
@@ -110,44 +234,37 @@
           <!-- Product column -->
           <div class="table__column table__column--product">
             <div class="table__header"><ds-text>Product</ds-text></div>
-            <div class="table__cell table__cell--link">
-              <span>allmythin.gs</span>
-              <a href="https://allmythin.gs" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell">Ritonel</div>
-            <div class="table__cell">Ezo</div>
-            <div class="table__cell table__cell--link">
-              <span>DS one</span>
-              <a href="https://github.com/0001-labs/ds-one" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell table__cell--link">
-              <span>theseareuntitled.com</span>
-              <a href="https://theseareuntitled.com" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
+            <div class="table__cell">Portfolio</div>
+            <div class="table__cell">DS one</div>
+            <div class="table__cell">Mailer</div>
+            <div class="table__cell">Animator</div>
             <div class="table__cell">archcss</div>
+            <div class="table__cell">Blocker</div>
+            <div class="table__cell">Digte</div>
+            <div class="table__cell">Ezo</div>
+            <div class="table__cell">Marketer</div>
+            <div class="table__cell">Mirive</div>
+            <div class="table__cell">allmythin.gs</div>
+            <div class="table__cell">tau99</div>
+            <div class="table__cell">e</div>
+            <div class="table__cell">OpenBook</div>
+            <div class="table__cell">Post²</div>
+            <div class="table__cell">Ritonel</div>
           </div>
 
           <!-- Users column -->
           <div class="table__column table__column--users">
             <div class="table__header"><ds-text>Users</ds-text></div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
             <div class="table__cell">0</div>
             <div class="table__cell">0</div>
             <div class="table__cell">0</div>
@@ -165,25 +282,71 @@
             <div class="table__cell">0%</div>
             <div class="table__cell">0%</div>
             <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
           </div>
 
           <!-- Status column -->
           <div class="table__column table__column--status">
             <div class="table__header"><ds-text>Status</ds-text></div>
-            <div class="table__cell table__cell--status">In progress</div>
-            <div class="table__cell table__cell--status">In progress</div>
-            <div class="table__cell table__cell--status">In progress</div>
-            <div class="table__cell table__cell--status">In progress</div>
-            <div class="table__cell table__cell--status">In progress</div>
-            <div class="table__cell table__cell--status">In progress</div>
+            <div class="table__cell table__cell--ga">GA</div>
+            <div class="table__cell table__cell--alpha">Alpha</div>
+            <div class="table__cell table__cell--alpha">Alpha</div>
+            <div class="table__cell table__cell--in-progress">In progress</div>
+            <div class="table__cell table__cell--in-progress">In progress</div>
+            <div class="table__cell table__cell--in-progress">In progress</div>
+            <div class="table__cell table__cell--in-progress">In progress</div>
+            <div class="table__cell table__cell--in-progress">In progress</div>
+            <div class="table__cell table__cell--in-progress">In progress</div>
+            <div class="table__cell table__cell--in-progress">In progress</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--planned">Planned</div>
+            <div class="table__cell table__cell--planned">Planned</div>
+            <div class="table__cell table__cell--planned">Planned</div>
+            <div class="table__cell table__cell--planned">Planned</div>
           </div>
         </div>
 
-        <!-- Footer -->
-        <footer style="margin-top: 120px; display: flex; flex-direction: column; gap: 27px; align-items: center;">
-          <ds-cycle type="language"></ds-cycle>
-          <p style="font-family: var(--font-regular); font-size: 18px; letter-spacing: -0.38px; color: rgba(0,0,0,0.3);"><ds-text>© 2025 0001</ds-text></p>
-        </footer>
+      <!-- Footer -->
+      <footer class="home-footer">
+        <div class="home-footer__top">
+          <div class="home-footer__brand">
+            <span class="home-footer__brand-name">0001</span>
+            <span class="home-footer__tagline">We deliver digital products</span>
+          </div>
+          <div class="home-footer__controls">
+            <button class="home-footer__toggle">English</button>
+            <button class="home-footer__toggle">Light</button>
+          </div>
+        </div>
+
+        <nav class="home-footer__nav">
+          <div class="home-footer__nav-column">
+            <a href="/services" class="home-footer__link">Services</a>
+            <a href="#" class="home-footer__link">Blog</a>
+            <a href="/sentences" class="home-footer__link">9999 sentences</a>
+            <a href="/about" class="home-footer__link">About</a>
+            <a href="/contact" class="home-footer__link home-footer__link--contact">Contact</a>
+          </div>
+          <div class="home-footer__nav-column">
+            <a href="/products" class="home-footer__link home-footer__link--product">Products</a>
+            <a href="#" class="home-footer__link home-footer__link--product">Architecture</a>
+          </div>
+        </nav>
+
+        <div class="home-footer__bottom">
+          <p class="home-footer__copyright">0001 © 2025</p>
+        </div>
+      </footer>
       </main>
     </div>
 

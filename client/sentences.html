@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentences - 0001</title>
+    <meta name="description" content="9999 sentences from 0001. The last sentence is never written." />
+
+    <!-- Prevent FOUC -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const theme = savedTheme || systemTheme;
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+
+    <!-- DS one CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+
+    <!-- DS one i18n setup -->
+    <script>
+      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
+    </script>
+
+    <!-- DS one bundle -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
+
+    <style>
+      .sentences-page {
+        background-color: #FCFFF6;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .decorative-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 150px;
+        overflow: hidden;
+        cursor: pointer;
+        display: block;
+      }
+
+      .decorative-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .decorative-image::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: #CCFF4D;
+        mix-blend-mode: screen;
+      }
+
+      .decorative-image::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(204, 255, 77, 0.3);
+        z-index: 1;
+      }
+
+      .sentences-main {
+        padding: 200px 0 0 400px;
+      }
+
+      .sentences-title {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .sentences-title__number {
+        position: absolute;
+        right: calc(100% + 10px);
+        font-family: var(--font-medium);
+        font-size: 48px;
+        letter-spacing: -0.96px;
+        color: var(--base-slate);
+      }
+
+      .sentences-title__text {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 48px;
+        letter-spacing: -0.96px;
+        color: var(--base-slate);
+        font-weight: normal;
+      }
+
+      .sentences-description {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+        line-height: 1.5;
+        max-width: 451px;
+        margin: 0 0 30px 0;
+      }
+
+      .sentences-table__column--action {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sentences-table__column--action .sentences-table__header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 8px;
+      }
+
+      .sentences-table {
+        display: flex;
+      }
+
+      .sentences-table__column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sentences-table__column--no {
+        width: 80px;
+      }
+
+      .sentences-table__column--sentence {
+        width: 400px;
+      }
+
+      .sentences-table__header {
+        padding: 7.5px 1.5px;
+        height: 30px;
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        color: var(--base-slate);
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .sentences-table__cell {
+        border: 1px solid var(--base-black);
+        padding: 7.5px 4.5px;
+        height: 30px;
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        color: var(--base-slate);
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+      }
+
+      .sentences-table__column--sentence .sentences-table__cell {
+        font-family: var(--typeface-canon), Georgia, serif;
+      }
+
+      .sentences-table__column--no .sentences-table__cell {
+        border-right: none;
+      }
+
+      .sentences-table__column .sentences-table__cell + .sentences-table__cell {
+        border-top: none;
+      }
+
+      .sentences-table__cell--hidden {
+        color: #FCFFF6;
+      }
+
+      .home-footer {
+        background-color: #F2FFCF;
+        padding: 60px 374px 50px 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+        position: relative;
+        margin-top: 150px;
+      }
+
+      .home-footer__top {
+        display: flex;
+        align-items: center;
+      }
+
+      .home-footer__brand {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 300px;
+      }
+
+      .home-footer__brand-name {
+        font-family: var(--font-medium);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-black);
+      }
+
+      .home-footer__tagline {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: var(--base-slate);
+      }
+
+      .home-footer__controls {
+        display: flex;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__toggle {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        background-color: #CCFF4D;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .home-footer__nav {
+        display: flex;
+        padding-left: 150px;
+        height: 200px;
+      }
+
+      .home-footer__nav-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 150px;
+      }
+
+      .home-footer__link {
+        font-family: var(--font-pantheon);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #979441;
+        text-decoration: none;
+      }
+
+      .home-footer__link:hover {
+        text-decoration: underline;
+      }
+
+      .home-footer__link--contact {
+        background-color: #CCFF4D;
+        display: inline-block;
+      }
+
+      .home-footer__link--product {
+        font-family: var(--font-medium);
+      }
+
+      .home-footer__bottom {
+        position: absolute;
+        left: 0;
+        bottom: 50px;
+        width: 200px;
+        text-align: right;
+        padding-right: 60px;
+      }
+
+      .home-footer__copyright {
+        font-family: var(--font-medium);
+        font-size: 12px;
+        letter-spacing: -0.24px;
+        color: rgba(101, 138, 8, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sentences-page">
+      <!-- Decorative image top-left -->
+      <a href="/" class="decorative-image">
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" alt="Back to home" />
+      </a>
+
+      <!-- Main content -->
+      <main class="sentences-main">
+        <div class="sentences-content">
+          <h1 class="sentences-title">
+            <span class="sentences-title__number">9999</span>
+            <span class="sentences-title__text">Sentences</span>
+          </h1>
+
+          <p class="sentences-description">A collection of thoughts, principles, and beliefs that guide how we work. Some slots are filled, most remain empty. The last sentence is never written.</p>
+
+          <div class="sentences-table">
+            <div class="sentences-table__column sentences-table__column--no" id="column-no">
+              <div class="sentences-table__header">No.</div>
+            </div>
+            <div class="sentences-table__column sentences-table__column--sentence" id="column-sentence">
+              <div class="sentences-table__header">Sentence</div>
+            </div>
+            <div class="sentences-table__column sentences-table__column--action">
+              <div class="sentences-table__header">
+                <ds-button primary id="compact-btn">
+                  <ds-icon type="in"></ds-icon>
+                </ds-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="home-footer">
+        <div class="home-footer__top">
+          <div class="home-footer__brand">
+            <span class="home-footer__brand-name">0001</span>
+            <span class="home-footer__tagline">We deliver digital products</span>
+          </div>
+          <div class="home-footer__controls">
+            <button class="home-footer__toggle">English</button>
+            <button class="home-footer__toggle">Light</button>
+          </div>
+        </div>
+
+        <nav class="home-footer__nav">
+          <div class="home-footer__nav-column">
+            <a href="/services" class="home-footer__link">Services</a>
+            <a href="#" class="home-footer__link">Blog</a>
+            <a href="/sentences" class="home-footer__link">9999 sentences</a>
+            <a href="/about" class="home-footer__link">About</a>
+            <a href="/contact" class="home-footer__link home-footer__link--contact">Contact</a>
+          </div>
+          <div class="home-footer__nav-column">
+            <a href="/products" class="home-footer__link home-footer__link--product">Products</a>
+            <a href="#" class="home-footer__link home-footer__link--product">Architecture</a>
+          </div>
+        </nav>
+
+        <div class="home-footer__bottom">
+          <p class="home-footer__copyright">0001 © 2025</p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Sentences spread across 0001-9999
+      const sentences = {
+        1: "We deliver digital products",
+        714: "Small teams, sharp edges",
+        1429: "Every pixel is a promise",
+        2143: "Built to outlast trends",
+        2857: "Shipping beats perfection",
+        3571: "Details that disappear when done right",
+        4286: "Systems over pages",
+        5000: "Craft is in the constraints",
+        5714: "Making tools feel like instincts",
+        6429: "Nothing decorative, everything deliberate",
+        7143: "We delete more than we keep",
+        7857: "Complexity absorbed, simplicity delivered",
+        1241: "Telling stories again and again",
+        9999: "The last sentence is never written"
+      };
+
+      // Generate all 9999 rows
+      const columnNo = document.getElementById('column-no');
+      const columnSentence = document.getElementById('column-sentence');
+      const rows = [];
+
+      for (let i = 1; i <= 9999; i++) {
+        const noCell = document.createElement('div');
+        noCell.className = 'sentences-table__cell';
+        noCell.textContent = String(i).padStart(4, '0');
+        columnNo.appendChild(noCell);
+
+        const sentenceCell = document.createElement('div');
+        sentenceCell.className = 'sentences-table__cell';
+        if (i === 9999) {
+          sentenceCell.classList.add('sentences-table__cell--hidden');
+        }
+        sentenceCell.textContent = sentences[i] || '–';
+        columnSentence.appendChild(sentenceCell);
+
+        rows.push({ no: noCell, sentence: sentenceCell, hasSentence: !!sentences[i] });
+      }
+
+      // Compact toggle functionality - start compacted
+      let isCompact = true;
+      const compactBtn = document.getElementById('compact-btn');
+      const compactIcon = compactBtn.querySelector('ds-icon');
+
+      // Apply initial compact state
+      rows.forEach(row => {
+        if (!row.hasSentence) {
+          row.no.style.display = 'none';
+          row.sentence.style.display = 'none';
+        }
+      });
+      compactIcon.setAttribute('type', 'row');
+
+      compactBtn.addEventListener('click', () => {
+        isCompact = !isCompact;
+        rows.forEach(row => {
+          if (isCompact && !row.hasSentence) {
+            row.no.style.display = 'none';
+            row.sentence.style.display = 'none';
+          } else {
+            row.no.style.display = '';
+            row.sentence.style.display = '';
+          }
+        });
+        // Toggle icon: 'row' to expand, 'in' to compact
+        compactIcon.setAttribute('type', isCompact ? 'row' : 'in');
+      });
+    </script>
+  </body>
+</html>
