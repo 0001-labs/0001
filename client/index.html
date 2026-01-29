@@ -380,9 +380,28 @@
         9999: "The last sentence is never written"
       };
 
+      const images = {
+        1: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
+        714: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
+        1241: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800",
+        1429: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800",
+        2143: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800",
+        2857: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800",
+        3571: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
+        4286: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+        5000: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
+        5714: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800",
+        6429: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800",
+        7143: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=800",
+        7857: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800",
+        9999: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800"
+      };
+
       const sentenceKeys = Object.keys(sentences);
       const heroNumber = document.getElementById('hero-number');
       const heroTagline = document.getElementById('hero-tagline');
+      const heroImage = document.querySelector('.hero__image img');
+      const decorativeImage = document.querySelector('.decorative-image img');
       const randomizeBtn = document.getElementById('randomize-btn');
       const footerTagline = document.getElementById('footer-tagline');
 
@@ -396,6 +415,7 @@
       function randomizeSentence() {
         const randomKey = sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
         const sentence = sentences[randomKey];
+        const image = images[randomKey];
 
         heroNumber.textContent = String(randomKey).padStart(4, '0');
 
@@ -405,6 +425,10 @@
         const line1 = words.slice(0, midpoint).join(' ');
         const line2 = words.slice(midpoint).join(' ');
         heroTagline.innerHTML = line1 + '<br />' + line2;
+
+        // Update images
+        heroImage.src = image;
+        decorativeImage.src = image.replace('w=800', 'w=400');
       }
 
       // Hero randomize on click (decorative image)
