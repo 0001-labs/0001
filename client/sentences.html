@@ -181,6 +181,28 @@
         color: #FCFFF6;
       }
 
+      .sentences-table__input {
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        color: var(--base-slate);
+        background: transparent;
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .sentences-table__input::placeholder {
+        color: rgba(30, 30, 30, 0.2);
+      }
+
+      .sentences-table__input:focus {
+        background-color: rgba(204, 204, 255, 0.2);
+      }
+
       .home-footer {
         background-color: #F2FFCF;
         padding: 60px 374px 50px 400px;
@@ -385,10 +407,39 @@
 
         const sentenceCell = document.createElement('div');
         sentenceCell.className = 'sentences-table__cell';
-        if (i === 9999) {
-          sentenceCell.classList.add('sentences-table__cell--hidden');
+
+        if (sentences[i]) {
+          // Has a sentence - show text
+          if (i === 9999) {
+            sentenceCell.classList.add('sentences-table__cell--hidden');
+          }
+          sentenceCell.textContent = sentences[i];
+        } else {
+          // Empty slot - show input field
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.className = 'sentences-table__input';
+          input.placeholder = 'Write a sentence...';
+          input.dataset.index = i;
+
+          input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && input.value.trim()) {
+              const sentenceData = {
+                index: i,
+                sentence: input.value.trim()
+              };
+              console.log('Sentence submitted:', sentenceData);
+              // TODO: Send to backend
+
+              // Show as submitted
+              sentenceCell.textContent = input.value.trim();
+              sentences[i] = input.value.trim();
+            }
+          });
+
+          sentenceCell.appendChild(input);
         }
-        sentenceCell.textContent = sentences[i] || '–';
+
         columnSentence.appendChild(sentenceCell);
 
         rows.push({ no: noCell, sentence: sentenceCell, hasSentence: !!sentences[i] });
