@@ -1,0 +1,11 @@
+name = "0001-website"
+pages_build_output_dir = "dist"
+
+# Custom domain configuration
+# Note: Custom domain must be configured in Cloudflare Dashboard
+# Dashboard > Pages > 0001-website > Custom domains > Add: 0001.dev
+
+[env.production]
+routes = [
+  { pattern = "0001.dev", custom_domain = true }
+]
