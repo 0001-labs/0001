@@ -26,8 +26,8 @@ async function fetchProducts(): Promise<NotionProduct[]> {
       database_id: DATABASE_ID,
       filter: {
         property: "Active",
-        checkbox: {
-          equals: true,
+        status: {
+          equals: "Active",
         },
       },
     });
@@ -41,7 +41,7 @@ async function fetchProducts(): Promise<NotionProduct[]> {
         status: props.Status?.select?.name || "In progress",
         website: props.Website?.rich_text?.[0]?.plain_text || null,
         github: props.Github?.url || null,
-        active: props.Active?.checkbox || false,
+        active: props.Active?.status?.name === "Active",
       };
     });
 
@@ -128,7 +128,7 @@ async function updateProductsPage(): Promise<void> {
 
   // Replace the table content
   const tableStartMarker = '<div class="products-table">';
-  const tableEndMarker = "</div>\n\n        <!-- Footer -->";
+  const tableEndMarker = "</div>\n\n      <!-- Footer -->";
 
   const startIndex = template.indexOf(tableStartMarker);
   const endIndex = template.indexOf(tableEndMarker);
@@ -140,7 +140,7 @@ async function updateProductsPage(): Promise<void> {
 
   const newContent = `<div class="products-table">
           ${productsHTML}
-        </div>\n\n        <!-- Footer -->`;
+        </div>\n\n      <!-- Footer -->`;
 
   template = template.substring(0, startIndex) + newContent + template.substring(endIndex + tableEndMarker.length);
 
