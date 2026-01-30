@@ -1,10 +1,10 @@
 /**
- * 0001-h1 Web Component
+ * one-h1 Web Component
  * A styled h1 that hooks into ds-one's language system
  *
- * Usage: <0001-h1>translation-key</0001-h1>
+ * Usage: <one-h1>translation-key</one-h1>
  */
-class ZeroH1 extends HTMLElement {
+class OneH1 extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -84,4 +84,4 @@ class ZeroH1 extends HTMLElement {
   }
 }
 
-customElements.define('zero-h1', ZeroH1);
+customElements.define('one-h1', OneH1);
