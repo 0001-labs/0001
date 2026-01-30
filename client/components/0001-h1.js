@@ -76,6 +76,8 @@ class OneH1 extends HTMLElement {
           font-weight: normal;
           margin: 0;
           max-width: 400px;
+          user-select: none;
+          -webkit-user-select: none;
         }
       </style>
       <h1></h1>
