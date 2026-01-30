@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sentences - 0001</title>
+    <title>9999 Sentences</title>
     <meta name="description" content="9999 sentences from 0001. The last sentence is never written." />
 
     <!-- Prevent FOUC -->
@@ -193,6 +193,32 @@
         background-color: rgba(204, 204, 255, 0.2);
       }
 
+      .sentences-table__cell--input {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .sentences-table__submit {
+        font-family: var(--font-regular);
+        font-size: 14px;
+        color: #979441;
+        background-color: #CCFF4D;
+        border: none;
+        padding: 4px 8px;
+        cursor: pointer;
+        white-space: nowrap;
+        display: none;
+      }
+
+      .sentences-table__submit:hover {
+        text-decoration: underline;
+      }
+
+      .sentences-table__submit.visible {
+        display: block;
+      }
+
       .home-footer {
         background-color: #F2FFCF;
         padding: 60px 374px 50px 400px;
@@ -217,6 +243,7 @@
 
       .home-footer__brand-name {
         font-family: var(--font-medium);
+        font-weight: 500;
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-black);
@@ -349,7 +376,7 @@
       <footer class="home-footer">
         <div class="home-footer__top">
           <div class="home-footer__brand">
-            <span class="home-footer__brand-name"><ds-text>0001</ds-text></span>
+            <span class="home-footer__brand-name">0001</span>
             <span class="home-footer__tagline"><ds-text>We deliver digital products</ds-text></span>
           </div>
           <div class="home-footer__controls">
@@ -361,7 +388,6 @@
         <nav class="home-footer__nav">
           <div class="home-footer__nav-column">
             <a href="/services" class="home-footer__link"><ds-text>Services</ds-text></a>
-            <a href="#" class="home-footer__link"><ds-text>Blog</ds-text></a>
             <a href="/sentences" class="home-footer__link"><ds-text>9999 sentences</ds-text></a>
             <a href="/about" class="home-footer__link"><ds-text>About</ds-text></a>
             <a href="/contact" class="home-footer__link home-footer__link--contact"><ds-text>Contact</ds-text></a>
@@ -422,15 +448,21 @@
           }
           sentenceCell.textContent = sentences[i];
         } else {
-          // Empty slot - show input field
+          // Empty slot - show input field with submit button
+          sentenceCell.classList.add('sentences-table__cell--input');
+
           const input = document.createElement('input');
           input.type = 'text';
           input.className = 'sentences-table__input';
           input.placeholder = 'Write a sentence...';
           input.dataset.index = i;
 
-          input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && input.value.trim()) {
+          const submitBtn = document.createElement('button');
+          submitBtn.className = 'sentences-table__submit';
+          submitBtn.textContent = 'Submit';
+
+          const submitSentence = () => {
+            if (input.value.trim()) {
               const sentenceData = {
                 index: i,
                 sentence: input.value.trim()
@@ -439,12 +471,31 @@
               // TODO: Send to backend
 
               // Show as submitted
+              sentenceCell.classList.remove('sentences-table__cell--input');
               sentenceCell.textContent = input.value.trim();
               sentences[i] = input.value.trim();
+              rows[i - 1].hasSentence = true;
+            }
+          };
+
+          input.addEventListener('input', () => {
+            if (input.value.trim()) {
+              submitBtn.classList.add('visible');
+            } else {
+              submitBtn.classList.remove('visible');
             }
           });
 
+          input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              submitSentence();
+            }
+          });
+
+          submitBtn.addEventListener('click', submitSentence);
+
           sentenceCell.appendChild(input);
+          sentenceCell.appendChild(submitBtn);
         }
 
         columnSentence.appendChild(sentenceCell);

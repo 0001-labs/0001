@@ -1,23 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About - 0001</title>
-    <meta name="description" content="About 0001 - We deliver digital products." />
+    <title>About</title>
+    <meta
+      name="description"
+      content="About 0001 - We deliver digital products."
+    />
 
     <!-- Prevent FOUC -->
     <script>
       (function () {
         const savedTheme = localStorage.getItem("theme");
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
         const theme = savedTheme || systemTheme;
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>
 
     <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css"
+    />
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
@@ -29,11 +38,14 @@
     </script>
 
     <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"
+    ></script>
 
     <style>
       .about-page {
-        background-color: #FFFFFF;
+        background-color: #ffffff;
         min-height: 100vh;
         position: relative;
       }
@@ -42,7 +54,11 @@
         position: absolute;
         top: 115px;
         left: 140px;
-        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-family:
+          var(--font-medium),
+          "GT America",
+          -apple-system,
+          sans-serif;
         font-weight: 500;
         font-size: 24px;
         letter-spacing: -0.48px;
@@ -102,7 +118,11 @@
       }
 
       .section-title {
-        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-family:
+          var(--font-medium),
+          "GT America",
+          -apple-system,
+          sans-serif;
         font-size: 32px;
         font-weight: 500;
         letter-spacing: -0.64px;
@@ -187,7 +207,7 @@
         font-size: 16px;
         letter-spacing: -0.32px;
         color: #979441;
-        background-color: #CCFF4D;
+        background-color: #ccff4d;
         text-decoration: none;
         padding: 4px 8px;
         display: inline-block;
@@ -198,7 +218,7 @@
       }
 
       .home-footer {
-        background-color: #F2FFCF;
+        background-color: #f2ffcf;
         padding: 60px 374px 50px 400px;
         display: flex;
         flex-direction: column;
@@ -220,6 +240,7 @@
 
       .home-footer__brand-name {
         font-family: var(--font-medium);
+        font-weight: 500;
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-black);
@@ -243,7 +264,7 @@
         font-size: 16px;
         letter-spacing: -0.32px;
         color: #979441;
-        background-color: #CCFF4D;
+        background-color: #ccff4d;
         border: none;
         cursor: pointer;
         padding: 0;
@@ -275,7 +296,7 @@
       }
 
       .home-footer__link--contact {
-        background-color: #CCFF4D;
+        background-color: #ccff4d;
         width: fit-content;
       }
 
@@ -324,12 +345,28 @@
         <section class="about-header">
           <h1 class="about-title">About</h1>
           <div class="about-body">
-            <p>0001 was founded in 2024 with a simple mission: build digital products that feel effortless. We believe great software should disappear into the background, letting people focus on what matters.</p>
-            <p>We're a small team that values craft over scale. Every pixel, every interaction, every line of code is intentional. We delete more than we keep.</p>
-            <p>Our products are built for solo builders and small teams who want to operate at scale without the overhead. Local-first, zero-latency, designed for the way people actually work.</p>
+            <p>
+              0001 was founded in 2024 with a simple mission: build digital
+              products that feel effortless. We believe great software should
+              disappear into the background, letting people focus on what
+              matters.
+            </p>
+            <p>
+              We're a small team that values craft over scale. Every pixel,
+              every interaction, every line of code is intentional. We delete
+              more than we keep.
+            </p>
+            <p>
+              Our products are built for solo builders and small teams who want
+              to operate at scale without the overhead. Local-first,
+              zero-latency, designed for the way people actually work.
+            </p>
           </div>
           <div class="about-image">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" alt="0001 workspace" />
+            <img
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800"
+              alt="0001 workspace"
+            />
           </div>
         </section>
 
@@ -339,12 +376,16 @@
             <div class="team-member">
               <span class="team-member__name">Joachim Aaløkke Sørensen</span>
               <span class="team-member__role">Product @0001</span>
-              <a href="mailto:joachim@0001.dev" class="team-member__email">joachim@0001.dev</a>
+              <a href="mailto:joachim@0001.dev" class="team-member__email"
+                >joachim@0001.dev</a
+              >
             </div>
             <div class="team-member">
               <span class="team-member__name">Søren Vestergaard</span>
               <span class="team-member__role">Engineering @0001</span>
-              <a href="mailto:soren@0001.dev" class="team-member__email">soren@0001.dev</a>
+              <a href="mailto:soren@0001.dev" class="team-member__email"
+                >soren@0001.dev</a
+              >
             </div>
           </div>
         </section>
@@ -380,34 +421,63 @@
       <footer class="home-footer">
         <div class="home-footer__top">
           <div class="home-footer__brand">
-            <span class="home-footer__brand-name"><ds-text>0001</ds-text></span>
-            <span class="home-footer__tagline"><ds-text>We deliver digital products</ds-text></span>
+            <span class="home-footer__brand-name">0001</span>
+            <span class="home-footer__tagline"
+              ><ds-text>We deliver digital products</ds-text></span
+            >
           </div>
           <div class="home-footer__controls">
-            <button class="home-footer__toggle" id="lang-toggle"><ds-text>English</ds-text></button>
-            <button class="home-footer__toggle"><ds-text>Light</ds-text></button>
+            <button class="home-footer__toggle" id="lang-toggle">
+              <ds-text>English</ds-text>
+            </button>
+            <button class="home-footer__toggle">
+              <ds-text>Light</ds-text>
+            </button>
           </div>
         </div>
 
         <nav class="home-footer__nav">
           <div class="home-footer__nav-column">
-            <a href="/services" class="home-footer__link"><ds-text>Services</ds-text></a>
-            <a href="#" class="home-footer__link"><ds-text>Blog</ds-text></a>
-            <a href="/sentences" class="home-footer__link"><ds-text>9999 sentences</ds-text></a>
-            <a href="/about" class="home-footer__link"><ds-text>About</ds-text></a>
-            <a href="/contact" class="home-footer__link home-footer__link--contact"><ds-text>Contact</ds-text></a>
+            <a href="/services" class="home-footer__link"
+              ><ds-text>Services</ds-text></a
+            >
+            <a href="/sentences" class="home-footer__link"
+              ><ds-text>9999 sentences</ds-text></a
+            >
+            <a href="/about" class="home-footer__link"
+              ><ds-text>About</ds-text></a
+            >
+            <a
+              href="/contact"
+              class="home-footer__link home-footer__link--contact"
+              ><ds-text>Contact</ds-text></a
+            >
           </div>
           <div class="home-footer__nav-column">
-            <a href="/products" class="home-footer__link home-footer__link--product"><ds-text>Products</ds-text></a>
-            <a href="#" class="home-footer__link home-footer__link--product"><ds-text>Architecture</ds-text></a>
+            <a
+              href="/products"
+              class="home-footer__link home-footer__link--product"
+              ><ds-text>Products</ds-text></a
+            >
+            <a href="#" class="home-footer__link home-footer__link--product"
+              ><ds-text>Architecture</ds-text></a
+            >
           </div>
         </nav>
 
         <div class="home-footer__bottom">
           <p class="home-footer__copyright">
             <span>0001 © <ds-date format="YYYY"></ds-date></span>
-            <a href="https://instagram.com/0001labs" class="home-footer__social-link">Instagram</a>
-            <a href="https://linkedin.com/company/0001labs" class="home-footer__social-link">LinkedIn</a>
+            <a
+              href="https://instagram.com/0001labs"
+              class="home-footer__social-link"
+              >Instagram</a
+            >
+            <a
+              href="https://linkedin.com/company/0001labs"
+              class="home-footer__social-link"
+              >LinkedIn</a
+            >
           </p>
         </div>
       </footer>
@@ -415,24 +485,26 @@
 
     <script>
       // Language cycling - use ds-one's setLanguage for proper language switching
-      const languages = ['en', 'da', 'ja'];
-      const langToggle = document.getElementById('lang-toggle');
+      const languages = ["en", "da", "ja"];
+      const langToggle = document.getElementById("lang-toggle");
 
-      langToggle.addEventListener('click', async () => {
-        const currentLang = localStorage.getItem('language') || 'en';
+      langToggle.addEventListener("click", async () => {
+        const currentLang = localStorage.getItem("language") || "en";
         const currentIndex = languages.indexOf(currentLang);
         const nextIndex = (currentIndex + 1) % languages.length;
         const nextLang = languages[nextIndex];
 
-        const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
+        const dsOne =
+          await import("https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js");
         dsOne.setLanguage(nextLang);
       });
 
       // Set initial language from localStorage on page load
       (async () => {
-        const savedLang = localStorage.getItem('language');
-        if (savedLang && savedLang !== 'en') {
-          const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
+        const savedLang = localStorage.getItem("language");
+        if (savedLang && savedLang !== "en") {
+          const dsOne =
+            await import("https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js");
           dsOne.setLanguage(savedLang);
         }
       })();

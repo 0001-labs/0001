@@ -1,23 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>0001 - We design digital products</title>
-    <meta name="description" content="0001 designs digital products. Telling stories again and again." />
+    <title>0001 We deliver digital products</title>
+    <meta
+      name="description"
+      content="0001 delivers digital products. Come work with us to leverage your business."
+    />
 
     <!-- Prevent FOUC -->
     <script>
       (function () {
         const savedTheme = localStorage.getItem("theme");
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
         const theme = savedTheme || systemTheme;
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>
 
     <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css"
+    />
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
@@ -29,11 +38,17 @@
     </script>
 
     <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"
+    ></script>
+
+    <!-- 0001 components -->
+    <script type="module" src="./components/0001-h1.js"></script>
 
     <style>
       .home-page {
-        background-color: #FFFFFF;
+        background-color: #ffffff;
         min-height: 100vh;
         position: relative;
         display: flex;
@@ -56,15 +71,15 @@
       }
 
       .decorative-image::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
-        background: #CCFF4D;
+        background: #ccff4d;
         mix-blend-mode: screen;
       }
 
       .decorative-image::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
         background: rgba(204, 255, 77, 0.3);
@@ -111,22 +126,10 @@
         text-align: right;
       }
 
-      .hero__tagline {
-        font-family: var(--typeface-canon), Georgia, serif;
-        font-size: 48px;
-        letter-spacing: -0.96px;
-        color: var(--base-slate);
-        line-height: normal;
-        font-weight: normal;
-        height: 120px;
-        width: 652px;
-        margin: 0;
-      }
-
       .hero__media {
         position: relative;
         width: 400px;
-        height: 300px;
+        min-height: 300px;
       }
 
       .hero__image {
@@ -172,7 +175,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        max-width: 800px;
         opacity: 0;
         transition: opacity 0.5s ease;
         display: flex;
@@ -189,12 +192,18 @@
       }
 
       .hero__description p {
-        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-family:
+          var(--font-regular),
+          "GT America",
+          -apple-system,
+          sans-serif;
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
         line-height: 1.5;
         margin: 0;
+        max-width: 100%;
+        width: 100%;
       }
 
       .hero__buttons {
@@ -206,7 +215,11 @@
       }
 
       .hero__text-link {
-        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-family:
+          var(--font-regular),
+          "GT America",
+          -apple-system,
+          sans-serif;
         font-size: 14px;
         letter-spacing: -0.28px;
         color: var(--base-slate);
@@ -217,13 +230,12 @@
         text-decoration: underline;
       }
 
-
       .hero__timer.hidden {
         display: none;
       }
 
       .home-footer {
-        background-color: #F2FFCF;
+        background-color: #f2ffcf;
         padding: 60px 374px 50px 400px;
         display: flex;
         flex-direction: column;
@@ -245,6 +257,7 @@
 
       .home-footer__brand-name {
         font-family: var(--font-medium);
+        font-weight: 500;
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-black);
@@ -268,7 +281,7 @@
         font-size: 16px;
         letter-spacing: -0.32px;
         color: #979441;
-        background-color: #CCFF4D;
+        background-color: #ccff4d;
         border: none;
         cursor: pointer;
         padding: 0;
@@ -300,7 +313,7 @@
       }
 
       .home-footer__link--contact {
-        background-color: #CCFF4D;
+        background-color: #ccff4d;
         width: fit-content;
       }
 
@@ -343,7 +356,10 @@
     <div class="home-page">
       <!-- Decorative image top-left -->
       <div class="decorative-image" id="randomize-btn">
-        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" alt="Click to randomize sentence" />
+        <img
+          src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400"
+          alt="Click to randomize sentence"
+        />
       </div>
 
       <!-- Main content -->
@@ -351,21 +367,30 @@
         <main class="hero">
           <div class="hero__inner">
             <div class="hero__title-wrapper">
-              <span class="hero__number" id="hero-number">1241</span>
-              <h1 class="hero__tagline" id="hero-tagline">Telling stories<br />again and again</h1>
+              <span class="hero__number" id="hero-number">0001</span>
+              <zero-h1 id="hero-tagline">sentence-1</zero-h1>
             </div>
 
             <div class="hero__media">
               <div class="hero__image">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800" alt="Vintage computers" />
+                <img
+                  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800"
+                  alt="0001"
+                />
               </div>
               <div class="hero__timer" id="hero-timer"></div>
               <div class="hero__description">
-                <p>We are a software company delivering solutions to high-scale clients across the Nordics and Japan.</p>
-                <p>Our focus is building digital products that feel effortless, designed for teams who value the craft of software design.</p>
+                <p><ds-text>hero-p1</ds-text></p>
+                <p><ds-text>hero-p2</ds-text></p>
                 <div class="hero__buttons">
-                  <a href="/services"><ds-button primary>See our services</ds-button></a>
-                  <a href="/products" class="hero__text-link">See our past work</a>
+                  <a href="/services"
+                    ><ds-button primary
+                      ><ds-text>See our services</ds-text></ds-button
+                    ></a
+                  >
+                  <a href="/products" class="hero__text-link"
+                    ><ds-text>See our past work</ds-text></a
+                  >
                 </div>
               </div>
             </div>
@@ -376,34 +401,63 @@
         <footer class="home-footer">
           <div class="home-footer__top">
             <div class="home-footer__brand">
-              <span class="home-footer__brand-name"><ds-text>0001</ds-text></span>
-              <span class="home-footer__tagline"><ds-text>We deliver digital products</ds-text></span>
+              <span class="home-footer__brand-name">0001</span>
+              <span class="home-footer__tagline"
+                ><ds-text>We deliver digital products</ds-text></span
+              >
             </div>
             <div class="home-footer__controls">
-              <button class="home-footer__toggle" id="lang-toggle"><ds-text>English</ds-text></button>
-              <button class="home-footer__toggle"><ds-text>Light</ds-text></button>
+              <button class="home-footer__toggle" id="lang-toggle">
+                <ds-text>English</ds-text>
+              </button>
+              <button class="home-footer__toggle">
+                <ds-text>Light</ds-text>
+              </button>
             </div>
           </div>
 
           <nav class="home-footer__nav">
             <div class="home-footer__nav-column">
-              <a href="/services" class="home-footer__link"><ds-text>Services</ds-text></a>
-              <a href="#" class="home-footer__link"><ds-text>Blog</ds-text></a>
-              <a href="/sentences" class="home-footer__link"><ds-text>9999 sentences</ds-text></a>
-              <a href="/about" class="home-footer__link"><ds-text>About</ds-text></a>
-              <a href="/contact" class="home-footer__link home-footer__link--contact"><ds-text>Contact</ds-text></a>
+              <a href="/services" class="home-footer__link"
+                ><ds-text>Services</ds-text></a
+              >
+              <a href="/sentences" class="home-footer__link"
+                ><ds-text>9999 sentences</ds-text></a
+              >
+              <a href="/about" class="home-footer__link"
+                ><ds-text>About</ds-text></a
+              >
+              <a
+                href="/contact"
+                class="home-footer__link home-footer__link--contact"
+                ><ds-text>Contact</ds-text></a
+              >
             </div>
             <div class="home-footer__nav-column">
-              <a href="/products" class="home-footer__link home-footer__link--product"><ds-text>Products</ds-text></a>
-              <a href="#" class="home-footer__link home-footer__link--product"><ds-text>Architecture</ds-text></a>
+              <a
+                href="/products"
+                class="home-footer__link home-footer__link--product"
+                ><ds-text>Products</ds-text></a
+              >
+              <a href="#" class="home-footer__link home-footer__link--product"
+                ><ds-text>Architecture</ds-text></a
+              >
             </div>
           </nav>
 
           <div class="home-footer__bottom">
             <p class="home-footer__copyright">
               <span>0001 © <ds-date format="YYYY"></ds-date></span>
-              <a href="https://instagram.com/0001labs" class="home-footer__social-link">Instagram</a>
-              <a href="https://linkedin.com/company/0001labs" class="home-footer__social-link">LinkedIn</a>
+              <a
+                href="https://instagram.com/0001labs"
+                class="home-footer__social-link"
+                >Instagram</a
+              >
+              <a
+                href="https://linkedin.com/company/0001labs"
+                class="home-footer__social-link"
+                >LinkedIn</a
+              >
             </p>
           </div>
         </footer>
@@ -411,22 +465,10 @@
     </div>
 
     <script>
-      const sentences = {
-        1: "We deliver digital products",
-        714: "Small teams, sharp edges",
-        1241: "Telling stories again and again",
-        1429: "Every pixel is a promise",
-        2143: "Built to outlast trends",
-        2857: "Shipping beats perfection",
-        3571: "Details that disappear when done right",
-        4286: "Systems over pages",
-        5000: "Craft is in the constraints",
-        5714: "Making tools feel like instincts",
-        6429: "Nothing decorative, everything deliberate",
-        7143: "We delete more than we keep",
-        7857: "Complexity absorbed, simplicity delivered",
-        9999: "The last sentence is never written"
-      };
+      const sentenceKeys = [
+        1, 714, 1241, 1429, 2143, 2857, 3571, 4286, 5000, 5714, 6429, 7143,
+        7857, 9999,
+      ];
 
       const images = {
         1: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
@@ -442,40 +484,35 @@
         6429: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800",
         7143: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=800",
         7857: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800",
-        9999: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800"
+        9999: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800",
       };
 
-      const sentenceKeys = Object.keys(sentences);
-      const heroNumber = document.getElementById('hero-number');
-      const heroTagline = document.getElementById('hero-tagline');
-      const heroImage = document.querySelector('.hero__image img');
-      const decorativeImage = document.querySelector('.decorative-image img');
-      const randomizeBtn = document.getElementById('randomize-btn');
+      let currentSentenceKey = 1;
 
-      // Randomize function
+      const heroNumber = document.getElementById("hero-number");
+      const heroTagline = document.getElementById("hero-tagline");
+      const heroImage = document.querySelector(".hero__image img");
+      const decorativeImage = document.querySelector(".decorative-image img");
+      const randomizeBtn = document.getElementById("randomize-btn");
+
+      // Randomize function - just update the ds-text key, it handles translation
       function randomizeSentence() {
-        const randomKey = sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
-        const sentence = sentences[randomKey];
-        const image = images[randomKey];
+        currentSentenceKey =
+          sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
+        const image = images[currentSentenceKey];
 
-        heroNumber.textContent = String(randomKey).padStart(4, '0');
-
-        // Split sentence into two lines if it's long
-        const words = sentence.split(' ');
-        const midpoint = Math.ceil(words.length / 2);
-        const line1 = words.slice(0, midpoint).join(' ');
-        const line2 = words.slice(midpoint).join(' ');
-        heroTagline.innerHTML = line1 + '<br />' + line2;
+        heroNumber.textContent = String(currentSentenceKey).padStart(4, "0");
+        heroTagline.textContent = `sentence-${currentSentenceKey}`;
 
         // Update images
         heroImage.src = image;
-        decorativeImage.src = image.replace('w=800', 'w=400');
+        decorativeImage.src = image.replace("w=800", "w=400");
       }
 
       // Timer elements
-      const heroTimer = document.getElementById('hero-timer');
-      const heroDescription = document.querySelector('.hero__description');
-      const heroImageDiv = document.querySelector('.hero__image');
+      const heroTimer = document.getElementById("hero-timer");
+      const heroDescription = document.querySelector(".hero__description");
+      const heroImageDiv = document.querySelector(".hero__image");
       let timerTimeout = null;
 
       // Start/restart timer function
@@ -486,32 +523,32 @@
         }
 
         // Reset states
-        heroTimer.classList.remove('hidden');
-        heroImageDiv.classList.remove('hidden');
-        heroDescription.classList.remove('revealed');
+        heroTimer.classList.remove("hidden");
+        heroImageDiv.classList.remove("hidden");
+        heroDescription.classList.remove("revealed");
 
         // Restart animation by removing and re-adding element
-        heroTimer.style.animation = 'none';
+        heroTimer.style.animation = "none";
         heroTimer.offsetHeight; // Trigger reflow
-        heroTimer.style.animation = '';
+        heroTimer.style.animation = "";
 
         // After 4 seconds: hide timer and image, reveal description
         timerTimeout = setTimeout(() => {
-          heroTimer.classList.add('hidden');
-          heroImageDiv.classList.add('hidden');
-          heroDescription.classList.add('revealed');
+          heroTimer.classList.add("hidden");
+          heroImageDiv.classList.add("hidden");
+          heroDescription.classList.add("revealed");
         }, 4000);
       }
 
       // Hero randomize on click (decorative image)
-      randomizeBtn.addEventListener('click', () => {
+      randomizeBtn.addEventListener("click", () => {
         randomizeSentence();
         startTimer();
       });
 
       // Hero randomize on click (title)
-      const heroTitleWrapper = document.querySelector('.hero__title-wrapper');
-      heroTitleWrapper.addEventListener('click', () => {
+      const heroTitleWrapper = document.querySelector(".hero__title-wrapper");
+      heroTitleWrapper.addEventListener("click", () => {
         randomizeSentence();
         startTimer();
       });
@@ -520,24 +557,26 @@
       startTimer();
 
       // Language cycling - use ds-one's setLanguage for proper language switching
-      const languages = ['en', 'da', 'ja'];
-      const langToggle = document.getElementById('lang-toggle');
+      const languages = ["en", "da", "ja"];
+      const langToggle = document.getElementById("lang-toggle");
 
-      langToggle.addEventListener('click', async () => {
-        const currentLang = localStorage.getItem('language') || 'en';
+      langToggle.addEventListener("click", async () => {
+        const currentLang = localStorage.getItem("language") || "en";
         const currentIndex = languages.indexOf(currentLang);
         const nextIndex = (currentIndex + 1) % languages.length;
         const nextLang = languages[nextIndex];
 
-        const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
+        const dsOne =
+          await import("https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js");
         dsOne.setLanguage(nextLang);
       });
 
       // Set initial language from localStorage on page load
       (async () => {
-        const savedLang = localStorage.getItem('language');
-        if (savedLang && savedLang !== 'en') {
-          const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
+        const savedLang = localStorage.getItem("language");
+        if (savedLang && savedLang !== "en") {
+          const dsOne =
+            await import("https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js");
           dsOne.setLanguage(savedLang);
         }
       })();

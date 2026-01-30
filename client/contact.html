@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact - 0001</title>
+    <title>Contact</title>
     <meta name="description" content="Contact 0001 - Get in touch about your project." />
 
     <!-- Prevent FOUC -->
@@ -149,6 +149,62 @@
         display: block;
       }
 
+      .contact-mode-toggle {
+        display: flex;
+        position: relative;
+        margin-bottom: 24px;
+        border-bottom: 1px solid rgba(163, 163, 204, 0.3);
+      }
+
+      .contact-mode-btn {
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        color: #a3a3cc;
+        background-color: transparent;
+        border: none;
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: color 0.15s ease;
+        position: relative;
+      }
+
+      .contact-mode-btn:first-child {
+        padding-left: 0;
+      }
+
+      .contact-mode-btn:hover {
+        color: var(--base-slate);
+      }
+
+      .contact-mode-btn.active {
+        color: var(--base-black);
+      }
+
+      .contact-mode-btn.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: var(--base-black);
+      }
+
+      .contact-mode-btn:first-child.active::after {
+        left: 0;
+      }
+
+      .contact-mode {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .contact-mode.hidden {
+        display: none;
+      }
+
       .contact-actions {
         display: flex;
         justify-content: flex-end;
@@ -206,6 +262,18 @@
         color: var(--base-slate);
         background-color: #ccf;
         padding: 2px 6px;
+      }
+
+      .contact-topic-label {
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        color: var(--base-slate);
+        margin-left: 8px;
+      }
+
+      .contact-topic-label:first-child {
+        margin-left: 0;
       }
 
       .contact-field {
@@ -286,6 +354,7 @@
 
       .home-footer__brand-name {
         font-family: var(--font-medium);
+        font-weight: 500;
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-black);
@@ -387,120 +456,190 @@
 
       <!-- Main content -->
       <main class="contact-main">
-        <h1 class="contact-title">Contact us</h1>
+        <h1 class="contact-title"><ds-text>Contact us</ds-text></h1>
 
         <!-- Step 1: Topic Selection -->
         <div class="contact-step active" id="step-1">
-          <p class="contact-description">Select your focus areas below to help us understand your needs.</p>
+          <p class="contact-description"><ds-text>Select your focus areas below to help us understand your needs.</ds-text></p>
 
           <div class="contact-form-box">
-            <!-- Frontend options -->
-            <div class="contact-category">
-              <span class="contact-category__label">Frontend</span>
-              <div class="contact-category__options">
-                <div class="contact-option" data-value="SEO">
-                  <span>SEO</span>
-                  <span class="contact-option__selected-text">Selected</span>
+            <!-- Mode toggle tabs -->
+            <div class="contact-mode-toggle">
+              <button type="button" class="contact-mode-btn active" data-mode="services"><ds-text>By service</ds-text></button>
+              <button type="button" class="contact-mode-btn" data-mode="techstack"><ds-text>By tech stack</ds-text></button>
+            </div>
+
+            <!-- Services mode -->
+            <div class="contact-mode" id="mode-services">
+              <!-- Website options -->
+              <div class="contact-category">
+                <span class="contact-category__label"><ds-text>Website</ds-text></span>
+                <div class="contact-category__options">
+                  <div class="contact-option" data-value="Cron jobs">
+                    <span><ds-text>Cron jobs</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="CRM">
+                    <span><ds-text>CRM</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Marketing sites">
+                    <span><ds-text>Marketing sites</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Website optimizations">
+                    <span><ds-text>Website optimizations</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
                 </div>
-                <div class="contact-option" data-value="Speed optimizing">
-                  <span>Speed optimizing</span>
-                  <span class="contact-option__selected-text">Selected</span>
+              </div>
+
+              <!-- Backend options -->
+              <div class="contact-category">
+                <span class="contact-category__label"><ds-text>Backend</ds-text></span>
+                <div class="contact-category__options">
+                  <div class="contact-option" data-value="API development">
+                    <span><ds-text>API development</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Database design">
+                    <span><ds-text>Database design</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Authentication">
+                    <span><ds-text>Authentication</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Security">
+                    <span><ds-text>Security</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
                 </div>
-                <div class="contact-option" data-value="Image delivery pipeline">
-                  <span>Image delivery pipeline</span>
-                  <span class="contact-option__selected-text">Selected</span>
-                </div>
-                <div class="contact-option" data-value="Marketing sites">
-                  <span>Marketing sites</span>
-                  <span class="contact-option__selected-text">Selected</span>
-                </div>
-                <div class="contact-option" data-value="Design systems">
-                  <span>Design systems</span>
-                  <span class="contact-option__selected-text">Selected</span>
+              </div>
+
+              <!-- AI options -->
+              <div class="contact-category">
+                <span class="contact-category__label"><ds-text>AI</ds-text></span>
+                <div class="contact-category__options">
+                  <div class="contact-option" data-value="AI Agents">
+                    <span><ds-text>Agents</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="MCP">
+                    <span><ds-text>MCP</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Backend options -->
-            <div class="contact-category">
-              <span class="contact-category__label">Backend</span>
-              <div class="contact-category__options">
-                <div class="contact-option" data-value="API development">
-                  <span>API development</span>
-                  <span class="contact-option__selected-text">Selected</span>
-                </div>
-                <div class="contact-option" data-value="Database design">
-                  <span>Database design</span>
-                  <span class="contact-option__selected-text">Selected</span>
-                </div>
-                <div class="contact-option" data-value="Cloud infrastructure">
-                  <span>Cloud infrastructure</span>
-                  <span class="contact-option__selected-text">Selected</span>
-                </div>
-                <div class="contact-option" data-value="Authentication">
-                  <span>Authentication</span>
-                  <span class="contact-option__selected-text">Selected</span>
-                </div>
-                <div class="contact-option" data-value="Security">
-                  <span>Security</span>
-                  <span class="contact-option__selected-text">Selected</span>
+            <!-- Tech Stack mode -->
+            <div class="contact-mode hidden" id="mode-techstack">
+              <!-- Backend tech -->
+              <div class="contact-category">
+                <span class="contact-category__label"><ds-text>Backend</ds-text></span>
+                <div class="contact-category__options">
+                  <div class="contact-option" data-value="Java">
+                    <span><ds-text>Java</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Node">
+                    <span><ds-text>Node</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="C#">
+                    <span><ds-text>C#</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- AI options -->
-            <div class="contact-category">
-              <span class="contact-category__label">AI</span>
-              <div class="contact-category__options">
-                <div class="contact-option" data-value="AI Agents">
-                  <span>Agents</span>
-                  <span class="contact-option__selected-text">Selected</span>
+              <!-- Frontend tech -->
+              <div class="contact-category">
+                <span class="contact-category__label"><ds-text>Frontend</ds-text></span>
+                <div class="contact-category__options">
+                  <div class="contact-option" data-value="HTML">
+                    <span><ds-text>HTML</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="React">
+                    <span><ds-text>React</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Angular">
+                    <span><ds-text>Angular</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Vue">
+                    <span><ds-text>Vue</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
                 </div>
-                <div class="contact-option" data-value="MCP">
-                  <span>MCP</span>
-                  <span class="contact-option__selected-text">Selected</span>
+              </div>
+
+              <!-- Cloud tech -->
+              <div class="contact-category">
+                <span class="contact-category__label"><ds-text>Cloud</ds-text></span>
+                <div class="contact-category__options">
+                  <div class="contact-option" data-value="Cloudflare">
+                    <span><ds-text>Cloudflare</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="Azure">
+                    <span><ds-text>Azure</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
+                  <div class="contact-option" data-value="AWS">
+                    <span><ds-text>AWS</ds-text></span>
+                    <span class="contact-option__selected-text"><ds-text>Selected</ds-text></span>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="contact-actions">
-              <button type="button" class="contact-btn" id="next-btn">Next</button>
+              <button type="button" class="contact-btn" id="next-btn"><ds-text>Next</ds-text></button>
             </div>
           </div>
         </div>
 
         <!-- Step 2: Message Form -->
         <div class="contact-step" id="step-2">
-          <p class="contact-description">Please provide as much context as needed when contacting us.</p>
+          <p class="contact-description"><ds-text>Please provide as much context as needed when contacting us.</ds-text></p>
 
           <div class="contact-topics-header">
-            <span class="contact-topics-label">Write to us about:</span>
+            <span class="contact-topics-label"><ds-text>Write to us about:</ds-text></span>
             <div class="contact-selected-topics" id="selected-topics-display"></div>
           </div>
 
           <form class="contact-form-box" id="message-form">
             <div class="contact-field">
-              <label class="contact-field__label">Your name</label>
-              <input type="text" class="contact-field__input" placeholder="First and last name" name="name" required />
+              <label class="contact-field__label"><ds-text>Your name</ds-text></label>
+              <input type="text" class="contact-field__input" data-placeholder="First and last name" name="name" required />
             </div>
 
             <div class="contact-field">
-              <label class="contact-field__label">Company name</label>
-              <input type="text" class="contact-field__input" placeholder="Company name" name="company" />
+              <label class="contact-field__label"><ds-text>Company name</ds-text></label>
+              <input type="text" class="contact-field__input" data-placeholder="Company name" name="company" />
             </div>
 
             <div class="contact-field">
-              <label class="contact-field__label">Your email</label>
+              <label class="contact-field__label"><ds-text>Your email</ds-text></label>
               <input type="email" class="contact-field__input" placeholder="your@email.com" name="email" required />
             </div>
 
             <div class="contact-field">
-              <label class="contact-field__label">Your message</label>
-              <textarea class="contact-field__textarea" placeholder="Enter your message" name="message" required></textarea>
+              <label class="contact-field__label"><ds-text>Phone number</ds-text> <span style="opacity: 0.5">(<ds-text>Optional</ds-text>)</span></label>
+              <input type="tel" class="contact-field__input" placeholder="+45 12 34 56 78" name="phone" />
+            </div>
+
+            <div class="contact-field">
+              <label class="contact-field__label"><ds-text>Your message</ds-text></label>
+              <textarea class="contact-field__textarea" data-placeholder="Enter your message" name="message" required></textarea>
             </div>
 
             <div class="contact-actions">
-              <button type="submit" class="contact-btn contact-btn--secondary">Send inquiry</button>
+              <button type="submit" class="contact-btn contact-btn--secondary"><ds-text>Send inquiry</ds-text></button>
             </div>
           </form>
         </div>
@@ -510,7 +649,7 @@
       <footer class="home-footer">
         <div class="home-footer__top">
           <div class="home-footer__brand">
-            <span class="home-footer__brand-name"><ds-text>0001</ds-text></span>
+            <span class="home-footer__brand-name">0001</span>
             <span class="home-footer__tagline"><ds-text>We deliver digital products</ds-text></span>
           </div>
           <div class="home-footer__controls">
@@ -522,7 +661,6 @@
         <nav class="home-footer__nav">
           <div class="home-footer__nav-column">
             <a href="/services" class="home-footer__link"><ds-text>Services</ds-text></a>
-            <a href="#" class="home-footer__link"><ds-text>Blog</ds-text></a>
             <a href="/sentences" class="home-footer__link"><ds-text>9999 sentences</ds-text></a>
             <a href="/about" class="home-footer__link"><ds-text>About</ds-text></a>
             <a href="/contact" class="home-footer__link home-footer__link--contact"><ds-text>Contact</ds-text></a>
@@ -544,9 +682,38 @@
     </div>
 
     <script>
+      // Mode toggle functionality
+      const modeBtns = document.querySelectorAll('.contact-mode-btn');
+      const modeServices = document.getElementById('mode-services');
+      const modeTechstack = document.getElementById('mode-techstack');
+      let currentMode = 'services';
+
+      modeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const mode = btn.dataset.mode;
+          if (mode === currentMode) return;
+
+          currentMode = mode;
+
+          // Update button states
+          modeBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          // Show/hide modes
+          if (mode === 'services') {
+            modeServices.classList.remove('hidden');
+            modeTechstack.classList.add('hidden');
+          } else {
+            modeServices.classList.add('hidden');
+            modeTechstack.classList.remove('hidden');
+          }
+        });
+      });
+
       // Topic selection functionality
       const options = document.querySelectorAll('.contact-option');
-      const selectedTopics = new Set();
+      const selectedServices = new Set();
+      const selectedTechstack = new Set();
       const nextBtn = document.getElementById('next-btn');
       const step1 = document.getElementById('step-1');
       const step2 = document.getElementById('step-2');
@@ -555,32 +722,73 @@
       options.forEach(option => {
         option.addEventListener('click', () => {
           const value = option.dataset.value;
+          const isInTechstack = option.closest('#mode-techstack') !== null;
+          const targetSet = isInTechstack ? selectedTechstack : selectedServices;
 
           if (option.classList.contains('selected')) {
             option.classList.remove('selected');
-            selectedTopics.delete(value);
+            targetSet.delete(value);
           } else {
             option.classList.add('selected');
-            selectedTopics.add(value);
+            targetSet.add(value);
           }
         });
       });
 
+      // Pre-select topic from URL query param (from "Inquire about this" links)
+      const urlParams = new URLSearchParams(window.location.search);
+      const topicParam = urlParams.get('topic');
+      if (topicParam) {
+        const option = document.querySelector(`.contact-option[data-value="${topicParam}"]`);
+        if (option) {
+          option.classList.add('selected');
+          const isInTechstack = option.closest('#mode-techstack') !== null;
+          if (isInTechstack) {
+            selectedTechstack.add(topicParam);
+          } else {
+            selectedServices.add(topicParam);
+          }
+        }
+      }
+
       // Next button - go to step 2
       nextBtn.addEventListener('click', () => {
-        if (selectedTopics.size === 0) {
+        const hasSelections = selectedServices.size > 0 || selectedTechstack.size > 0;
+        if (!hasSelections) {
           alert('Please select at least one topic.');
           return;
         }
 
         // Display selected topics
         selectedTopicsDisplay.innerHTML = '';
-        selectedTopics.forEach(topic => {
-          const tag = document.createElement('span');
-          tag.className = 'contact-topic-tag';
-          tag.textContent = topic;
-          selectedTopicsDisplay.appendChild(tag);
-        });
+
+        // Add services selections
+        if (selectedServices.size > 0) {
+          const servicesLabel = document.createElement('span');
+          servicesLabel.className = 'contact-topic-label';
+          servicesLabel.textContent = 'Services:';
+          selectedTopicsDisplay.appendChild(servicesLabel);
+          selectedServices.forEach(topic => {
+            const tag = document.createElement('span');
+            tag.className = 'contact-topic-tag';
+            tag.textContent = topic;
+            selectedTopicsDisplay.appendChild(tag);
+          });
+        }
+
+        // Add tech stack selections
+        if (selectedTechstack.size > 0) {
+          const techLabel = document.createElement('span');
+          techLabel.className = 'contact-topic-label';
+          techLabel.textContent = 'Tech:';
+          selectedTopicsDisplay.appendChild(techLabel);
+          selectedTechstack.forEach(topic => {
+            const tag = document.createElement('span');
+            tag.className = 'contact-topic-tag';
+            tag.textContent = topic;
+            selectedTopicsDisplay.appendChild(tag);
+          });
+        }
 
         // Switch to step 2
         step1.classList.remove('active');
@@ -588,21 +796,68 @@
       });
 
       // Form submission
-      document.getElementById('message-form').addEventListener('submit', (e) => {
+      document.getElementById('message-form').addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
 
         const formData = new FormData(e.target);
         const data = {
-          topics: Array.from(selectedTopics),
+          topics: Array.from(selectedServices),
+          techstack: Array.from(selectedTechstack),
           name: formData.get('name'),
           company: formData.get('company'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
           message: formData.get('message')
         };
 
-        console.log('Form submitted:', data);
-        // Redirect to thank you page
-        window.location.href = '/thank-you';
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+
+          if (response.ok) {
+            window.location.href = '/thank-you';
+          } else {
+            throw new Error('Failed to submit');
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+          alert('Failed to send message. Please try again.');
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }
       });
+
+      // Placeholder translations
+      let translations = {};
+
+      async function loadTranslations() {
+        const res = await fetch('./language/translations.json');
+        translations = await res.json();
+        updatePlaceholders();
+      }
+
+      function updatePlaceholders() {
+        const lang = localStorage.getItem('language') || 'en';
+        document.querySelectorAll('[data-placeholder]').forEach(el => {
+          const key = el.dataset.placeholder;
+          const text = translations[lang]?.[key] || translations['en']?.[key] || key;
+          el.placeholder = text;
+        });
+      }
+
+      // Load translations and set initial placeholders
+      loadTranslations();
+
+      // Listen for language changes
+      document.addEventListener('language-changed', updatePlaceholders);
 
       // Language cycling - use ds-one's setLanguage for proper language switching
       const languages = ['en', 'da', 'ja'];
