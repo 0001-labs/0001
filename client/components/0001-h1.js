@@ -61,23 +61,30 @@ class OneH1 extends HTMLElement {
     }
   }
 
+  checkMobile() {
+    return document.documentElement.classList.contains('mobile');
+  }
+
   render() {
+    const isMobile = this.checkMobile();
+
     this.shadowRoot.innerHTML = `
       <style>
         :host {
-          display: block;
+          display: ${isMobile ? 'inline' : 'block'};
         }
         h1 {
           font-family: var(--typeface-canon, Georgia, serif);
-          font-size: 48px;
-          letter-spacing: -0.96px;
+          font-size: ${isMobile ? 'calc(24px * var(--sf, 1))' : '48px'};
+          letter-spacing: ${isMobile ? 'calc(-0.48px * var(--sf, 1))' : '-0.96px'};
           color: var(--base-slate, #2a2a2a);
           line-height: 1.2;
           font-weight: normal;
           margin: 0;
-          max-width: 400px;
+          max-width: ${isMobile ? 'none' : '400px'};
           user-select: none;
           -webkit-user-select: none;
+          display: ${isMobile ? 'inline' : 'block'};
         }
       </style>
       <h1></h1>

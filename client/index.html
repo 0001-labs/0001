@@ -247,12 +247,11 @@
 
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
       html.mobile .home-page {
-        gap: calc(30px * var(--sf));
+        gap: 0;
       }
 
       html.mobile .decorative-image {
-        width: calc(120px * var(--sf));
-        height: calc(90px * var(--sf));
+        display: none;
       }
 
       html.mobile .home-content {
@@ -260,28 +259,39 @@
       }
 
       html.mobile .hero {
-        padding-left: calc(20px * var(--sf));
-        padding-right: calc(20px * var(--sf));
+        padding: calc(30px * var(--sf)) calc(20px * var(--sf));
       }
 
       html.mobile .hero__inner {
         width: 100%;
-        gap: calc(20px * var(--sf));
+        gap: calc(24px * var(--sf));
+      }
+
+      html.mobile .hero__title-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: calc(8px * var(--sf));
       }
 
       html.mobile .hero__number {
         position: static;
         width: auto;
         height: auto;
-        justify-content: flex-start;
-        font-size: calc(32px * var(--sf));
+        font-size: calc(24px * var(--sf));
         padding: 0;
-        margin-bottom: calc(8px * var(--sf));
+        margin: 0;
+        display: inline;
       }
 
       html.mobile .hero__media {
         width: 100%;
-        min-height: calc(200px * var(--sf));
+        min-height: auto;
+      }
+
+      html.mobile .hero__image {
+        width: 100%;
+        aspect-ratio: 4/3;
       }
 
       html.mobile .hero__timer {
@@ -289,13 +299,30 @@
       }
 
       html.mobile .hero__description {
+        position: static;
+        opacity: 1;
+        pointer-events: auto;
         max-width: 100%;
-        padding-top: calc(16px * var(--sf));
+        padding-top: calc(24px * var(--sf));
         gap: calc(16px * var(--sf));
       }
 
       html.mobile .hero__description p {
         font-size: calc(14px * var(--sf));
+      }
+
+      html.mobile .hero__buttons {
+        align-items: flex-start;
+        gap: calc(16px * var(--sf));
+        margin-top: calc(8px * var(--sf));
+      }
+
+      html.mobile .hero__text-link {
+        font-size: calc(14px * var(--sf));
+      }
+
+      html.mobile .hero__image.hidden {
+        display: none;
       }
 
     </style>
