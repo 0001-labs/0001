@@ -203,12 +203,12 @@ class OneFooter extends HTMLElement {
 
         /* Mobile styles */
         .footer.mobile {
-          padding: calc(40px * var(--sf, 1)) calc(20px * var(--sf, 1));
-          gap: calc(40px * var(--sf, 1));
+          padding: 40px 20px;
+          gap: 40px;
         }
 
         .footer.mobile .footer__top {
-          width: calc(400px * var(--sf, 1));
+          width: 100%;
         }
 
         .footer.mobile .footer__brand {
@@ -221,26 +221,26 @@ class OneFooter extends HTMLElement {
 
         .footer.mobile .footer__nav {
           flex-direction: column;
-          gap: calc(30px * var(--sf, 1));
+          gap: 30px;
         }
 
         .footer.mobile .footer__nav-column {
           width: 100%;
-          gap: calc(16px * var(--sf, 1));
+          gap: 16px;
         }
 
         .footer.mobile .footer__nav-header {
-          font-size: calc(14px * var(--sf, 1));
-          margin-bottom: calc(8px * var(--sf, 1));
+          font-size: 16px;
+          margin-bottom: 8px;
         }
 
         .footer.mobile .footer__link {
-          font-size: calc(14px * var(--sf, 1));
+          font-size: 16px;
         }
 
         .footer.mobile .footer__controls-mobile {
           display: flex;
-          gap: calc(20px * var(--sf, 1));
+          gap: 20px;
         }
 
         .footer.mobile .footer__bottom {
@@ -249,11 +249,11 @@ class OneFooter extends HTMLElement {
           bottom: auto;
           display: flex;
           flex-direction: column;
-          gap: calc(30px * var(--sf, 1));
+          gap: 30px;
         }
 
         .footer.mobile .footer__copyright {
-          font-size: calc(12px * var(--sf, 1));
+          font-size: 14px;
         }
       </style>
 
