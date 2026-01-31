@@ -50,6 +50,9 @@
       src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"
     ></script>
 
+    <!-- 0001 components -->
+    <script type="module" src="./components/one-footer.js"></script>
+
     <style>
       .about-page {
         background-color: #ffffff;
@@ -159,7 +162,8 @@
         color: var(--base-slate);
       }
 
-      .team-member__role {
+      .team-member__role,
+      .team-member__email {
         font-family: var(--typeface-canon, Georgia, serif);
         font-size: 16px;
         letter-spacing: -0.32px;
@@ -168,16 +172,16 @@
       }
 
       .team-member__email {
-        font-family: var(--typeface-canon, Georgia, serif);
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: var(--base-slate);
         text-decoration: none;
-        line-height: 1.5;
       }
 
       .team-member__email:hover {
         text-decoration: underline;
+      }
+
+      .team-member__details {
+        display: flex;
+        flex-direction: column;
       }
 
       .about-offices {
@@ -226,122 +230,84 @@
         text-decoration: underline;
       }
 
-      .home-footer {
-        background-color: #f2ffcf;
-        padding: 60px 374px 50px 400px;
-        display: flex;
-        flex-direction: column;
-        gap: 70px;
+
+      /* Mobile styles - using DS one .mobile class and --sf scaling factor */
+      html.mobile .about-logo {
         position: relative;
+        top: auto;
+        left: auto;
+        padding: calc(20px * var(--sf));
+        font-size: calc(20px * var(--sf));
       }
 
-      .home-footer__top {
-        display: flex;
-        align-items: center;
+      html.mobile .about-main {
+        padding: calc(20px * var(--sf));
+        padding-top: calc(40px * var(--sf));
+        gap: calc(60px * var(--sf));
       }
 
-      .home-footer__brand {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        width: 300px;
+      html.mobile .about-header {
+        gap: calc(20px * var(--sf));
       }
 
-      .home-footer__brand-name {
-        font-family: var(--font-medium);
-        font-weight: 500;
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: var(--base-black);
+      html.mobile .about-title {
+        font-size: calc(32px * var(--sf));
       }
 
-      .home-footer__tagline {
-        font-family: var(--typeface-canon), Georgia, serif;
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: var(--base-slate);
+      html.mobile .about-body {
+        width: 100%;
+        font-size: calc(14px * var(--sf));
       }
 
-      .home-footer__controls {
-        display: flex;
-        gap: 20px;
-        width: 150px;
+      html.mobile .about-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+        margin-top: calc(20px * var(--sf));
       }
 
-      .home-footer__toggle {
-        font-family: var(--font-regular);
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: #979441;
-        background-color: #ccff4d;
-        border: none;
-        cursor: pointer;
-        padding: 0;
+      html.mobile .section-title {
+        font-size: calc(24px * var(--sf));
+        margin-bottom: calc(20px * var(--sf));
       }
 
-      .home-footer__nav {
-        display: flex;
-        padding-left: 150px;
-        height: 200px;
-      }
-
-      .home-footer__nav-column {
-        display: flex;
+      html.mobile .about-team {
         flex-direction: column;
-        gap: 20px;
-        width: 150px;
+        gap: calc(30px * var(--sf));
       }
 
-      .home-footer__link {
-        font-family: var(--font-pantheon);
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: #979441;
-        text-decoration: none;
+      html.mobile .team-member {
+        gap: calc(12px * var(--sf));
       }
 
-      .home-footer__link:hover {
-        text-decoration: underline;
+      html.mobile .team-member__name,
+      html.mobile .team-member__role,
+      html.mobile .team-member__email {
+        font-size: calc(14px * var(--sf));
       }
 
-      .home-footer__link--contact {
-        background-color: #ccff4d;
-        width: fit-content;
+      html.mobile .about-offices {
+        flex-direction: column;
+        gap: calc(30px * var(--sf));
       }
 
-      .home-footer__link--product {
-        font-family: var(--font-medium);
+      html.mobile .office {
+        gap: calc(12px * var(--sf));
       }
 
-      .home-footer__bottom {
-        position: absolute;
-        left: 0;
-        bottom: 50px;
-        width: 400px;
-        padding-left: 60px;
+      html.mobile .office__title,
+      html.mobile .office__address {
+        font-size: calc(14px * var(--sf));
       }
 
-      .home-footer__copyright {
-        font-family: var(--font-medium);
-        font-size: 12px;
-        letter-spacing: -0.24px;
-        color: rgba(101, 138, 8, 0.3);
-        display: flex;
-        gap: 12px;
-        margin: 0;
+      html.mobile .about-contact {
+        margin-top: calc(40px * var(--sf));
       }
 
-      .home-footer__social-link {
-        font-family: var(--font-medium);
-        font-size: 12px;
-        letter-spacing: -0.24px;
-        color: rgba(101, 138, 8, 0.3);
-        text-decoration: none;
+      html.mobile .about-contact a {
+        font-size: calc(14px * var(--sf));
       }
 
-      .home-footer__social-link:hover {
-        color: rgba(101, 138, 8, 0.6);
-      }
     </style>
   </head>
   <body>
@@ -384,17 +350,17 @@
           <div class="about-team">
             <div class="team-member">
               <span class="team-member__name">Joachim Aaløkke Sørensen</span>
-              <span class="team-member__role">Product @0001</span>
-              <a href="mailto:joachim@0001.dev" class="team-member__email"
-                >joachim@0001.dev</a
-              >
+              <div class="team-member__details">
+                <span class="team-member__role">Product @0001</span>
+                <a href="mailto:joachim@0001.dev" class="team-member__email">joachim@0001.dev</a>
+              </div>
             </div>
             <div class="team-member">
               <span class="team-member__name">Søren Vestergaard</span>
-              <span class="team-member__role">Product @0001</span>
-              <a href="mailto:soren@0001.dev" class="team-member__email"
-                >soren@0001.dev</a
-              >
+              <div class="team-member__details">
+                <span class="team-member__role">Product @0001</span>
+                <a href="mailto:soren@0001.dev" class="team-member__email">soren@0001.dev</a>
+              </div>
             </div>
           </div>
         </section>
@@ -427,87 +393,10 @@
       </main>
 
       <!-- Footer -->
-      <footer class="home-footer">
-        <div class="home-footer__top">
-          <div class="home-footer__brand">
-            <span class="home-footer__brand-name">0001</span>
-            <span class="home-footer__tagline"
-              ><ds-text>We deliver digital products</ds-text></span
-            >
-          </div>
-          <div class="home-footer__controls">
-            <button class="home-footer__toggle" id="lang-toggle">
-              <ds-text>English</ds-text>
-            </button>
-            <button class="home-footer__toggle">
-              <ds-text>Light</ds-text>
-            </button>
-          </div>
-        </div>
-
-        <nav class="home-footer__nav">
-          <div class="home-footer__nav-column">
-            <a href="/services" class="home-footer__link"
-              ><ds-text>Services</ds-text></a
-            >
-            <a href="/sentences" class="home-footer__link"
-              ><ds-text>9999 sentences</ds-text></a
-            >
-            <a href="/about" class="home-footer__link"
-              ><ds-text>About</ds-text></a
-            >
-            <a
-              href="/contact"
-              class="home-footer__link home-footer__link--contact"
-              ><ds-text>Contact</ds-text></a
-            >
-          </div>
-          <div class="home-footer__nav-column">
-            <a
-              href="/products"
-              class="home-footer__link home-footer__link--product"
-              ><ds-text>Products</ds-text></a
-            >
-            <a href="#" class="home-footer__link home-footer__link--product"
-              ><ds-text>Architecture</ds-text></a
-            >
-          </div>
-        </nav>
-
-        <div class="home-footer__bottom">
-          <p class="home-footer__copyright">
-            <span>0001 © <ds-date format="YYYY"></ds-date></span>
-            <a
-              href="https://instagram.com/0001labs"
-              class="home-footer__social-link"
-              >Instagram</a
-            >
-            <a
-              href="https://linkedin.com/company/0001labs"
-              class="home-footer__social-link"
-              >LinkedIn</a
-            >
-          </p>
-        </div>
-      </footer>
+      <one-footer></one-footer>
     </div>
 
     <script>
-      // Language cycling - use ds-one's setLanguage for proper language switching
-      const languages = ["en", "da", "ja"];
-      const langToggle = document.getElementById("lang-toggle");
-
-      langToggle.addEventListener("click", async () => {
-        const currentLang = localStorage.getItem("language") || "en";
-        const currentIndex = languages.indexOf(currentLang);
-        const nextIndex = (currentIndex + 1) % languages.length;
-        const nextLang = languages[nextIndex];
-
-        const dsOne =
-          await import("https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js");
-        dsOne.setLanguage(nextLang);
-      });
-
       // Set initial language from localStorage on page load
       (async () => {
         const savedLang = localStorage.getItem("language");

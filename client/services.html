@@ -38,6 +38,9 @@
     <!-- DS one bundle -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
+    <!-- 0001 components -->
+    <script type="module" src="./components/one-footer.js"></script>
+
     <style>
       .services-page {
         background-color: #FFFFFF;
@@ -186,123 +189,67 @@
         transition: opacity 0.3s ease;
       }
 
-      .home-footer {
-        background-color: #F2FFCF;
-        padding: 60px 374px 50px 400px;
-        display: flex;
-        flex-direction: column;
-        gap: 70px;
+
+      /* Mobile styles - using DS one .mobile class and --sf scaling factor */
+      html.mobile .services-logo {
         position: relative;
-        margin-top: 150px;
+        top: auto;
+        left: auto;
+        padding: calc(20px * var(--sf));
+        font-size: calc(20px * var(--sf));
       }
 
-      .home-footer__top {
-        display: flex;
-        align-items: center;
+      html.mobile .services-main {
+        padding: calc(20px * var(--sf));
+        padding-top: calc(40px * var(--sf));
+        gap: calc(50px * var(--sf));
       }
 
-      .home-footer__brand {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        width: 300px;
+      html.mobile .services-title {
+        font-size: calc(32px * var(--sf));
       }
 
-      .home-footer__brand-name {
-        font-family: var(--font-medium);
-        font-weight: 500;
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: var(--base-black);
+      html.mobile .services-category {
+        gap: calc(16px * var(--sf));
       }
 
-      .home-footer__tagline {
-        font-family: var(--typeface-canon), Georgia, serif;
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: var(--base-slate);
+      html.mobile .services-category__label {
+        font-size: calc(14px * var(--sf));
       }
 
-      .home-footer__controls {
-        display: flex;
-        gap: 20px;
-        width: 150px;
+      html.mobile .services-category__list {
+        max-width: 100%;
+        gap: calc(16px * var(--sf));
       }
 
-      .home-footer__toggle {
-        font-family: var(--font-regular);
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: #979441;
-        background-color: #CCFF4D;
-        border: none;
-        cursor: pointer;
-        padding: 0;
+      html.mobile .services-item__title {
+        font-size: calc(24px * var(--sf));
       }
 
-      .home-footer__nav {
-        display: flex;
-        padding-left: 150px;
-        height: 200px;
+      html.mobile .services-item__description {
+        font-size: calc(14px * var(--sf));
+        max-width: 100%;
+        padding-top: calc(10px * var(--sf));
       }
 
-      .home-footer__nav-column {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        width: 150px;
+      html.mobile .services-item__inquiry {
+        font-size: calc(12px * var(--sf));
+        margin-top: calc(6px * var(--sf));
       }
 
-      .home-footer__link {
-        font-family: var(--font-pantheon);
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: #979441;
-        text-decoration: none;
+      html.mobile .services-contact {
+        margin-top: calc(16px * var(--sf));
       }
 
-      .home-footer__link:hover {
-        text-decoration: underline;
+      html.mobile .services-contact a {
+        font-size: calc(14px * var(--sf));
       }
 
-      .home-footer__link--contact {
-        background-color: #CCFF4D;
-        width: fit-content;
+      /* Hide fixed image on mobile */
+      html.mobile .services-image {
+        display: none;
       }
 
-      .home-footer__link--product {
-        font-family: var(--font-medium);
-      }
-
-      .home-footer__bottom {
-        position: absolute;
-        left: 0;
-        bottom: 50px;
-        width: 400px;
-        padding-left: 60px;
-      }
-
-      .home-footer__copyright {
-        font-family: var(--font-medium);
-        font-size: 12px;
-        letter-spacing: -0.24px;
-        color: rgba(101, 138, 8, 0.3);
-        display: flex;
-        gap: 12px;
-        margin: 0;
-      }
-
-      .home-footer__social-link {
-        font-family: var(--font-medium);
-        font-size: 12px;
-        letter-spacing: -0.24px;
-        color: rgba(101, 138, 8, 0.3);
-        text-decoration: none;
-      }
-
-      .home-footer__social-link:hover {
-        color: rgba(101, 138, 8, 0.6);
-      }
     </style>
   </head>
   <body>
@@ -431,39 +378,7 @@
       </main>
 
       <!-- Footer -->
-      <footer class="home-footer">
-        <div class="home-footer__top">
-          <div class="home-footer__brand">
-            <span class="home-footer__brand-name">0001</span>
-            <span class="home-footer__tagline"><ds-text>We deliver digital products</ds-text></span>
-          </div>
-          <div class="home-footer__controls">
-            <button class="home-footer__toggle" id="lang-toggle"><ds-text>English</ds-text></button>
-            <button class="home-footer__toggle"><ds-text>Light</ds-text></button>
-          </div>
-        </div>
-
-        <nav class="home-footer__nav">
-          <div class="home-footer__nav-column">
-            <a href="/services" class="home-footer__link"><ds-text>Services</ds-text></a>
-            <a href="/sentences" class="home-footer__link"><ds-text>9999 sentences</ds-text></a>
-            <a href="/about" class="home-footer__link"><ds-text>About</ds-text></a>
-            <a href="/contact" class="home-footer__link home-footer__link--contact"><ds-text>Contact</ds-text></a>
-          </div>
-          <div class="home-footer__nav-column">
-            <a href="/products" class="home-footer__link home-footer__link--product"><ds-text>Products</ds-text></a>
-            <a href="#" class="home-footer__link home-footer__link--product"><ds-text>Architecture</ds-text></a>
-          </div>
-        </nav>
-
-        <div class="home-footer__bottom">
-          <p class="home-footer__copyright">
-            <span>0001 © <ds-date format="YYYY"></ds-date></span>
-            <a href="https://instagram.com/0001labs" class="home-footer__social-link">Instagram</a>
-            <a href="https://linkedin.com/company/0001labs" class="home-footer__social-link">LinkedIn</a>
-          </p>
-        </div>
-      </footer>
+      <one-footer></one-footer>
     </div>
 
     <script>
@@ -489,20 +404,6 @@
 
       // Listen for language changes
       document.addEventListener('language-changed', applyTranslations);
-
-      // Language cycling - use ds-one's setLanguage for proper language switching
-      const languages = ['en', 'da', 'ja'];
-      const langToggle = document.getElementById('lang-toggle');
-
-      langToggle.addEventListener('click', async () => {
-        const currentLang = localStorage.getItem('language') || 'en';
-        const currentIndex = languages.indexOf(currentLang);
-        const nextIndex = (currentIndex + 1) % languages.length;
-        const nextLang = languages[nextIndex];
-
-        const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
-        dsOne.setLanguage(nextLang);
-      });
 
       // Set initial language from localStorage on page load
       (async () => {
