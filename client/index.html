@@ -51,8 +51,11 @@
     ></script>
 
     <!-- 0001 components -->
-    <script type="module" src="./components/0001-h1.js"></script>
-    <script type="module" src="./components/one-footer.js"></script>
+    <script type="module" src="./components/one-h1.ts"></script>
+    <script type="module" src="./components/one-footer.ts"></script>
+
+    <!-- Page module -->
+    <script type="module" src="./modules/pages/index.ts"></script>
 
     <style>
       .home-page {
@@ -278,7 +281,7 @@
         position: static;
         width: auto;
         height: auto;
-        font-size: calc(32px * var(--sf));
+        font-size: 32px;
         padding: 0;
         margin: 0;
         display: inline;
@@ -308,7 +311,7 @@
       }
 
       html.mobile .hero__description p {
-        font-size: calc(14px * var(--sf));
+        font-size: 16px;
       }
 
       html.mobile .hero__buttons {
@@ -377,107 +380,5 @@
       </div>
     </div>
 
-    <script>
-      const sentenceKeys = [
-        1, 714, 1241, 1429, 2143, 2857, 3571, 4286, 5000, 5714, 6429, 7143,
-        7857, 9999,
-      ];
-
-      const images = {
-        1: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
-        714: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
-        1241: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800",
-        1429: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800",
-        2143: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800",
-        2857: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800",
-        3571: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
-        4286: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
-        5000: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
-        5714: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800",
-        6429: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800",
-        7143: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=800",
-        7857: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800",
-        9999: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800",
-      };
-
-      let currentSentenceKey = 1;
-
-      const heroNumber = document.getElementById("hero-number");
-      const heroTagline = document.getElementById("hero-tagline");
-      const heroImage = document.querySelector(".hero__image img");
-      const decorativeImage = document.querySelector(".decorative-image img");
-      const randomizeBtn = document.getElementById("randomize-btn");
-
-      // Randomize function - just update the ds-text key, it handles translation
-      function randomizeSentence() {
-        currentSentenceKey =
-          sentenceKeys[Math.floor(Math.random() * sentenceKeys.length)];
-        const image = images[currentSentenceKey];
-
-        heroNumber.textContent = String(currentSentenceKey).padStart(4, "0");
-        heroTagline.textContent = `sentence-${currentSentenceKey}`;
-
-        // Update images
-        heroImage.src = image;
-        decorativeImage.src = image.replace("w=800", "w=400");
-      }
-
-      // Timer elements
-      const heroTimer = document.getElementById("hero-timer");
-      const heroDescription = document.querySelector(".hero__description");
-      const heroImageDiv = document.querySelector(".hero__image");
-      let timerTimeout = null;
-
-      // Start/restart timer function
-      function startTimer() {
-        // Clear existing timer
-        if (timerTimeout) {
-          clearTimeout(timerTimeout);
-        }
-
-        // Reset states
-        heroTimer.classList.remove("hidden");
-        heroImageDiv.classList.remove("hidden");
-        heroDescription.classList.remove("revealed");
-
-        // Restart animation by removing and re-adding element
-        heroTimer.style.animation = "none";
-        heroTimer.offsetHeight; // Trigger reflow
-        heroTimer.style.animation = "";
-
-        // After 4 seconds: hide timer and image, reveal description
-        timerTimeout = setTimeout(() => {
-          heroTimer.classList.add("hidden");
-          heroImageDiv.classList.add("hidden");
-          heroDescription.classList.add("revealed");
-        }, 4000);
-      }
-
-      // Hero randomize on click (decorative image)
-      randomizeBtn.addEventListener("click", () => {
-        randomizeSentence();
-        startTimer();
-      });
-
-      // Hero randomize on click (title)
-      const heroTitleWrapper = document.querySelector(".hero__title-wrapper");
-      heroTitleWrapper.addEventListener("click", () => {
-        randomizeSentence();
-        startTimer();
-      });
-
-      // Start timer on page load
-      startTimer();
-
-      // Set initial language from localStorage on page load
-      (async () => {
-        const savedLang = localStorage.getItem("language");
-        if (savedLang && savedLang !== "en") {
-          const dsOne =
-            await import("https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js");
-          dsOne.setLanguage(savedLang);
-        }
-      })();
-    </script>
   </body>
 </html>

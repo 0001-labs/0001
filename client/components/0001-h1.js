@@ -75,8 +75,8 @@ class OneH1 extends HTMLElement {
         }
         h1 {
           font-family: var(--typeface-canon, Georgia, serif);
-          font-size: ${isMobile ? 'calc(32px * var(--sf, 1))' : '48px'};
-          letter-spacing: ${isMobile ? 'calc(-0.48px * var(--sf, 1))' : '-0.96px'};
+          font-size: ${isMobile ? '32px' : '48px'};
+          letter-spacing: ${isMobile ? '-0.64px' : '-0.96px'};
           color: var(--base-slate, #2a2a2a);
           line-height: 1.2;
           font-weight: normal;
