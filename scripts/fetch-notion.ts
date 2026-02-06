@@ -25,23 +25,24 @@ async function fetchProducts(): Promise<NotionProduct[]> {
     const response = await notion.databases.query({
       database_id: DATABASE_ID,
       filter: {
-        property: "Active",
-        status: {
-          equals: "Active",
+        property: "Include on website",
+        checkbox: {
+          equals: true,
         },
       },
     });
 
     const products: NotionProduct[] = response.results.map((page: any) => {
       const props = page.properties;
+      const retention = props.Retention?.number;
       return {
         name: props.Name?.title?.[0]?.plain_text || "Untitled",
         users: props.Users?.number || 0,
-        retention: props.Retention?.rich_text?.[0]?.plain_text || "0%",
-        status: props.Status?.select?.name || "In progress",
+        retention: retention != null ? `${retention}%` : "0%",
+        status: props.Active?.status?.name || "In progress",
         website: props.Website?.rich_text?.[0]?.plain_text || null,
         github: props.Github?.url || null,
-        active: props.Active?.status?.name === "Active",
+        active: true,
       };
     });
 
@@ -55,20 +56,41 @@ async function fetchProducts(): Promise<NotionProduct[]> {
 
 function getMockProducts(): NotionProduct[] {
   return [
-    { name: "allmythin.gs", users: 0, retention: "0%", status: "In progress", website: "https://allmythin.gs", github: null, active: true },
-    { name: "Ritonel", users: 0, retention: "0%", status: "In progress", website: null, github: null, active: true },
-    { name: "Ezo", users: 0, retention: "0%", status: "In progress", website: null, github: null, active: true },
-    { name: "DS one", users: 0, retention: "0%", status: "In progress", website: null, github: "https://github.com/0001-labs/ds-one", active: true },
-    { name: "theseareuntitled.com", users: 0, retention: "0%", status: "In progress", website: "https://theseareuntitled.com", github: null, active: true },
-    { name: "archcss", users: 0, retention: "0%", status: "In progress", website: null, github: null, active: true },
+    { name: "DS one", users: 0, retention: "0%", status: "Alpha", website: "dsone.dev", github: "https://github.com/0001-labs/ds-one", active: true },
+    { name: "Ezo", users: 0, retention: "0%", status: "In progress", website: "ezo-app.com", github: "https://github.com/0001-labs/ezo", active: true },
+    { name: "tau99", users: 0, retention: "0%", status: "On hold", website: "tau99.com", github: "https://github.com/0001-labs/tau99", active: true },
+    { name: "Digte", users: 0, retention: "0%", status: "In progress", website: "digte.co", github: "https://github.com/0001-labs/digte", active: true },
+    { name: "allmythin.gs", users: 0, retention: "0%", status: "On hold", website: "allmythin.gs", github: "https://github.com/0001-labs/allmythings", active: true },
+    { name: "Consistency", users: 0, retention: "0%", status: "Planned", website: "consistency.0001.dev", github: null, active: true },
   ];
+}
+
+function statusClass(status: string): string {
+  switch (status.toLowerCase()) {
+    case "ga":
+      return " table__cell--ga";
+    case "alpha":
+      return " table__cell--alpha";
+    case "in progress":
+      return " table__cell--in-progress";
+    case "on hold":
+      return " table__cell--on-hold";
+    case "planned":
+      return " table__cell--planned";
+    default:
+      return "";
+  }
 }
 
 function generateProductsHTML(products: NotionProduct[]): string {
   const productCells = products
     .map((p) => {
       if (p.website || p.github) {
-        const link = p.website || p.github;
+        // Use first URL if comma-separated, and ensure https:// prefix
+        let link = (p.website || p.github || "").split(",")[0].trim();
+        if (link && !link.startsWith("http")) {
+          link = `https://${link}`;
+        }
         return `<div class="table__cell table__cell--link">
               <span>${p.name}</span>
               <a href="${link}" target="_blank" rel="noopener" class="external-link-icon">
@@ -88,7 +110,12 @@ function generateProductsHTML(products: NotionProduct[]): string {
 
   const retentionCells = products.map((p) => `<div class="table__cell">${p.retention}</div>`).join("\n            ");
 
-  const statusCells = products.map((p) => `<div class="table__cell table__cell--status">${p.status}</div>`).join("\n            ");
+  const statusCells = products
+    .map((p) => {
+      const cls = statusClass(p.status);
+      return `<div class="table__cell${cls}">${p.status}</div>`;
+    })
+    .join("\n            ");
 
   return `<!-- Product column -->
           <div class="table__column table__column--product">

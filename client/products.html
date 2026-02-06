@@ -39,7 +39,10 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
     <!-- 0001 components -->
-    <script type="module" src="./components/one-footer.js"></script>
+    <script type="module" src="./components/one-footer.ts"></script>
+
+    <!-- Page module -->
+    <script type="module" src="./modules/pages/common.ts"></script>
 
     <style>
       .products-page {
@@ -183,25 +186,99 @@
           <!-- Product column -->
           <div class="table__column table__column--product">
             <div class="table__header">Product</div>
-            
+            <div class="table__cell table__cell--link">
+              <span>DS one</span>
+              <a href="https://dsone.dev" target="_blank" rel="noopener" class="external-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+            <div class="table__cell table__cell--link">
+              <span>Ezo</span>
+              <a href="https://ezo-app.com" target="_blank" rel="noopener" class="external-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+            <div class="table__cell table__cell--link">
+              <span>tau99</span>
+              <a href="https://tau99.com" target="_blank" rel="noopener" class="external-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+            <div class="table__cell table__cell--link">
+              <span>Digte</span>
+              <a href="https://digte.co" target="_blank" rel="noopener" class="external-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+            <div class="table__cell table__cell--link">
+              <span>allmythin.gs</span>
+              <a href="https://allmythin.gs" target="_blank" rel="noopener" class="external-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+            <div class="table__cell table__cell--link">
+              <span>Consistency</span>
+              <a href="https://consistency.0001.dev" target="_blank" rel="noopener" class="external-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
           </div>
 
           <!-- Users column -->
           <div class="table__column table__column--users">
             <div class="table__header">Users</div>
-            
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
+            <div class="table__cell">0</div>
           </div>
 
           <!-- Retention column -->
           <div class="table__column table__column--retention">
             <div class="table__header">Retention</div>
-            
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
+            <div class="table__cell">0%</div>
           </div>
 
           <!-- Status column -->
           <div class="table__column table__column--status">
             <div class="table__header">Status</div>
-            
+            <div class="table__cell table__cell--alpha">Alpha</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--in-progress">In progress</div>
           </div>
         </div>
 
@@ -209,16 +286,5 @@
       <one-footer></one-footer>
       </main>
     </div>
-
-    <script>
-      // Set initial language from localStorage on page load
-      (async () => {
-        const savedLang = localStorage.getItem('language');
-        if (savedLang && savedLang !== 'en') {
-          const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
-          dsOne.setLanguage(savedLang);
-        }
-      })();
-    </script>
   </body>
 </html>
