@@ -30,6 +30,12 @@ async function fetchProducts(): Promise<NotionProduct[]> {
           equals: true,
         },
       },
+      sorts: [
+        {
+          property: "Status",
+          direction: "descending",
+        },
+      ],
     });
 
     const products: NotionProduct[] = response.results.map((page: any) => {
@@ -39,7 +45,7 @@ async function fetchProducts(): Promise<NotionProduct[]> {
         name: props.Name?.title?.[0]?.plain_text || "Untitled",
         users: props.Users?.number || 0,
         retention: retention != null ? `${retention}%` : "0%",
-        status: props.Active?.status?.name || "In progress",
+        status: props.Status?.status?.name || "In progress",
         website: props.Website?.rich_text?.[0]?.plain_text || null,
         github: props.Github?.url || null,
         active: true,
@@ -155,7 +161,7 @@ async function updateProductsPage(): Promise<void> {
 
   // Replace the table content
   const tableStartMarker = '<div class="products-table">';
-  const tableEndMarker = "</div>\n\n      <!-- Footer -->";
+  const tableEndMarker = "</div>\n        </main>\n\n        <!-- Footer -->";
 
   const startIndex = template.indexOf(tableStartMarker);
   const endIndex = template.indexOf(tableEndMarker);
@@ -167,7 +173,8 @@ async function updateProductsPage(): Promise<void> {
 
   const newContent = `<div class="products-table">
           ${productsHTML}
-        </div>\n\n      <!-- Footer -->`;
+          </div>
+        </main>\n\n        <!-- Footer -->`;
 
   template = template.substring(0, startIndex) + newContent + template.substring(endIndex + tableEndMarker.length);
 

@@ -48,40 +48,28 @@
       .products-page {
         background-color: #FFFFFF;
         min-height: 100vh;
-        position: relative;
+        display: flex;
+        flex-direction: column;
       }
 
       .products-header {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
         height: 100px;
         background-color: #CCFF4D;
-        z-index: 10;
       }
 
       .products-content {
-        position: relative;
-        background-color: #FFFFFF;
-        margin-top: 100px;
-        padding: 80px 60px 120px;
-        min-height: calc(100vh - 100px);
+        display: flex;
+        flex-direction: column;
+        gap: 150px;
+      }
+
+      .products-main {
+        padding: 80px 60px 0;
       }
 
       .products-table {
         display: flex;
         justify-content: center;
-      }
-
-      .table__column--product {
-        width: 180px;
-      }
-
-      .table__column--users,
-      .table__column--retention,
-      .table__column--status {
-        width: 100px;
       }
 
       /* Override border to 1px */
@@ -124,45 +112,17 @@
         background-color: #f2ffcf;
       }
 
-
-      /* Mobile styles - using DS one .mobile class and --sf scaling factor */
+      /* Mobile styles */
       html.mobile .products-header {
         height: calc(60px * var(--sf));
       }
 
       html.mobile .products-content {
-        margin-top: calc(60px * var(--sf));
-        padding: calc(40px * var(--sf)) calc(20px * var(--sf));
+        gap: calc(80px * var(--sf));
       }
 
-      html.mobile .products-table {
-        flex-direction: column;
-        overflow-x: auto;
-      }
-
-      html.mobile .table__column {
-        flex-direction: row;
-        width: 100%;
-      }
-
-      html.mobile .table__column--product,
-      html.mobile .table__column--users,
-      html.mobile .table__column--retention,
-      html.mobile .table__column--status {
-        width: 100%;
-      }
-
-      html.mobile .table__header {
-        font-size: calc(14px * var(--sf));
-        padding: calc(6px * var(--sf));
-        min-width: calc(80px * var(--sf));
-      }
-
-      html.mobile .table__cell {
-        font-size: calc(14px * var(--sf));
-        padding: calc(6px * var(--sf));
-        height: auto;
-        min-height: calc(28px * var(--sf));
+      html.mobile .products-main {
+        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) 0;
       }
 
     </style>
@@ -181,8 +141,9 @@
       </header>
 
       <!-- Main content -->
-      <main class="products-content">
-        <div class="products-table">
+      <div class="products-content">
+        <main class="products-main">
+          <div class="products-table">
           <!-- Product column -->
           <div class="table__column table__column--product">
             <div class="table__header">Product</div>
@@ -197,28 +158,8 @@
               </a>
             </div>
             <div class="table__cell table__cell--link">
-              <span>Ezo</span>
-              <a href="https://ezo-app.com" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell table__cell--link">
-              <span>tau99</span>
-              <a href="https://tau99.com" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell table__cell--link">
-              <span>Digte</span>
-              <a href="https://digte.co" target="_blank" rel="noopener" class="external-link-icon">
+              <span>Consistency</span>
+              <a href="https://consistency.0001.dev" target="_blank" rel="noopener" class="external-link-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                   <polyline points="15 3 21 3 21 9" />
@@ -237,8 +178,28 @@
               </a>
             </div>
             <div class="table__cell table__cell--link">
-              <span>Consistency</span>
-              <a href="https://consistency.0001.dev" target="_blank" rel="noopener" class="external-link-icon">
+              <span>Digte</span>
+              <a href="https://digte.co" target="_blank" rel="noopener" class="external-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+            <div class="table__cell table__cell--link">
+              <span>tau99</span>
+              <a href="https://tau99.com" target="_blank" rel="noopener" class="external-link-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+            <div class="table__cell table__cell--link">
+              <span>Ezo</span>
+              <a href="https://ezo-app.com" target="_blank" rel="noopener" class="external-link-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                   <polyline points="15 3 21 3 21 9" />
@@ -274,17 +235,18 @@
           <div class="table__column table__column--status">
             <div class="table__header">Status</div>
             <div class="table__cell table__cell--alpha">Alpha</div>
-            <div class="table__cell table__cell--on-hold">On hold</div>
-            <div class="table__cell table__cell--on-hold">On hold</div>
-            <div class="table__cell table__cell--on-hold">On hold</div>
-            <div class="table__cell table__cell--on-hold">On hold</div>
             <div class="table__cell table__cell--in-progress">In progress</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
+            <div class="table__cell table__cell--on-hold">On hold</div>
           </div>
-        </div>
+          </div>
+        </main>
 
-      <!-- Footer -->
-      <one-footer></one-footer>
-      </main>
+        <!-- Footer -->
+        <one-footer></one-footer>
+      </div>
     </div>
   </body>
 </html>
