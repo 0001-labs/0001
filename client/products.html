@@ -333,57 +333,114 @@
           <div class="products-table-wrap">
             <table class="products-table">
               <!-- PRODUCTS_TABLE_START -->
-              <thead>
-                <tr>
-                  <th class="products-table__header-cell products-table__header-cell--product"><ds-text>Product</ds-text></th>
-                  <th class="products-table__header-cell products-table__header-cell--users"><ds-text>Users</ds-text></th>
-                  <th class="products-table__header-cell products-table__header-cell--retention"><ds-text>Retention</ds-text></th>
-                  <th class="products-table__header-cell products-table__header-cell--status"><ds-text>Status</ds-text></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">DS one</td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--alpha">Alpha</td>
-                </tr>
+              <div class="products-table__header">
+                <div class="products-table__header-cell"><ds-text>Product</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Users</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Retention</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Status</ds-text></div>
+              </div>
 
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">Consistency</td>
-                  <td class="products-table__cell">1</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--in-progress">In progress</td>
-                </tr>
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">DS one</span>
+                  <a href="https://dsone.dev" target="_blank" rel="noopener" class="products-table__link" aria-label="Open DS one">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--alpha">Alpha</div>
+              </div>
 
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">allmythin.gs</td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</td>
-                </tr>
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">Consistency</span>
+                  <a href="https://consistency.0001.dev" target="_blank" rel="noopener" class="products-table__link" aria-label="Open Consistency">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">1</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--in-progress">In progress</div>
+              </div>
 
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">Digte</td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</td>
-                </tr>
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">allmythin.gs</span>
+                  <a href="https://allmythin.gs" target="_blank" rel="noopener" class="products-table__link" aria-label="Open allmythin.gs">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</div>
+              </div>
 
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">tau99</td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</td>
-                </tr>
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">Digte</span>
+                  <a href="https://digte.co" target="_blank" rel="noopener" class="products-table__link" aria-label="Open Digte">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</div>
+              </div>
 
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">Ezo</td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</td>
-                </tr>
-              </tbody>
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">tau99</span>
+                  <a href="https://tau99.com" target="_blank" rel="noopener" class="products-table__link" aria-label="Open tau99">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</div>
+              </div>
+
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">Ezo</span>
+                  <a href="https://ezo-app.com" target="_blank" rel="noopener" class="products-table__link" aria-label="Open Ezo">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</div>
+              </div>
               <!-- PRODUCTS_TABLE_END -->
             </table>
           </div>

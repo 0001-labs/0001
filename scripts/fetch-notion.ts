@@ -121,36 +121,30 @@ function externalLinkSVG(): string {
 function generateProductsHTML(products: NotionProduct[]): string {
   const rows = products
     .map((product) => {
-      const link = getProductLink(product);
       const safeName = escapeHtml(product.name);
       const safeStatus = escapeHtml(product.status);
       const safeRetention = escapeHtml(product.retention);
-      const linkMarkup = link
-        ? `
-                  <a href="${escapeHtml(link)}" target="_blank" rel="noopener" class="products-table__link" aria-label="Open ${safeName}">
-                    ${externalLinkSVG()}
-                  </a>`
-        : "";
 
-      return `              <div class="products-table__row">
-                <div class="products-table__cell products-table__cell--product">
-                  <span class="products-table__product-name">${safeName}</span>${linkMarkup}
-                </div>
-                <div class="products-table__cell">${product.users}</div>
-                <div class="products-table__cell">${safeRetention}</div>
-                <div class="products-table__cell products-table__cell--status${statusClass(product.status)}">${safeStatus}</div>
-              </div>`;
+      return `                <tr>
+                  <td class="products-table__cell products-table__cell--product">${safeName}</td>
+                  <td class="products-table__cell">${product.users}</td>
+                  <td class="products-table__cell">${safeRetention}</td>
+                  <td class="products-table__cell products-table__cell--status${statusClass(product.status)}">${safeStatus}</td>
+                </tr>`;
     })
     .join("\n\n");
 
-  return `              <div class="products-table__header">
-                <div class="products-table__header-cell"><ds-text>Product</ds-text></div>
-                <div class="products-table__header-cell"><ds-text>Users</ds-text></div>
-                <div class="products-table__header-cell"><ds-text>Retention</ds-text></div>
-                <div class="products-table__header-cell"><ds-text>Status</ds-text></div>
-              </div>
-
-${rows}`;
+  return `              <thead>
+                <tr>
+                  <th class="products-table__header-cell products-table__header-cell--product"><ds-text>Product</ds-text></th>
+                  <th class="products-table__header-cell products-table__header-cell--users"><ds-text>Users</ds-text></th>
+                  <th class="products-table__header-cell products-table__header-cell--retention"><ds-text>Retention</ds-text></th>
+                  <th class="products-table__header-cell products-table__header-cell--status"><ds-text>Status</ds-text></th>
+                </tr>
+              </thead>
+              <tbody>
+${rows}
+              </tbody>`;
 }
 
 async function updateProductsPage(): Promise<void> {
