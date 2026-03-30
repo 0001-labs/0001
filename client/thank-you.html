@@ -38,6 +38,9 @@
     <!-- DS one bundle -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
+    <!-- Page module -->
+    <script type="module" src="./modules/pages/thank-you.ts"></script>
+
     <style>
       .thankyou-page {
         background-color: #FFFFFF;
@@ -120,8 +123,8 @@
 
       .home-footer__brand {
         display: flex;
-        align-items: center;
-        gap: 5px;
+        align-items: baseline;
+        gap: 10px;
         width: 300px;
       }
 
@@ -129,6 +132,7 @@
         font-family: var(--font-medium);
         font-weight: 500;
         font-size: 16px;
+        line-height: 1;
         letter-spacing: -0.32px;
         color: var(--base-black);
       }
@@ -136,6 +140,7 @@
       .home-footer__tagline {
         font-family: var(--typeface-canon), Georgia, serif;
         font-size: 16px;
+        line-height: 1;
         letter-spacing: -0.32px;
         color: var(--base-slate);
       }
@@ -270,36 +275,11 @@
         <div class="home-footer__bottom">
           <p class="home-footer__copyright">
             <span>0001 © <ds-date format="YYYY"></ds-date></span>
-            <a href="https://instagram.com/0001labs" class="home-footer__social-link">Instagram</a>
-            <a href="https://linkedin.com/company/0001labs" class="home-footer__social-link">LinkedIn</a>
+            <a href="https://www.instagram.com/0001hq/" class="home-footer__social-link">Instagram</a>
+            <a href="https://www.linkedin.com/company/000one/" class="home-footer__social-link">LinkedIn</a>
           </p>
         </div>
       </footer>
     </div>
-
-    <script>
-      // Language cycling - use ds-one's setLanguage for proper language switching
-      const languages = ['en', 'da', 'ja'];
-      const langToggle = document.getElementById('lang-toggle');
-
-      langToggle.addEventListener('click', async () => {
-        const currentLang = localStorage.getItem('language') || 'en';
-        const currentIndex = languages.indexOf(currentLang);
-        const nextIndex = (currentIndex + 1) % languages.length;
-        const nextLang = languages[nextIndex];
-
-        const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
-        dsOne.setLanguage(nextLang);
-      });
-
-      // Set initial language from localStorage on page load
-      (async () => {
-        const savedLang = localStorage.getItem('language');
-        if (savedLang && savedLang !== 'en') {
-          const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
-          dsOne.setLanguage(savedLang);
-        }
-      })();
-    </script>
   </body>
 </html>

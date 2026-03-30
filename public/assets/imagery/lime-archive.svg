@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+      
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#f5f0e8" />
+        <stop offset="100%" stop-color="#eef1ea" />
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="400" height="300" rx="30" fill="url(#bg)" />
+    <rect x="1" y="1" width="398" height="298" rx="29" fill="none" stroke="#16171b" stroke-opacity="0.08" stroke-width="2" />
+  
+      
+      <rect x="34" y="42" width="286" height="162" rx="24" fill="#f7f4ed" stroke="#16171b" stroke-width="2" stroke-opacity="0.18" opacity="1" />
+      <rect x="52" y="62" width="78" height="96" rx="24" fill="#ffffff" stroke="#16171b" stroke-width="2" stroke-opacity="0.18" opacity="1" transform="rotate(-8 91 110)" />
+      <rect x="142" y="60" width="82" height="106" rx="24" fill="#faf9f5" stroke="#16171b" stroke-width="2" stroke-opacity="0.18" opacity="1" transform="rotate(4 183 113)" />
+      <rect x="232" y="54" width="64" height="86" rx="24" fill="#ffffff" stroke="#16171b" stroke-width="2" stroke-opacity="0.18" opacity="1" transform="rotate(-2 264 97)" />
+      <rect x="208" y="84" width="116" height="10" rx="5" fill="#d5c6b0" />
+      <path d="M90 190 C110 166 136 144 170 122 C210 96 252 92 310 100" stroke="#16171b" stroke-opacity="0.18" stroke-width="2" fill="none" />
+      <circle cx="278" cy="74" r="38" fill="#ccff4d" opacity="0.82" />
+      <rect x="34" y="222" width="108" height="14" rx="7" fill="#ccff4d" />
+      <rect x="240" y="162" width="86" height="102" rx="24" fill="#ffffff" stroke="#16171b" stroke-width="2" stroke-opacity="0.18" opacity="1" transform="rotate(7 283 213)" />
+      <rect x="34" y="222" width="165.88" height="2" rx="1" fill="#16171b" opacity="0.18" /><rect x="34" y="250" width="97.24000000000001" height="2" rx="1" fill="#16171b" opacity="0.135" />
+    
+    </svg>

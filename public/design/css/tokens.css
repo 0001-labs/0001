@@ -1,0 +1,53 @@
+/* 0001 Brand Token Overrides */
+:root {
+  /* Primary brand colors */
+  --chartreuse-green: #ccff4d;
+  --every-green: #979441;
+  --tau99-brand: #f2ffcf;
+  --zenith-blue: #ccf;
+
+  /* Semantic mappings */
+  --accent-color: var(--chartreuse-green);
+  --accent-text: var(--every-green);
+  --page-background-accent: var(--tau99-brand);
+  --status-in-progress: var(--zenith-blue);
+
+  /* Base colors */
+  --base-white: #ffffff;
+  --base-black: #000000;
+  --base-slate: #1e1e1e;
+  --base-darker-grey: #797979;
+  --base-light-grey: #858585;
+
+  /* Typography */
+  --font-regular: "GT America", "GT_America_Trial:Rg", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-medium: "GT America", "GT_America_Trial:Md", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-pantheon: "GT Pantheon Text Trial", "GT_Pantheon_Text_Trial:Rg", Georgia, serif;
+  --font-pantheon-medium: "GT Pantheon Text Trial", "GT_Pantheon_Text_Trial:Md", Georgia, serif;
+
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+  --space-2xl: 120px;
+
+  /* Border */
+  --border-default: 1.5px solid rgba(0, 0, 0, 0.1);
+  --border-solid: 1.5px solid var(--base-black);
+}
+
+/* Light theme (default) */
+[data-theme="light"] {
+  --background: #90EE90;
+  --text-color: var(--base-black);
+  --text-color-dimmed: var(--base-slate);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --background: var(--base-slate);
+  --text-color: var(--base-white);
+  --text-color-dimmed: var(--base-light-grey);
+}

@@ -38,6 +38,9 @@
     <!-- DS one bundle -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
+    <!-- Page module -->
+    <script type="module" src="./modules/pages/sentences.ts"></script>
+
     <style>
       .sentences-page {
         background-color: #FFFFFF;
@@ -243,8 +246,8 @@
 
       .home-footer__brand {
         display: flex;
-        align-items: center;
-        gap: 5px;
+        align-items: baseline;
+        gap: 10px;
         width: 300px;
       }
 
@@ -252,6 +255,7 @@
         font-family: var(--font-medium);
         font-weight: 500;
         font-size: 16px;
+        line-height: 1;
         letter-spacing: -0.32px;
         color: var(--base-black);
       }
@@ -259,6 +263,7 @@
       .home-footer__tagline {
         font-family: var(--typeface-canon), Georgia, serif;
         font-size: 16px;
+        line-height: 1;
         letter-spacing: -0.32px;
         color: var(--base-slate);
       }
@@ -349,7 +354,7 @@
     <div class="sentences-page">
       <!-- Decorative image top-left -->
       <a href="/" class="decorative-image">
-        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" alt="Back to home" />
+        <img src="/assets/imagery/signal-stack.svg" alt="Back to home" />
       </a>
 
       <!-- Main content -->
@@ -408,159 +413,11 @@
         <div class="home-footer__bottom">
           <p class="home-footer__copyright">
             <span>0001 © <ds-date format="YYYY"></ds-date></span>
-            <a href="https://instagram.com/0001labs" class="home-footer__social-link">Instagram</a>
-            <a href="https://linkedin.com/company/0001labs" class="home-footer__social-link">LinkedIn</a>
+            <a href="https://www.instagram.com/0001hq/" class="home-footer__social-link">Instagram</a>
+            <a href="https://www.linkedin.com/company/000one/" class="home-footer__social-link">LinkedIn</a>
           </p>
         </div>
       </footer>
     </div>
-
-    <script>
-      // Sentences spread across 0001-9999
-      const sentences = {
-        1: "We deliver digital products",
-        714: "Small teams, sharp edges",
-        1429: "Every pixel is a promise",
-        2143: "Built to outlast trends",
-        2857: "Shipping beats perfection",
-        3571: "Details that disappear when done right",
-        4286: "Systems over pages",
-        5000: "Craft is in the constraints",
-        5714: "Making tools feel like instincts",
-        6429: "Nothing decorative, everything deliberate",
-        7143: "We delete more than we keep",
-        7857: "Complexity absorbed, simplicity delivered",
-        1241: "Telling stories again and again",
-        9999: "The last sentence is never written"
-      };
-
-      // Generate all 9999 rows
-      const columnNo = document.getElementById('column-no');
-      const columnSentence = document.getElementById('column-sentence');
-      const rows = [];
-
-      for (let i = 1; i <= 9999; i++) {
-        const noCell = document.createElement('div');
-        noCell.className = 'sentences-table__cell';
-        noCell.textContent = String(i).padStart(4, '0');
-        columnNo.appendChild(noCell);
-
-        const sentenceCell = document.createElement('div');
-        sentenceCell.className = 'sentences-table__cell';
-
-        if (sentences[i]) {
-          // Has a sentence - show text
-          if (i === 9999) {
-            sentenceCell.classList.add('sentences-table__cell--hidden');
-          }
-          sentenceCell.textContent = sentences[i];
-        } else {
-          // Empty slot - show input field with submit button
-          sentenceCell.classList.add('sentences-table__cell--input');
-
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.className = 'sentences-table__input';
-          input.placeholder = 'Write a sentence...';
-          input.dataset.index = i;
-
-          const submitBtn = document.createElement('button');
-          submitBtn.className = 'sentences-table__submit';
-          submitBtn.textContent = 'Submit';
-
-          const submitSentence = () => {
-            if (input.value.trim()) {
-              const sentenceData = {
-                index: i,
-                sentence: input.value.trim()
-              };
-              console.log('Sentence submitted:', sentenceData);
-              // TODO: Send to backend
-
-              // Show as submitted
-              sentenceCell.classList.remove('sentences-table__cell--input');
-              sentenceCell.textContent = input.value.trim();
-              sentences[i] = input.value.trim();
-              rows[i - 1].hasSentence = true;
-            }
-          };
-
-          input.addEventListener('input', () => {
-            if (input.value.trim()) {
-              submitBtn.classList.add('visible');
-            } else {
-              submitBtn.classList.remove('visible');
-            }
-          });
-
-          input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-              submitSentence();
-            }
-          });
-
-          submitBtn.addEventListener('click', submitSentence);
-
-          sentenceCell.appendChild(input);
-          sentenceCell.appendChild(submitBtn);
-        }
-
-        columnSentence.appendChild(sentenceCell);
-
-        rows.push({ no: noCell, sentence: sentenceCell, hasSentence: !!sentences[i] });
-      }
-
-      // Compact toggle functionality - start compacted
-      let isCompact = true;
-      const compactBtn = document.getElementById('compact-btn');
-      const compactIcon = compactBtn.querySelector('ds-icon');
-
-      // Apply initial compact state
-      rows.forEach(row => {
-        if (!row.hasSentence) {
-          row.no.style.display = 'none';
-          row.sentence.style.display = 'none';
-        }
-      });
-      compactIcon.setAttribute('type', 'row');
-
-      compactBtn.addEventListener('click', () => {
-        isCompact = !isCompact;
-        rows.forEach(row => {
-          if (isCompact && !row.hasSentence) {
-            row.no.style.display = 'none';
-            row.sentence.style.display = 'none';
-          } else {
-            row.no.style.display = '';
-            row.sentence.style.display = '';
-          }
-        });
-        // Toggle icon: 'row' to expand, 'in' to compact
-        compactIcon.setAttribute('type', isCompact ? 'row' : 'in');
-      });
-
-      // Language cycling - use ds-one's setLanguage for proper language switching
-      const languages = ['en', 'da', 'ja'];
-      const langToggle = document.getElementById('lang-toggle');
-
-      langToggle.addEventListener('click', async () => {
-        const currentLang = localStorage.getItem('language') || 'en';
-        const currentIndex = languages.indexOf(currentLang);
-        const nextIndex = (currentIndex + 1) % languages.length;
-        const nextLang = languages[nextIndex];
-
-        const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
-        dsOne.setLanguage(nextLang);
-      });
-
-      // Set initial language from localStorage on page load
-      (async () => {
-        const savedLang = localStorage.getItem('language');
-        if (savedLang && savedLang !== 'en') {
-          const dsOne = await import('https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js');
-          dsOne.setLanguage(savedLang);
-        }
-      })();
-    </script>
   </body>
 </html>

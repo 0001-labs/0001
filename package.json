@@ -4,8 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "bun run fetch-notion && vite build",
+    "build": "bun run fetch-notion && bun run fetch-tasks && vite build",
     "fetch-notion": "bun run scripts/fetch-notion.ts",
+    "fetch-tasks": "bun run scripts/fetch-tasks.ts",
     "preview": "vite preview",
     "deploy": "bun run build && wrangler pages deploy dist --project-name=0001-website",
     "test": "vitest run",

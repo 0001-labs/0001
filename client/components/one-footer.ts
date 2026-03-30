@@ -92,11 +92,15 @@ class OneFooter extends HTMLElement {
 
         .footer {
           background-color: #f2ffcf;
+          position: relative;
+          padding: 0;
+        }
+
+        .footer__inner {
           padding: 60px 374px 50px 400px;
           display: flex;
           flex-direction: column;
           gap: 70px;
-          position: relative;
         }
 
         .footer__top {
@@ -108,14 +112,15 @@ class OneFooter extends HTMLElement {
 
         .footer__brand {
           display: flex;
-          align-items: center;
-          gap: 5px;
+          align-items: baseline;
+          gap: 10px;
         }
 
         .footer__brand-name {
           font-family: var(--font-medium, -apple-system, sans-serif);
           font-weight: 500;
           font-size: 16px;
+          line-height: 1;
           letter-spacing: -0.32px;
           color: var(--base-black, #000);
         }
@@ -123,6 +128,7 @@ class OneFooter extends HTMLElement {
         .footer__tagline {
           font-family: var(--typeface-canon, Georgia, serif);
           font-size: 16px;
+          line-height: 1;
           letter-spacing: -0.32px;
           color: var(--base-slate, #1e1e1e);
         }
@@ -159,7 +165,9 @@ class OneFooter extends HTMLElement {
           font-family: var(--font-medium, -apple-system, sans-serif);
           font-size: 16px;
           letter-spacing: -0.32px;
-          color: #979441;
+          color: var(--every-green, #979441);
+          /* Darken the headline green a bit, while staying on-brand */
+          color: color-mix(in srgb, var(--every-green, #979441) 75%, black 25%);
           margin-bottom: 10px;
         }
 
@@ -199,25 +207,16 @@ class OneFooter extends HTMLElement {
           margin: 0;
         }
 
-        .footer__colors {
-          position: absolute;
-          left: 60px;
-          top: 60px;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .footer__color-square {
-          width: 60px;
-          height: 60px;
-        }
-
         .footer__controls-mobile {
           display: none;
         }
 
         /* Mobile styles */
         .footer.mobile {
+          gap: calc(40px * var(--sf, 1));
+        }
+
+        .footer.mobile .footer__inner {
           padding: calc(40px * var(--sf, 1)) calc(20px * var(--sf, 1));
           gap: calc(40px * var(--sf, 1));
         }
@@ -258,16 +257,6 @@ class OneFooter extends HTMLElement {
           gap: calc(20px * var(--sf, 1));
         }
 
-        .footer.mobile .footer__colors {
-          position: static;
-          flex-direction: row;
-        }
-
-        .footer.mobile .footer__color-square {
-          width: calc(40px * var(--sf, 1));
-          height: calc(40px * var(--sf, 1));
-        }
-
         .footer.mobile .footer__bottom {
           position: relative;
           left: auto;
@@ -283,44 +272,40 @@ class OneFooter extends HTMLElement {
       </style>
 
       <footer class="footer">
-        <div class="footer__colors">
-          <div class="footer__color-square" style="background-color: #E8A0BF;"></div>
-          <div class="footer__color-square" style="background-color: #7EC8B8;"></div>
-          <div class="footer__color-square" style="background-color: #E8D44D;"></div>
-          <div class="footer__color-square" style="background-color: #5B4B9E;"></div>
-        </div>
-        <div class="footer__top">
-          <div class="footer__brand">
-            <span class="footer__brand-name">0001</span>
-            <span class="footer__tagline" data-i18n="We deliver digital products">We deliver digital products</span>
+        <div class="footer__inner">
+          <div class="footer__top">
+            <div class="footer__brand">
+              <span class="footer__brand-name">0001</span>
+              <span class="footer__tagline" data-i18n="We deliver digital products">We deliver digital products</span>
+            </div>
+            <div class="footer__controls">
+              <button class="footer__toggle" id="lang-toggle">English</button>
+              <button class="footer__toggle" data-i18n="Light">Light</button>
+            </div>
           </div>
-          <div class="footer__controls">
-            <button class="footer__toggle" id="lang-toggle">English</button>
-            <button class="footer__toggle" data-i18n="Light">Light</button>
-          </div>
-        </div>
 
-        <nav class="footer__nav">
-          <div class="footer__nav-column">
-            <span class="footer__nav-header" data-i18n="Company">Company</span>
-            <a href="/services" class="footer__link" data-i18n="Services">Services</a>
-            <a href="/about" class="footer__link" data-i18n="About us">About us</a>
-            <a href="/sentences" class="footer__link" data-i18n="9999 Sentences">9999 Sentences</a>
-            <a href="/contact" class="footer__link footer__link--contact" data-i18n="Contact us">Contact us</a>
-          </div>
-          <div class="footer__nav-column">
-            <span class="footer__nav-header" data-i18n="Work">Work</span>
-            <a href="/projects" class="footer__link" data-i18n="Projects">Projects</a>
-            <a href="/products" class="footer__link" data-i18n="Products">Products</a>
-            <a href="#" class="footer__link" data-i18n="Architecture">Architecture</a>
-          </div>
-          <div class="footer__nav-column">
-            <span class="footer__nav-header" data-i18n="Other">Other</span>
-            <a href="https://linkedin.com/company/0001labs" class="footer__link" target="_blank" data-i18n="LinkedIn">LinkedIn</a>
-            <a href="https://instagram.com/0001labs" class="footer__link" target="_blank" data-i18n="Instagram">Instagram</a>
-            <a href="/terms" class="footer__link" data-i18n="Terms and conditions">Terms and conditions</a>
-          </div>
-        </nav>
+          <nav class="footer__nav">
+            <div class="footer__nav-column">
+              <span class="footer__nav-header" data-i18n="Company">Company</span>
+              <a href="/services" class="footer__link" data-i18n="Services">Services</a>
+              <a href="/about" class="footer__link" data-i18n="About us">About us</a>
+              <a href="/sentences" class="footer__link" data-i18n="9999 Sentences">9999 Sentences</a>
+              <a href="/contact" class="footer__link footer__link--contact" data-i18n="Contact us">Contact us</a>
+            </div>
+            <div class="footer__nav-column">
+              <span class="footer__nav-header" data-i18n="Work">Work</span>
+              <a href="/projects" class="footer__link" data-i18n="Projects">Projects</a>
+              <a href="/products" class="footer__link" data-i18n="Products">Products</a>
+              <a href="#" class="footer__link" data-i18n="Architecture">Architecture</a>
+            </div>
+            <div class="footer__nav-column">
+              <span class="footer__nav-header" data-i18n="Other">Other</span>
+              <a href="https://www.linkedin.com/company/000one/" class="footer__link" target="_blank" data-i18n="LinkedIn">LinkedIn</a>
+              <a href="https://www.instagram.com/0001hq/" class="footer__link" target="_blank" data-i18n="Instagram">Instagram</a>
+              <a href="/terms" class="footer__link" data-i18n="Terms and conditions">Terms and conditions</a>
+            </div>
+          </nav>
+        </div>
 
         <div class="footer__bottom">
           <div class="footer__controls-mobile">

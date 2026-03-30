@@ -38,215 +38,418 @@
     <!-- DS one bundle -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
 
-    <!-- 0001 components -->
-    <script type="module" src="./components/one-footer.ts"></script>
-
     <!-- Page module -->
-    <script type="module" src="./modules/pages/common.ts"></script>
+    <script type="module" src="./modules/pages/products.ts"></script>
 
     <style>
       .products-page {
-        background-color: #FFFFFF;
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+        background: var(--chartreuse-green);
       }
 
       .products-header {
-        height: 100px;
-        background-color: #CCFF4D;
+        height: 180px;
+        padding: 40px 60px 0;
       }
 
-      .products-content {
+      .products-header__inner {
+        align-items: flex-start;
         display: flex;
-        flex-direction: column;
-        gap: 150px;
+        justify-content: space-between;
+      }
+
+      .products-header__logo {
+        color: var(--base-slate);
+        font-family: var(--font-medium);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        line-height: 15px;
+        text-decoration: none;
+      }
+
+      .products-header__nav {
+        display: flex;
+        gap: 32px;
+      }
+
+      .products-header__link {
+        color: var(--base-slate);
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        line-height: 15px;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .products-header__link:hover,
+      .products-header__link--active {
+        color: var(--every-green);
       }
 
       .products-main {
-        padding: 80px 60px 0;
+        background: #fcfff6;
+        border-top: 1.5px solid rgba(0, 0, 0, 0.1);
+        min-height: calc(100vh - 180px);
+        padding: 100px 60px 120px;
+      }
+
+      .products-main__inner {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .products-table-wrap {
+        max-width: 100%;
+        overflow-x: auto;
+        width: 100%;
       }
 
       .products-table {
+        margin: 0 auto;
+        min-width: 600px;
+        width: 600px;
+      }
+
+      .products-table__header,
+      .products-table__row {
+        display: grid;
+        grid-template-columns: 240px 120px 120px 120px;
+      }
+
+      .products-table__header {
+        margin-bottom: 0;
+      }
+
+      .products-table__header-cell {
+        align-items: flex-end;
+        color: var(--base-slate);
         display: flex;
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        line-height: 15px;
+        min-height: 30px;
+        overflow: hidden;
+        padding: 7.5px 1.5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .products-table__cell {
+        align-items: center;
+        border-bottom: 1.5px solid var(--base-black);
+        border-right: 1.5px solid var(--base-black);
+        color: var(--base-slate);
+        display: flex;
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        line-height: 15px;
+        min-height: 30px;
+        overflow: hidden;
+        padding: 7.5px 4.5px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .products-table__row:first-of-type .products-table__cell {
+        border-top: 1.5px solid var(--base-black);
+      }
+
+      .products-table__cell--product {
+        border-left: 1.5px solid var(--base-black);
+        justify-content: space-between;
+        min-width: 0;
+      }
+
+      .products-table__product-name {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .products-table__cell--status {
+        background: var(--zenith-blue);
+      }
+
+      .products-table__cell--status.products-table__cell--ga {
+        background: var(--chartreuse-green);
+      }
+
+      .products-table__cell--status.products-table__cell--alpha {
+        background: #ffe97a;
+      }
+
+      .products-table__cell--status.products-table__cell--on-hold {
+        background: #ffd7bf;
+      }
+
+      .products-table__cell--status.products-table__cell--planned {
+        background: #f2ffcf;
+      }
+
+      .products-table__cell--status.products-table__cell--archived {
+        background: #ececec;
+      }
+
+      .products-table__link {
+        align-items: center;
+        color: inherit;
+        display: inline-flex;
+        flex-shrink: 0;
+        height: 24px;
         justify-content: center;
+        margin-left: 8px;
+        text-decoration: none;
+        width: 24px;
       }
 
-      /* Override border to 1px */
-      .table__cell {
-        border: 1px solid var(--base-slate);
-        border-top: none;
-        border-left: none;
+      .products-table__link svg {
+        display: block;
+        height: 24px;
+        width: 24px;
       }
 
-      .table__column--product .table__cell {
-        border-left: 1px solid var(--base-slate);
+      .products-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+        margin-top: 21px;
+        width: 600px;
       }
 
-      .table__column .table__cell:nth-child(2) {
-        border-top: 1px solid var(--base-slate);
-      }
-
-      .table__header {
+      .products-meta__language {
+        align-items: center;
+        align-self: flex-start;
+        background: rgba(0, 0, 0, 0.3);
         border: none;
+        color: var(--base-black);
+        cursor: pointer;
+        display: inline-flex;
+        font-family: var(--font-regular);
+        font-size: 17.44px;
+        height: 21.47px;
+        justify-content: center;
+        letter-spacing: -0.35px;
+        line-height: 17.44px;
+        min-width: 49.91px;
+        padding: 0 10px;
       }
 
-      /* Status colors */
-      .table__cell--ga {
-        background-color: var(--apple-green);
+      .products-meta__language:hover {
+        background: rgba(0, 0, 0, 0.36);
       }
 
-      .table__cell--alpha {
-        background-color: var(--yellow);
+      .products-meta__copyright {
+        color: rgba(0, 0, 0, 0.3);
+        font-family: var(--font-regular);
+        font-size: 18.78px;
+        letter-spacing: -0.38px;
+        line-height: 24px;
       }
 
-      .table__cell--in-progress {
-        background-color: var(--pink);
-      }
-
-      .table__cell--on-hold {
-        background-color: var(--orange);
-      }
-
-      .table__cell--planned {
-        background-color: #f2ffcf;
-      }
-
-      /* Mobile styles */
       html.mobile .products-header {
-        height: calc(60px * var(--sf));
+        height: auto;
+        padding: calc(24px * var(--sf)) calc(20px * var(--sf)) calc(48px * var(--sf));
       }
 
-      html.mobile .products-content {
-        gap: calc(80px * var(--sf));
+      html.mobile .products-header__inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: calc(24px * var(--sf));
+      }
+
+      html.mobile .products-header__logo,
+      html.mobile .products-header__link,
+      html.mobile .products-table__header-cell,
+      html.mobile .products-table__cell {
+        font-size: calc(16px * var(--sf));
+        letter-spacing: calc(-0.32px * var(--sf));
+      }
+
+      html.mobile .products-header__nav {
+        flex-wrap: wrap;
+        gap: calc(18px * var(--sf));
       }
 
       html.mobile .products-main {
-        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) 0;
+        min-height: calc(100vh - 120px * var(--sf));
+        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) calc(64px * var(--sf));
       }
 
+      html.mobile .products-table {
+        min-width: 500px;
+      }
+
+      html.mobile .products-table__header,
+      html.mobile .products-table__row {
+        grid-template-columns: minmax(200px, 1fr) 100px 100px 120px;
+      }
+
+      html.mobile .products-table__header-cell,
+      html.mobile .products-table__cell {
+        min-height: calc(30px * var(--sf));
+        padding: calc(7px * var(--sf)) calc(5px * var(--sf));
+      }
+
+      html.mobile .products-meta {
+        gap: calc(20px * var(--sf));
+        margin-top: calc(24px * var(--sf));
+        width: 100%;
+      }
+
+      html.mobile .products-meta__language {
+        font-size: calc(15px * var(--sf));
+        height: calc(22px * var(--sf));
+        letter-spacing: calc(-0.3px * var(--sf));
+        min-width: calc(46px * var(--sf));
+      }
+
+      html.mobile .products-meta__copyright {
+        font-size: calc(16px * var(--sf));
+        letter-spacing: calc(-0.32px * var(--sf));
+        line-height: calc(22px * var(--sf));
+      }
     </style>
   </head>
   <body>
     <div class="products-page">
-      <!-- Header -->
       <header class="products-header">
-        <div class="header">
-          <a href="/" class="header__logo"><ds-text>0001</ds-text></a>
-          <nav class="header__nav">
-            <a href="/products" class="header__link header__link--active"><ds-text>Products</ds-text></a>
-            <a href="#" class="header__link"><ds-text>Architecture</ds-text></a>
+        <div class="products-header__inner">
+          <a href="/" class="products-header__logo"><ds-text>0001</ds-text></a>
+          <nav class="products-header__nav">
+            <a href="/products" class="products-header__link products-header__link--active"><ds-text>Products</ds-text></a>
+            <a href="#" class="products-header__link"><ds-text>Architecture</ds-text></a>
           </nav>
         </div>
       </header>
 
-      <!-- Main content -->
-      <div class="products-content">
-        <main class="products-main">
-          <div class="products-table">
-          <!-- Product column -->
-          <div class="table__column table__column--product">
-            <div class="table__header">Product</div>
-            <div class="table__cell table__cell--link">
-              <span>DS one</span>
-              <a href="https://dsone.dev" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell table__cell--link">
-              <span>Consistency</span>
-              <a href="https://consistency.0001.dev" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell table__cell--link">
-              <span>allmythin.gs</span>
-              <a href="https://allmythin.gs" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell table__cell--link">
-              <span>Digte</span>
-              <a href="https://digte.co" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell table__cell--link">
-              <span>tau99</span>
-              <a href="https://tau99.com" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-            <div class="table__cell table__cell--link">
-              <span>Ezo</span>
-              <a href="https://ezo-app.com" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
+      <main class="products-main">
+        <div class="products-main__inner">
+          <div class="products-table-wrap">
+            <div class="products-table">
+              <!-- PRODUCTS_TABLE_START -->
+              <div class="products-table__header">
+                <div class="products-table__header-cell"><ds-text>Product</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Users</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Retention</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Status</ds-text></div>
+              </div>
+
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">DS one</span>
+                  <a href="https://dsone.dev" target="_blank" rel="noopener" class="products-table__link" aria-label="Open DS one">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--alpha">Alpha</div>
+              </div>
+
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">Consistency</span>
+                  <a href="https://consistency.0001.dev" target="_blank" rel="noopener" class="products-table__link" aria-label="Open Consistency">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">1</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--in-progress">In progress</div>
+              </div>
+
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">allmythin.gs</span>
+                  <a href="https://allmythin.gs" target="_blank" rel="noopener" class="products-table__link" aria-label="Open allmythin.gs">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</div>
+              </div>
+
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">Digte</span>
+                  <a href="https://digte.co" target="_blank" rel="noopener" class="products-table__link" aria-label="Open Digte">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</div>
+              </div>
+
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">tau99</span>
+                  <a href="https://tau99.com" target="_blank" rel="noopener" class="products-table__link" aria-label="Open tau99">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</div>
+              </div>
+
+              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">Ezo</span>
+                  <a href="https://ezo-app.com" target="_blank" rel="noopener" class="products-table__link" aria-label="Open Ezo">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="products-table__cell">0</div>
+                <div class="products-table__cell">0%</div>
+                <div class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</div>
+              </div>
+              <!-- PRODUCTS_TABLE_END -->
             </div>
           </div>
 
-          <!-- Users column -->
-          <div class="table__column table__column--users">
-            <div class="table__header">Users</div>
-            <div class="table__cell">0</div>
-            <div class="table__cell">0</div>
-            <div class="table__cell">0</div>
-            <div class="table__cell">0</div>
-            <div class="table__cell">0</div>
-            <div class="table__cell">0</div>
+          <div class="products-meta">
+            <button type="button" class="products-meta__language" id="products-language-toggle"><ds-text>EN</ds-text></button>
+            <p class="products-meta__copyright">0001 © <ds-date format="YYYY"></ds-date></p>
           </div>
-
-          <!-- Retention column -->
-          <div class="table__column table__column--retention">
-            <div class="table__header">Retention</div>
-            <div class="table__cell">0%</div>
-            <div class="table__cell">0%</div>
-            <div class="table__cell">0%</div>
-            <div class="table__cell">0%</div>
-            <div class="table__cell">0%</div>
-            <div class="table__cell">0%</div>
-          </div>
-
-          <!-- Status column -->
-          <div class="table__column table__column--status">
-            <div class="table__header">Status</div>
-            <div class="table__cell table__cell--alpha">Alpha</div>
-            <div class="table__cell table__cell--in-progress">In progress</div>
-            <div class="table__cell table__cell--on-hold">On hold</div>
-            <div class="table__cell table__cell--on-hold">On hold</div>
-            <div class="table__cell table__cell--on-hold">On hold</div>
-            <div class="table__cell table__cell--on-hold">On hold</div>
-          </div>
-          </div>
-        </main>
-
-        <!-- Footer -->
-        <one-footer></one-footer>
-      </div>
+        </div>
+      </main>
     </div>
   </body>
 </html>

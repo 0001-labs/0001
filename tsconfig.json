@@ -15,5 +15,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["client/**/*.ts", "scripts/**/*.ts"]
+  "include": ["client/**/*.ts", "scripts/**/*.ts", "functions/**/*.ts", "tests/**/*.ts"]
 }

@@ -4,16 +4,21 @@
  *
  * Usage: <one-h1>translation-key</one-h1>
  */
+import type { Translations, SupportedLanguage } from '../modules/types';
+import { TRANSLATIONS_PATH, DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY } from '../modules/shared/constants';
+
 class OneH1 extends HTMLElement {
+  private _key: string = '';
+  private _translations: Translations | null = null;
+  private _observer: MutationObserver | null = null;
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this._key = '';
-    this._translations = null;
   }
 
-  connectedCallback() {
-    this._key = this.textContent.trim();
+  connectedCallback(): void {
+    this._key = this.textContent?.trim() || '';
     this.render();
     this.loadTranslations();
 
@@ -22,7 +27,7 @@ class OneH1 extends HTMLElement {
 
     // Observe changes to the text content (for dynamic key updates)
     this._observer = new MutationObserver(() => {
-      const newKey = this.textContent.trim();
+      const newKey = this.textContent?.trim() || '';
       if (newKey !== this._key) {
         this._key = newKey;
         this.updateText();
@@ -31,15 +36,15 @@ class OneH1 extends HTMLElement {
     this._observer.observe(this, { childList: true, characterData: true, subtree: true });
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     if (this._observer) {
       this._observer.disconnect();
     }
   }
 
-  async loadTranslations() {
+  private async loadTranslations(): Promise<void> {
     try {
-      const res = await fetch('./language/translations.json');
+      const res = await fetch(TRANSLATIONS_PATH);
       this._translations = await res.json();
       this.updateText();
     } catch (e) {
@@ -47,13 +52,14 @@ class OneH1 extends HTMLElement {
     }
   }
 
-  updateText() {
-    if (!this._translations) return;
+  private updateText(): void {
+    if (!this._translations || !this.shadowRoot) return;
 
-    const lang = localStorage.getItem('language') || 'en';
-    const text = this._translations[lang]?.[this._key]
-              || this._translations['en']?.[this._key]
-              || this._key;
+    const lang = (localStorage.getItem(LANGUAGE_STORAGE_KEY) || DEFAULT_LANGUAGE) as SupportedLanguage;
+    const text =
+      this._translations[lang]?.[this._key] ||
+      this._translations[DEFAULT_LANGUAGE]?.[this._key] ||
+      this._key;
 
     const h1 = this.shadowRoot.querySelector('h1');
     if (h1) {
@@ -61,30 +67,26 @@ class OneH1 extends HTMLElement {
     }
   }
 
-  checkMobile() {
-    return document.documentElement.classList.contains('mobile');
-  }
-
-  render() {
-    const isMobile = this.checkMobile();
+  private render(): void {
+    if (!this.shadowRoot) return;
 
     this.shadowRoot.innerHTML = `
       <style>
         :host {
-          display: ${isMobile ? 'inline' : 'block'};
+          display: block;
         }
         h1 {
           font-family: var(--typeface-canon, Georgia, serif);
-          font-size: ${isMobile ? '32px' : '48px'};
-          letter-spacing: ${isMobile ? '-0.64px' : '-0.96px'};
+          font-size: 48px;
+          letter-spacing: -0.96px;
           color: var(--base-slate, #2a2a2a);
           line-height: 1.2;
           font-weight: normal;
           margin: 0;
-          max-width: ${isMobile ? 'none' : '400px'};
+          max-width: 100%;
+          text-wrap: balance;
           user-select: none;
           -webkit-user-select: none;
-          display: ${isMobile ? 'inline' : 'block'};
         }
       </style>
       <h1></h1>

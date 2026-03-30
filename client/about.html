@@ -51,7 +51,10 @@
     ></script>
 
     <!-- 0001 components -->
-    <script type="module" src="./components/one-footer.js"></script>
+    <script type="module" src="./components/one-footer.ts"></script>
+
+    <!-- Page module -->
+    <script type="module" src="./modules/pages/common.ts"></script>
 
     <style>
       .about-page {
@@ -260,7 +263,7 @@
       }
 
       html.mobile .about-image {
-        width: 100%;
+        width: min(400px, 100%);
         height: auto;
         aspect-ratio: 4/3;
         margin-top: calc(20px * var(--sf));
@@ -339,7 +342,7 @@
           </div>
           <div class="about-image">
             <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800"
+              src="/assets/imagery/lime-archive.svg"
               alt="0001 workspace"
             />
           </div>
@@ -395,17 +398,5 @@
       <!-- Footer -->
       <one-footer></one-footer>
     </div>
-
-    <script>
-      // Set initial language from localStorage on page load
-      (async () => {
-        const savedLang = localStorage.getItem("language");
-        if (savedLang && savedLang !== "en") {
-          const dsOne =
-            await import("https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js");
-          dsOne.setLanguage(savedLang);
-        }
-      })();
-    </script>
   </body>
 </html>

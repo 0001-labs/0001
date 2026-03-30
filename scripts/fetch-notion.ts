@@ -74,78 +74,83 @@ function getMockProducts(): NotionProduct[] {
 function statusClass(status: string): string {
   switch (status.toLowerCase()) {
     case "ga":
-      return " table__cell--ga";
+      return " products-table__cell--ga";
     case "alpha":
-      return " table__cell--alpha";
+      return " products-table__cell--alpha";
     case "in progress":
-      return " table__cell--in-progress";
+      return " products-table__cell--in-progress";
     case "on hold":
-      return " table__cell--on-hold";
+      return " products-table__cell--on-hold";
     case "planned":
-      return " table__cell--planned";
+      return " products-table__cell--planned";
+    case "archived":
+      return " products-table__cell--archived";
     default:
       return "";
   }
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function getProductLink(product: NotionProduct): string | null {
+  const rawLink = (product.website || product.github || "").split(",")[0].trim();
+
+  if (!rawLink) {
+    return null;
+  }
+
+  return rawLink.startsWith("http") ? rawLink : `https://${rawLink}`;
+}
+
+function externalLinkSVG(): string {
+  return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                      <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
+                      <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
+                    </svg>`;
+}
+
 function generateProductsHTML(products: NotionProduct[]): string {
-  const productCells = products
-    .map((p) => {
-      if (p.website || p.github) {
-        // Use first URL if comma-separated, and ensure https:// prefix
-        let link = (p.website || p.github || "").split(",")[0].trim();
-        if (link && !link.startsWith("http")) {
-          link = `https://${link}`;
-        }
-        return `<div class="table__cell table__cell--link">
-              <span>${p.name}</span>
-              <a href="${link}" target="_blank" rel="noopener" class="external-link-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>`;
-      }
-      return `<div class="table__cell">${p.name}</div>`;
+  const rows = products
+    .map((product) => {
+      const link = getProductLink(product);
+      const safeName = escapeHtml(product.name);
+      const safeStatus = escapeHtml(product.status);
+      const safeRetention = escapeHtml(product.retention);
+      const linkMarkup = link
+        ? `
+                  <a href="${escapeHtml(link)}" target="_blank" rel="noopener" class="products-table__link" aria-label="Open ${safeName}">
+                    ${externalLinkSVG()}
+                  </a>`
+        : "";
+
+      return `              <div class="products-table__row">
+                <div class="products-table__cell products-table__cell--product">
+                  <span class="products-table__product-name">${safeName}</span>${linkMarkup}
+                </div>
+                <div class="products-table__cell">${product.users}</div>
+                <div class="products-table__cell">${safeRetention}</div>
+                <div class="products-table__cell products-table__cell--status${statusClass(product.status)}">${safeStatus}</div>
+              </div>`;
     })
-    .join("\n            ");
+    .join("\n\n");
 
-  const usersCells = products.map((p) => `<div class="table__cell">${p.users}</div>`).join("\n            ");
+  return `              <div class="products-table__header">
+                <div class="products-table__header-cell"><ds-text>Product</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Users</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Retention</ds-text></div>
+                <div class="products-table__header-cell"><ds-text>Status</ds-text></div>
+              </div>
 
-  const retentionCells = products.map((p) => `<div class="table__cell">${p.retention}</div>`).join("\n            ");
-
-  const statusCells = products
-    .map((p) => {
-      const cls = statusClass(p.status);
-      return `<div class="table__cell${cls}">${p.status}</div>`;
-    })
-    .join("\n            ");
-
-  return `<!-- Product column -->
-          <div class="table__column table__column--product">
-            <div class="table__header">Product</div>
-            ${productCells}
-          </div>
-
-          <!-- Users column -->
-          <div class="table__column table__column--users">
-            <div class="table__header">Users</div>
-            ${usersCells}
-          </div>
-
-          <!-- Retention column -->
-          <div class="table__column table__column--retention">
-            <div class="table__header">Retention</div>
-            ${retentionCells}
-          </div>
-
-          <!-- Status column -->
-          <div class="table__column table__column--status">
-            <div class="table__header">Status</div>
-            ${statusCells}
-          </div>`;
+${rows}`;
 }
 
 async function updateProductsPage(): Promise<void> {
@@ -160,8 +165,8 @@ async function updateProductsPage(): Promise<void> {
   let template = readFileSync(templatePath, "utf-8");
 
   // Replace the table content
-  const tableStartMarker = '<div class="products-table">';
-  const tableEndMarker = "</div>\n        </main>\n\n        <!-- Footer -->";
+  const tableStartMarker = "<!-- PRODUCTS_TABLE_START -->";
+  const tableEndMarker = "<!-- PRODUCTS_TABLE_END -->";
 
   const startIndex = template.indexOf(tableStartMarker);
   const endIndex = template.indexOf(tableEndMarker);
@@ -171,10 +176,9 @@ async function updateProductsPage(): Promise<void> {
     return;
   }
 
-  const newContent = `<div class="products-table">
-          ${productsHTML}
-          </div>
-        </main>\n\n        <!-- Footer -->`;
+  const newContent = `${tableStartMarker}
+${productsHTML}
+              ${tableEndMarker}`;
 
   template = template.substring(0, startIndex) + newContent + template.substring(endIndex + tableEndMarker.length);
 

@@ -1,55 +1,21 @@
 interface Env {
   NOTION_API_KEY: string;
+  NOTION_DATABASE_ID: string;
 }
 
 interface ContactForm {
   name: string;
   company?: string;
   email: string;
+  phone?: string;
   message: string;
   topics: string[];
   techstack?: string[];
 }
 
-const LEADS_DATABASE_ID = "2f789c2fcf7680e190dbe6c9bf92413d";
-
-// Build notes content from form data
-function buildNotesContent(body: ContactForm): string {
-  const parts: string[] = [];
-
-  if (body.topics && body.topics.length > 0) {
-    parts.push(`Services: ${body.topics.join(", ")}`);
-  }
-
-  if (body.techstack && body.techstack.length > 0) {
-    parts.push(`Tech Stack: ${body.techstack.join(", ")}`);
-  }
-
-  parts.push(`\nMessage:\n${body.message}`);
-
-  return parts.join("\n");
-}
-
-// Map website topics to Notion Services options
-const SERVICE_MAP: Record<string, string> = {
-  "SEO": "Web apps",
-  "Speed optimizing": "Web apps",
-  "Image delivery pipeline": "Web apps",
-  "Marketing sites": "Web apps",
-  "Design systems": "Web apps",
-  "API development": "Web apps",
-  "Database design": "Data analytics",
-  "Cloud infrastructure": "Cloud",
-  "Authentication": "Security",
-  "Security": "Security",
-  "AI Agents": "AI",
-  "MCP": "AI",
-};
-
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
-  // CORS headers
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -61,19 +27,55 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const body: ContactForm = await request.json();
 
     // Validate required fields
-    if (!body.name || !body.email || !body.message) {
+    if (!body.name || !body.email) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
         { status: 400, headers }
       );
     }
 
-    // Map topics to Notion Services
-    const services = [...new Set(
-      body.topics
-        .map(topic => SERVICE_MAP[topic])
-        .filter(Boolean)
-    )];
+    // Combine services and techstack with prefixes to match Notion options
+    const allServices = [
+      ...(body.topics || []).map(t => `Services: ${t}`),
+      ...(body.techstack || []).map(t => `Tech stack: ${t}`),
+    ];
+
+    // Build properties
+    const properties: Record<string, any> = {
+      // Name (title) = Company name
+      "Name": {
+        title: [{ text: { content: body.company || body.name || "Unknown" } }],
+      },
+      // Contact = Person's name
+      "Contact": {
+        rich_text: [{ text: { content: body.name || "" } }],
+      },
+      // Email
+      "Email": {
+        email: body.email,
+      },
+      // Status
+      "Status": {
+        status: { name: "New" },
+      },
+      // Lead Source
+      "Lead Source": {
+        select: { name: "Website" },
+      },
+      // Services
+      "Services": {
+        multi_select: allServices.map(s => ({ name: s })),
+      },
+      // Message
+      "Message": {
+        rich_text: [{ text: { content: body.message || "" } }],
+      },
+    };
+
+    // Add phone only if provided
+    if (body.phone) {
+      properties["Phone"] = { phone_number: body.phone };
+    }
 
     // Create lead in Notion
     const notionResponse = await fetch("https://api.notion.com/v1/pages", {
@@ -84,34 +86,18 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         "Notion-Version": "2022-06-28",
       },
       body: JSON.stringify({
-        parent: { database_id: LEADS_DATABASE_ID },
-        properties: {
-          "Name": {
-            title: [{ text: { content: body.name } }],
+        parent: { database_id: env.NOTION_DATABASE_ID },
+        properties,
+        // Add message as page content
+        children: body.message ? [
+          {
+            object: "block",
+            type: "paragraph",
+            paragraph: {
+              rich_text: [{ type: "text", text: { content: body.message } }],
+            },
           },
-          "Email": {
-            email: body.email,
-          },
-          "Contact": {
-            rich_text: [{ text: { content: body.company || "" } }],
-          },
-          "Lead Source": {
-            select: { name: "Website" },
-          },
-          "Status": {
-            status: { name: "New" },
-          },
-          "Services": {
-            multi_select: services.map(s => ({ name: s })),
-          },
-          "Notes": {
-            rich_text: [{
-              text: {
-                content: buildNotesContent(body)
-              }
-            }],
-          },
-        },
+        ] : [],
       }),
     });
 
@@ -119,7 +105,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       const error = await notionResponse.text();
       console.error("Notion API error:", error);
       return new Response(
-        JSON.stringify({ error: "Failed to submit form" }),
+        JSON.stringify({ error: "Failed to save", details: error }),
         { status: 500, headers }
       );
     }
@@ -132,7 +118,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   } catch (error) {
     console.error("Contact form error:", error);
     return new Response(
-      JSON.stringify({ error: "Internal server error" }),
+      JSON.stringify({ error: "Internal server error", message: String(error) }),
       { status: 500, headers }
     );
   }

@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task log</title>
+    <meta name="description" content="0001 task log - What we're building and what's done." />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Prevent FOUC -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const theme = savedTheme || systemTheme;
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+
+    <!-- DS one CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+
+    <!-- DS one i18n setup -->
+    <script>
+      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
+    </script>
+
+    <!-- DS one bundle -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
+
+    <!-- 0001 components -->
+    <script type="module" src="./components/one-footer.ts"></script>
+
+    <!-- Page module -->
+    <script type="module" src="./modules/pages/common.ts"></script>
+
+    <style>
+      .tasklog-page {
+        background-color: #FFFFFF;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .tasklog-header {
+        height: 100px;
+        background-color: #CCFF4D;
+      }
+
+      .tasklog-content {
+        display: flex;
+        flex-direction: column;
+        gap: 150px;
+      }
+
+      .tasklog-main {
+        padding: 80px 60px 0;
+      }
+
+      /* Tabs — Ezo style with color indicators */
+      .tasklog-tabs {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-bottom: 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #FFFFFF;
+        padding: 12px 0;
+      }
+
+      .tasklog-tab {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 0;
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        color: var(--base-darker-grey);
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        transition: color 0.15s;
+      }
+
+      .tasklog-tab:hover {
+        color: var(--base-slate);
+      }
+
+      .tasklog-tab--active {
+        color: var(--base-slate);
+      }
+
+      .tasklog-tab__indicator {
+        width: 4px;
+        height: 18px;
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      /* Table — row-based, same cell styling as products */
+      .tasklog-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .tasklog-table__row {
+        display: flex;
+      }
+
+      .tasklog-table__row[data-hidden="true"] {
+        display: none;
+      }
+
+      .tasklog-table__cell {
+        border: 1px solid var(--base-slate);
+        border-top: none;
+        border-left: none;
+        padding: 7.5px 4.5px;
+        min-height: 30px;
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        color: var(--base-slate);
+        display: flex;
+        align-items: center;
+      }
+
+      /* First cell in each row gets left border */
+      .tasklog-table__cell--name {
+        flex: 1;
+        min-width: 0;
+        border-left: 1px solid var(--base-slate);
+      }
+
+      .tasklog-table__cell--status {
+        width: 120px;
+        flex-shrink: 0;
+      }
+
+      .tasklog-table__cell--due {
+        width: 120px;
+        flex-shrink: 0;
+      }
+
+      /* First visible row gets top border */
+      .tasklog-table__row--first-visible .tasklog-table__cell {
+        border-top: 1px solid var(--base-slate);
+      }
+
+      /* Status colors */
+      .tasklog-table__cell--shipped {
+        background-color: var(--chartreuse-green);
+      }
+
+      .tasklog-table__cell--planned {
+        background-color: #f5f5f5;
+      }
+
+      .tasklog-table__cell--in-progress {
+        background-color: var(--zenith-blue);
+      }
+
+      /* Mobile */
+      html.mobile .tasklog-header {
+        height: calc(60px * var(--sf));
+      }
+
+      html.mobile .tasklog-content {
+        gap: calc(80px * var(--sf));
+      }
+
+      html.mobile .tasklog-main {
+        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) 0;
+      }
+
+      html.mobile .tasklog-tab {
+        font-size: calc(16px * var(--sf));
+        padding: calc(6px * var(--sf)) calc(8px * var(--sf));
+      }
+
+      html.mobile .tasklog-table__cell {
+        font-size: calc(16px * var(--sf));
+        padding: calc(6px * var(--sf));
+        min-height: calc(30px * var(--sf));
+      }
+
+      html.mobile .tasklog-table__cell--status,
+      html.mobile .tasklog-table__cell--due {
+        width: calc(90px * var(--sf));
+      }
+
+      /* Dateline */
+      .tasklog-dateline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 0;
+      }
+
+      .tasklog-dateline__line {
+        flex: 1;
+        height: 2px;
+        background-color: #e53e3e;
+      }
+
+      .tasklog-dateline__label {
+        font-family: var(--font-medium);
+        font-size: 12px;
+        color: #e53e3e;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        flex-shrink: 0;
+      }
+
+      /* Past rows */
+      .tasklog-table__row--past {
+        opacity: 0.4;
+      }
+
+      .tasklog-table__row--past:hover {
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .tasklog-main {
+          padding: 40px 20px 0;
+        }
+
+        .tasklog-tabs {
+          flex-wrap: wrap;
+        }
+
+        .tasklog-tab {
+          font-size: 16px;
+          padding: 6px 8px;
+        }
+
+        .tasklog-table__cell {
+          font-size: 16px;
+          padding: 6px;
+        }
+
+        .tasklog-table__cell--status,
+        .tasklog-table__cell--due {
+          width: 90px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tasklog-page">
+      <!-- Header -->
+      <header class="tasklog-header">
+        <div class="header">
+          <a href="/" class="header__logo"><ds-text>0001</ds-text></a>
+          <nav class="header__nav">
+            <a href="/products" class="header__link"><ds-text>Products</ds-text></a>
+            <a href="/task-log" class="header__link header__link--active"><ds-text>Task log</ds-text></a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Main content -->
+      <div class="tasklog-content">
+        <main class="tasklog-main">
+
+          <!-- TABS_START -->
+          <div class="tasklog-tabs">
+            <button class="tasklog-tab tasklog-tab--active" data-filter="all">All tasks</button>
+            <button class="tasklog-tab" data-filter="Blocker"><span class="tasklog-tab__indicator" style="background:#E85D5D"></span>Blocker</button>
+            <button class="tasklog-tab" data-filter="Consistency"><span class="tasklog-tab__indicator" style="background:#E8A83E"></span>Consistency</button>
+            <button class="tasklog-tab" data-filter="Ezo"><span class="tasklog-tab__indicator" style="background:#5DB85D"></span>Ezo</button>
+            <button class="tasklog-tab" data-filter="DS one"><span class="tasklog-tab__indicator" style="background:#4A9EE0"></span>DS one</button>
+            <button class="tasklog-tab" data-filter="0001"><span class="tasklog-tab__indicator" style="background:#CCFF4D"></span>0001</button>
+          </div>
+          <!-- TABS_END -->
+
+          <div class="tasklog-table">
+            <!-- TASKS_START -->
+            <div class="tasklog-table__row tasklog-table__row--first-visible" data-project="Blocker" data-date="2026-04-01">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Email escrow feature for blocking individual accounts</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Apr 1</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-21">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Privacy-preserving usage analytics</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 21</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-14">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – PWA support (manifest, service worker, install prompt)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 14</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-03-12">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement Calc blocks (SUM, AVG, COUNT, MIN, MAX, MED)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 12</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-07">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Email notifications for session start/end</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 7</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-03-05">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Offline support (PWA)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 5</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-28">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – E2E test coverage (Playwright)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 28</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-02-28">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Export/import schedule</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 28</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-02-28">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement Ezo ID sharing with scannable codes</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 28</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-26">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Team collaboration (invite members, roles)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 26</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-02-25">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement Terminal User Interface (TUI)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 25</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-24">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – API access (read/write site data)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 24</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-22">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Version history (rollback, compare versions)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 22</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-21">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – AI translations (up to 10 languages, Business tier)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 21</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-02-21">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Session history view</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 21</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-20">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Analytics dashboard (pageviews, visitors, referrers)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 20</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-19">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Custom code injection (head/body scripts)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 19</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-17">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – SEO settings (meta titles, descriptions, OG images, sitemap)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 17</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Contact forms (form element, submissions, email notifications)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-02-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement Sticker Personalization feature</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-15">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Element styling (property inspector, colors, typography, spacing)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 15</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-14">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Undo/redo stack in editor</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 14</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-02-14">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Timezone selector in settings</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 14</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-13">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Block templates (hero, feature grid, pricing, footer)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 13</div>
+            </div>
+            <div class="tasklog-table__row" data-project="0001" data-date="2026-02-12">
+              <div class="tasklog-table__cell tasklog-table__cell--name">0001 – Write to tax office about business opening</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 12</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-02-12">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement themes system (Toothpaste, Born Slippy)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 12</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-11">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Responsive panel auto-collapse under 1000px</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 11</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-11">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Anonymous AI editing in playground (3/day limit)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 11</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-11">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – AI command bar with multi-page editing</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 11</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-10">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Microsoft integration + new blocks</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 10</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-10">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Rename playground to build.consistency.site</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 10</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-10">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Animated tangram logo + WebGL badge redesign</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 10</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-10">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Login screen styled with dogfood site colors</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 10</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-10">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Hybrid routing: dogfood consistency.site</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 10</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-09">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Terminology updates (sites/blocks/top bar)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 9</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-09">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Top bar: save CTA pill + URL styling</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 9</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-02-09">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement URL routing with multilingual slugs</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 9</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-08">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Published sites: remove live editing</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 8</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-08">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – SettingsPanel refactor for multi-site management</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 8</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-08">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – OTP: 6-digit code with branded email</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 8</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-08">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Notion import + Settings connect</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 8</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-02-07">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – PIN generation helper</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 7</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-05">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Playground CTAs + Start over button</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 5</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-05">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Publishing CSS/caching tweaks (consistency.css, stale-while-revalidate)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 5</div>
+            </div>
+            <div class="tasklog-table__row" data-project="0001" data-date="2026-02-05">
+              <div class="tasklog-table__cell tasklog-table__cell--name">0001 – Connect contact form to Leads database</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 5</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-02-05">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement search via address bar</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 5</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-04">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Builder flow refresh (publishing/domains + marketing/UI + tests)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 4</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-03">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Drag and drop improvements (palette drag preview stability)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 3</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-03">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Editor visual sync between tree and canvas (FLIP animation)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 3</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-03">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Deploy single build for main + playground</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 3</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-03">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Create marketing pitch deck</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 3</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-03">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – HeaderBlock drag improvements and CSS refactor</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 3</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-02">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Security hardening (publishing, edge routing, validation)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 2</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-02-02">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement compare lists feature</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 2</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-01">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Pricing + Stripe integration + admin dashboard</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 1</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-02-01">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Align Notion documentation with codebase</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 1</div>
+            </div>
+            <div class="tasklog-table__row" data-project="DS one" data-date="2026-01-31">
+              <div class="tasklog-table__cell tasklog-table__cell--name">DS one – Add panel icons (v0.3.0-alpha.9)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 31</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-01-31">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Use c9y.site domain with 3-part color subdomains</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 31</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-01-31">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Remove user story files and Tailwind dependencies</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 31</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-01-31">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Initial commit: website builder foundation</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 31</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-01-31">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Add DS One design system CDN to published sites</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 31</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-01-31">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Add vitest tests for user stories</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 31</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Consistency" data-date="2026-01-31">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Consistency – Update pricing to Free + Business tiers</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 31</div>
+            </div>
+            <div class="tasklog-table__row" data-project="DS one" data-date="2026-01-29">
+              <div class="tasklog-table__cell tasklog-table__cell--name">DS one – Add GT Canon M Standard Medium typeface</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 29</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-28">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Add troubleshooting guide</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 28</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-28">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Update README with deployment instructions</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 28</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-01-28">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Standardize terminology: Task → Item</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 28</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-27">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Set up error tracking (Sentry or similar)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 27</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-27">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Set up uptime monitoring for Worker</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 27</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-01-27">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement Star items feature</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 27</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-26">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Set up Cloudflare Worker analytics</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 26</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-25">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Improve error handling and user-friendly messages</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 25</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-24">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Add rate limiting to email OTP</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 24</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-24">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Add rate limiting to Worker endpoints</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 24</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-01-24">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Add priority levels and due dates to items</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 24</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-22">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Test on mobile Safari</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 22</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-22">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Test timezone handling and edge cases</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 22</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-01-22">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Add item types: blank and note</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 22</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-21">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – E2E test: full blocking flow</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 21</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-20">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Set up custom domain DNS (useblocker.com)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 20</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2026-01-20">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement Notes feature with layouts, colors, and grids</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 20</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-19">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Verify Cloudflare Pages deployment</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 19</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-19">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Verify Worker deployment</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 19</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-18">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Deploy Convex to production</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 18</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-18">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Set production environment variables</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 18</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-17">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Review password storage encryption in KV</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 17</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-17">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Audit vault token generation entropy</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 17</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – UI polish and Settings improvements</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="0001" data-date="2026-01-15">
+              <div class="tasklog-table__cell tasklog-table__cell--name">0001 – Set up Claude Code Cloud workflow with auto-merge and auto-pull</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 15</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-15">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Admin session simulation with lock confirmation</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 15</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-15">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Start block flow with macOS Screen Time instructions</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 15</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-14">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Research custom block page design</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 14</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-14">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Convert JS to TypeScript and reorganize folder structure</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 14</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-13">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Landing page redesign</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 13</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-13">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Calendar settings (24h toggle, first day of week)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 13</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-13">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Footer component for landing &amp; FAQ only</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 13</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-13">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Schedule.js dynamic preferences</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 13</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-01-13">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Session ended view with credentials reveal</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Jan 13</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-12-28">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Add new components, pages, and content structure</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 28</div>
+            </div>
+            <div class="tasklog-table__row" data-project="DS one" data-date="2025-12-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">DS one – UI library research</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="DS one" data-date="2025-12-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">DS one – Move ds-form to 3-unit</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="DS one" data-date="2025-12-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">DS one – Improve header and sidebar responsiveness</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="DS one" data-date="2025-12-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">DS one – Add ds-input component</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="DS one" data-date="2025-12-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">DS one – Add styles for various DS components</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-12-12">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Update dialogs, layouts, and routing for 0.2.0-alpha.2</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 12</div>
+            </div>
+            <div class="tasklog-table__row" data-project="DS one" data-date="2025-12-11">
+              <div class="tasklog-table__cell tasklog-table__cell--name">DS one – Release v0.2.5 series (alpha.2 → alpha.13)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 11</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-12-10">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Upgrade to React 19 and DS one design system integration</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 10</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-12-09">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Remove Notion integration, switch to signals</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 9</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-12-08">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Initial setup and iOS app removal</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--shipped">Shipped</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Dec 8</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-03-24">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement Admin Dashboard</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 24</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-03-10">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement Stripe payment integration</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 10</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-02-24">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement rate limiting</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 24</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Ezo" data-date="2025-02-21">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Ezo – Implement authentication (Apple, Google, email)</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Feb 21</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-16">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Create AppleScript for Screen Time automation</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 16</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-13">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Documentation: Update architecture docs</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 13</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-12">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Frontend: Update API client for PIN escrow</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 12</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-11">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Frontend: Update setup flow for PIN escrow</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 11</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-10">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Worker: Add linking code endpoints</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 10</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-09">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Worker: Replace credential escrow with PIN escrow</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 9</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-06">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Maximum block of 48 hours</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 6</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-05">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Allow blocks to cross midnight</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 5</div>
+            </div>
+            <div class="tasklog-table__row" data-project="Blocker" data-date="2026-03-04">
+              <div class="tasklog-table__cell tasklog-table__cell--name">Blocker – Add title input dialog for sessions</div>
+              <div class="tasklog-table__cell tasklog-table__cell--status tasklog-table__cell--planned">Planned</div>
+              <div class="tasklog-table__cell tasklog-table__cell--due">Mar 4</div>
+            </div>
+            <!-- TASKS_END -->
+          </div>
+
+        </main>
+
+        <!-- Footer -->
+        <one-footer></one-footer>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const tabs = document.querySelectorAll(".tasklog-tab");
+        const table = document.querySelector(".tasklog-table");
+        const allRows = [...document.querySelectorAll(".tasklog-table__row")];
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const todayMs = today.getTime();
+
+        // Parse dates from data-date attribute (ISO format YYYY-MM-DD)
+        allRows.forEach(row => {
+          const dateStr = row.dataset.date;
+          if (dateStr) {
+            const d = new Date(dateStr + "T00:00:00");
+            row._dateMs = d.getTime();
+          }
+        });
+
+        // Sort: dated descending (future first), undated at bottom
+        allRows.sort((a, b) => {
+          const aMs = a._dateMs ?? -Infinity;
+          const bMs = b._dateMs ?? -Infinity;
+          return bMs - aMs;
+        });
+
+        // Reorder rows in DOM
+        allRows.forEach(row => table.appendChild(row));
+
+        // Create and insert dateline
+        const dateline = document.createElement("div");
+        dateline.className = "tasklog-dateline";
+        dateline.id = "today";
+        dateline.innerHTML =
+          '<div class="tasklog-dateline__line"></div>' +
+          '<span class="tasklog-dateline__label">Today</span>' +
+          '<div class="tasklog-dateline__line"></div>';
+
+        let insertBefore = null;
+        for (const row of allRows) {
+          if (row._dateMs != null && row._dateMs < todayMs) {
+            insertBefore = row;
+            break;
+          }
+        }
+        if (insertBefore) {
+          table.insertBefore(dateline, insertBefore);
+        } else {
+          table.appendChild(dateline);
+        }
+
+        // Mark past rows + convert to relative dates
+        allRows.forEach(row => {
+          if (row._dateMs != null && row._dateMs < todayMs) {
+            row.classList.add("tasklog-table__row--past");
+          }
+
+          const dueCell = row.querySelector(".tasklog-table__cell--due");
+          if (row._dateMs != null && dueCell) {
+            const diff = Math.round((row._dateMs - todayMs) / 86400000);
+            if (diff === 0) dueCell.textContent = "Today";
+            else if (diff === 1) dueCell.textContent = "Tomorrow";
+            else if (diff === -1) dueCell.textContent = "Yesterday";
+            else if (diff > 1) dueCell.textContent = "In " + diff + "d";
+            else dueCell.textContent = Math.abs(diff) + "d ago";
+          }
+        });
+
+        // Scroll to dateline
+        setTimeout(() => {
+          dateline.scrollIntoView({ behavior: "instant", block: "center" });
+        }, 150);
+
+        // First visible row border
+        function updateFirstVisible() {
+          allRows.forEach(r => r.classList.remove("tasklog-table__row--first-visible"));
+          for (const row of allRows) {
+            if (row.dataset.hidden !== "true") {
+              row.classList.add("tasklog-table__row--first-visible");
+              break;
+            }
+          }
+        }
+
+        // Show/hide dateline based on visible rows
+        function updateDateline() {
+          const visible = allRows.filter(r => r.dataset.hidden !== "true");
+          const hasFuture = visible.some(r => r._dateMs != null && r._dateMs >= todayMs);
+          const hasPast = visible.some(r => r._dateMs != null && r._dateMs < todayMs);
+          dateline.style.display = (hasFuture || hasPast) ? "" : "none";
+        }
+
+        // Tab filtering
+        function filterByProject(project) {
+          const isAll = project === "all";
+
+          allRows.forEach(row => {
+            const rowProject = row.dataset.project;
+            const visible = isAll || rowProject === project;
+            row.dataset.hidden = visible ? "false" : "true";
+
+            const nameCell = row.querySelector(".tasklog-table__cell--name");
+            if (!nameCell) return;
+            const fullName = nameCell.dataset.fullName || nameCell.textContent;
+            if (!nameCell.dataset.fullName) {
+              nameCell.dataset.fullName = nameCell.textContent;
+            }
+
+            if (isAll) {
+              nameCell.textContent = fullName;
+            } else {
+              const prefix = project + " \u2013 ";
+              nameCell.textContent = fullName.startsWith(prefix)
+                ? fullName.substring(prefix.length)
+                : fullName;
+            }
+          });
+
+          updateFirstVisible();
+          updateDateline();
+        }
+
+        tabs.forEach(tab => {
+          tab.addEventListener("click", () => {
+            tabs.forEach(t => t.classList.remove("tasklog-tab--active"));
+            tab.classList.add("tasklog-tab--active");
+            filterByProject(tab.dataset.filter);
+          });
+        });
+
+        updateFirstVisible();
+        updateDateline();
+      });
+    </script>
+  </body>
+</html>

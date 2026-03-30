@@ -110,7 +110,7 @@
       }
 
       .hero__inner {
-        width: 600px;
+        width: min(100%, 400px);
         display: flex;
         flex-direction: column;
         gap: 30px;
@@ -119,6 +119,11 @@
       .hero__title-wrapper {
         position: relative;
         cursor: pointer;
+        max-width: 400px;
+      }
+
+      .hero__title-wrapper one-h1 {
+        margin-top: 5px;
       }
 
       .hero__number {
@@ -183,7 +188,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
+        width: min(100%, 400px);
         max-width: 400px;
         opacity: 0;
         transition: opacity 0.5s ease;
@@ -193,6 +198,11 @@
         padding-top: 20px;
         gap: 20px;
         pointer-events: none;
+      }
+
+      .hero__description > * {
+        width: 100%;
+        max-width: 400px;
       }
 
       .hero__description.revealed {
@@ -211,7 +221,13 @@
         color: var(--base-slate);
         line-height: 1.5;
         margin: 0;
-        align-self: stretch;
+      }
+
+      .hero__description p ds-text {
+        display: block;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
       }
 
       .hero__buttons {
@@ -242,7 +258,6 @@
         display: none;
       }
 
-
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
       html.mobile .home-page {
         gap: 0;
@@ -272,6 +287,10 @@
         gap: calc(8px * var(--sf));
       }
 
+      html.mobile .hero__title-wrapper one-h1 {
+        margin-top: 0;
+      }
+
       html.mobile .hero__number {
         position: static;
         width: auto;
@@ -283,13 +302,14 @@
       }
 
       html.mobile .hero__media {
-        width: 100%;
-        min-height: auto;
+        width: min(400px, 100%);
+        height: auto;
+        aspect-ratio: 4/3;
       }
 
       html.mobile .hero__image {
         width: 100%;
-        aspect-ratio: 4/3;
+        height: 100%;
       }
 
       html.mobile .hero__timer {
@@ -330,11 +350,10 @@
       <!-- Decorative image top-left -->
       <div class="decorative-image" id="randomize-btn">
         <img
-          src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400"
+          src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop&auto=format"
           alt="Click to randomize sentence"
         />
       </div>
-
       <!-- Main content -->
       <div class="home-content">
         <main class="hero">
@@ -347,7 +366,7 @@
             <div class="hero__media">
               <div class="hero__image">
                 <img
-                  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800"
+                  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop&auto=format"
                   alt="0001"
                 />
               </div>
