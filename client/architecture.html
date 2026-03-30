@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Architecture</title>
+    <meta name="description" content="Architecture by 0001 - How we build." />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Prevent FOUC -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const theme = savedTheme || systemTheme;
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+
+    <!-- DS one CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+
+    <!-- DS one i18n setup -->
+    <script>
+      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
+    </script>
+
+    <!-- DS one bundle -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
+
+    <style>
+      .arch-page {
+        min-height: 100vh;
+        background: var(--chartreuse-green);
+      }
+
+      .arch-header {
+        height: 180px;
+        padding: 40px 60px 0;
+      }
+
+      .arch-header__inner {
+        align-items: flex-start;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .arch-header__logo {
+        color: var(--base-slate);
+        font-family: var(--font-medium);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        line-height: 15px;
+        text-decoration: none;
+      }
+
+      .arch-header__nav {
+        display: flex;
+        gap: 32px;
+      }
+
+      .arch-header__link {
+        color: var(--base-slate);
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        line-height: 15px;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .arch-header__link:hover,
+      .arch-header__link--active {
+        color: var(--every-green);
+      }
+
+      .arch-main {
+        background: #fcfff6;
+        border-top: 1.5px solid rgba(0, 0, 0, 0.1);
+        min-height: calc(100vh - 180px);
+        padding: 100px 60px 120px;
+      }
+
+      .arch-main__inner {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 300px;
+      }
+
+      .arch-coming-soon {
+        color: rgba(0, 0, 0, 0.3);
+        font-family: var(--font-regular);
+        font-size: 13px;
+        letter-spacing: -0.26px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="arch-page">
+      <header class="arch-header">
+        <div class="arch-header__inner">
+          <a href="/" class="arch-header__logo"><ds-text>0001</ds-text></a>
+          <nav class="arch-header__nav">
+            <a href="/products" class="arch-header__link"><ds-text>Products</ds-text></a>
+            <a href="/architecture" class="arch-header__link arch-header__link--active"><ds-text>Architecture</ds-text></a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="arch-main">
+        <div class="arch-main__inner">
+          <p class="arch-coming-soon">Coming soon</p>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

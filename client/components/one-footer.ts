@@ -188,6 +188,11 @@ class OneFooter extends HTMLElement {
           width: fit-content;
         }
 
+        .footer__link--dimmed {
+          color: rgba(151, 148, 65, 0.4);
+          font-size: 12px;
+        }
+
         .footer__nav-column:nth-child(2) .footer__link,
         .footer__nav-column:nth-child(3) .footer__link {
           font-family: var(--font-regular, -apple-system, sans-serif);
@@ -294,15 +299,13 @@ class OneFooter extends HTMLElement {
             </div>
             <div class="footer__nav-column">
               <span class="footer__nav-header" data-i18n="Work">Work</span>
-              <a href="/projects" class="footer__link" data-i18n="Projects">Projects</a>
               <a href="/products" class="footer__link" data-i18n="Products">Products</a>
-              <a href="#" class="footer__link" data-i18n="Architecture">Architecture</a>
+              <a href="/architecture" class="footer__link" data-i18n="Architecture">Architecture</a>
             </div>
             <div class="footer__nav-column">
               <span class="footer__nav-header" data-i18n="Other">Other</span>
               <a href="https://www.linkedin.com/company/000one/" class="footer__link" target="_blank" data-i18n="LinkedIn">LinkedIn</a>
               <a href="https://www.instagram.com/0001hq/" class="footer__link" target="_blank" data-i18n="Instagram">Instagram</a>
-              <a href="/terms" class="footer__link" data-i18n="Terms and conditions">Terms and conditions</a>
             </div>
           </nav>
         </div>

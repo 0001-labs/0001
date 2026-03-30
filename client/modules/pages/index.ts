@@ -11,20 +11,20 @@ const SENTENCE_KEYS = [
 
 /** Images for each sentence */
 const IMAGES: Record<number, string> = {
-  1: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop&auto=format',
-  714: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop&auto=format',
-  1241: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=300&fit=crop&auto=format',
-  1429: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=300&fit=crop&auto=format',
-  2143: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop&auto=format',
-  2857: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop&auto=format',
-  3571: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop&auto=format',
-  4286: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&auto=format',
-  5000: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop&auto=format',
-  5714: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=300&fit=crop&auto=format',
-  6429: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop&auto=format',
-  7143: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?w=400&h=300&fit=crop&auto=format',
-  7857: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&auto=format',
-  9999: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=300&fit=crop&auto=format',
+  1: '/assets/imagery/retro-monitors.png',
+  714: '/assets/imagery/photo-1.png',
+  1241: '/assets/imagery/photo-2.png',
+  1429: '/assets/imagery/retro-monitors.png',
+  2143: '/assets/imagery/photo-1.png',
+  2857: '/assets/imagery/photo-2.png',
+  3571: '/assets/imagery/retro-monitors.png',
+  4286: '/assets/imagery/photo-1.png',
+  5000: '/assets/imagery/photo-2.png',
+  5714: '/assets/imagery/retro-monitors.png',
+  6429: '/assets/imagery/photo-1.png',
+  7143: '/assets/imagery/photo-2.png',
+  7857: '/assets/imagery/retro-monitors.png',
+  9999: '/assets/imagery/photo-1.png',
 };
 
 /** Timer duration in milliseconds */
