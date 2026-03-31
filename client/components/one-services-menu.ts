@@ -91,9 +91,9 @@ class OneServicesMenu extends HTMLElement {
           gap: 10px;
           padding: 6px 10px;
           border-radius: 999px;
-          background: rgba(204, 255, 77, 0.55);
+          background: var(--surface-overlay-strong, rgba(204, 255, 77, 0.55));
           color: var(--base-slate, #1e1e1e);
-          border: 1px solid rgba(0, 0, 0, 0.08);
+          border: 1px solid var(--panel-border, rgba(0, 0, 0, 0.08));
           box-shadow: 0 2px 10px rgba(0,0,0,0.06);
         }
 
@@ -114,7 +114,7 @@ class OneServicesMenu extends HTMLElement {
         }
 
         details[open] summary {
-          background: rgba(204, 255, 77, 0.85);
+          background: var(--surface-overlay-strong-hover, rgba(204, 255, 77, 0.85));
         }
 
         details[open] .caret {
@@ -127,8 +127,8 @@ class OneServicesMenu extends HTMLElement {
           left: 50%;
           transform: translateX(-50%);
           width: min(560px, calc(100vw - 40px));
-          background: var(--tau99-brand, #f2ffcf);
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          background: var(--footer-background, var(--tau99-brand, #f2ffcf));
+          border: 1px solid var(--border-default, rgba(0, 0, 0, 0.1));
           border-radius: 18px;
           box-shadow: 0 18px 45px rgba(0,0,0,0.12);
           padding: 18px 18px 14px;
@@ -144,7 +144,7 @@ class OneServicesMenu extends HTMLElement {
           gap: 10px;
           padding: 8px 10px;
           border-radius: 14px;
-          background: rgba(255, 255, 255, 0.55);
+          background: var(--surface-overlay, rgba(255, 255, 255, 0.55));
         }
 
         .heading {
@@ -152,7 +152,7 @@ class OneServicesMenu extends HTMLElement {
           font-size: 12px;
           letter-spacing: -0.24px;
           text-transform: uppercase;
-          color: rgba(30, 30, 30, 0.65);
+          color: var(--text-color-muted, rgba(30, 30, 30, 0.65));
         }
 
         a {
@@ -170,7 +170,7 @@ class OneServicesMenu extends HTMLElement {
         }
 
         a:hover {
-          background: rgba(204, 255, 77, 0.55);
+          background: var(--surface-overlay-strong, rgba(204, 255, 77, 0.55));
           transform: translateY(-1px);
         }
 
@@ -185,17 +185,17 @@ class OneServicesMenu extends HTMLElement {
 
         .cta a {
           font-family: var(--font-medium, -apple-system, BlinkMacSystemFont, sans-serif);
-          background: rgba(204, 255, 77, 0.65);
+          background: var(--surface-overlay-strong-hover, rgba(204, 255, 77, 0.65));
         }
 
         .cta a:hover {
-          background: rgba(204, 255, 77, 0.9);
+          background: var(--footer-control-hover, rgba(204, 255, 77, 0.9));
         }
 
         .hint {
           font-size: 12px;
           letter-spacing: -0.24px;
-          color: rgba(30, 30, 30, 0.55);
+          color: var(--text-color-subtle, rgba(30, 30, 30, 0.55));
           white-space: nowrap;
         }
 

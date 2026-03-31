@@ -111,7 +111,7 @@ function getProductLink(product: NotionProduct): string | null {
 
 function externalLinkSVG(): string {
   return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <rect x="0" y="0" width="24" height="24" fill="#CCFF4D" />
+                      <rect x="0" y="0" width="24" height="24" fill="#e8e8ec" />
                       <path d="M12 5.5V19" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
                       <path d="M6 11.5L12 5.5L18 11.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" />
                       <path d="M7.5 18.5H16.5" stroke="#000000" stroke-width="1.5" stroke-linecap="square" />
@@ -126,7 +126,9 @@ function generateProductsHTML(products: NotionProduct[]): string {
       const safeRetention = escapeHtml(product.retention);
 
       return `                <tr>
-                  <td class="products-table__cell products-table__cell--product">${safeName}</td>
+                  <td class="products-table__cell products-table__cell--product">
+                    <span class="products-table__product-name">${safeName}</span>
+                  </td>
                   <td class="products-table__cell">${product.users}</td>
                   <td class="products-table__cell">${safeRetention}</td>
                   <td class="products-table__cell products-table__cell--status${statusClass(product.status)}">${safeStatus}</td>

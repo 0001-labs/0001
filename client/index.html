@@ -19,13 +19,10 @@
     <!-- Prevent FOUC -->
     <script>
       (function () {
-        const savedTheme = localStorage.getItem("theme");
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches
-          ? "dark"
-          : "light";
-        const theme = savedTheme || systemTheme;
-        document.documentElement.setAttribute("data-theme", theme);
+        var root = document.documentElement;
+        root.classList.remove("dark-theme");
+        root.classList.add("light-theme");
+        root.setAttribute("data-theme", "light");
       })();
     </script>
 
@@ -59,7 +56,7 @@
 
     <style>
       .home-page {
-        background-color: #ffffff;
+        background-color: var(--page-background);
         min-height: 100vh;
         position: relative;
         display: flex;
@@ -85,7 +82,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: #ccff4d;
+        background: var(--chartreuse-green);
         mix-blend-mode: screen;
       }
 
@@ -93,7 +90,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: rgba(204, 255, 77, 0.3);
+        background: var(--surface-overlay-strong);
         z-index: 1;
       }
 
@@ -164,15 +161,15 @@
 
       .hero__timer {
         position: absolute;
-        top: -4px;
+        top: -2px;
         left: 0;
         width: 100%;
         height: 4px;
-        background-color: rgba(204, 255, 77, 0.25);
+        background-color: var(--chartreuse-green);
+        opacity: 0.6;
         z-index: 10;
-        transform: translateY(-100%);
         transform-origin: right;
-        animation: timer-countdown 4s linear forwards;
+        animation: timer-countdown 3s linear forwards;
       }
 
       @keyframes timer-countdown {
@@ -208,6 +205,7 @@
       .hero__description.revealed {
         opacity: 1;
         pointer-events: auto;
+        gap: 12px;
       }
 
       .hero__description p {
@@ -236,22 +234,26 @@
         align-items: center;
         gap: 12px;
         width: 100%;
+        margin-top: 20px;
+      }
+
+      /* Same 16px bar as footer; wins over any late DS one / link rules */
+      .hero__description .hero__buttons a.button {
+        display: inline-block;
+        box-sizing: border-box;
+        height: 16px;
+        max-height: 16px;
+        min-height: 0;
+        padding: 0;
+        line-height: 16px;
+        font-size: 14px;
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        vertical-align: top;
+        overflow: hidden;
       }
 
       .hero__text-link {
-        font-family:
-          var(--font-regular),
-          "GT America",
-          -apple-system,
-          sans-serif;
         font-size: 14px;
-        letter-spacing: -0.28px;
-        color: var(--base-slate);
-        text-decoration: none;
-      }
-
-      .hero__text-link:hover {
-        text-decoration: underline;
       }
 
       .hero__timer.hidden {
@@ -325,6 +327,10 @@
         gap: calc(16px * var(--sf));
       }
 
+      html.mobile .hero__description.revealed {
+        gap: calc(12px * var(--sf));
+      }
+
       html.mobile .hero__description p {
         font-size: 16px;
       }
@@ -332,17 +338,19 @@
       html.mobile .hero__buttons {
         align-items: flex-start;
         gap: calc(16px * var(--sf));
-        margin-top: calc(8px * var(--sf));
+        margin-top: calc(20px * var(--sf));
       }
 
-      html.mobile .hero__text-link {
+      html.mobile .hero__description .hero__buttons a.button {
+        height: calc(16px * var(--sf));
+        max-height: calc(16px * var(--sf));
+        line-height: calc(16px * var(--sf));
         font-size: calc(14px * var(--sf));
       }
 
       html.mobile .hero__image.hidden {
         display: none;
       }
-
     </style>
   </head>
   <body>
@@ -365,24 +373,15 @@
 
             <div class="hero__media">
               <div class="hero__image">
-                <img
-                  src="/assets/imagery/photo-2.png"
-                  alt="0001"
-                />
+                <img src="/assets/imagery/retro-monitors.png" alt="0001" />
               </div>
               <div class="hero__timer" id="hero-timer"></div>
               <div class="hero__description">
                 <p><ds-text>hero-p1</ds-text></p>
                 <p><ds-text>hero-p2</ds-text></p>
                 <div class="hero__buttons">
-                  <a href="/services"
-                    ><ds-button primary
-                      ><ds-text>See our services</ds-text></ds-button
-                    ></a
-                  >
-                  <a href="/products" class="hero__text-link"
-                    ><ds-text>See our past work</ds-text></a
-                  >
+                  <a href="/services" class="button" data-i18n="See our services">See our services</a>
+                  <a href="/products" class="hero__text-link" data-i18n="See our past work">See our past work</a>
                 </div>
               </div>
             </div>
@@ -393,6 +392,5 @@
         <one-footer></one-footer>
       </div>
     </div>
-
   </body>
 </html>

@@ -2,12 +2,25 @@
  * Contact page module
  * Handles multi-step contact form with topic selection
  */
-import type { ContactFormData, ContactMode } from '../types';
-import { initLanguage, loadTranslations, updatePlaceholders } from '../shared';
+import type { ContactFormData, ContactMode, Translations } from '../types';
+import {
+  getCurrentLanguage,
+  getTranslation,
+  initLanguage,
+  loadTranslations,
+  updatePlaceholders,
+} from '../shared';
 
 let currentMode: ContactMode = 'services';
 const selectedServices = new Set<string>();
 const selectedTechstack = new Set<string>();
+
+function setContactProgressStep(step: 1 | 2): void {
+  const bar = document.getElementById('contact-progress');
+  if (!bar) return;
+  bar.dataset.step = String(step);
+  bar.setAttribute('aria-valuenow', String(step));
+}
 
 /**
  * Initialize mode toggle tabs
@@ -139,6 +152,7 @@ function initStepNavigation(): void {
     // Switch to step 2
     step1?.classList.remove('active');
     step2?.classList.add('active');
+    setContactProgressStep(2);
   });
 }
 
@@ -190,23 +204,38 @@ function initFormSubmission(): void {
   });
 }
 
+function applyContactDataI18n(translations: Translations): void {
+  const lang = getCurrentLanguage();
+  document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+    const key = el.dataset.i18n;
+    if (key) {
+      el.textContent = getTranslation(translations, key, lang);
+    }
+  });
+}
+
 /**
- * Initialize placeholder translations
+ * Placeholders + static labels (h1, Next, …)
  */
 async function initPlaceholders(): Promise<void> {
   const translations = await loadTranslations();
   updatePlaceholders(translations);
+  applyContactDataI18n(translations);
 
-  // Listen for language changes
-  document.addEventListener('language-changed', () => {
+  const refresh = (): void => {
     updatePlaceholders(translations);
-  });
+    applyContactDataI18n(translations);
+  };
+
+  document.addEventListener('language-changed', refresh);
+  window.addEventListener('language-changed', refresh);
 }
 
 /**
  * Initialize the contact form
  */
 export function initContactForm(): void {
+  setContactProgressStep(1);
   initModeToggle();
   initTopicSelection();
   initStepNavigation();

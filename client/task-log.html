@@ -16,10 +16,10 @@
     <!-- Prevent FOUC -->
     <script>
       (function () {
-        const savedTheme = localStorage.getItem("theme");
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        const theme = savedTheme || systemTheme;
-        document.documentElement.setAttribute("data-theme", theme);
+        var root = document.documentElement;
+        root.classList.remove("dark-theme");
+        root.classList.add("light-theme");
+        root.setAttribute("data-theme", "light");
       })();
     </script>
 
@@ -46,7 +46,7 @@
 
     <style>
       .tasklog-page {
-        background-color: #FFFFFF;
+        background-color: var(--page-background);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -54,7 +54,7 @@
 
       .tasklog-header {
         height: 100px;
-        background-color: #CCFF4D;
+        background-color: var(--page-shell);
       }
 
       .tasklog-content {
@@ -76,7 +76,7 @@
         position: sticky;
         top: 0;
         z-index: 10;
-        background: #FFFFFF;
+        background: var(--page-background);
         padding: 12px 0;
       }
 
@@ -106,7 +106,6 @@
       .tasklog-tab__indicator {
         width: 4px;
         height: 18px;
-        border-radius: 2px;
         flex-shrink: 0;
       }
 
@@ -166,7 +165,7 @@
       }
 
       .tasklog-table__cell--planned {
-        background-color: #f5f5f5;
+        background-color: var(--status-planned);
       }
 
       .tasklog-table__cell--in-progress {
@@ -213,13 +212,13 @@
       .tasklog-dateline__line {
         flex: 1;
         height: 2px;
-        background-color: #e53e3e;
+        background-color: var(--status-dateline);
       }
 
       .tasklog-dateline__label {
         font-family: var(--font-medium);
         font-size: 12px;
-        color: #e53e3e;
+        color: var(--status-dateline);
         text-transform: uppercase;
         letter-spacing: 0.8px;
         flex-shrink: 0;

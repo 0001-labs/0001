@@ -22,6 +22,30 @@ function applyPageTranslations(): void {
 }
 
 /**
+ * Inject chevron icon buttons into each service item header
+ */
+function injectChevrons(): void {
+  const chevronSvg = `<svg viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 7.21L0 7.21V9.24H16.5L10.69 15.05L12.1 16.44L20.31 8.22L12.09 0L10.68 1.41L16.5 7.21Z" fill="currentColor"/></svg>`;
+
+  document.querySelectorAll<HTMLElement>('.services-item').forEach((item) => {
+    const title = item.querySelector('.services-item__title');
+    if (!title) return;
+
+    const header = document.createElement('div');
+    header.className = 'services-item__header';
+
+    const chevron = document.createElement('span');
+    chevron.className = 'services-item__chevron';
+    chevron.setAttribute('aria-hidden', 'true');
+    chevron.innerHTML = chevronSvg;
+
+    title.parentNode!.insertBefore(header, title);
+    header.appendChild(title);
+    header.appendChild(chevron);
+  });
+}
+
+/**
  * Initialize accordion functionality
  */
 function initAccordion(): void {
@@ -74,12 +98,14 @@ async function initTranslations(): Promise<void> {
 
   // Listen for language changes
   document.addEventListener('language-changed', applyPageTranslations);
+  window.addEventListener('language-changed', applyPageTranslations);
 }
 
 /**
  * Initialize the services page
  */
 export function initServices(): void {
+  injectChevrons();
   initAccordion();
   initImageHover();
   initTranslations();

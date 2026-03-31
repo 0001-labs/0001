@@ -2,7 +2,27 @@
  * Index page (home) module
  * Handles hero section with sentence randomization and timer
  */
-import { initLanguage } from '../shared';
+import type { Translations } from '../types';
+import { getCurrentLanguage, getTranslation, initLanguage, loadTranslations } from '../shared';
+
+let translations: Translations = {};
+
+function applyHeroI18n(): void {
+  const lang = getCurrentLanguage();
+  document.querySelectorAll<HTMLElement>('.hero__buttons [data-i18n]').forEach((el) => {
+    const key = el.dataset.i18n;
+    if (key) {
+      el.textContent = getTranslation(translations, key, lang);
+    }
+  });
+}
+
+async function initHeroI18n(): Promise<void> {
+  translations = await loadTranslations();
+  applyHeroI18n();
+  document.addEventListener('language-changed', applyHeroI18n);
+  window.addEventListener('language-changed', applyHeroI18n);
+}
 
 /** Sentence keys that have translations */
 const SENTENCE_KEYS = [
@@ -123,6 +143,7 @@ export function initHero(): void {
  */
 function init(): void {
   initHero();
+  void initHeroI18n();
   initLanguage();
 }
 

@@ -2,7 +2,8 @@
  * Sentences page module
  * Handles 9999 sentences table with compact mode
  */
-import { initLanguage, cycleLanguage } from '../shared';
+import { initLanguage, cycleLanguage, toggleDSOneTheme } from '../shared';
+import { getThemeLabel } from '../../utils/theme';
 
 /** Predefined sentences */
 const sentences: Record<number, string> = {
@@ -160,12 +161,37 @@ function initLanguageToggle(): void {
 }
 
 /**
+ * Initialize theme toggle (custom footer on this page)
+ */
+function initThemeToggle(): void {
+  const themeToggle = document.getElementById('theme-toggle');
+
+  const updateThemeLabel = (): void => {
+    const themeText = themeToggle?.querySelector('ds-text');
+    const themeLabel = getThemeLabel();
+
+    if (themeText) {
+      themeText.setAttribute('text', themeLabel);
+    }
+  };
+
+  themeToggle?.addEventListener('click', async () => {
+    await toggleDSOneTheme();
+    updateThemeLabel();
+  });
+
+  window.addEventListener('theme-changed', updateThemeLabel);
+  updateThemeLabel();
+}
+
+/**
  * Initialize the sentences page
  */
 export function initSentences(): void {
   generateRows();
   initCompactToggle();
   initLanguageToggle();
+  initThemeToggle();
 }
 
 /**

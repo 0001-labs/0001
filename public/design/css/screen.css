@@ -14,10 +14,15 @@ html {
 
 body {
   font-family: var(--font-regular);
-  background-color: var(--background, #90EE90);
+  background-color: var(--background) !important;
   color: var(--text-color, var(--base-black));
   line-height: 1.5;
   min-height: 100vh;
+}
+
+/* DS one 1-root/one.css sets tr { background-color: var(--apple-green) } — reset for site tables */
+table tr {
+  background-color: transparent !important;
 }
 
 /* Page container */

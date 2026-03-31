@@ -1,0 +1,181 @@
+/**
+ * 0001 — shared buttons (chartreuse block, 14px type, 16px bar, square — not pills)
+ * Depends on tokens.css (linked before screen.css, which @imports this file).
+ */
+
+button {
+  font: inherit;
+}
+
+/* Chartreuse control — hard cap 16px tall, no padding (per spec) */
+.button,
+a.button,
+button.button {
+  /* inline-block + line-height = bar height avoids inline-flex min-size blowing past 16px */
+  display: inline-block;
+  box-sizing: border-box;
+  height: 16px;
+  max-height: 16px;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-regular);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.28px;
+  line-height: 16px;
+  vertical-align: top;
+  text-align: center;
+  color: var(--every-green);
+  background-color: var(--chartreuse-green);
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.15s ease;
+}
+
+a.button:hover,
+button.button:hover {
+  opacity: 0.9;
+  background-color: var(--footer-control-hover);
+}
+
+a.button:hover {
+  text-decoration: underline;
+}
+
+button.button:focus-visible,
+a.button:focus-visible {
+  outline: 2px solid var(--base-slate);
+  outline-offset: 2px;
+}
+
+/*
+ * thank-you / sentences: .home-footer__link is defined after screen.css and
+ * would override .button — win with higher specificity + full box.
+ */
+.home-footer__nav a.home-footer__link.button {
+  font-family: var(--font-regular);
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.28px;
+  color: var(--every-green);
+  background-color: var(--chartreuse-green);
+  height: 16px;
+  max-height: 16px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+}
+
+.home-footer__controls .button,
+.home-footer__controls a.button,
+.home-footer__controls button.button {
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.28px;
+  height: 16px;
+  max-height: 16px;
+  min-height: 0;
+  padding: 0;
+}
+
+/* Home hero: lock chartreuse bar + type if DS one link styles win */
+.hero__buttons a.button {
+  height: 16px;
+  max-height: 16px;
+  min-height: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.28px;
+  color: var(--every-green);
+  background-color: var(--chartreuse-green);
+  font-family: var(--font-regular);
+  overflow: hidden;
+}
+
+/* Services accordions: same bar as hero / footer */
+.services-item a.button {
+  height: 16px;
+  max-height: 16px;
+  min-height: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.28px;
+  color: var(--every-green);
+  background-color: var(--chartreuse-green);
+  font-family: var(--font-regular);
+  overflow: hidden;
+}
+
+/* --- Contact flow (unchanged) --- */
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  font-family: var(--font-regular);
+  font-size: 16px;
+  letter-spacing: -0.32px;
+  color: var(--solid-button-text);
+  background-color: var(--solid-button-background);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.contact-btn:hover {
+  opacity: 0.8;
+}
+
+.contact-btn--secondary {
+  background-color: var(--zenith-blue);
+  color: var(--base-black);
+}
+
+/* --- one-footer shadow: mobile --- */
+.footer.mobile .button {
+  height: calc(16px * var(--sf, 1));
+  max-height: calc(16px * var(--sf, 1));
+  min-height: 0;
+  padding: 0;
+  font-size: calc(14px * var(--sf, 1));
+  line-height: calc(16px * var(--sf, 1));
+}
+
+html.mobile .button {
+  height: calc(16px * var(--sf, 1));
+  max-height: calc(16px * var(--sf, 1));
+  min-height: 0;
+  padding: 0;
+  font-size: calc(14px * var(--sf, 1));
+  line-height: calc(16px * var(--sf, 1));
+}
+
+html.mobile .services-item .button {
+  height: calc(16px * var(--sf, 1));
+  max-height: calc(16px * var(--sf, 1));
+  min-height: 0;
+  padding: 0;
+  font-size: calc(14px * var(--sf, 1));
+  line-height: calc(16px * var(--sf, 1));
+}
+
+html.mobile .contact-btn {
+  font-size: calc(14px * var(--sf, 1));
+  padding: calc(8px * var(--sf, 1)) calc(14px * var(--sf, 1));
+  min-height: calc(40px * var(--sf, 1));
+}

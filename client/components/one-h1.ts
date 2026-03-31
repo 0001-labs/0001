@@ -11,6 +11,7 @@ class OneH1 extends HTMLElement {
   private _key: string = '';
   private _translations: Translations | null = null;
   private _observer: MutationObserver | null = null;
+  private readonly _handleLanguageChange = (): void => this.updateText();
 
   constructor() {
     super();
@@ -22,8 +23,9 @@ class OneH1 extends HTMLElement {
     this.render();
     this.loadTranslations();
 
-    // Listen for language changes from ds-one
-    document.addEventListener('language-changed', () => this.updateText());
+    // Listen for language changes from ds-one (fires on window) and local fallback (fires on document)
+    document.addEventListener('language-changed', this._handleLanguageChange);
+    window.addEventListener('language-changed', this._handleLanguageChange);
 
     // Observe changes to the text content (for dynamic key updates)
     this._observer = new MutationObserver(() => {
@@ -37,6 +39,8 @@ class OneH1 extends HTMLElement {
   }
 
   disconnectedCallback(): void {
+    document.removeEventListener('language-changed', this._handleLanguageChange);
+    window.removeEventListener('language-changed', this._handleLanguageChange);
     if (this._observer) {
       this._observer.disconnect();
     }

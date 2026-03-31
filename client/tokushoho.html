@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>特定商取引法に基づく表記</title>
+    <meta
+      name="description"
+      content="0001.devの特定商取引法に基づく表記。Stripe対応のための事業者情報、支払方法、キャンセル、返金、提供時期などを掲載しています。"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        root.classList.remove("dark-theme");
+        root.classList.add("light-theme");
+        root.setAttribute("data-theme", "light");
+      })();
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+
+    <script>
+      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
+    </script>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
+    <script type="module" src="./components/one-footer.ts"></script>
+    <script type="module" src="./modules/pages/common.ts"></script>
+
+    <style>
+      .tokushoho-page {
+        background-color: var(--page-background);
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .tokushoho-logo {
+        position: absolute;
+        top: 115px;
+        left: 140px;
+        color: var(--base-slate);
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: -0.48px;
+        text-decoration: none;
+      }
+
+      .tokushoho-main {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+        padding: 200px 60px 150px 400px;
+      }
+
+      .tokushoho-header {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        max-width: 720px;
+      }
+
+      .tokushoho-title {
+        color: var(--base-slate);
+        font-family: var(--typeface-canon), Georgia, serif;
+        font-size: 48px;
+        font-weight: normal;
+        letter-spacing: -0.96px;
+        margin: 0;
+      }
+
+      .tokushoho-meta,
+      .tokushoho-intro,
+      .tokushoho-body,
+      .tokushoho-list {
+        color: var(--base-black);
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        line-height: 1.6;
+      }
+
+      .tokushoho-meta,
+      .tokushoho-intro {
+        margin: 0;
+        max-width: 720px;
+      }
+
+      .tokushoho-sections {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: minmax(0, 720px);
+      }
+
+      .tokushoho-section {
+        background: var(--panel-background-subtle);
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        padding: 24px;
+      }
+
+      .tokushoho-section__title {
+        color: var(--base-slate);
+        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: -0.4px;
+        margin: 0 0 14px;
+      }
+
+      .tokushoho-list {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .tokushoho-list li + li {
+        margin-top: 10px;
+      }
+
+      .tokushoho-body {
+        margin: 0;
+      }
+
+      .tokushoho-body + .tokushoho-body {
+        margin-top: 14px;
+      }
+
+      .tokushoho-link {
+        color: var(--every-green);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      html.mobile .tokushoho-logo {
+        left: auto;
+        padding: calc(20px * var(--sf));
+        position: relative;
+        top: auto;
+        font-size: calc(20px * var(--sf));
+      }
+
+      html.mobile .tokushoho-main {
+        gap: calc(32px * var(--sf));
+        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) calc(80px * var(--sf));
+      }
+
+      html.mobile .tokushoho-title {
+        font-size: calc(30px * var(--sf));
+        letter-spacing: calc(-0.6px * var(--sf));
+      }
+
+      html.mobile .tokushoho-meta,
+      html.mobile .tokushoho-intro,
+      html.mobile .tokushoho-body,
+      html.mobile .tokushoho-list {
+        font-size: calc(14px * var(--sf));
+        letter-spacing: calc(-0.28px * var(--sf));
+      }
+
+      html.mobile .tokushoho-section {
+        border-radius: calc(16px * var(--sf));
+        padding: calc(18px * var(--sf));
+      }
+
+      html.mobile .tokushoho-section__title {
+        font-size: calc(18px * var(--sf));
+        letter-spacing: calc(-0.36px * var(--sf));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tokushoho-page">
+      <a href="/" class="tokushoho-logo">0001</a>
+
+      <main class="tokushoho-main">
+        <header class="tokushoho-header">
+          <h1 class="tokushoho-title">特定商取引法に基づく表記（通信販売に関する表示事項）</h1>
+          <p class="tokushoho-meta">最終更新日: 2026年3月30日</p>
+          <p class="tokushoho-intro">
+            本ページは特定商取引法およびStripeの表示要件に基づく開示ページです。
+          </p>
+        </header>
+
+        <div class="tokushoho-sections">
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">事業者情報</h2>
+            <ul class="tokushoho-list">
+              <li>販売業者: 0001</li>
+              <li>代表者（運営統括責任者）: Joachim Aaløkke Sørensen</li>
+              <li>所在地: 1F, Takagi Building, 2-20-7 Azabujuban, Minato-ku, Tokyo 106-0045, Japan</li>
+              <li>電話番号: 請求があったら遅滞なく開示します</li>
+              <li>サポート受付時間: 平日 10:00-17:00（JST、土日祝を除く）</li>
+              <li>メールアドレス: <a class="tokushoho-link" href="mailto:joachim@0001.dev">joachim@0001.dev</a></li>
+              <li>お問い合わせフォーム: <a class="tokushoho-link" href="/contact">https://0001.dev/contact</a></li>
+              <li>URL: <a class="tokushoho-link" href="https://0001.dev">https://0001.dev</a></li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">販売価格・販売数量</h2>
+            <ul class="tokushoho-list">
+              <li>デジタルプロダクト、ソフトウェア、開発サービスの価格は各商品ページ、提案書、注文ページ、または決済画面に表示します。</li>
+              <li>継続課金型サービスがある場合、月額または年額の価格を該当ページまたはチェックアウト画面に表示します。</li>
+              <li>販売数量: 1契約、1ライセンス、または1案件単位（別途定めがある場合を除く）</li>
+              <li>消費税: 税込価格・税額は見積、請求書、または最終決済画面に表示します。</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">商品代金以外の必要料金</h2>
+            <ul class="tokushoho-list">
+              <li>追加手数料はありません。</li>
+              <li>銀行振込時の振込手数料、インターネット接続料金・通信料金はお客様のご負担となります。</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">支払方法・支払時期</h2>
+            <ul class="tokushoho-list">
+              <li>支払方法: Stripeを利用したクレジットカード・デビットカード決済、または当社が個別に認める請求書・銀行振込</li>
+              <li>デジタルプロダクト・サブスクリプション: 申込時に初回課金。以後、月額または年額で自動更新・自動課金</li>
+              <li>受託開発・コンサルティング: 提案書、注文書、または請求書に記載の条件に従って請求します。</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">サービス提供時期</h2>
+            <ul class="tokushoho-list">
+              <li>デジタルプロダクトまたはアカウント提供型サービスは、決済完了または有効化後、直ちに利用できます。</li>
+              <li>受託開発・コンサルティングは、発注確定後、必要情報の受領および合意したスケジュールに従って開始します。</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">契約期間・更新</h2>
+            <ul class="tokushoho-list">
+              <li>サブスクリプション型サービスは、解約されるまで月額または年額で自動更新されます。</li>
+              <li>案件型サービスの契約期間は提案書、注文書、または個別契約に定めるとおりで、明示しない限り自動更新はありません。</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">返品・交換・キャンセル</h2>
+            <ul class="tokushoho-list">
+              <li>0001は物理的な商品を販売していないため、物理商品の返品・交換はありません。</li>
+              <li>お客様都合の解約: サブスクリプションはいつでも解約できますが、請求期間途中の解約による日割り返金は行いません。</li>
+              <li>受託開発・コンサルティング: 作業開始後またはマイルストーン提供後の返金は、法令上必要な場合または書面合意がある場合を除き行いません。完了済み作業、確定済み工数、第三者費用はご負担いただきます。</li>
+              <li>不具合時の対応: 当社起因の重大な不具合で通常利用ができない場合は、内容を確認のうえ返金またはサービスクレジット付与で対応します。まずは <a class="tokushoho-link" href="mailto:joachim@0001.dev">joachim@0001.dev</a> までご連絡ください。</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">申込有効期限</h2>
+            <p class="tokushoho-body">
+              特別な定めがある場合を除き、申込期限はありません。期間限定キャンペーンや特別価格は各ページに表示します。
+            </p>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">動作環境</h2>
+            <p class="tokushoho-body">
+              最新版の主要ブラウザ（Chrome、Safari、Firefox、Edge）および安定したインターネット接続環境が必要です。
+            </p>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">English Translation</h2>
+            <p class="tokushoho-body">
+              For reference only. The Japanese text controls in case of conflict.
+            </p>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">Business Information</h2>
+            <ul class="tokushoho-list">
+              <li>Seller (Business Name): 0001</li>
+              <li>Head of Operations: Joachim Aaløkke Sørensen</li>
+              <li>Address: 1F, Takagi Building, 2-20-7 Azabujuban, Minato-ku, Tokyo 106-0045, Japan</li>
+              <li>Phone Number: Will be disclosed without delay upon request.</li>
+              <li>Support Hours: Weekdays 10:00-17:00 JST (excluding weekends and holidays)</li>
+              <li>Email: <a class="tokushoho-link" href="mailto:joachim@0001.dev">joachim@0001.dev</a></li>
+              <li>Contact Form: <a class="tokushoho-link" href="/contact">https://0001.dev/contact</a></li>
+              <li>URL: <a class="tokushoho-link" href="https://0001.dev">https://0001.dev</a></li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">Pricing and Quantity</h2>
+            <ul class="tokushoho-list">
+              <li>Prices for digital products, software, and development services are shown on the relevant product page, proposal, order page, or checkout page.</li>
+              <li>If a recurring service is offered, the monthly or annual price is shown on the relevant page or during checkout.</li>
+              <li>Quantity: Per contract, per license, or per project unless otherwise stated.</li>
+              <li>Tax: Tax-inclusive totals and tax details are shown in the proposal, invoice, or final checkout screen.</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">Additional Fees</h2>
+            <ul class="tokushoho-list">
+              <li>No additional service fees.</li>
+              <li>Bank transfer fees, internet access fees, and telecom charges are borne by the customer.</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">Payment Method and Timing</h2>
+            <ul class="tokushoho-list">
+              <li>Payment method: Credit or debit card via Stripe, or invoice / bank transfer when individually approved by 0001.</li>
+              <li>Digital products and subscriptions: First charge at signup, then automatically billed monthly or annually if applicable.</li>
+              <li>Custom development and consulting: Charged according to the proposal, order form, or invoice terms.</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">Service Delivery Timing</h2>
+            <ul class="tokushoho-list">
+              <li>Digital products or account-based services are available immediately after payment completion or activation.</li>
+              <li>Custom development and consulting begin after order confirmation, receipt of required materials, and according to the agreed schedule.</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">Contract Term and Renewal</h2>
+            <ul class="tokushoho-list">
+              <li>Subscription-based services renew automatically on a monthly or annual basis until canceled.</li>
+              <li>Project-based services run for the term stated in the proposal, order form, or contract and do not auto-renew unless explicitly stated.</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">Returns, Exchanges, and Cancellations</h2>
+            <ul class="tokushoho-list">
+              <li>0001 does not sell physical goods, so no physical returns or exchanges apply.</li>
+              <li>Customer-initiated cancellation: You may cancel a subscription at any time, but no prorated refunds are provided for partial billing periods.</li>
+              <li>Custom development and consulting: Once work has begun or a milestone has been delivered, payments are generally non-refundable except where required by law or agreed in writing. Completed work, committed time, and third-party costs remain payable.</li>
+              <li>Defects or service issues: If a material issue caused by us prevents normal use, we review the case and provide a refund or service credit as appropriate. Please contact <a class="tokushoho-link" href="mailto:joachim@0001.dev">joachim@0001.dev</a> first.</li>
+            </ul>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">Offer Period</h2>
+            <p class="tokushoho-body">
+              No application deadline applies unless specifically stated. Time-limited campaigns or special pricing are shown on the relevant page.
+            </p>
+          </section>
+
+          <section class="tokushoho-section">
+            <h2 class="tokushoho-section__title">System Requirements</h2>
+            <p class="tokushoho-body">
+              Latest versions of major browsers including Chrome, Safari, Firefox, and Edge, plus a stable internet connection.
+            </p>
+          </section>
+        </div>
+      </main>
+
+      <one-footer></one-footer>
+    </div>
+  </body>
+</html>

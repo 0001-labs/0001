@@ -19,13 +19,10 @@
     <!-- Prevent FOUC -->
     <script>
       (function () {
-        const savedTheme = localStorage.getItem("theme");
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches
-          ? "dark"
-          : "light";
-        const theme = savedTheme || systemTheme;
-        document.documentElement.setAttribute("data-theme", theme);
+        var root = document.documentElement;
+        root.classList.remove("dark-theme");
+        root.classList.add("light-theme");
+        root.setAttribute("data-theme", "light");
       })();
     </script>
 
@@ -54,11 +51,11 @@
     <script type="module" src="./components/one-footer.ts"></script>
 
     <!-- Page module -->
-    <script type="module" src="./modules/pages/common.ts"></script>
+    <script type="module" src="./modules/pages/about.ts"></script>
 
     <style>
       .about-page {
-        background-color: #ffffff;
+        background-color: var(--page-background);
         min-height: 100vh;
         position: relative;
       }
@@ -218,21 +215,22 @@
         margin-top: 60px;
       }
 
-      .about-contact a {
-        font-family: var(--font-regular);
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: #979441;
-        background-color: #ccff4d;
-        text-decoration: none;
-        padding: 4px 8px;
+      .about-contact a.button {
         display: inline-block;
+        box-sizing: border-box;
+        height: 16px;
+        max-height: 16px;
+        min-height: 0;
+        padding: 0;
+        line-height: 16px;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: -0.28px;
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        vertical-align: top;
+        overflow: hidden;
+        border-radius: 0;
       }
-
-      .about-contact a:hover {
-        text-decoration: underline;
-      }
-
 
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
       html.mobile .about-logo {
@@ -307,10 +305,6 @@
         margin-top: calc(40px * var(--sf));
       }
 
-      html.mobile .about-contact a {
-        font-size: calc(14px * var(--sf));
-      }
-
     </style>
   </head>
   <body>
@@ -321,24 +315,22 @@
       <!-- Main content -->
       <main class="about-main">
         <section class="about-header">
-          <h1 class="about-title">About</h1>
+          <h1 class="about-title" data-i18n="About us">About us</h1>
           <div class="about-body">
-            <p>
-              0001 was founded in 2024 to build digital products that feel
-              calm, capable, and effortless. We believe the best software gets
-              out of the way, so people can stay focused on the work that
-              matters.
+            <p data-i18n="about-p1">
+              0001 was founded in 2026 in Tokyo to build software that scales.
             </p>
-            <p>
-              We stay intentionally small and put craft before scale. Every
-              pixel, every interaction, and every line of code has to earn its
-              place. If it does not, we remove it.
+            <p data-i18n="about-p2">
+              We believe products should be focused and designed as tools, tools that, when done right, eventually become a natural extension of the user's intent.
             </p>
-            <p>
-              We build for founders and small teams who want leverage without
-              unnecessary overhead. Local-first where it matters, fast by
-              default, and shaped around the way people actually think and
-              work.
+            <p data-i18n="about-p3">
+              We design component-first architectures and help teams stay performant so their businesses can scale progressively.
+            </p>
+            <p data-i18n="about-p4">
+              0001 is half in-house products, half consultancy.
+            </p>
+            <p data-i18n="about-p5">
+              We're ready to connect, whether you need a faster, stronger online presence or want to take a deep dive into your current stack to optimize it.
             </p>
           </div>
           <div class="about-image">
@@ -376,7 +368,7 @@
             </div>
           </div>
           <div class="about-contact">
-            <a href="/contact">Contact us</a>
+            <a class="button" href="/contact">Contact us</a>
           </div>
         </section>
       </main>

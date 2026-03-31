@@ -1,34 +1,23 @@
-// Theme management utility
+// Theme utility — light mode only
 
-export type Theme = "light" | "dark";
+export type Theme = "light";
 
 export function getTheme(): Theme {
-  const saved = localStorage.getItem("theme") as Theme | null;
-  if (saved) return saved;
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "light";
 }
 
-export function setTheme(theme: Theme): void {
-  localStorage.setItem("theme", theme);
-  document.documentElement.setAttribute("data-theme", theme);
+export function getThemeLabel(): "Light" {
+  return "Light";
 }
 
-export function toggleTheme(): Theme {
-  const current = getTheme();
-  const next = current === "light" ? "dark" : "light";
-  setTheme(next);
-  return next;
+export function initTheme(): Theme {
+  const root = document.documentElement;
+  root.classList.remove("dark-theme");
+  root.classList.add("light-theme");
+  root.setAttribute("data-theme", "light");
+  return "light";
 }
 
-export function initTheme(): void {
-  const theme = getTheme();
-  document.documentElement.setAttribute("data-theme", theme);
-}
-
-// Auto-init on load
 if (typeof window !== "undefined") {
   initTheme();
 }

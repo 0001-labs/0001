@@ -1,21 +1,34 @@
 /**
  * Products page module
- * Handles page-level language initialization and the compact language toggle.
+ * DS one language + footer-style Contact us label (data-i18n).
  */
-import { cycleLanguage, initLanguage } from '../shared';
+import type { Translations } from '../types';
+import { getCurrentLanguage, getTranslation, initLanguage, loadTranslations } from '../shared';
 
-function initProductsPage(): void {
-  const languageToggle = document.getElementById('products-language-toggle');
+let translations: Translations = {};
 
-  languageToggle?.addEventListener('click', () => {
-    void cycleLanguage();
+function applyProductsLabels(): void {
+  const lang = getCurrentLanguage();
+  document.querySelectorAll<HTMLElement>('.products-page [data-i18n]').forEach((el) => {
+    const key = el.dataset.i18n;
+    if (key) {
+      el.textContent = getTranslation(translations, key, lang);
+    }
   });
+}
 
+async function initProductsPage(): Promise<void> {
+  translations = await loadTranslations();
+  applyProductsLabels();
+  document.addEventListener('language-changed', applyProductsLabels);
+  window.addEventListener('language-changed', applyProductsLabels);
   void initLanguage();
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initProductsPage);
+  document.addEventListener('DOMContentLoaded', () => {
+    void initProductsPage();
+  });
 } else {
-  initProductsPage();
+  void initProductsPage();
 }

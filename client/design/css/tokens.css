@@ -20,10 +20,16 @@
   --base-light-grey: #858585;
 
   /* Typography */
-  --font-regular: "GT America", "GT_America_Trial:Rg", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-medium: "GT America", "GT_America_Trial:Md", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-pantheon: "GT Pantheon Text Trial", "GT_Pantheon_Text_Trial:Rg", Georgia, serif;
-  --font-pantheon-medium: "GT Pantheon Text Trial", "GT_Pantheon_Text_Trial:Md", Georgia, serif;
+  --font-regular:
+    "GT America", "GT_America_Trial:Rg", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --font-medium:
+    "GT America", "GT_America_Trial:Md", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --font-pantheon:
+    "GT Pantheon Text Trial", "GT_Pantheon_Text_Trial:Rg", Georgia, serif;
+  --font-pantheon-medium:
+    "GT Pantheon Text Trial", "GT_Pantheon_Text_Trial:Md", Georgia, serif;
 
   /* Spacing scale */
   --space-xs: 4px;
@@ -33,21 +39,47 @@
   --space-xl: 64px;
   --space-2xl: 120px;
 
-  /* Border */
-  --border-default: 1.5px solid rgba(0, 0, 0, 0.1);
-  --border-solid: 1.5px solid var(--base-black);
-}
-
-/* Light theme (default) */
-[data-theme="light"] {
-  --background: #90EE90;
+  /* Surfaces and controls */
+  --page-background: #fbfcf6;
+  --page-surface: #fcfff6;
+  --page-shell: var(--chartreuse-green);
+  --page-background-accent: var(--tau99-brand);
+  --footer-background: var(--tau99-brand);
+  --panel-background: rgba(115, 217, 248, 0.1);
+  --panel-background-subtle: rgba(115, 217, 248, 0.08);
+  --panel-border: rgba(30, 30, 30, 0.08);
+  /* Contact form — pulled from live https://0001.dev/contact inline CSS */
+  --contact-form-panel-bg: rgba(115, 217, 248, 0.1);
+  --contact-form-field-bg: rgba(204, 204, 255, 0.3);
+  --surface-overlay: rgba(255, 255, 255, 0.55);
+  --surface-overlay-strong: rgba(204, 255, 77, 0.55);
+  --surface-overlay-strong-hover: rgba(204, 255, 77, 0.85);
+  --footer-control-background: var(--chartreuse-green);
+  --footer-control-hover: #d9ff69;
+  --footer-control-text: var(--every-green);
+  --footer-control-border: rgba(151, 148, 65, 0.08);
+  --footer-link-color: var(--every-green);
+  --footer-link-dimmed: rgba(151, 148, 65, 0.4);
+  --footer-copyright: rgba(101, 138, 8, 0.3);
+  --subtle-control-background: rgba(0, 0, 0, 0.3);
+  --subtle-control-background-hover: rgba(0, 0, 0, 0.36);
+  --subtle-control-text: var(--base-black);
+  --solid-button-background: var(--base-slate);
+  --solid-button-text: var(--base-white);
+  --tab-muted: #a3a3cc;
+  --text-color-subtle: rgba(30, 30, 30, 0.55);
+  --text-color-muted: rgba(0, 0, 0, 0.6);
+  --text-color-faint: rgba(0, 0, 0, 0.3);
+  --input-placeholder: rgba(30, 30, 30, 0.2);
+  --input-focus-background: rgba(204, 204, 255, 0.2);
+  --status-alpha: #ffe97a;
+  --status-on-hold: #ffd7bf;
+  --status-planned: #f2ffcf;
+  --status-archived: #ececec;
+  --status-dateline: #e53e3e;
   --text-color: var(--base-black);
   --text-color-dimmed: var(--base-slate);
-}
-
-/* Dark theme */
-[data-theme="dark"] {
-  --background: var(--base-slate);
-  --text-color: var(--base-white);
-  --text-color-dimmed: var(--base-light-grey);
+  --border-default: 1.5px solid rgba(0, 0, 0, 0.1);
+  --border-solid: 1.5px solid var(--base-black);
+  --background: #ffffff !important;
 }

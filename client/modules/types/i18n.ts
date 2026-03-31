@@ -2,6 +2,7 @@
  * Supported languages in the application
  */
 export type SupportedLanguage = 'en' | 'da' | 'ja';
+export type Theme = 'light' | 'dark';
 
 /**
  * Structure of the translations JSON file
@@ -17,6 +18,7 @@ export interface Translations {
  */
 export interface DSOneModule {
   setLanguage: (lang: SupportedLanguage) => void;
+  setTheme: (theme: Theme) => void;
 }
 
 /**

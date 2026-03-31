@@ -1,4 +1,5 @@
 /* Layout and responsive styles */
+@import './buttons.css';
 
 * {
   box-sizing: border-box;
@@ -10,14 +11,20 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: light;
 }
 
 body {
   font-family: var(--font-regular);
-  background-color: var(--background, #90EE90);
-  color: var(--text-color, var(--base-black));
+  background-color: var(--page-background) !important;
+  color: var(--base-black);
   line-height: 1.5;
   min-height: 100vh;
+}
+
+/* DS one 1-root/one.css sets tr { background-color: var(--apple-green) } — reset for site tables */
+table tr {
+  background-color: transparent !important;
 }
 
 /* Page container */
@@ -85,7 +92,7 @@ body {
 }
 
 .section--chartreuse {
-  background-color: var(--chartreuse-green);
+  background-color: var(--page-shell);
 }
 
 /* Content widths */
@@ -146,26 +153,6 @@ a {
   text-decoration: none;
 }
 
-/* Buttons */
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  background-color: var(--chartreuse-green);
-  color: var(--every-green);
-  font-family: var(--font-pantheon);
-  font-size: 16px;
-  letter-spacing: -0.32px;
-  border: none;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.button:hover {
-  opacity: 0.9;
-}
-
 /* Footer */
 .footer {
   background-color: var(--page-background-accent);
@@ -206,17 +193,6 @@ a {
   gap: 20px;
 }
 
-.footer__toggle {
-  padding: 4px 8px;
-  background-color: var(--chartreuse-green);
-  color: var(--every-green);
-  font-family: var(--font-regular);
-  font-size: 16px;
-  letter-spacing: -0.32px;
-  border: none;
-  cursor: pointer;
-}
-
 .footer__nav {
   display: flex;
   gap: 150px;
@@ -233,12 +209,13 @@ a {
   font-family: var(--font-pantheon-medium);
   font-size: 16px;
   letter-spacing: -0.32px;
-  color: var(--every-green);
+  color: var(--footer-link-color);
 }
 
 .footer__link--highlight {
-  background-color: var(--chartreuse-green);
-  padding: 2px 4px;
+  background-color: var(--footer-control-background);
+  border-radius: 999px;
+  padding: 4px 10px;
 }
 
 .footer__bottom {
@@ -250,7 +227,7 @@ a {
   font-family: var(--font-medium);
   font-size: 12px;
   letter-spacing: -0.24px;
-  color: rgba(101, 138, 8, 0.3);
+  color: var(--footer-copyright);
 }
 
 /* Grid table for Products */
@@ -629,4 +606,40 @@ html.mobile .services-list__description {
   .services-list__item {
     font-size: 24px;
   }
+}
+
+/* Contact page — heading + progress strip (same 4px / chartreuse / 0.6 as index .hero__timer) */
+.contact-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 443px;
+}
+
+.contact-progress {
+  width: 100%;
+  height: 4px;
+  position: relative;
+  background-color: color-mix(in srgb, var(--chartreuse-green) 22%, transparent);
+}
+
+.contact-progress__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  background-color: var(--chartreuse-green);
+  opacity: 0.6;
+  transform-origin: left center;
+  transition: width 0.45s ease;
+}
+
+.contact-progress[data-step="2"] .contact-progress__fill {
+  width: 100%;
+}
+
+html.mobile .contact-heading {
+  max-width: 100%;
 }

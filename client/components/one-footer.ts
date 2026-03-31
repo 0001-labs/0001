@@ -1,36 +1,46 @@
 /**
  * one-footer Web Component
- * A styled footer that hooks into ds-one's language system
+ * Styled footer with language / contact .button controls
  *
  * Usage: <one-footer></one-footer>
  */
-import type { Translations, SupportedLanguage } from '../modules/types';
-import { LANGUAGE_NAMES, SUPPORTED_LANGUAGES } from '../modules/types';
-import { TRANSLATIONS_PATH, DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY } from '../modules/shared/constants';
-import { setDSOneLanguage } from '../modules/shared/ds-one';
+import type { Translations, SupportedLanguage } from "../modules/types";
+import { LANGUAGE_NAMES, SUPPORTED_LANGUAGES } from "../modules/types";
+import {
+  TRANSLATIONS_PATH,
+  DEFAULT_LANGUAGE,
+  LANGUAGE_STORAGE_KEY,
+} from "../modules/shared/constants";
+import footerButtonsCss from "../design/css/buttons.css?raw";
+import { setDSOneLanguage } from "../modules/shared/ds-one";
 
 class OneFooter extends HTMLElement {
   private _translations: Translations | null = null;
+  private readonly handleLanguageChange = (): void => this.updateText();
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback(): void {
     this.render();
     this.loadTranslations();
     this.checkMobile();
+    document.addEventListener("language-changed", this.handleLanguageChange);
+    window.addEventListener("language-changed", this.handleLanguageChange);
+  }
 
-    // Listen for language changes from ds-one
-    document.addEventListener('language-changed', () => this.updateText());
+  disconnectedCallback(): void {
+    document.removeEventListener("language-changed", this.handleLanguageChange);
+    window.removeEventListener("language-changed", this.handleLanguageChange);
   }
 
   private checkMobile(): void {
-    const isMobile = document.documentElement.classList.contains('mobile');
-    const footer = this.shadowRoot?.querySelector('.footer');
+    const isMobile = document.documentElement.classList.contains("mobile");
+    const footer = this.shadowRoot?.querySelector(".footer");
     if (isMobile && footer) {
-      footer.classList.add('mobile');
+      footer.classList.add("mobile");
     }
   }
 
@@ -40,43 +50,49 @@ class OneFooter extends HTMLElement {
       this._translations = await res.json();
       this.updateText();
     } catch (e) {
-      console.error('Failed to load translations:', e);
+      console.error("Failed to load translations:", e);
     }
   }
 
   private updateText(): void {
-    if (!this._translations || !this.shadowRoot) return;
+    const lang = (localStorage.getItem(LANGUAGE_STORAGE_KEY) ||
+      DEFAULT_LANGUAGE) as SupportedLanguage;
+    if (!this.shadowRoot) return;
 
-    const lang = (localStorage.getItem(LANGUAGE_STORAGE_KEY) || DEFAULT_LANGUAGE) as SupportedLanguage;
+    if (this._translations) {
+      this.shadowRoot
+        .querySelectorAll<HTMLElement>("[data-i18n]")
+        .forEach((el) => {
+          const key = el.dataset.i18n;
+          if (key) {
+            el.textContent = this.getTranslatedText(key, lang);
+          }
+        });
+    }
 
-    // Update all translatable elements
-    this.shadowRoot.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
-      const key = el.dataset.i18n;
-      if (key) {
-        const text =
-          this._translations![lang]?.[key] ||
-          this._translations![DEFAULT_LANGUAGE]?.[key] ||
-          key;
-        el.textContent = text;
-      }
-    });
-
-    // Update language toggle button text (both desktop and mobile)
-    const langText = LANGUAGE_NAMES[lang] || 'English';
-    const langBtn = this.shadowRoot.querySelector('#lang-toggle');
-    const langBtnMobile = this.shadowRoot.querySelector('#lang-toggle-mobile');
-    if (langBtn) langBtn.textContent = langText;
-    if (langBtnMobile) langBtnMobile.textContent = langText;
+    const langText = LANGUAGE_NAMES[lang] || "English";
+    this.shadowRoot
+      .querySelectorAll<HTMLElement>('[data-role="lang"]')
+      .forEach((btn) => {
+        btn.textContent = langText;
+      });
   }
 
   private async handleLanguageToggle(): Promise<void> {
-    const currentLang = (localStorage.getItem(LANGUAGE_STORAGE_KEY) || DEFAULT_LANGUAGE) as SupportedLanguage;
+    const currentLang = (localStorage.getItem(LANGUAGE_STORAGE_KEY) ||
+      DEFAULT_LANGUAGE) as SupportedLanguage;
     const currentIndex = SUPPORTED_LANGUAGES.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % SUPPORTED_LANGUAGES.length;
-    const nextLang = SUPPORTED_LANGUAGES[nextIndex];
-
-    await setDSOneLanguage(nextLang);
+    await setDSOneLanguage(SUPPORTED_LANGUAGES[nextIndex]);
     this.updateText();
+  }
+
+  private getTranslatedText(key: string, lang: SupportedLanguage): string {
+    return (
+      this._translations?.[lang]?.[key] ||
+      this._translations?.[DEFAULT_LANGUAGE]?.[key] ||
+      key
+    );
   }
 
   private render(): void {
@@ -86,12 +102,15 @@ class OneFooter extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
+        ${footerButtonsCss}
+      </style>
+      <style>
         :host {
           display: block;
         }
 
         .footer {
-          background-color: #f2ffcf;
+          background-color: var(--footer-background, #f2ffcf);
           position: relative;
           padding: 0;
         }
@@ -135,18 +154,8 @@ class OneFooter extends HTMLElement {
 
         .footer__controls {
           display: flex;
-          gap: 20px;
-        }
-
-        .footer__toggle {
-          font-family: var(--font-regular, -apple-system, sans-serif);
-          font-size: 16px;
-          letter-spacing: -0.32px;
-          color: #979441;
-          background-color: #ccff4d;
-          border: none;
-          cursor: pointer;
-          padding: 0;
+          gap: 10px;
+          align-items: center;
         }
 
         .footer__nav {
@@ -165,31 +174,25 @@ class OneFooter extends HTMLElement {
           font-family: var(--font-medium, -apple-system, sans-serif);
           font-size: 16px;
           letter-spacing: -0.32px;
-          color: var(--every-green, #979441);
-          /* Darken the headline green a bit, while staying on-brand */
-          color: color-mix(in srgb, var(--every-green, #979441) 75%, black 25%);
+          color: var(--footer-link-color, #979441);
           margin-bottom: 10px;
+          text-decoration: underline;
         }
 
         .footer__link {
           font-family: var(--font-pantheon-medium, Georgia, serif);
           font-size: 16px;
           letter-spacing: -0.32px;
-          color: #979441;
+          color: var(--footer-link-color, #979441);
           text-decoration: none;
         }
 
         .footer__link:hover {
-          text-decoration: underline;
-        }
-
-        .footer__link--contact {
-          background-color: #ccff4d;
-          width: fit-content;
+          text-decoration: none;
         }
 
         .footer__link--dimmed {
-          color: rgba(151, 148, 65, 0.4);
+          color: var(--footer-link-dimmed, rgba(151, 148, 65, 0.4));
           font-size: 12px;
         }
 
@@ -208,7 +211,7 @@ class OneFooter extends HTMLElement {
           font-family: var(--font-medium, -apple-system, sans-serif);
           font-size: 14px;
           letter-spacing: -0.28px;
-          color: rgba(101, 138, 8, 0.3);
+          color: var(--footer-copyright, rgba(101, 138, 8, 0.3));
           margin: 0;
         }
 
@@ -217,10 +220,6 @@ class OneFooter extends HTMLElement {
         }
 
         /* Mobile styles */
-        .footer.mobile {
-          gap: calc(40px * var(--sf, 1));
-        }
-
         .footer.mobile .footer__inner {
           padding: calc(40px * var(--sf, 1)) calc(20px * var(--sf, 1));
           gap: calc(40px * var(--sf, 1));
@@ -259,7 +258,8 @@ class OneFooter extends HTMLElement {
 
         .footer.mobile .footer__controls-mobile {
           display: flex;
-          gap: calc(20px * var(--sf, 1));
+          gap: calc(10px * var(--sf, 1));
+          align-items: center;
         }
 
         .footer.mobile .footer__bottom {
@@ -284,8 +284,7 @@ class OneFooter extends HTMLElement {
               <span class="footer__tagline" data-i18n="We deliver digital products">We deliver digital products</span>
             </div>
             <div class="footer__controls">
-              <button class="footer__toggle" id="lang-toggle">English</button>
-              <button class="footer__toggle" data-i18n="Light">Light</button>
+              <button type="button" class="button" data-role="lang">English</button>
             </div>
           </div>
 
@@ -295,7 +294,8 @@ class OneFooter extends HTMLElement {
               <a href="/services" class="footer__link" data-i18n="Services">Services</a>
               <a href="/about" class="footer__link" data-i18n="About us">About us</a>
               <a href="/sentences" class="footer__link" data-i18n="9999 Sentences">9999 Sentences</a>
-              <a href="/contact" class="footer__link footer__link--contact" data-i18n="Contact us">Contact us</a>
+              <a href="/tokushoho" class="footer__link">Tokushoho</a>
+              <a href="/contact" class="button" data-i18n="Contact us">Contact us</a>
             </div>
             <div class="footer__nav-column">
               <span class="footer__nav-header" data-i18n="Work">Work</span>
@@ -312,18 +312,17 @@ class OneFooter extends HTMLElement {
 
         <div class="footer__bottom">
           <div class="footer__controls-mobile">
-            <button class="footer__toggle" id="lang-toggle-mobile">English</button>
-            <button class="footer__toggle" data-i18n="Light">Light</button>
+            <button type="button" class="button" data-role="lang">English</button>
           </div>
           <p class="footer__copyright">0001.dev © ${currentYear}</p>
         </div>
       </footer>
     `;
 
-    // Add event listeners
-    this.shadowRoot.querySelector('#lang-toggle')?.addEventListener('click', () => this.handleLanguageToggle());
-    this.shadowRoot.querySelector('#lang-toggle-mobile')?.addEventListener('click', () => this.handleLanguageToggle());
+    this.shadowRoot.querySelectorAll('[data-role="lang"]').forEach((btn) => {
+      btn.addEventListener("click", () => this.handleLanguageToggle());
+    });
   }
 }
 
-customElements.define('one-footer', OneFooter);
+customElements.define("one-footer", OneFooter);

@@ -15,10 +15,15 @@ export async function setDSOneLanguage(lang: SupportedLanguage): Promise<void> {
   try {
     const dsOne = await importDSOne();
     dsOne.setLanguage(lang);
+    // DS one dispatches on window; also fire on document for local listeners
+    document.dispatchEvent(new CustomEvent('language-changed'));
   } catch (error) {
     console.error('Failed to set DS one language:', error);
-    // Fallback: dispatch event manually
     localStorage.setItem('language', lang);
+    window.dispatchEvent(new CustomEvent('language-changed'));
     document.dispatchEvent(new CustomEvent('language-changed'));
   }
 }
+
+/** No-op: site is light-only; footer theme control kept for layout compatibility */
+export async function toggleDSOneTheme(): Promise<void> {}

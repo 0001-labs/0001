@@ -16,10 +16,10 @@
     <!-- Prevent FOUC -->
     <script>
       (function () {
-        const savedTheme = localStorage.getItem("theme");
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        const theme = savedTheme || systemTheme;
-        document.documentElement.setAttribute("data-theme", theme);
+        var root = document.documentElement;
+        root.classList.remove("dark-theme");
+        root.classList.add("light-theme");
+        root.setAttribute("data-theme", "light");
       })();
     </script>
 
@@ -43,7 +43,7 @@
 
     <style>
       .thankyou-page {
-        background-color: #FFFFFF;
+        background-color: var(--page-background);
         min-height: 100vh;
         position: relative;
       }
@@ -86,6 +86,7 @@
         width: 20px;
         height: 20px;
         margin-top: 10px;
+        color: var(--text-color-subtle);
       }
 
       .thankyou-description {
@@ -102,12 +103,12 @@
         font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
         font-size: 14px;
         letter-spacing: -0.28px;
-        color: rgba(30, 30, 30, 0.5);
+        color: var(--text-color-subtle);
         margin: 16px 0 0 0;
       }
 
       .home-footer {
-        background-color: #F2FFCF;
+        background-color: var(--page-background);
         padding: 60px 374px 50px 400px;
         display: flex;
         flex-direction: column;
@@ -151,17 +152,6 @@
         width: 150px;
       }
 
-      .home-footer__toggle {
-        font-family: var(--font-regular);
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        color: #979441;
-        background-color: #CCFF4D;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-      }
-
       .home-footer__nav {
         display: flex;
         padding-left: 150px;
@@ -179,17 +169,12 @@
         font-family: var(--font-pantheon);
         font-size: 16px;
         letter-spacing: -0.32px;
-        color: #979441;
+        color: var(--footer-link-color);
         text-decoration: none;
       }
 
       .home-footer__link:hover {
         text-decoration: underline;
-      }
-
-      .home-footer__link--contact {
-        background-color: #CCFF4D;
-        width: fit-content;
       }
 
       .home-footer__link--product {
@@ -208,7 +193,7 @@
         font-family: var(--font-medium);
         font-size: 12px;
         letter-spacing: -0.24px;
-        color: rgba(101, 138, 8, 0.3);
+        color: var(--footer-copyright);
         display: flex;
         gap: 12px;
         margin: 0;
@@ -218,12 +203,12 @@
         font-family: var(--font-medium);
         font-size: 12px;
         letter-spacing: -0.24px;
-        color: rgba(101, 138, 8, 0.3);
+        color: var(--footer-copyright);
         text-decoration: none;
       }
 
       .home-footer__social-link:hover {
-        color: rgba(101, 138, 8, 0.6);
+        color: var(--footer-link-color);
       }
     </style>
   </head>
@@ -237,8 +222,8 @@
         <div class="thankyou-header">
           <h1 class="thankyou-title">Thank you</h1>
           <svg class="thankyou-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0.5" y="0.5" width="19" height="19" stroke="#1e1e1e" stroke-opacity="0.2"/>
-            <text x="10" y="14" text-anchor="middle" font-family="var(--font-medium), GT America, sans-serif" font-size="12" fill="#1e1e1e">1</text>
+            <rect x="0.5" y="0.5" width="19" height="19" stroke="currentColor" stroke-opacity="0.3"/>
+            <text x="10" y="14" text-anchor="middle" font-family="var(--font-medium), GT America, sans-serif" font-size="12" fill="currentColor">1</text>
           </svg>
         </div>
 
@@ -254,8 +239,8 @@
             <span class="home-footer__tagline"><ds-text>We deliver digital products</ds-text></span>
           </div>
           <div class="home-footer__controls">
-            <button class="home-footer__toggle" id="lang-toggle"><ds-text>English</ds-text></button>
-            <button class="home-footer__toggle"><ds-text>Light</ds-text></button>
+            <button type="button" class="button" id="lang-toggle"><ds-text>English</ds-text></button>
+            <button type="button" class="button" id="theme-toggle"><ds-text text="Light"></ds-text></button>
           </div>
         </div>
 
@@ -264,7 +249,8 @@
             <a href="/services" class="home-footer__link"><ds-text>Services</ds-text></a>
             <a href="/sentences" class="home-footer__link"><ds-text>9999 sentences</ds-text></a>
             <a href="/about" class="home-footer__link"><ds-text>About</ds-text></a>
-            <a href="/contact" class="home-footer__link home-footer__link--contact"><ds-text>Contact</ds-text></a>
+            <a href="/tokushoho" class="home-footer__link">Tokushoho</a>
+            <a href="/contact" class="home-footer__link button"><ds-text>Contact</ds-text></a>
           </div>
           <div class="home-footer__nav-column">
             <a href="/products" class="home-footer__link home-footer__link--product"><ds-text>Products</ds-text></a>
