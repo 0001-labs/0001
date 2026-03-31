@@ -19,6 +19,7 @@ export default defineConfig({
         sentences: resolve(__dirname, "client/sentences.html"),
         tasklog: resolve(__dirname, "client/task-log.html"),
         thankyou: resolve(__dirname, "client/thank-you.html"),
+        architecture: resolve(__dirname, "client/architecture.html"),
       },
     },
   },
