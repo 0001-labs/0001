@@ -1,29 +1,24 @@
-import type { DSOneModule, SupportedLanguage } from '../types';
-import { DS_ONE_CDN_URL } from './constants';
+import type { SupportedLanguage } from '../types';
+import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY } from './constants';
 
-/**
- * Dynamically import DS one module
- */
-export async function importDSOne(): Promise<DSOneModule> {
-  return import(/* @vite-ignore */ DS_ONE_CDN_URL) as Promise<DSOneModule>;
+function dispatchLanguageChange(lang: SupportedLanguage): void {
+  document.documentElement.lang = lang;
+  const event = new CustomEvent('language-changed', { detail: { lang } });
+  window.dispatchEvent(event);
+  document.dispatchEvent(event);
 }
 
-/**
- * Set language using DS one's setLanguage function
- */
+export function getStoredLanguage(): SupportedLanguage {
+  return (localStorage.getItem(LANGUAGE_STORAGE_KEY) || DEFAULT_LANGUAGE) as SupportedLanguage;
+}
+
 export async function setDSOneLanguage(lang: SupportedLanguage): Promise<void> {
-  try {
-    const dsOne = await importDSOne();
-    dsOne.setLanguage(lang);
-    // DS one dispatches on window; also fire on document for local listeners
-    document.dispatchEvent(new CustomEvent('language-changed'));
-  } catch (error) {
-    console.error('Failed to set DS one language:', error);
-    localStorage.setItem('language', lang);
-    window.dispatchEvent(new CustomEvent('language-changed'));
-    document.dispatchEvent(new CustomEvent('language-changed'));
-  }
+  localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+  dispatchLanguageChange(lang);
 }
 
-/** No-op: site is light-only; footer theme control kept for layout compatibility */
-export async function toggleDSOneTheme(): Promise<void> {}
+export async function toggleDSOneTheme(): Promise<void> {
+  const event = new CustomEvent('theme-changed', { detail: { theme: 'light' } });
+  window.dispatchEvent(event);
+  document.dispatchEvent(event);
+}

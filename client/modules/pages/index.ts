@@ -9,7 +9,7 @@ let translations: Translations = {};
 
 function applyHeroI18n(): void {
   const lang = getCurrentLanguage();
-  document.querySelectorAll<HTMLElement>('.hero__buttons [data-i18n]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('.home-page [data-i18n]').forEach((el) => {
     const key = el.dataset.i18n;
     if (key) {
       el.textContent = getTranslation(translations, key, lang);
@@ -91,10 +91,9 @@ export function randomizeSentence(): void {
  */
 export function startTimer(): void {
   const heroTimer = document.getElementById('hero-timer');
-  const heroDescription = document.querySelector<HTMLElement>('.hero__description');
   const heroImageDiv = document.querySelector<HTMLElement>('.hero__image');
 
-  if (!heroTimer || !heroDescription || !heroImageDiv) return;
+  if (!heroTimer || !heroImageDiv) return;
 
   // Clear existing timer
   if (timerTimeout) {
@@ -104,18 +103,16 @@ export function startTimer(): void {
   // Reset states
   heroTimer.classList.remove('hidden');
   heroImageDiv.classList.remove('hidden');
-  heroDescription.classList.remove('revealed');
 
   // Restart animation by removing and re-adding element
   heroTimer.style.animation = 'none';
   heroTimer.offsetHeight; // Trigger reflow
   heroTimer.style.animation = '';
 
-  // After timer: hide timer and image, reveal description
+  // After timer: remove the image cover so the copy beneath is exposed
   timerTimeout = setTimeout(() => {
     heroTimer.classList.add('hidden');
     heroImageDiv.classList.add('hidden');
-    heroDescription.classList.add('revealed');
   }, TIMER_DURATION);
 }
 

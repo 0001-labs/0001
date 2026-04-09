@@ -5,9 +5,6 @@ import { setDSOneLanguage } from './ds-one';
 
 let cachedTranslations: Translations | null = null;
 
-/**
- * Get the current language from localStorage
- */
 export function getCurrentLanguage(): SupportedLanguage {
   const saved = localStorage.getItem(LANGUAGE_STORAGE_KEY);
   if (saved && SUPPORTED_LANGUAGES.includes(saved as SupportedLanguage)) {
@@ -16,9 +13,6 @@ export function getCurrentLanguage(): SupportedLanguage {
   return DEFAULT_LANGUAGE;
 }
 
-/**
- * Load translations from JSON file
- */
 export async function loadTranslations(): Promise<Translations> {
   if (cachedTranslations) {
     return cachedTranslations;
@@ -27,27 +21,21 @@ export async function loadTranslations(): Promise<Translations> {
   try {
     const response = await fetch(TRANSLATIONS_PATH);
     cachedTranslations = await response.json();
-    return cachedTranslations!;
+    return cachedTranslations;
   } catch (error) {
     console.error('Failed to load translations:', error);
     return {};
   }
 }
 
-/**
- * Get a translated string
- */
 export function getTranslation(
   translations: Translations,
   key: string,
-  lang: SupportedLanguage = getCurrentLanguage()
+  lang: SupportedLanguage = getCurrentLanguage(),
 ): string {
   return translations[lang]?.[key] || translations[DEFAULT_LANGUAGE]?.[key] || key;
 }
 
-/**
- * Cycle to the next language
- */
 export async function cycleLanguage(): Promise<SupportedLanguage> {
   const currentLang = getCurrentLanguage();
   const currentIndex = SUPPORTED_LANGUAGES.indexOf(currentLang);
@@ -58,26 +46,21 @@ export async function cycleLanguage(): Promise<SupportedLanguage> {
   return nextLang;
 }
 
-/**
- * Initialize language from localStorage on page load
- */
-export async function initLanguage(): Promise<void> {
-  const savedLang = getCurrentLanguage();
-  if (savedLang !== DEFAULT_LANGUAGE) {
-    await setDSOneLanguage(savedLang);
-  }
+export function applyCurrentYear(root: Document | ShadowRoot = document): void {
+  root.querySelectorAll<HTMLElement>('[data-current-year]').forEach((el) => {
+    el.textContent = String(new Date().getFullYear());
+  });
 }
 
-/**
- * Get the display name for a language
- */
+export async function initLanguage(): Promise<void> {
+  applyCurrentYear(document);
+  await setDSOneLanguage(getCurrentLanguage());
+}
+
 export function getLanguageDisplayName(lang: SupportedLanguage): string {
   return LANGUAGE_NAMES[lang];
 }
 
-/**
- * Update placeholders on elements with data-placeholder attribute
- */
 export function updatePlaceholders(translations: Translations): void {
   const lang = getCurrentLanguage();
   document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-placeholder]').forEach((el) => {
@@ -88,13 +71,7 @@ export function updatePlaceholders(translations: Translations): void {
   });
 }
 
-/**
- * Apply translations to elements with data-i18n attribute
- */
-export function applyTranslations(
-  root: Document | ShadowRoot,
-  translations: Translations
-): void {
+export function applyTranslations(root: Document | ShadowRoot, translations: Translations): void {
   const lang = getCurrentLanguage();
   root.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
     const key = el.dataset.i18n;
@@ -102,4 +79,6 @@ export function applyTranslations(
       el.textContent = getTranslation(translations, key, lang);
     }
   });
+
+  applyCurrentYear(root);
 }

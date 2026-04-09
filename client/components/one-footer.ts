@@ -1,98 +1,79 @@
 /**
  * one-footer Web Component
- * Styled footer with language / contact .button controls
- *
- * Usage: <one-footer></one-footer>
+ * Site-owned footer with language toggle and local translations.
  */
-import type { Translations, SupportedLanguage } from "../modules/types";
-import { LANGUAGE_NAMES, SUPPORTED_LANGUAGES } from "../modules/types";
-import {
-  TRANSLATIONS_PATH,
-  DEFAULT_LANGUAGE,
-  LANGUAGE_STORAGE_KEY,
-} from "../modules/shared/constants";
-import footerButtonsCss from "../design/css/buttons.css?raw";
-import { setDSOneLanguage } from "../modules/shared/ds-one";
+import type { Translations, SupportedLanguage } from '../modules/types';
+import { LANGUAGE_NAMES, SUPPORTED_LANGUAGES } from '../modules/types';
+import { TRANSLATIONS_PATH, DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY } from '../modules/shared/constants';
+import footerButtonsCss from '../design/css/buttons.css?raw';
+import { setDSOneLanguage } from '../modules/shared/ds-one';
 
 class OneFooter extends HTMLElement {
-  private _translations: Translations | null = null;
+  private translations: Translations | null = null;
   private readonly handleLanguageChange = (): void => this.updateText();
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback(): void {
     this.render();
-    this.loadTranslations();
-    this.checkMobile();
-    document.addEventListener("language-changed", this.handleLanguageChange);
-    window.addEventListener("language-changed", this.handleLanguageChange);
+    void this.loadTranslations();
+    document.addEventListener('language-changed', this.handleLanguageChange);
+    window.addEventListener('language-changed', this.handleLanguageChange);
   }
 
   disconnectedCallback(): void {
-    document.removeEventListener("language-changed", this.handleLanguageChange);
-    window.removeEventListener("language-changed", this.handleLanguageChange);
-  }
-
-  private checkMobile(): void {
-    const isMobile = document.documentElement.classList.contains("mobile");
-    const footer = this.shadowRoot?.querySelector(".footer");
-    if (isMobile && footer) {
-      footer.classList.add("mobile");
-    }
+    document.removeEventListener('language-changed', this.handleLanguageChange);
+    window.removeEventListener('language-changed', this.handleLanguageChange);
   }
 
   private async loadTranslations(): Promise<void> {
     try {
-      const res = await fetch(TRANSLATIONS_PATH);
-      this._translations = await res.json();
+      const response = await fetch(TRANSLATIONS_PATH);
+      this.translations = await response.json();
       this.updateText();
-    } catch (e) {
-      console.error("Failed to load translations:", e);
+    } catch (error) {
+      console.error('Failed to load translations:', error);
     }
   }
 
-  private updateText(): void {
-    const lang = (localStorage.getItem(LANGUAGE_STORAGE_KEY) ||
-      DEFAULT_LANGUAGE) as SupportedLanguage;
-    if (!this.shadowRoot) return;
-
-    if (this._translations) {
-      this.shadowRoot
-        .querySelectorAll<HTMLElement>("[data-i18n]")
-        .forEach((el) => {
-          const key = el.dataset.i18n;
-          if (key) {
-            el.textContent = this.getTranslatedText(key, lang);
-          }
-        });
-    }
-
-    const langText = LANGUAGE_NAMES[lang] || "English";
-    this.shadowRoot
-      .querySelectorAll<HTMLElement>('[data-role="lang"]')
-      .forEach((btn) => {
-        btn.textContent = langText;
-      });
-  }
-
-  private async handleLanguageToggle(): Promise<void> {
-    const currentLang = (localStorage.getItem(LANGUAGE_STORAGE_KEY) ||
-      DEFAULT_LANGUAGE) as SupportedLanguage;
-    const currentIndex = SUPPORTED_LANGUAGES.indexOf(currentLang);
-    const nextIndex = (currentIndex + 1) % SUPPORTED_LANGUAGES.length;
-    await setDSOneLanguage(SUPPORTED_LANGUAGES[nextIndex]);
-    this.updateText();
+  private getCurrentLanguage(): SupportedLanguage {
+    return (localStorage.getItem(LANGUAGE_STORAGE_KEY) || DEFAULT_LANGUAGE) as SupportedLanguage;
   }
 
   private getTranslatedText(key: string, lang: SupportedLanguage): string {
-    return (
-      this._translations?.[lang]?.[key] ||
-      this._translations?.[DEFAULT_LANGUAGE]?.[key] ||
-      key
-    );
+    return this.translations?.[lang]?.[key] || this.translations?.[DEFAULT_LANGUAGE]?.[key] || key;
+  }
+
+  private updateText(): void {
+    if (!this.shadowRoot) return;
+
+    const lang = this.getCurrentLanguage();
+
+    if (this.translations) {
+      this.shadowRoot.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+        const key = el.dataset.i18n;
+        if (key) {
+          el.textContent = this.getTranslatedText(key, lang);
+        }
+      });
+    }
+
+    const languageLabel = LANGUAGE_NAMES[lang] || 'English';
+    this.shadowRoot.querySelectorAll<HTMLElement>('[data-role="lang"]').forEach((el) => {
+      el.textContent = languageLabel;
+    });
+  }
+
+  private async handleLanguageToggle(): Promise<void> {
+    const currentLang = this.getCurrentLanguage();
+    const currentIndex = SUPPORTED_LANGUAGES.indexOf(currentLang);
+    const nextLang = SUPPORTED_LANGUAGES[(currentIndex + 1) % SUPPORTED_LANGUAGES.length];
+
+    await setDSOneLanguage(nextLang);
+    this.updateText();
   }
 
   private render(): void {
@@ -145,7 +126,7 @@ class OneFooter extends HTMLElement {
         }
 
         .footer__tagline {
-          font-family: var(--typeface-canon, Georgia, serif);
+          font-family: "GT-Canon-M-Standard-Medium", Georgia, serif;
           font-size: 16px;
           line-height: 1;
           letter-spacing: -0.32px;
@@ -159,6 +140,11 @@ class OneFooter extends HTMLElement {
         }
 
         .footer__nav {
+          display: flex;
+          gap: 0;
+        }
+
+        .footer__nav-group--primary {
           display: flex;
           gap: 0;
         }
@@ -196,11 +182,6 @@ class OneFooter extends HTMLElement {
           font-size: 12px;
         }
 
-        .footer__nav-column:nth-child(2) .footer__link,
-        .footer__nav-column:nth-child(3) .footer__link {
-          font-family: var(--font-regular, -apple-system, sans-serif);
-        }
-
         .footer__bottom {
           position: absolute;
           left: 60px;
@@ -219,60 +200,82 @@ class OneFooter extends HTMLElement {
           display: none;
         }
 
-        /* Mobile styles */
-        .footer.mobile .footer__inner {
-          padding: calc(40px * var(--sf, 1)) calc(20px * var(--sf, 1));
-          gap: calc(40px * var(--sf, 1));
-        }
+        @media (max-width: 768px) {
+          .footer__inner {
+            padding: 32px 20px 0;
+            gap: 32px;
+          }
 
-        .footer.mobile .footer__top {
-          width: calc(400px * var(--sf, 1));
-        }
+          .footer__top {
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+          }
 
-        .footer.mobile .footer__brand {
-          width: 100%;
-        }
+          .footer__brand {
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 6px;
+          }
 
-        .footer.mobile .footer__controls {
-          display: none;
-        }
+          .footer__tagline {
+            line-height: 1.3;
+          }
 
-        .footer.mobile .footer__nav {
-          flex-direction: column;
-          gap: calc(30px * var(--sf, 1));
-        }
+          .footer__controls {
+            display: none;
+          }
 
-        .footer.mobile .footer__nav-column {
-          width: 100%;
-          gap: calc(16px * var(--sf, 1));
-        }
+          .footer__nav {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            column-gap: 16px;
+            align-items: start;
+          }
 
-        .footer.mobile .footer__nav-header {
-          font-size: calc(14px * var(--sf, 1));
-          margin-bottom: calc(8px * var(--sf, 1));
-        }
+          .footer__nav-group--primary {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            min-width: 0;
+          }
 
-        .footer.mobile .footer__link {
-          font-size: calc(14px * var(--sf, 1));
-        }
+          .footer__nav-column {
+            width: 100%;
+            min-width: 0;
+            gap: 16px;
+          }
 
-        .footer.mobile .footer__controls-mobile {
-          display: flex;
-          gap: calc(10px * var(--sf, 1));
-          align-items: center;
-        }
+          .footer__nav-column--other {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+          }
 
-        .footer.mobile .footer__bottom {
-          position: relative;
-          left: auto;
-          bottom: auto;
-          display: flex;
-          flex-direction: column;
-          gap: calc(30px * var(--sf, 1));
-        }
+          .footer__nav-column--other .footer__controls-mobile {
+            display: flex;
+          }
 
-        .footer.mobile .footer__copyright {
-          font-size: calc(12px * var(--sf, 1));
+          .footer__nav-header {
+            font-size: 14px;
+            margin-bottom: 0;
+          }
+
+          .footer__link {
+            font-size: 14px;
+          }
+
+          .footer__bottom {
+            position: static;
+            margin-top: 48px;
+            padding-bottom: 56px;
+          }
+
+          .footer__copyright {
+            font-size: 12px;
+            color: rgba(101, 138, 8, 0.45);
+          }
         }
       </style>
 
@@ -289,40 +292,61 @@ class OneFooter extends HTMLElement {
           </div>
 
           <nav class="footer__nav">
-            <div class="footer__nav-column">
-              <span class="footer__nav-header" data-i18n="Company">Company</span>
-              <a href="/services" class="footer__link" data-i18n="Services">Services</a>
-              <a href="/about" class="footer__link" data-i18n="About us">About us</a>
-              <a href="/sentences" class="footer__link" data-i18n="9999 Sentences">9999 Sentences</a>
-              <a href="/tokushoho" class="footer__link">Tokushoho</a>
-              <a href="/contact" class="button" data-i18n="Contact us">Contact us</a>
+            <div class="footer__nav-group--primary">
+              <div class="footer__nav-column">
+                <span class="footer__nav-header" data-i18n="Company">Company</span>
+                <a href="/services" class="footer__link" data-i18n="Services">Services</a>
+                <a href="/about" class="footer__link" data-i18n="About us">About us</a>
+                <a href="/sentences" class="footer__link" data-i18n="9999 Sentences">9999 Sentences</a>
+                <a href="/tokushoho" class="footer__link">Tokushoho</a>
+                <a href="/contact" class="button" data-i18n="Contact us">Contact us</a>
+              </div>
+              <div class="footer__nav-column">
+                <span class="footer__nav-header" data-i18n="Work">Work</span>
+                <a href="/products" class="footer__link" data-i18n="Products">Products</a>
+                <a href="/architecture" class="footer__link" data-i18n="Architecture">Architecture</a>
+              </div>
             </div>
-            <div class="footer__nav-column">
-              <span class="footer__nav-header" data-i18n="Work">Work</span>
-              <a href="/products" class="footer__link" data-i18n="Products">Products</a>
-              <a href="/architecture" class="footer__link" data-i18n="Architecture">Architecture</a>
-            </div>
-            <div class="footer__nav-column">
+
+            <div class="footer__nav-column footer__nav-column--other">
               <span class="footer__nav-header" data-i18n="Other">Other</span>
-              <a href="https://www.linkedin.com/company/000one/" class="footer__link" target="_blank" data-i18n="LinkedIn">LinkedIn</a>
-              <a href="https://www.instagram.com/0001hq/" class="footer__link" target="_blank" data-i18n="Instagram">Instagram</a>
+              <a
+                href="https://www.linkedin.com/company/000one/"
+                class="footer__link"
+                target="_blank"
+                rel="noreferrer"
+                data-i18n="LinkedIn"
+              >LinkedIn</a>
+              <a
+                href="https://www.instagram.com/0001hq/"
+                class="footer__link"
+                target="_blank"
+                rel="noreferrer"
+                data-i18n="Instagram"
+              >Instagram</a>
+              <div class="footer__controls-mobile">
+                <button type="button" class="button" data-role="lang">English</button>
+              </div>
             </div>
           </nav>
-        </div>
 
-        <div class="footer__bottom">
-          <div class="footer__controls-mobile">
-            <button type="button" class="button" data-role="lang">English</button>
+          <div class="footer__bottom">
+            <p class="footer__copyright">0001.dev © ${currentYear}</p>
           </div>
-          <p class="footer__copyright">0001.dev © ${currentYear}</p>
         </div>
       </footer>
     `;
 
-    this.shadowRoot.querySelectorAll('[data-role="lang"]').forEach((btn) => {
-      btn.addEventListener("click", () => this.handleLanguageToggle());
+    this.shadowRoot.querySelectorAll<HTMLElement>('[data-role="lang"]').forEach((button) => {
+      button.addEventListener('click', () => {
+        void this.handleLanguageToggle();
+      });
     });
+
+    this.updateText();
   }
 }
 
-customElements.define("one-footer", OneFooter);
+if (!customElements.get('one-footer')) {
+  customElements.define('one-footer', OneFooter);
+}

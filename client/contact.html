@@ -45,29 +45,10 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <!-- DS one CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css"
-    />
-
-    <!-- Custom styles -->
+<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <!-- DS one i18n setup -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <!-- DS one bundle -->
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"
-    ></script>
-
-    <!-- 0001 components -->
+<!-- 0001 components -->
     <script type="module" src="./components/one-footer.ts"></script>
 
     <!-- Page module -->
@@ -77,6 +58,7 @@
       .contact-page {
         background-color: var(--page-background);
         min-height: 100vh;
+        min-height: 100dvh;
         position: relative;
       }
 
@@ -126,6 +108,19 @@
         margin: 0 0 25px 0;
       }
 
+      .contact-description [data-i18n] {
+        display: block;
+        height: auto;
+        min-height: 0;
+        max-width: 100%;
+        font: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        line-height: inherit;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+
       /* Step 1: Topic Selection */
       .contact-step {
         display: none;
@@ -166,7 +161,7 @@
       }
 
       .contact-category__label,
-      .contact-category__label ds-text {
+      .contact-category__label [data-i18n] {
         text-decoration: underline;
         text-underline-offset: 0.2em;
         text-decoration-thickness: 1px;
@@ -450,97 +445,158 @@
       }
 
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
-      html.mobile .contact-logo {
+      @media (max-width: 768px) {
+        .contact-logo {
         position: relative;
         top: auto;
         left: auto;
-        padding: calc(20px * var(--sf));
-        font-size: calc(20px * var(--sf));
+        display: block;
+        padding: 28px 20px 0;
+        font-size: 20px;
+        line-height: 1;
+        }
       }
 
-      html.mobile .contact-main {
-        padding: calc(20px * var(--sf));
-        padding-top: calc(40px * var(--sf));
-        gap: calc(50px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-main {
+        padding: 16px 20px 20px;
+        gap: 44px;
+        }
       }
 
-      html.mobile .contact-title {
-        font-size: calc(32px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        }
       }
 
-      html.mobile .contact-description {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-title {
+        font-size: 40px;
+        line-height: 0.94;
+        letter-spacing: -0.8px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .contact-description {
+        font-size: 14px;
         max-width: 100%;
-        margin-bottom: calc(20px * var(--sf));
+        margin-bottom: 20px;
+        }
       }
 
-      html.mobile .contact-form-box {
+      @media (max-width: 768px) {
+        .contact-form-box {
         max-width: 100%;
-        padding: calc(12px * var(--sf));
-        gap: calc(24px * var(--sf));
+        padding: 12px;
+        gap: 24px;
+        }
       }
 
-      html.mobile .contact-category {
-        gap: calc(12px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-category {
+        gap: 12px;
+        }
       }
 
-      html.mobile .contact-category__label {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-category__label {
+        font-size: 14px;
+        }
       }
 
-      html.mobile .contact-option {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-option {
+        font-size: 14px;
+        }
       }
 
-      html.mobile .contact-mode-toggle {
-        margin-bottom: calc(16px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-mode-toggle {
+        margin-bottom: 16px;
+        }
       }
 
-      html.mobile .contact-mode-btn {
-        font-size: calc(14px * var(--sf));
-        padding: calc(10px * var(--sf)) calc(12px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-mode-btn {
+        font-size: 14px;
+        padding: 10px 12px;
+        }
       }
 
-      html.mobile .contact-topics-header {
+      @media (max-width: 768px) {
+        .contact-topics-header {
         width: 100%;
         flex-direction: column;
-        gap: calc(12px * var(--sf));
+        gap: 12px;
         align-items: flex-start;
-        margin-bottom: calc(20px * var(--sf));
+        margin-bottom: 20px;
+        }
       }
 
-      html.mobile .contact-topics-label {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-topics-label {
+        font-size: 14px;
+        }
       }
 
-      html.mobile .contact-selected-topics {
+      @media (max-width: 768px) {
+        .contact-selected-topics {
         justify-content: flex-start;
+        }
       }
 
-      html.mobile .contact-topic-tag {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-topic-tag {
+        font-size: 14px;
+        }
       }
 
-      html.mobile .contact-field {
-        gap: calc(6px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-field {
+        gap: 6px;
+        }
       }
 
-      html.mobile .contact-field__label {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-field__label {
+        font-size: 14px;
+        }
       }
 
-      html.mobile .contact-field__input,
-      html.mobile .contact-field__textarea {
-        font-size: calc(14px * var(--sf));
-        padding: calc(8px * var(--sf)) calc(10px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-field__input,
+      .contact-field__textarea {
+        font-size: 14px;
+        padding: 8px 10px;
+        }
       }
 
-      html.mobile .contact-field__textarea {
-        min-height: calc(150px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-field__textarea {
+        min-height: 150px;
+        }
       }
 
-      html.mobile .contact-field__hint {
-        font-size: calc(12px * var(--sf));
+      @media (max-width: 768px) {
+        .contact-field__hint {
+        font-size: 12px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #next-btn,
+      #submit-inquiry-btn {
+        height: auto;
+        max-height: none;
+        min-height: 24px;
+        padding: 0 10px;
+        line-height: 24px;
+        font-size: 15px;
+        }
       }
 
     </style>
@@ -571,10 +627,7 @@
         <!-- Step 1: Topic Selection -->
         <div class="contact-step active" id="step-1">
           <p class="contact-description">
-            <ds-text
-              >Select your focus areas below to help us understand your
-              needs.</ds-text
-            >
+            <span data-i18n="Select your focus areas below to help us understand your needs.">Select your focus areas below to help us understand your needs.</span>
           </p>
 
           <div class="contact-form-box">
@@ -585,14 +638,14 @@
                 class="contact-mode-btn active"
                 data-mode="services"
               >
-                <ds-text>By service</ds-text>
+                <span data-i18n="By service">By service</span>
               </button>
               <button
                 type="button"
                 class="contact-mode-btn"
                 data-mode="techstack"
               >
-                <ds-text>By tech stack</ds-text>
+                <span data-i18n="By tech stack">By tech stack</span>
               </button>
             </div>
 
@@ -601,40 +654,40 @@
               <!-- Frontend options -->
               <div class="contact-category">
                 <span class="contact-category__label"
-                  ><ds-text>Frontend</ds-text></span
+                  ><span data-i18n="Frontend">Frontend</span></span
                 >
                 <div class="contact-category__options">
                   <div class="contact-option" data-value="SEO">
-                    <span><ds-text>SEO</ds-text></span>
+                    <span><span data-i18n="SEO">SEO</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Speed optimizing">
-                    <span><ds-text>Speed optimizing</ds-text></span>
+                    <span><span data-i18n="Speed optimizing">Speed optimizing</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div
                     class="contact-option"
                     data-value="Image delivery pipeline"
                   >
-                    <span><ds-text>Image delivery pipeline</ds-text></span>
+                    <span><span data-i18n="Image delivery pipeline">Image delivery pipeline</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Marketing sites">
-                    <span><ds-text>Marketing sites</ds-text></span>
+                    <span><span data-i18n="Marketing sites">Marketing sites</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Design systems">
-                    <span><ds-text>Design systems</ds-text></span>
+                    <span><span data-i18n="Design systems">Design systems</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                 </div>
@@ -643,37 +696,37 @@
               <!-- Backend options -->
               <div class="contact-category">
                 <span class="contact-category__label"
-                  ><ds-text>Backend</ds-text></span
+                  ><span data-i18n="Backend">Backend</span></span
                 >
                 <div class="contact-category__options">
                   <div class="contact-option" data-value="API development">
-                    <span><ds-text>API development</ds-text></span>
+                    <span><span data-i18n="API development">API development</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Database design">
-                    <span><ds-text>Database design</ds-text></span>
+                    <span><span data-i18n="Database design">Database design</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Cloud infrastructure">
-                    <span><ds-text>Cloud infrastructure</ds-text></span>
+                    <span><span data-i18n="Cloud infrastructure">Cloud infrastructure</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Authentication">
-                    <span><ds-text>Authentication</ds-text></span>
+                    <span><span data-i18n="Authentication">Authentication</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Security">
-                    <span><ds-text>Security</ds-text></span>
+                    <span><span data-i18n="Security">Security</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                 </div>
@@ -682,19 +735,40 @@
               <!-- AI options -->
               <div class="contact-category">
                 <span class="contact-category__label"
-                  ><ds-text>AI</ds-text></span
+                  ><span data-i18n="AI">AI</span></span
                 >
                 <div class="contact-category__options">
                   <div class="contact-option" data-value="Agents">
-                    <span><ds-text>Agents</ds-text></span>
+                    <span><span data-i18n="Agents">Agents</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="MCP">
-                    <span><ds-text>MCP</ds-text></span>
+                    <span><span data-i18n="MCP">MCP</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Delivery options -->
+              <div class="contact-category">
+                <span class="contact-category__label"
+                  ><span data-i18n="Delivery">Delivery</span></span
+                >
+                <div class="contact-category__options">
+                  <div class="contact-option" data-value="CI/CD optimization">
+                    <span><span data-i18n="CI/CD optimization">CI/CD optimization</span></span>
+                    <span class="contact-option__selected-text"
+                      ><span data-i18n="Selected">Selected</span></span
+                    >
+                  </div>
+                  <div class="contact-option" data-value="Delivery planning">
+                    <span><span data-i18n="Delivery planning">Delivery planning</span></span>
+                    <span class="contact-option__selected-text"
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                 </div>
@@ -706,25 +780,25 @@
               <!-- Backend tech -->
               <div class="contact-category">
                 <span class="contact-category__label"
-                  ><ds-text>Backend</ds-text></span
+                  ><span data-i18n="Backend">Backend</span></span
                 >
                 <div class="contact-category__options">
                   <div class="contact-option" data-value="Java">
-                    <span><ds-text>Java</ds-text></span>
+                    <span><span data-i18n="Java">Java</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Node">
-                    <span><ds-text>Node</ds-text></span>
+                    <span><span data-i18n="Node">Node</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="C#">
-                    <span><ds-text>C#</ds-text></span>
+                    <span><span data-i18n="C#">C#</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                 </div>
@@ -733,31 +807,31 @@
               <!-- Frontend tech -->
               <div class="contact-category">
                 <span class="contact-category__label"
-                  ><ds-text>Frontend</ds-text></span
+                  ><span data-i18n="Frontend">Frontend</span></span
                 >
                 <div class="contact-category__options">
                   <div class="contact-option" data-value="HTML">
-                    <span><ds-text>HTML</ds-text></span>
+                    <span><span data-i18n="HTML">HTML</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="React">
-                    <span><ds-text>React</ds-text></span>
+                    <span><span data-i18n="React">React</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Angular">
-                    <span><ds-text>Angular</ds-text></span>
+                    <span><span data-i18n="Angular">Angular</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Vue">
-                    <span><ds-text>Vue</ds-text></span>
+                    <span><span data-i18n="Vue">Vue</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                 </div>
@@ -766,25 +840,25 @@
               <!-- Cloud tech -->
               <div class="contact-category">
                 <span class="contact-category__label"
-                  ><ds-text>Cloud</ds-text></span
+                  ><span data-i18n="Cloud">Cloud</span></span
                 >
                 <div class="contact-category__options">
                   <div class="contact-option" data-value="Cloudflare">
-                    <span><ds-text>Cloudflare</ds-text></span>
+                    <span><span data-i18n="Cloudflare">Cloudflare</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="Azure">
-                    <span><ds-text>Azure</ds-text></span>
+                    <span><span data-i18n="Azure">Azure</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                   <div class="contact-option" data-value="AWS">
-                    <span><ds-text>AWS</ds-text></span>
+                    <span><span data-i18n="AWS">AWS</span></span>
                     <span class="contact-option__selected-text"
-                      ><ds-text>Selected</ds-text></span
+                      ><span data-i18n="Selected">Selected</span></span
                     >
                   </div>
                 </div>
@@ -803,15 +877,12 @@
         <div class="contact-step" id="step-2">
           <div class="contact-form-box">
             <p class="contact-description">
-              <ds-text
-                >Please provide as much context as needed when contacting
-                us.</ds-text
-              >
+              <span data-i18n="Please provide as much context as needed when contacting us.">Please provide as much context as needed when contacting us.</span>
             </p>
 
             <div class="contact-topics-header">
               <span class="contact-topics-label"
-                ><ds-text>Write to us about:</ds-text></span
+                ><span data-i18n="Write to us about:">Write to us about:</span></span
               >
               <div
                 class="contact-selected-topics"
@@ -822,7 +893,7 @@
             <form class="contact-message-form" id="message-form">
               <div class="contact-field">
                 <label class="contact-field__label"
-                  ><ds-text>Your name</ds-text></label
+                  ><span data-i18n="Your name">Your name</span></label
                 >
                 <input
                   type="text"
@@ -835,7 +906,7 @@
 
               <div class="contact-field">
                 <label class="contact-field__label"
-                  ><ds-text>Company name</ds-text></label
+                  ><span data-i18n="Company name">Company name</span></label
                 >
                 <input
                   type="text"
@@ -847,7 +918,7 @@
 
               <div class="contact-field">
                 <label class="contact-field__label"
-                  ><ds-text>Your email</ds-text></label
+                  ><span data-i18n="Your email">Your email</span></label
                 >
                 <input
                   type="email"
@@ -860,9 +931,9 @@
 
               <div class="contact-field">
                 <label class="contact-field__label"
-                  ><ds-text>Phone number</ds-text>
+                  ><span data-i18n="Phone number">Phone number</span>
                   <span style="opacity: 0.5"
-                    >(<ds-text>Optional</ds-text>)</span
+                    >(<span data-i18n="Optional">Optional</span>)</span
                   ></label
                 >
                 <input
@@ -875,7 +946,7 @@
 
               <div class="contact-field">
                 <label class="contact-field__label"
-                  ><ds-text>Your message</ds-text></label
+                  ><span data-i18n="Your message">Your message</span></label
                 >
                 <textarea
                   class="contact-field__textarea"

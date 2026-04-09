@@ -23,16 +23,8 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
     <script type="module" src="./components/one-footer.ts"></script>
     <script type="module" src="./modules/pages/common.ts"></script>
 
@@ -40,6 +32,7 @@
       .tokushoho-page {
         background-color: var(--page-background);
         min-height: 100vh;
+        min-height: 100dvh;
         position: relative;
       }
 
@@ -141,41 +134,54 @@
         text-underline-offset: 2px;
       }
 
-      html.mobile .tokushoho-logo {
+      @media (max-width: 768px) {
+        .tokushoho-logo {
         left: auto;
-        padding: calc(20px * var(--sf));
+        padding: 20px;
         position: relative;
         top: auto;
-        font-size: calc(20px * var(--sf));
+        font-size: 20px;
+        }
       }
 
-      html.mobile .tokushoho-main {
-        gap: calc(32px * var(--sf));
-        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) calc(80px * var(--sf));
+      @media (max-width: 768px) {
+        .tokushoho-main {
+        gap: 32px;
+        padding: 40px 20px 80px;
+        }
       }
 
-      html.mobile .tokushoho-title {
-        font-size: calc(30px * var(--sf));
-        letter-spacing: calc(-0.6px * var(--sf));
+      @media (max-width: 768px) {
+        .tokushoho-title {
+        font-size: 30px;
+        letter-spacing: -0.6px;
+        }
       }
 
-      html.mobile .tokushoho-meta,
-      html.mobile .tokushoho-intro,
-      html.mobile .tokushoho-body,
-      html.mobile .tokushoho-list {
-        font-size: calc(14px * var(--sf));
-        letter-spacing: calc(-0.28px * var(--sf));
+      @media (max-width: 768px) {
+        .tokushoho-meta,
+      .tokushoho-intro,
+      .tokushoho-body,
+      .tokushoho-list {
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        }
       }
 
-      html.mobile .tokushoho-section {
-        border-radius: calc(16px * var(--sf));
-        padding: calc(18px * var(--sf));
+      @media (max-width: 768px) {
+        .tokushoho-section {
+        border-radius: 16px;
+        padding: 18px;
+        }
       }
 
-      html.mobile .tokushoho-section__title {
-        font-size: calc(18px * var(--sf));
-        letter-spacing: calc(-0.36px * var(--sf));
+      @media (max-width: 768px) {
+        .tokushoho-section__title {
+        font-size: 18px;
+        letter-spacing: -0.36px;
+        }
       }
+
     </style>
   </head>
   <body>

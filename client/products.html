@@ -22,28 +22,16 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
-
-    <!-- Custom styles -->
+<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <!-- DS one i18n setup -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
-
-    <!-- Page module -->
+<!-- Page module -->
     <script type="module" src="./modules/pages/products.ts"></script>
 
     <style>
       .products-page {
         min-height: 100vh;
+        min-height: 100dvh;
         background: var(--page-background);
       }
 
@@ -94,6 +82,7 @@
         background: var(--page-background);
         border-top: var(--border-default);
         min-height: calc(100vh - 180px);
+        min-height: calc(100dvh - 180px);
         padding: 100px 60px 120px;
       }
 
@@ -278,69 +267,135 @@
         background-color: var(--footer-control-hover) !important;
       }
 
-      html.mobile .products-header {
+      @media (max-width: 768px) {
+        .products-header {
         height: auto;
-        padding: calc(24px * var(--sf)) calc(20px * var(--sf)) calc(48px * var(--sf));
+        padding: 24px 20px 48px;
+        }
       }
 
-      html.mobile .products-header__inner {
+      @media (max-width: 768px) {
+        .products-header__inner {
         align-items: flex-start;
         flex-direction: column;
-        gap: calc(24px * var(--sf));
+        gap: 24px;
+        }
       }
 
-      html.mobile .products-header__logo,
-      html.mobile .products-header__link,
-      html.mobile .products-table__header-cell,
-      html.mobile .products-table__cell {
-        font-size: calc(16px * var(--sf));
-        letter-spacing: calc(-0.32px * var(--sf));
+      @media (max-width: 768px) {
+        .products-header__logo svg {
+        width: 84px;
+        }
       }
 
-      html.mobile .products-header__nav {
+      @media (max-width: 768px) {
+        .products-header__link {
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        line-height: 1.2;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .products-header__nav {
         flex-wrap: wrap;
-        gap: calc(18px * var(--sf));
+        gap: 16px;
+        }
       }
 
-      html.mobile .products-main {
-        min-height: calc(100vh - 120px * var(--sf));
-        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) calc(64px * var(--sf));
+      @media (max-width: 768px) {
+        .products-main {
+        min-height: calc(100vh - 120px);
+        min-height: calc(100dvh - 120px);
+        padding: 28px 12px 48px;
+        }
       }
 
-      html.mobile .products-table {
-        min-width: 500px;
+      @media (max-width: 768px) {
+        .products-main__inner {
+        align-items: stretch;
+        }
       }
 
-      html.mobile .products-table__header-cell,
-      html.mobile .products-table__cell {
-        height: calc(30px * var(--sf));
-        padding: calc(7px * var(--sf)) calc(5px * var(--sf));
+      @media (max-width: 768px) {
+        .products-table-wrap {
+        overflow-x: visible;
+        }
       }
 
-      html.mobile .products-meta {
-        gap: calc(20px * var(--sf));
-        margin-top: calc(24px * var(--sf));
+      @media (max-width: 768px) {
+        .products-table {
+        min-width: 0;
         width: 100%;
+        table-layout: fixed;
+        }
       }
 
-      html.mobile .products-meta__links {
-        gap: calc(16px * var(--sf));
+      @media (max-width: 768px) {
+        .products-table__header-cell,
+      .products-table__cell {
+        font-size: 11px;
+        letter-spacing: -0.22px;
+        height: 28px;
+        padding: 6px 4px;
+        }
       }
 
-      html.mobile .products-meta__copyright {
-        font-size: calc(16px * var(--sf));
-        letter-spacing: calc(-0.32px * var(--sf));
-        line-height: calc(22px * var(--sf));
+      @media (max-width: 768px) {
+        .products-table__header-cell--product {
+        width: 40%;
+        }
       }
 
-      html.mobile .products-page .products-meta__links > a.button {
-        height: calc(24px * var(--sf)) !important;
-        max-height: calc(24px * var(--sf)) !important;
-        padding: 0 calc(12px * var(--sf)) !important;
-        font-size: calc(16px * var(--sf)) !important;
-        line-height: calc(24px * var(--sf)) !important;
-        letter-spacing: calc(-0.32px * var(--sf));
+      @media (max-width: 768px) {
+        .products-table__header-cell--users,
+      .products-table__header-cell--retention,
+      .products-table__header-cell--status {
+        width: 20%;
+        }
       }
+
+      @media (max-width: 768px) {
+        .products-table__product-name {
+        display: block;
+        min-width: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .products-meta {
+        gap: 20px;
+        margin-top: 24px;
+        width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .products-meta__links {
+        gap: 12px;
+        flex-wrap: wrap;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .products-meta__copyright {
+        font-size: 12px;
+        letter-spacing: -0.24px;
+        line-height: 16px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .products-page .products-meta__links > a.button {
+        height: 24px !important;
+        max-height: 24px !important;
+        padding: 0 12px !important;
+        font-size: 16px !important;
+        line-height: 24px !important;
+        letter-spacing: -0.32px;
+        }
+      }
+
     </style>
   </head>
   <body>
@@ -349,8 +404,8 @@
         <div class="products-header__inner">
           <a href="/" class="products-header__logo"><svg width="53" height="20" viewBox="0 0 53 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.8147e-06 5.97334C3.8147e-06 3.88248 3.8147e-06 2.83705 0.406913 2.03844C0.76484 1.33597 1.33597 0.764846 2.03844 0.406918C2.83704 9.26852e-06 3.88247 9.28298e-06 5.97334 9.28298e-06H27.0267C29.1175 9.28298e-06 30.163 9.26852e-06 30.9616 0.406918C31.664 0.764846 32.2352 1.33597 32.5931 2.03844C33 2.83705 33 3.88248 33 5.97334C33 3.88248 33 2.83704 33.4069 2.03844C33.7648 1.33596 34.336 0.764836 35.0384 0.406909C35.837 0 36.8825 0 38.9733 0H47.0267C49.1175 0 50.163 0 50.9616 0.406909C51.664 0.764836 52.2352 1.33596 52.5931 2.03844C53 2.83704 53 3.88247 53 5.97333V14.0267C53 16.1175 53 17.163 52.5931 17.9616C52.2352 18.664 51.664 19.2352 50.9616 19.5931C50.163 20 49.1175 20 47.0267 20H38.9733C36.8825 20 35.837 20 35.0384 19.5931C34.336 19.2352 33.7648 18.664 33.4069 17.9616C33 17.163 33 16.1175 33 14.0267C33 16.1175 33 17.163 32.5931 17.9616C32.2352 18.664 31.664 19.2352 30.9616 19.5931C30.163 20 29.1175 20 27.0267 20H5.97334C3.88247 20 2.83704 20 2.03844 19.5931C1.33597 19.2352 0.76484 18.664 0.406913 17.9616C3.8147e-06 17.163 3.8147e-06 16.1175 3.8147e-06 14.0267V5.97334Z" fill="#1E1E1E"/><path d="M10.1448 16.5996C6.96474 16.5996 5.19995 14.1184 5.19995 10.0821C5.19995 6.04586 6.96474 3.59962 10.1448 3.59962C13.3424 3.59962 15.1072 6.06333 15.1072 10.0821C15.1072 14.1184 13.3424 16.5996 10.1448 16.5996ZM10.1448 14.8523C11.9621 14.8523 12.8881 13.07 12.8881 10.0821C12.8881 7.09425 11.9446 5.34693 10.1448 5.34693C8.34512 5.34693 7.41904 7.11172 7.41904 10.0821C7.41904 13.0875 8.34512 14.8523 10.1448 14.8523Z" fill="url(#paint0_linear_140_602)"/><path d="M21.5261 16.5996C18.346 16.5996 16.5812 14.1184 16.5812 10.0821C16.5812 6.04586 18.346 3.59962 21.5261 3.59962C24.7237 3.59962 26.4885 6.06333 26.4885 10.0821C26.4885 14.1184 24.7237 16.5996 21.5261 16.5996ZM21.5261 14.8523C23.3433 14.8523 24.2694 13.07 24.2694 10.0821C24.2694 7.09425 23.3258 5.34693 21.5261 5.34693C19.7264 5.34693 18.8003 7.11172 18.8003 10.0821C18.8003 13.0875 19.7264 14.8523 21.5261 14.8523Z" fill="url(#paint1_linear_140_602)"/><path d="M32.9031 16.5996C29.723 16.5996 27.9582 14.1184 27.9582 10.0821C27.9582 6.04586 29.723 3.59962 32.9031 3.59962C36.1006 3.59962 37.8654 6.06333 37.8654 10.0821C37.8654 14.1184 36.1006 16.5996 32.9031 16.5996ZM32.9031 14.8523C34.7203 14.8523 35.6463 13.07 35.6463 10.0821C35.6463 7.09425 34.7028 5.34693 32.9031 5.34693C31.1033 5.34693 30.1773 7.11172 30.1773 10.0821C30.1773 13.0875 31.1033 14.8523 32.9031 14.8523Z" fill="url(#paint2_linear_140_602)"/><path d="M42.4708 6.79728C42.0515 7.28653 41.1604 7.53115 40.4265 7.53115H39.8673V5.57416H40.2343C41.5448 5.57416 42.4708 4.91019 42.8552 3.5997H44.655V16.0056H42.4708V6.79728Z" fill="url(#paint3_linear_140_602)"/><path d="M32.9031 16.5996C29.723 16.5996 27.9582 14.1184 27.9582 10.0821C27.9582 6.04586 29.723 3.59962 32.9031 3.59962C36.1006 3.59962 37.8654 6.06333 37.8654 10.0821C37.8654 14.1184 36.1006 16.5996 32.9031 16.5996ZM32.9031 14.8523C34.7203 14.8523 35.6463 13.07 35.6463 10.0821C35.6463 7.09425 34.7028 5.34693 32.9031 5.34693C31.1033 5.34693 30.1773 7.11172 30.1773 10.0821C30.1773 13.0875 31.1033 14.8523 32.9031 14.8523Z" fill="url(#paint4_linear_140_602)"/><defs><linearGradient id="paint0_linear_140_602" x1="15.0522" y1="10.0996" x2="42.6054" y2="10.0996" gradientUnits="userSpaceOnUse"><stop stop-color="#525252"/><stop offset="1" stop-color="#F2F2F2"/></linearGradient><linearGradient id="paint1_linear_140_602" x1="15.0522" y1="10.0996" x2="42.6054" y2="10.0996" gradientUnits="userSpaceOnUse"><stop stop-color="#525252"/><stop offset="1" stop-color="#F2F2F2"/></linearGradient><linearGradient id="paint2_linear_140_602" x1="15.0522" y1="10.0996" x2="42.6054" y2="10.0996" gradientUnits="userSpaceOnUse"><stop stop-color="#525252"/><stop offset="1" stop-color="#F2F2F2"/></linearGradient><linearGradient id="paint3_linear_140_602" x1="15.0522" y1="10.0996" x2="42.6054" y2="10.0996" gradientUnits="userSpaceOnUse"><stop stop-color="#525252"/><stop offset="1" stop-color="#F2F2F2"/></linearGradient><linearGradient id="paint4_linear_140_602" x1="15.0522" y1="10.0996" x2="42.6054" y2="10.0996" gradientUnits="userSpaceOnUse"><stop stop-color="#525252"/><stop offset="1" stop-color="#F2F2F2"/></linearGradient></defs></svg></a>
           <nav class="products-header__nav">
-            <a href="/products" class="products-header__link products-header__link--active"><ds-text>Products</ds-text></a>
-            <a href="/architecture" class="products-header__link"><ds-text>Architecture</ds-text></a>
+            <a href="/products" class="products-header__link products-header__link--active"><span data-i18n="Products">Products</span></a>
+            <a href="/architecture" class="products-header__link"><span data-i18n="Architecture">Architecture</span></a>
           </nav>
         </div>
       </header>
@@ -371,56 +426,20 @@
               <tbody>
                 <tr>
                   <td class="products-table__cell products-table__cell--product">
+                    <span class="products-table__product-name">Consistency</span>
+                  </td>
+                  <td class="products-table__cell">3</td>
+                  <td class="products-table__cell">0%</td>
+                  <td class="products-table__cell products-table__cell--status">In beta</td>
+                </tr>
+
+                <tr>
+                  <td class="products-table__cell products-table__cell--product">
                     <span class="products-table__product-name">DS one</span>
                   </td>
                   <td class="products-table__cell">0</td>
                   <td class="products-table__cell">0%</td>
                   <td class="products-table__cell products-table__cell--status products-table__cell--alpha">Alpha</td>
-                </tr>
-
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">
-                    <span class="products-table__product-name">Consistency</span>
-                  </td>
-                  <td class="products-table__cell">3</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--in-progress">In progress</td>
-                </tr>
-
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">
-                    <span class="products-table__product-name">allmythin.gs</span>
-                  </td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</td>
-                </tr>
-
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">
-                    <span class="products-table__product-name">Digte</span>
-                  </td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</td>
-                </tr>
-
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">
-                    <span class="products-table__product-name">tau99</span>
-                  </td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</td>
-                </tr>
-
-                <tr>
-                  <td class="products-table__cell products-table__cell--product">
-                    <span class="products-table__product-name">Ezo</span>
-                  </td>
-                  <td class="products-table__cell">0</td>
-                  <td class="products-table__cell">0%</td>
-                  <td class="products-table__cell products-table__cell--status products-table__cell--on-hold">On hold</td>
                 </tr>
               </tbody>
               <!-- PRODUCTS_TABLE_END -->
@@ -431,7 +450,7 @@
             <div class="products-meta__links">
               <a href="/contact" class="button" data-i18n="Contact us">Contact us</a>
             </div>
-            <p class="products-meta__copyright">0001 © <ds-date format="YYYY"></ds-date></p>
+            <p class="products-meta__copyright">0001 © <span data-current-year></span></p>
           </div>
         </div>
       </main>

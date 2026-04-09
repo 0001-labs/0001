@@ -1,30 +1,45 @@
 /**
  * Thank you page module
- * Handles custom footer with language toggle
+ * Handles the custom footer language/theme controls and translations.
  */
-import { initLanguage, cycleLanguage, toggleDSOneTheme } from '../shared';
+import type { Translations } from '../types';
+import { LANGUAGE_NAMES } from '../types';
+import { cycleLanguage, getCurrentLanguage, getTranslation, initLanguage, loadTranslations, toggleDSOneTheme } from '../shared';
 import { getThemeLabel } from '../../utils/theme';
 
-/**
- * Initialize language toggle on custom footer
- */
-function initLanguageToggle(): void {
-  const langToggle = document.getElementById('lang-toggle');
-  langToggle?.addEventListener('click', () => cycleLanguage());
+let translations: Translations = {};
+
+function applyThankYouI18n(): void {
+  const lang = getCurrentLanguage();
+  document.querySelectorAll<HTMLElement>('.thankyou-page [data-i18n]').forEach((el) => {
+    const key = el.dataset.i18n;
+    if (key) {
+      el.textContent = getTranslation(translations, key, lang);
+    }
+  });
 }
 
-/**
- * Initialize theme toggle on custom footer
- */
+function updateLanguageLabel(): void {
+  const langToggle = document.getElementById('lang-toggle');
+  if (langToggle) {
+    langToggle.textContent = LANGUAGE_NAMES[getCurrentLanguage()];
+  }
+}
+
+function initLanguageToggle(): void {
+  const langToggle = document.getElementById('lang-toggle');
+  langToggle?.addEventListener('click', async () => {
+    await cycleLanguage();
+    updateLanguageLabel();
+  });
+}
+
 function initThemeToggle(): void {
   const themeToggle = document.getElementById('theme-toggle');
 
   const updateThemeLabel = (): void => {
-    const themeText = themeToggle?.querySelector('ds-text');
-    const themeLabel = getThemeLabel();
-
-    if (themeText) {
-      themeText.setAttribute('text', themeLabel);
+    if (themeToggle) {
+      themeToggle.textContent = getThemeLabel();
     }
   };
 
@@ -37,18 +52,26 @@ function initThemeToggle(): void {
   updateThemeLabel();
 }
 
-/**
- * Initialize the page
- */
-function init(): void {
+async function init(): Promise<void> {
+  translations = await loadTranslations();
+  const apply = (): void => {
+    applyThankYouI18n();
+    updateLanguageLabel();
+  };
+
+  apply();
+  document.addEventListener('language-changed', apply);
+  window.addEventListener('language-changed', apply);
+
   initLanguageToggle();
   initThemeToggle();
-  initLanguage();
+  await initLanguage();
 }
 
-// Auto-initialize on DOM ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', () => {
+    void init();
+  });
 } else {
-  init();
+  void init();
 }

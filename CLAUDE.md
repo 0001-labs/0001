@@ -27,6 +27,10 @@ Marketing and portfolio website for 0001 labs.
 
 Requires `NOTION_API_KEY` in `.env`
 
+## TODO
+
+- Add `Services: CI/CD optimization` and `Services: Delivery planning` to the Notion lead database (1.1 Leads) Services multi-select property.
+
 ## Git commits
 
 - Do not add Co-Authored-By lines to commits.

@@ -1,11 +1,10 @@
 /**
  * Sentences page module
- * Handles 9999 sentences table with compact mode
+ * Handles 9999 sentences table with compact mode.
  */
 import { initLanguage, cycleLanguage, toggleDSOneTheme } from '../shared';
 import { getThemeLabel } from '../../utils/theme';
 
-/** Predefined sentences */
 const sentences: Record<number, string> = {
   1: 'We deliver digital products',
   714: 'Small teams, sharp edges',
@@ -29,12 +28,12 @@ interface RowData {
   hasSentence: boolean;
 }
 
+const COMPACT_ICON = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/><path d="M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/><path d="M3 12H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>`;
+const EXPANDED_ICON = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 2H2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/><path d="M10 2H14V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/><path d="M6 14H2V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/><path d="M10 14H14V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>`;
+
 const rows: RowData[] = [];
 let isCompact = true;
 
-/**
- * Generate all 9999 rows
- */
 function generateRows(): void {
   const columnNo = document.getElementById('column-no');
   const columnSentence = document.getElementById('column-sentence');
@@ -51,13 +50,11 @@ function generateRows(): void {
     sentenceCell.className = 'sentences-table__cell';
 
     if (sentences[i]) {
-      // Has a sentence - show text
       if (i === 9999) {
         sentenceCell.classList.add('sentences-table__cell--hidden');
       }
       sentenceCell.textContent = sentences[i];
     } else {
-      // Empty slot - show input field with submit button
       sentenceCell.classList.add('sentences-table__cell--input');
 
       const input = document.createElement('input');
@@ -71,32 +68,26 @@ function generateRows(): void {
       submitBtn.textContent = 'Submit';
 
       const submitSentence = (): void => {
-        if (input.value.trim()) {
-          const sentenceData = {
-            index: i,
-            sentence: input.value.trim(),
-          };
-          console.log('Sentence submitted:', sentenceData);
-          // TODO: Send to backend
+        if (!input.value.trim()) return;
 
-          // Show as submitted
-          sentenceCell.classList.remove('sentences-table__cell--input');
-          sentenceCell.textContent = input.value.trim();
-          sentences[i] = input.value.trim();
-          rows[i - 1].hasSentence = true;
-        }
+        const sentenceData = {
+          index: i,
+          sentence: input.value.trim(),
+        };
+        console.log('Sentence submitted:', sentenceData);
+
+        sentenceCell.classList.remove('sentences-table__cell--input');
+        sentenceCell.textContent = input.value.trim();
+        sentences[i] = input.value.trim();
+        rows[i - 1].hasSentence = true;
       };
 
       input.addEventListener('input', () => {
-        if (input.value.trim()) {
-          submitBtn.classList.add('visible');
-        } else {
-          submitBtn.classList.remove('visible');
-        }
+        submitBtn.classList.toggle('visible', Boolean(input.value.trim()));
       });
 
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
           submitSentence();
         }
       });
@@ -108,70 +99,53 @@ function generateRows(): void {
     }
 
     columnSentence.appendChild(sentenceCell);
-
-    rows.push({ no: noCell, sentence: sentenceCell, hasSentence: !!sentences[i] });
+    rows.push({ no: noCell, sentence: sentenceCell, hasSentence: Boolean(sentences[i]) });
   }
 }
 
-/**
- * Apply compact state to rows
- */
 function applyCompactState(): void {
   rows.forEach((row) => {
-    if (isCompact && !row.hasSentence) {
-      row.no.style.display = 'none';
-      row.sentence.style.display = 'none';
-    } else {
-      row.no.style.display = '';
-      row.sentence.style.display = '';
-    }
+    const shouldHide = isCompact && !row.hasSentence;
+    row.no.style.display = shouldHide ? 'none' : '';
+    row.sentence.style.display = shouldHide ? 'none' : '';
   });
 }
 
-/**
- * Initialize compact toggle
- */
+function updateCompactToggle(): void {
+  const compactBtn = document.getElementById('compact-btn');
+  if (!compactBtn) return;
+
+  compactBtn.innerHTML = isCompact ? COMPACT_ICON : EXPANDED_ICON;
+  compactBtn.setAttribute('aria-label', isCompact ? 'Show all rows' : 'Hide empty rows');
+}
+
 function initCompactToggle(): void {
   const compactBtn = document.getElementById('compact-btn');
-  const compactIcon = compactBtn?.querySelector('ds-icon');
+  if (!compactBtn) return;
 
-  if (!compactBtn || !compactIcon) return;
-
-  // Apply initial compact state
   applyCompactState();
-  compactIcon.setAttribute('type', 'row');
+  updateCompactToggle();
 
   compactBtn.addEventListener('click', () => {
     isCompact = !isCompact;
     applyCompactState();
-    // Toggle icon: 'row' to expand, 'in' to compact
-    compactIcon.setAttribute('type', isCompact ? 'row' : 'in');
+    updateCompactToggle();
   });
 }
 
-/**
- * Initialize language toggle (custom footer on this page)
- */
 function initLanguageToggle(): void {
   const langToggle = document.getElementById('lang-toggle');
-
   langToggle?.addEventListener('click', async () => {
     await cycleLanguage();
   });
 }
 
-/**
- * Initialize theme toggle (custom footer on this page)
- */
 function initThemeToggle(): void {
   const themeToggle = document.getElementById('theme-toggle');
 
   const updateThemeLabel = (): void => {
-    const themeText = themeToggle?.querySelector('ds-text');
-    const themeLabel = getThemeLabel();
-
-    if (themeText) {
-      themeText.setAttribute('text', themeLabel);
+    if (themeToggle) {
+      themeToggle.textContent = getThemeLabel();
     }
   };
 
@@ -184,9 +158,6 @@ function initThemeToggle(): void {
   updateThemeLabel();
 }
 
-/**
- * Initialize the sentences page
- */
 export function initSentences(): void {
   generateRows();
   initCompactToggle();
@@ -194,15 +165,11 @@ export function initSentences(): void {
   initThemeToggle();
 }
 
-/**
- * Initialize the page
- */
 function init(): void {
   initSentences();
-  initLanguage();
+  void initLanguage();
 }
 
-// Auto-initialize on DOM ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {

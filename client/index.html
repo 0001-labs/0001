@@ -25,29 +25,10 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <!-- DS one CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css"
-    />
-
-    <!-- Custom styles -->
+<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <!-- DS one i18n setup -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <!-- DS one bundle -->
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"
-    ></script>
-
-    <!-- 0001 components -->
+<!-- 0001 components -->
     <script type="module" src="./components/one-h1.ts"></script>
     <script type="module" src="./components/one-footer.ts"></script>
 
@@ -58,6 +39,7 @@
       .home-page {
         background-color: var(--page-background);
         min-height: 100vh;
+        min-height: 100dvh;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -113,6 +95,13 @@
         gap: 30px;
       }
 
+      /* Image cover reveals the copy beneath it on both desktop and mobile */
+      .hero__visual-wrap {
+        position: relative;
+        width: 400px;
+        height: 300px;
+      }
+
       .hero__title-wrapper {
         position: relative;
         cursor: pointer;
@@ -121,6 +110,7 @@
 
       .hero__title-wrapper one-h1 {
         margin-top: 5px;
+        transform: translateY(-2px);
       }
 
       .hero__number {
@@ -139,18 +129,24 @@
 
       .hero__media {
         position: relative;
-        width: 400px;
-        height: 300px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--base-cream);
       }
 
       .hero__image {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
+        z-index: 2;
         transition: opacity 0.5s ease;
       }
 
       .hero__image.hidden {
         opacity: 0;
+        pointer-events: none;
       }
 
       .hero__image img {
@@ -183,29 +179,21 @@
 
       .hero__description {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: min(100%, 400px);
-        max-width: 400px;
-        opacity: 0;
-        transition: opacity 0.5s ease;
+        inset: 0;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding-top: 20px;
-        gap: 20px;
-        pointer-events: none;
+        justify-content: flex-end;
+        padding: 24px 20px 20px;
+        gap: 16px;
+        background: var(--base-cream);
       }
 
       .hero__description > * {
         width: 100%;
-        max-width: 400px;
-      }
-
-      .hero__description.revealed {
-        opacity: 1;
-        pointer-events: auto;
-        gap: 12px;
       }
 
       .hero__description p {
@@ -217,17 +205,23 @@
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
-        line-height: normal;
+        line-height: 1.5;
         margin: 0;
       }
 
       .hero__description p + p {
-        margin-top: 12px;
+        margin-top: 0;
       }
 
-      .hero__description p ds-text {
+      .hero__description p > [data-i18n] {
         display: block;
+        height: auto;
+        min-height: 0;
         max-width: 100%;
+        font: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        line-height: inherit;
         white-space: normal;
         overflow-wrap: anywhere;
       }
@@ -235,10 +229,10 @@
       .hero__buttons {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 12px;
         width: 100%;
-        margin-top: 20px;
+        margin-top: 4px;
       }
 
       /* Same 16px bar as footer; wins over any late DS one / link rules */
@@ -257,7 +251,9 @@
       }
 
       .hero__text-link {
+        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
         font-size: 14px;
+        letter-spacing: -0.28px;
       }
 
       .hero__timer.hidden {
@@ -265,96 +261,141 @@
       }
 
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
-      html.mobile .home-page {
+      @media (max-width: 768px) {
+        .home-page {
         gap: 0;
+        overflow-x: clip;
+        }
       }
 
-      html.mobile .decorative-image {
+      @media (max-width: 768px) {
+        .decorative-image {
         display: none;
+        }
       }
 
-      html.mobile .home-content {
-        gap: calc(80px * var(--sf));
+      @media (max-width: 768px) {
+        .home-content {
+        gap: 80px;
+        }
       }
 
-      html.mobile .hero {
-        padding: calc(30px * var(--sf)) calc(20px * var(--sf));
+      @media (max-width: 768px) {
+        .hero {
+        padding: 30px 20px;
+        }
       }
 
-      html.mobile .hero__inner {
+      @media (max-width: 768px) {
+        .hero__inner {
         width: 100%;
-        gap: calc(24px * var(--sf));
+        gap: 24px;
+        }
       }
 
-      html.mobile .hero__title-wrapper {
+      @media (max-width: 768px) {
+        .hero__title-wrapper {
         display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: calc(8px * var(--sf));
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        }
       }
 
-      html.mobile .hero__title-wrapper one-h1 {
+      @media (max-width: 768px) {
+        .hero__title-wrapper one-h1 {
         margin-top: 0;
+        transform: translateY(-2px);
+        width: 100%;
+        }
       }
 
-      html.mobile .hero__number {
+      @media (max-width: 768px) {
+        .hero__number {
         position: static;
         width: auto;
         height: auto;
         font-size: 32px;
+        line-height: 1;
         padding: 0;
         margin: 0;
-        display: inline;
+        display: block;
+        }
       }
 
-      html.mobile .hero__media {
-        width: min(400px, 100%);
+      @media (max-width: 768px) {
+        .hero__visual-wrap {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero__media {
+        width: 100vw;
+        max-width: none;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
         height: auto;
         aspect-ratio: 4/3;
+        flex-shrink: 0;
+        }
       }
 
-      html.mobile .hero__image {
+      @media (max-width: 768px) {
+        .hero__image {
         width: 100%;
         height: 100%;
+        }
       }
 
-      html.mobile .hero__timer {
+      @media (max-width: 768px) {
+        .hero__timer {
         width: 100%;
+        }
       }
 
-      html.mobile .hero__description {
-        position: static;
-        opacity: 1;
-        pointer-events: auto;
-        max-width: 100%;
-        padding-top: calc(24px * var(--sf));
-        gap: calc(16px * var(--sf));
+      @media (max-width: 768px) {
+        .hero__description {
+        padding: 24px 20px 20px;
+        }
       }
 
-      html.mobile .hero__description.revealed {
-        gap: calc(12px * var(--sf));
-      }
-
-      html.mobile .hero__description p {
+      @media (max-width: 768px) {
+        .hero__description p {
         font-size: 16px;
+        line-height: 1.5;
+        }
       }
 
-      html.mobile .hero__buttons {
+      @media (max-width: 768px) {
+        .hero__buttons {
         align-items: flex-start;
-        gap: calc(16px * var(--sf));
-        margin-top: calc(20px * var(--sf));
+        gap: 16px;
+        margin-top: 20px;
+        }
       }
 
-      html.mobile .hero__description .hero__buttons a.button {
-        height: calc(16px * var(--sf));
-        max-height: calc(16px * var(--sf));
-        line-height: calc(16px * var(--sf));
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .hero__description .hero__buttons a.button {
+        height: 16px;
+        max-height: 16px;
+        line-height: 16px;
+        font-size: 14px;
+        }
       }
 
-      html.mobile .hero__image.hidden {
-        display: none;
+      /* Match chartreuse CTA typography — .button uses --sf on mobile; plain link did not */
+      @media (max-width: 768px) {
+        .hero__description .hero__buttons .hero__text-link {
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        }
       }
+
     </style>
   </head>
   <body>
@@ -375,18 +416,20 @@
               <one-h1 id="hero-tagline">sentence-1</one-h1>
             </div>
 
-            <div class="hero__media">
-              <div class="hero__image">
-                <img src="/assets/imagery/retro-monitors.png" alt="0001" />
-              </div>
-              <div class="hero__timer" id="hero-timer"></div>
-              <div class="hero__description">
-                <p><ds-text>hero-p1</ds-text></p>
-                <p><ds-text>hero-p2</ds-text></p>
-                <div class="hero__buttons">
-                  <a href="/services" class="button" data-i18n="See our services">See our services</a>
-                  <a href="/products" class="hero__text-link" data-i18n="See our past work">See our past work</a>
+            <div class="hero__visual-wrap">
+              <div class="hero__media">
+                <div class="hero__description">
+                  <p><span data-i18n="hero-p1">hero-p1</span></p>
+                  <p><span data-i18n="hero-p2">hero-p2</span></p>
+                  <div class="hero__buttons">
+                    <a href="/services" class="button" data-i18n="See our services">See our services</a>
+                    <a href="/products" class="hero__text-link" data-i18n="See our past work">See our past work</a>
+                  </div>
                 </div>
+                <div class="hero__image">
+                  <img src="/assets/imagery/retro-monitors.png" alt="0001" />
+                </div>
+                <div class="hero__timer" id="hero-timer"></div>
               </div>
             </div>
           </div>

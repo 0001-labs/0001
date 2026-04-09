@@ -45,29 +45,10 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <!-- DS one CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css"
-    />
-
-    <!-- Custom styles -->
+<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <!-- DS one i18n setup -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <!-- DS one bundle -->
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"
-    ></script>
-
-    <!-- 0001 components -->
+<!-- 0001 components -->
     <script type="module" src="./components/one-footer.ts"></script>
 
     <!-- Page module -->
@@ -77,6 +58,7 @@
       .services-page {
         background-color: var(--page-background);
         min-height: 100vh;
+        min-height: 100dvh;
         position: relative;
       }
 
@@ -104,7 +86,7 @@
       }
 
       .services-title {
-        font-family: var(--typeface-canon), Georgia, serif;
+        font-family: "GT-Canon-M-Standard-Medium", Georgia, serif;
         font-size: 48px;
         letter-spacing: -0.96px;
         color: var(--base-slate);
@@ -144,7 +126,7 @@
       }
 
       .services-item__title {
-        font-family: var(--typeface-canon), Georgia, serif;
+        font-family: "GT-Canon-M-Standard-Medium", Georgia, serif;
         font-size: 32px;
         letter-spacing: -0.64px;
         color: var(--base-slate);
@@ -277,73 +259,100 @@
       }
 
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
-      html.mobile .services-logo {
+      @media (max-width: 768px) {
+        .services-logo {
         position: relative;
         top: auto;
         left: auto;
-        padding: calc(20px * var(--sf));
-        font-size: calc(20px * var(--sf));
+        padding: 20px;
+        font-size: 20px;
+        }
       }
 
-      html.mobile .services-main {
-        padding: calc(20px * var(--sf));
-        padding-top: calc(40px * var(--sf));
-        gap: calc(50px * var(--sf));
+      @media (max-width: 768px) {
+        .services-main {
+        padding: 20px;
+        padding-top: 40px;
+        gap: 50px;
+        }
       }
 
-      html.mobile .services-title {
-        font-size: calc(32px * var(--sf));
+      @media (max-width: 768px) {
+        .services-title {
+        font-size: 32px;
+        }
       }
 
-      html.mobile .services-category {
-        gap: calc(16px * var(--sf));
+      @media (max-width: 768px) {
+        .services-category {
+        gap: 16px;
+        }
       }
 
-      html.mobile .services-category__label {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .services-category__label {
+        font-size: 14px;
+        }
       }
 
-      html.mobile .services-category__list {
+      @media (max-width: 768px) {
+        .services-category__list {
         max-width: 100%;
-        gap: calc(16px * var(--sf));
+        gap: 16px;
+        }
       }
 
-      html.mobile .services-item__title {
-        font-size: calc(24px * var(--sf));
+      @media (max-width: 768px) {
+        .services-item__title {
+        font-size: 24px;
+        }
       }
 
-      html.mobile .services-item__chevron {
-        width: calc(20px * var(--sf));
-        height: calc(20px * var(--sf));
+      @media (max-width: 768px) {
+        .services-item__chevron {
+        width: 20px;
+        height: 20px;
         opacity: 0.6;
+        }
       }
 
-      html.mobile .services-item__chevron svg {
-        width: calc(10px * var(--sf));
-        height: calc(10px * var(--sf));
+      @media (max-width: 768px) {
+        .services-item__chevron svg {
+        width: 10px;
+        height: 10px;
+        }
       }
 
-      html.mobile .services-item__description {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .services-item__description {
+        font-size: 14px;
         max-width: 100%;
-        padding-top: calc(10px * var(--sf));
+        padding-top: 10px;
+        }
       }
 
-      html.mobile .services-item .button {
-        height: calc(16px * var(--sf));
-        max-height: calc(16px * var(--sf));
-        line-height: calc(16px * var(--sf));
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .services-item .button {
+        height: 16px;
+        max-height: 16px;
+        line-height: 16px;
+        font-size: 14px;
+        }
       }
 
-      html.mobile .services-contact {
-        margin-top: calc(16px * var(--sf));
+      @media (max-width: 768px) {
+        .services-contact {
+        margin-top: 16px;
+        }
       }
 
       /* Hide fixed image on mobile */
-      html.mobile .services-image {
+      @media (max-width: 768px) {
+        .services-image {
         display: none;
+        }
       }
+
     </style>
   </head>
   <body>
@@ -633,6 +642,61 @@
                   </p>
                   <a
                     href="/contact?topic=MCP"
+                    class="button"
+                    data-i18n="Inquire about this"
+                    >Inquire about this</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delivery services -->
+        <div class="services-category">
+          <span class="services-category__label" data-i18n="Delivery"
+            >Delivery</span
+          >
+          <div class="services-category__list">
+            <div class="services-item" data-image="/assets/imagery/photo-1.png">
+              <span class="services-item__title" data-i18n="CI/CD optimization"
+                >CI/CD optimization</span
+              >
+              <div class="services-item__content">
+                <div class="services-item__content-inner">
+                  <p
+                    class="services-item__description"
+                    data-i18n="cicd-optimization-desc"
+                  >
+                    Faster builds with GitHub Actions and Blacksmith runners.
+                    Pipeline optimization, caching strategies, and parallel job
+                    configuration to cut build times.
+                  </p>
+                  <a
+                    href="/contact?topic=CI+optimizing"
+                    class="button"
+                    data-i18n="Inquire about this"
+                    >Inquire about this</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="services-item" data-image="/assets/imagery/photo-2.png">
+              <span class="services-item__title" data-i18n="Delivery planning"
+                >Delivery planning</span
+              >
+              <div class="services-item__content">
+                <div class="services-item__content-inner">
+                  <p
+                    class="services-item__description"
+                    data-i18n="delivery-planning-desc"
+                  >
+                    Structured action items and team delegation for fast-paced
+                    delivery. Sprint planning, task breakdown, and
+                    accountability tracking.
+                  </p>
+                  <a
+                    href="/contact?topic=Delivery+planning"
                     class="button"
                     data-i18n="Inquire about this"
                     >Inquire about this</a

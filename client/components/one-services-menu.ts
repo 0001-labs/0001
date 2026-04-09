@@ -133,7 +133,7 @@ class OneServicesMenu extends HTMLElement {
           box-shadow: 0 18px 45px rgba(0,0,0,0.12);
           padding: 18px 18px 14px;
           display: grid;
-          grid-template-columns: 1fr 1fr 0.8fr;
+          grid-template-columns: 1fr 1fr 0.8fr 0.8fr;
           gap: 14px;
           z-index: 1000;
         }
@@ -234,6 +234,12 @@ class OneServicesMenu extends HTMLElement {
             <div class="heading">AI</div>
             <a role="menuitem" href="/contact?topic=AI+Agents">Agents</a>
             <a role="menuitem" href="/contact?topic=MCP">MCP</a>
+          </div>
+
+          <div class="col">
+            <div class="heading">Delivery</div>
+            <a role="menuitem" href="/contact?topic=CI/CD+optimization">CI/CD optimization</a>
+            <a role="menuitem" href="/contact?topic=Delivery+planning">Delivery planning</a>
           </div>
 
           <div class="cta">

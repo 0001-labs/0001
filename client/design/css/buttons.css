@@ -146,36 +146,10 @@ a.button:focus-visible {
   color: var(--base-black);
 }
 
-/* --- one-footer shadow: mobile --- */
-.footer.mobile .button {
-  height: calc(16px * var(--sf, 1));
-  max-height: calc(16px * var(--sf, 1));
-  min-height: 0;
-  padding: 0;
-  font-size: calc(14px * var(--sf, 1));
-  line-height: calc(16px * var(--sf, 1));
-}
-
-html.mobile .button {
-  height: calc(16px * var(--sf, 1));
-  max-height: calc(16px * var(--sf, 1));
-  min-height: 0;
-  padding: 0;
-  font-size: calc(14px * var(--sf, 1));
-  line-height: calc(16px * var(--sf, 1));
-}
-
-html.mobile .services-item .button {
-  height: calc(16px * var(--sf, 1));
-  max-height: calc(16px * var(--sf, 1));
-  min-height: 0;
-  padding: 0;
-  font-size: calc(14px * var(--sf, 1));
-  line-height: calc(16px * var(--sf, 1));
-}
-
-html.mobile .contact-btn {
-  font-size: calc(14px * var(--sf, 1));
-  padding: calc(8px * var(--sf, 1)) calc(14px * var(--sf, 1));
-  min-height: calc(40px * var(--sf, 1));
+@media (max-width: 768px) {
+  .contact-btn {
+    font-size: 14px;
+    padding: 8px 14px;
+    min-height: 40px;
+  }
 }

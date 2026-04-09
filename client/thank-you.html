@@ -22,29 +22,17 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
-
-    <!-- Custom styles -->
+<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <!-- DS one i18n setup -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
-
-    <!-- Page module -->
+<!-- Page module -->
     <script type="module" src="./modules/pages/thank-you.ts"></script>
 
     <style>
       .thankyou-page {
         background-color: var(--page-background);
         min-height: 100vh;
+        min-height: 100dvh;
         position: relative;
       }
 
@@ -210,6 +198,89 @@
       .home-footer__social-link:hover {
         color: var(--footer-link-color);
       }
+
+      @media (max-width: 768px) {
+        .thankyou-logo {
+          position: relative;
+          top: auto;
+          left: auto;
+          display: block;
+          padding: 28px 20px 0;
+          font-size: 20px;
+          line-height: 1;
+        }
+
+        .thankyou-main {
+          padding: 16px 20px 20px;
+          gap: 32px;
+        }
+
+        .thankyou-header {
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        .thankyou-title {
+          font-size: 40px;
+          letter-spacing: -0.8px;
+        }
+
+        .thankyou-description {
+          font-size: 14px;
+          max-width: 100%;
+        }
+
+        .thankyou-hint {
+          font-size: 12px;
+          margin-top: 12px;
+        }
+
+        .home-footer {
+          margin-top: 48px;
+          padding: 32px 20px;
+          gap: 32px;
+        }
+
+        .home-footer__top {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+
+        .home-footer__brand {
+          width: 100%;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+
+        .home-footer__controls {
+          width: auto;
+          gap: 10px;
+        }
+
+        .home-footer__nav {
+          flex-direction: column;
+          gap: 24px;
+          padding-left: 0;
+          height: auto;
+        }
+
+        .home-footer__nav-column {
+          width: 100%;
+          gap: 16px;
+        }
+
+        .home-footer__bottom {
+          position: static;
+          width: auto;
+          padding-left: 0;
+        }
+
+        .home-footer__copyright {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -236,31 +307,31 @@
         <div class="home-footer__top">
           <div class="home-footer__brand">
             <span class="home-footer__brand-name">0001</span>
-            <span class="home-footer__tagline"><ds-text>We deliver digital products</ds-text></span>
+            <span class="home-footer__tagline"><span data-i18n="We deliver digital products">We deliver digital products</span></span>
           </div>
           <div class="home-footer__controls">
-            <button type="button" class="button" id="lang-toggle"><ds-text>English</ds-text></button>
-            <button type="button" class="button" id="theme-toggle"><ds-text text="Light"></ds-text></button>
+            <button type="button" class="button" id="lang-toggle"><span data-i18n="English">English</span></button>
+            <button type="button" class="button" id="theme-toggle"><span data-theme-label>Light</span></button>
           </div>
         </div>
 
         <nav class="home-footer__nav">
           <div class="home-footer__nav-column">
-            <a href="/services" class="home-footer__link"><ds-text>Services</ds-text></a>
-            <a href="/sentences" class="home-footer__link"><ds-text>9999 sentences</ds-text></a>
-            <a href="/about" class="home-footer__link"><ds-text>About</ds-text></a>
+            <a href="/services" class="home-footer__link"><span data-i18n="Services">Services</span></a>
+            <a href="/sentences" class="home-footer__link"><span data-i18n="9999 sentences">9999 sentences</span></a>
+            <a href="/about" class="home-footer__link"><span data-i18n="About">About</span></a>
             <a href="/tokushoho" class="home-footer__link">Tokushoho</a>
-            <a href="/contact" class="home-footer__link button"><ds-text>Contact</ds-text></a>
+            <a href="/contact" class="home-footer__link button"><span data-i18n="Contact">Contact</span></a>
           </div>
           <div class="home-footer__nav-column">
-            <a href="/products" class="home-footer__link home-footer__link--product"><ds-text>Products</ds-text></a>
-            <a href="#" class="home-footer__link home-footer__link--product"><ds-text>Architecture</ds-text></a>
+            <a href="/products" class="home-footer__link home-footer__link--product"><span data-i18n="Products">Products</span></a>
+            <a href="#" class="home-footer__link home-footer__link--product"><span data-i18n="Architecture">Architecture</span></a>
           </div>
         </nav>
 
         <div class="home-footer__bottom">
           <p class="home-footer__copyright">
-            <span>0001 © <ds-date format="YYYY"></ds-date></span>
+            <span>0001 © <span data-current-year></span></span>
             <a href="https://www.instagram.com/0001hq/" class="home-footer__social-link">Instagram</a>
             <a href="https://www.linkedin.com/company/000one/" class="home-footer__social-link">LinkedIn</a>
           </p>

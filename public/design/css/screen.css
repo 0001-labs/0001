@@ -8,6 +8,8 @@
 
 html {
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,6 +20,7 @@ body {
   color: var(--text-color, var(--base-black));
   line-height: 1.5;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* DS one 1-root/one.css sets tr { background-color: var(--apple-green) } — reset for site tables */
@@ -28,6 +31,7 @@ table tr {
 /* Page container */
 .page {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }

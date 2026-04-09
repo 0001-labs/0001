@@ -22,23 +22,10 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
-
-    <!-- Custom styles -->
+<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <!-- DS one i18n setup -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
-
-    <!-- 0001 components -->
+<!-- 0001 components -->
     <script type="module" src="./components/one-footer.ts"></script>
 
     <!-- Page module -->
@@ -48,6 +35,7 @@
       .tasklog-page {
         background-color: var(--page-background);
         min-height: 100vh;
+        min-height: 100dvh;
         display: flex;
         flex-direction: column;
       }
@@ -173,32 +161,44 @@
       }
 
       /* Mobile */
-      html.mobile .tasklog-header {
-        height: calc(60px * var(--sf));
+      @media (max-width: 768px) {
+        .tasklog-header {
+        height: 60px;
+        }
       }
 
-      html.mobile .tasklog-content {
-        gap: calc(80px * var(--sf));
+      @media (max-width: 768px) {
+        .tasklog-content {
+        gap: 80px;
+        }
       }
 
-      html.mobile .tasklog-main {
-        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) 0;
+      @media (max-width: 768px) {
+        .tasklog-main {
+        padding: 40px 20px 0;
+        }
       }
 
-      html.mobile .tasklog-tab {
-        font-size: calc(16px * var(--sf));
-        padding: calc(6px * var(--sf)) calc(8px * var(--sf));
+      @media (max-width: 768px) {
+        .tasklog-tab {
+        font-size: 16px;
+        padding: 6px 8px;
+        }
       }
 
-      html.mobile .tasklog-table__cell {
-        font-size: calc(16px * var(--sf));
-        padding: calc(6px * var(--sf));
-        min-height: calc(30px * var(--sf));
+      @media (max-width: 768px) {
+        .tasklog-table__cell {
+        font-size: 16px;
+        padding: 6px;
+        min-height: 30px;
+        }
       }
 
-      html.mobile .tasklog-table__cell--status,
-      html.mobile .tasklog-table__cell--due {
-        width: calc(90px * var(--sf));
+      @media (max-width: 768px) {
+        .tasklog-table__cell--status,
+      .tasklog-table__cell--due {
+        width: 90px;
+        }
       }
 
       /* Dateline */
@@ -264,10 +264,10 @@
       <!-- Header -->
       <header class="tasklog-header">
         <div class="header">
-          <a href="/" class="header__logo"><ds-text>0001</ds-text></a>
+          <a href="/" class="header__logo"><span data-i18n="0001">0001</span></a>
           <nav class="header__nav">
-            <a href="/products" class="header__link"><ds-text>Products</ds-text></a>
-            <a href="/task-log" class="header__link header__link--active"><ds-text>Task log</ds-text></a>
+            <a href="/products" class="header__link"><span data-i18n="Products">Products</span></a>
+            <a href="/task-log" class="header__link header__link--active"><span data-i18n="Task log">Task log</span></a>
           </nav>
         </div>
       </header>

@@ -25,29 +25,10 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <!-- DS one CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css"
-    />
-
-    <!-- Custom styles -->
+<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <!-- DS one i18n setup -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <!-- DS one bundle -->
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"
-    ></script>
-
-    <!-- 0001 components -->
+<!-- 0001 components -->
     <script type="module" src="./components/one-footer.ts"></script>
 
     <!-- Page module -->
@@ -57,6 +38,7 @@
       .about-page {
         background-color: var(--page-background);
         min-height: 100vh;
+        min-height: 100dvh;
         position: relative;
       }
 
@@ -233,76 +215,117 @@
       }
 
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
-      html.mobile .about-logo {
+      @media (max-width: 768px) {
+        .about-page {
+        overflow-x: clip;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .about-logo {
         position: relative;
         top: auto;
         left: auto;
-        padding: calc(20px * var(--sf));
-        font-size: calc(20px * var(--sf));
+        display: block;
+        padding: 28px 20px 0;
+        font-size: 20px;
+        line-height: 1;
+        }
       }
 
-      html.mobile .about-main {
-        padding: calc(20px * var(--sf));
-        padding-top: calc(40px * var(--sf));
-        gap: calc(60px * var(--sf));
+      @media (max-width: 768px) {
+        .about-main {
+        padding: 16px 20px 20px;
+        gap: 60px;
+        }
       }
 
-      html.mobile .about-header {
-        gap: calc(20px * var(--sf));
+      @media (max-width: 768px) {
+        .about-header {
+        gap: 24px;
+        }
       }
 
-      html.mobile .about-title {
-        font-size: calc(32px * var(--sf));
+      @media (max-width: 768px) {
+        .about-title {
+        font-size: 40px;
+        line-height: 0.94;
+        letter-spacing: -0.8px;
+        }
       }
 
-      html.mobile .about-body {
+      @media (max-width: 768px) {
+        .about-body {
         width: 100%;
-        font-size: calc(14px * var(--sf));
+        font-size: 14px;
+        }
       }
 
-      html.mobile .about-image {
-        width: min(400px, 100%);
+      /* Full-bleed image (Figma About / mobile — edge-to-edge between padded sections) */
+      @media (max-width: 768px) {
+        .about-image {
+        width: 100vw;
+        max-width: none;
+        margin-top: 20px;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
         height: auto;
         aspect-ratio: 4/3;
-        margin-top: calc(20px * var(--sf));
+        }
       }
 
-      html.mobile .section-title {
-        font-size: calc(24px * var(--sf));
-        margin-bottom: calc(20px * var(--sf));
+      @media (max-width: 768px) {
+        .section-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        }
       }
 
-      html.mobile .about-team {
+      @media (max-width: 768px) {
+        .about-team {
         flex-direction: column;
-        gap: calc(30px * var(--sf));
+        gap: 30px;
+        }
       }
 
-      html.mobile .team-member {
-        gap: calc(12px * var(--sf));
+      @media (max-width: 768px) {
+        .team-member {
+        gap: 12px;
+        }
       }
 
-      html.mobile .team-member__name,
-      html.mobile .team-member__role,
-      html.mobile .team-member__email {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .team-member__name,
+      .team-member__role,
+      .team-member__email {
+        font-size: 14px;
+        }
       }
 
-      html.mobile .about-offices {
+      @media (max-width: 768px) {
+        .about-offices {
         flex-direction: column;
-        gap: calc(30px * var(--sf));
+        gap: 30px;
+        }
       }
 
-      html.mobile .office {
-        gap: calc(12px * var(--sf));
+      @media (max-width: 768px) {
+        .office {
+        gap: 12px;
+        }
       }
 
-      html.mobile .office__title,
-      html.mobile .office__address {
-        font-size: calc(14px * var(--sf));
+      @media (max-width: 768px) {
+        .office__title,
+      .office__address {
+        font-size: 14px;
+        }
       }
 
-      html.mobile .about-contact {
-        margin-top: calc(40px * var(--sf));
+      @media (max-width: 768px) {
+        .about-contact {
+        margin-top: 40px;
+        }
       }
 
     </style>
@@ -342,7 +365,7 @@
         </section>
 
         <section class="about-team-section">
-          <h2 class="section-title"><ds-text>Founder</ds-text></h2>
+          <h2 class="section-title"><span data-i18n="Founder">Founder</span></h2>
           <div class="about-team">
             <div class="team-member">
               <span class="team-member__name">Joachim Aaløkke Sørensen</span>

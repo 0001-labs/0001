@@ -14,14 +14,6 @@ export interface Translations {
 }
 
 /**
- * DS one module interface for dynamic imports
- */
-export interface DSOneModule {
-  setLanguage: (lang: SupportedLanguage) => void;
-  setTheme: (theme: Theme) => void;
-}
-
-/**
  * Language names for display
  */
 export const LANGUAGE_NAMES: Record<SupportedLanguage, string> = {

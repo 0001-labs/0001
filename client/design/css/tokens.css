@@ -1,4 +1,36 @@
 /* 0001 Brand Token Overrides */
+
+/* GT America — Grilli Type */
+@font-face {
+  font-family: "GT America";
+  src: url("../fonts/GT-America-Standard-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America";
+  src: url("../fonts/GT-America-Standard-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America Compressed";
+  src: url("../fonts/GT-America-Compressed-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT-Canon-M-Standard-Medium";
+  src: url("../fonts/GT-Canon-M-Standard-Medium-Trial.woff2") format("woff2");
+  font-display: swap;
+}
+
 :root {
   /* Primary brand colors */
   --chartreuse-green: #ccff4d;
@@ -19,17 +51,23 @@
   --base-darker-grey: #797979;
   --base-light-grey: #858585;
 
-  /* Typography */
+  /* Typography — GT America family (Grilli Type) */
   --font-regular:
-    "GT America", "GT_America_Trial:Rg", -apple-system, BlinkMacSystemFont,
+    "GT America", "GT America Regular", -apple-system, BlinkMacSystemFont,
     sans-serif;
   --font-medium:
-    "GT America", "GT_America_Trial:Md", -apple-system, BlinkMacSystemFont,
+    "GT America", "GT America Medium", -apple-system, BlinkMacSystemFont,
     sans-serif;
+  --font-compressed:
+    "GT America Compressed", "GT America Compressed Regular", sans-serif;
   --font-pantheon:
-    "GT Pantheon Text Trial", "GT_Pantheon_Text_Trial:Rg", Georgia, serif;
+    "GT Pantheon Text", "GT Pantheon Text Regular", Georgia, serif;
   --font-pantheon-medium:
-    "GT Pantheon Text Trial", "GT_Pantheon_Text_Trial:Md", Georgia, serif;
+    "GT Pantheon Text", "GT Pantheon Text Medium", Georgia, serif;
+  --font-canon:
+    "GT-Canon-M-Standard-Medium", Georgia, serif;
+  --typeface-canon: "GT-Canon-M-Standard-Medium";
+  --typeface-canon-medium: "GT-Canon-M-Standard-Medium";
 
   /* Spacing scale */
   --space-xs: 4px;

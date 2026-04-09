@@ -22,23 +22,10 @@
         root.setAttribute("data-theme", "light");
       })();
     </script>
-
-    <!-- DS one CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/DS1/1-root/one.css" />
-
-    <!-- Custom styles -->
+<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-
-    <!-- DS one i18n setup -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./language/translations.json";
-    </script>
-
-    <!-- DS one bundle -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.8/dist/ds-one.bundle.min.js"></script>
-
-    <!-- 0001 components -->
+<!-- 0001 components -->
     <script type="module" src="./components/one-footer.ts"></script>
 
     <!-- Page module -->
@@ -48,6 +35,7 @@
       .sentences-page {
         background-color: var(--page-background);
         min-height: 100vh;
+        min-height: 100dvh;
         position: relative;
       }
 
@@ -233,6 +221,91 @@
         display: block;
       }
 
+      .sentences-compact-button {
+        align-items: center;
+        background: var(--base-slate);
+        border: none;
+        color: var(--page-background);
+        cursor: pointer;
+        display: inline-flex;
+        height: 20px;
+        justify-content: center;
+        padding: 0;
+        width: 20px;
+      }
+
+      .sentences-compact-button svg {
+        display: block;
+        height: 14px;
+        width: 14px;
+      }
+
+      .sentences-compact-button:focus-visible {
+        outline: 2px solid var(--chartreuse-green);
+        outline-offset: 2px;
+      }
+
+      @media (max-width: 768px) {
+        .sentences-main {
+          padding: 96px 20px 48px;
+        }
+
+        .sentences-title__text {
+          font-size: 40px;
+          letter-spacing: -0.8px;
+          line-height: 0.94;
+        }
+
+        .sentences-description {
+          font-size: 14px;
+          max-width: 100%;
+        }
+
+        .sentences-table {
+          width: 100%;
+        }
+
+        .sentences-table__column--no {
+          width: 64px;
+          flex-shrink: 0;
+        }
+
+        .sentences-table__column--sentence {
+          width: calc(100% - 88px);
+          min-width: 0;
+          flex: 1 1 auto;
+        }
+
+        .sentences-table__column--action {
+          width: 24px;
+          flex-shrink: 0;
+        }
+
+        .sentences-table__header,
+        .sentences-table__cell,
+        .sentences-table__input {
+          font-size: 14px;
+          letter-spacing: -0.28px;
+        }
+
+        .sentences-table__header,
+        .sentences-table__cell {
+          height: 28px;
+        }
+
+        .sentences-table__column--sentence .sentences-table__cell {
+          min-width: 0;
+        }
+
+        .sentences-table__cell--input {
+          gap: 6px;
+        }
+
+        .sentences-table__submit {
+          font-size: 12px;
+          padding: 2px 6px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -260,9 +333,7 @@
             </div>
             <div class="sentences-table__column sentences-table__column--action">
               <div class="sentences-table__header">
-                <ds-button primary id="compact-btn">
-                  <ds-icon type="in"></ds-icon>
-                </ds-button>
+                <button type="button" class="sentences-compact-button" id="compact-btn" aria-label="Show all rows"></button>
               </div>
             </div>
           </div>
