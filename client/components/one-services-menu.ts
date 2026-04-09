@@ -70,9 +70,36 @@ class OneServicesMenu extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
+        @font-face {
+          font-family: "GT America";
+          src: url("/design/fonts/GT-America-Standard-Regular.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GT America";
+          src: url("/design/fonts/GT-America-Standard-Medium.woff2") format("woff2");
+          font-weight: 500;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GT-Canon-M-Standard-Medium";
+          src: url("/design/fonts/GT-Canon-M-Standard-Medium-Trial.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+
         :host {
           display: block;
-          font-family: var(--font-regular, -apple-system, BlinkMacSystemFont, sans-serif);
+          --font-regular: "GT America";
+          --font-medium: "GT America";
+          --font-canon: "GT-Canon-M-Standard-Medium";
+          font-family: var(--font-regular);
           color: var(--base-slate, #1e1e1e);
         }
 
@@ -102,7 +129,7 @@ class OneServicesMenu extends HTMLElement {
         }
 
         .label {
-          font-family: var(--font-medium, -apple-system, BlinkMacSystemFont, sans-serif);
+          font-family: var(--font-medium);
           font-size: 16px;
           letter-spacing: -0.32px;
         }
@@ -148,7 +175,7 @@ class OneServicesMenu extends HTMLElement {
         }
 
         .heading {
-          font-family: var(--font-medium, -apple-system, BlinkMacSystemFont, sans-serif);
+          font-family: var(--font-medium);
           font-size: 12px;
           letter-spacing: -0.24px;
           text-transform: uppercase;
@@ -184,7 +211,7 @@ class OneServicesMenu extends HTMLElement {
         }
 
         .cta a {
-          font-family: var(--font-medium, -apple-system, BlinkMacSystemFont, sans-serif);
+          font-family: var(--font-medium);
           background: var(--surface-overlay-strong-hover, rgba(204, 255, 77, 0.65));
         }
 

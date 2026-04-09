@@ -66,17 +66,46 @@ class OneH1 extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
+        @font-face {
+          font-family: "GT America";
+          src: url("/design/fonts/GT-America-Standard-Regular.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GT America";
+          src: url("/design/fonts/GT-America-Standard-Medium.woff2") format("woff2");
+          font-weight: 500;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GT-Canon-M-Standard-Medium";
+          src: url("/design/fonts/GT-Canon-M-Standard-Medium-Trial.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+          font-display: block;
+        }
+
         :host {
           display: block;
+          --font-regular: "GT America";
+          --font-medium: "GT America";
+          --font-canon: "GT-Canon-M-Standard-Medium";
         }
 
         h1 {
-          font-family: "GT-Canon-M-Standard-Medium", Georgia, serif;
+          font-family: var(--font-canon);
           font-size: 48px;
           letter-spacing: -0.96px;
           color: var(--base-slate, #2a2a2a);
           line-height: 1.2;
-          font-weight: normal;
+          font-weight: 400;
+          font-style: normal;
+          font-synthesis: none;
           margin: 0;
           max-width: 100%;
           text-wrap: balance;

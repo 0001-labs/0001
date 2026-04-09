@@ -39,7 +39,7 @@ function initThemeToggle(): void {
 
   const updateThemeLabel = (): void => {
     if (themeToggle) {
-      themeToggle.textContent = getThemeLabel();
+      themeToggle.textContent = getTranslation(translations, getThemeLabel(), getCurrentLanguage());
     }
   };
 

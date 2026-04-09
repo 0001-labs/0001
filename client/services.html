@@ -40,9 +40,13 @@
     <script>
       (function () {
         var root = document.documentElement;
-        root.classList.remove("dark-theme");
-        root.classList.add("light-theme");
-        root.setAttribute("data-theme", "light");
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") {
+          theme = "light";
+        }
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
       })();
     </script>
 <!-- Custom styles -->
@@ -66,11 +70,7 @@
         position: absolute;
         top: 115px;
         left: 140px;
-        font-family:
-          var(--font-medium),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-medium);
         font-weight: 500;
         font-size: 24px;
         letter-spacing: -0.48px;
@@ -86,7 +86,7 @@
       }
 
       .services-title {
-        font-family: "GT-Canon-M-Standard-Medium", Georgia, serif;
+        font-family: var(--font-canon);
         font-size: 48px;
         letter-spacing: -0.96px;
         color: var(--base-slate);
@@ -126,7 +126,7 @@
       }
 
       .services-item__title {
-        font-family: "GT-Canon-M-Standard-Medium", Georgia, serif;
+        font-family: var(--font-canon);
         font-size: 32px;
         letter-spacing: -0.64px;
         color: var(--base-slate);
@@ -205,11 +205,7 @@
         font-size: 14px;
         font-weight: 400;
         letter-spacing: -0.28px;
-        font-family:
-          var(--font-regular),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-regular);
         vertical-align: top;
         text-align: center;
         overflow: hidden;
@@ -236,7 +232,7 @@
         font-size: 14px;
         font-weight: 400;
         letter-spacing: -0.28px;
-        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-family: var(--font-regular);
         vertical-align: top;
         overflow: hidden;
         border-radius: 0;

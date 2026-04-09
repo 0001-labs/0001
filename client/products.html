@@ -17,9 +17,13 @@
     <script>
       (function () {
         var root = document.documentElement;
-        root.classList.remove("dark-theme");
-        root.classList.add("light-theme");
-        root.setAttribute("data-theme", "light");
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") {
+          theme = "light";
+        }
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
       })();
     </script>
 <!-- Custom styles -->
@@ -246,7 +250,7 @@
         min-height: 0 !important;
         padding: 0 !important;
         margin: 0;
-        font-family: var(--typeface-canon), Georgia, serif !important;
+        font-family: var(--font-canon) !important;
         font-size: 14px !important;
         line-height: 16px !important;
         letter-spacing: -0.32px;

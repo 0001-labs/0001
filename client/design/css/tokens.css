@@ -18,16 +18,10 @@
 }
 
 @font-face {
-  font-family: "GT America Compressed";
-  src: url("../fonts/GT-America-Compressed-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "GT-Canon-M-Standard-Medium";
   src: url("../fonts/GT-Canon-M-Standard-Medium-Trial.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -48,26 +42,14 @@
   --base-white: #ffffff;
   --base-black: #000000;
   --base-slate: #1e1e1e;
+  --base-stealth: #554455;
   --base-darker-grey: #797979;
   --base-light-grey: #858585;
 
   /* Typography — GT America family (Grilli Type) */
-  --font-regular:
-    "GT America", "GT America Regular", -apple-system, BlinkMacSystemFont,
-    sans-serif;
-  --font-medium:
-    "GT America", "GT America Medium", -apple-system, BlinkMacSystemFont,
-    sans-serif;
-  --font-compressed:
-    "GT America Compressed", "GT America Compressed Regular", sans-serif;
-  --font-pantheon:
-    "GT Pantheon Text", "GT Pantheon Text Regular", Georgia, serif;
-  --font-pantheon-medium:
-    "GT Pantheon Text", "GT Pantheon Text Medium", Georgia, serif;
-  --font-canon:
-    "GT-Canon-M-Standard-Medium", Georgia, serif;
-  --typeface-canon: "GT-Canon-M-Standard-Medium";
-  --typeface-canon-medium: "GT-Canon-M-Standard-Medium";
+  --font-regular: "GT America";
+  --font-medium: "GT America";
+  --font-canon: "GT-Canon-M-Standard-Medium";
 
   /* Spacing scale */
   --space-xs: 4px;
@@ -120,4 +102,51 @@
   --border-default: 1.5px solid rgba(0, 0, 0, 0.1);
   --border-solid: 1.5px solid var(--base-black);
   --background: #ffffff !important;
+}
+
+[data-theme='dark'] {
+  --chartreuse-green: #2d4216;
+  --every-green: #d7f58a;
+  --page-background: #171913;
+  --page-surface: #1b1d16;
+  --page-shell: #202414;
+  --page-background-accent: #1a1d10;
+  --footer-background: #10110b;
+  --panel-background: rgba(204, 255, 77, 0.07);
+  --panel-background-subtle: rgba(204, 255, 77, 0.05);
+  --panel-border: rgba(242, 255, 207, 0.12);
+  --contact-form-panel-bg: rgba(204, 255, 77, 0.08);
+  --contact-form-field-bg: rgba(255, 255, 255, 0.05);
+  --surface-overlay: rgba(255, 255, 255, 0.07);
+  --surface-overlay-strong: rgba(204, 255, 77, 0.18);
+  --surface-overlay-strong-hover: rgba(204, 255, 77, 0.28);
+  --footer-control-background: #2d4216;
+  --footer-control-hover: #37501b;
+  --footer-control-text: #d7f58a;
+  --footer-control-border: rgba(215, 245, 138, 0.14);
+  --footer-link-color: #eef3dd;
+  --footer-link-dimmed: rgba(238, 243, 221, 0.52);
+  --footer-copyright: rgba(238, 243, 221, 0.36);
+  --subtle-control-background: rgba(255, 255, 255, 0.08);
+  --subtle-control-background-hover: rgba(255, 255, 255, 0.14);
+  --subtle-control-text: #f3f6e7;
+  --solid-button-background: var(--chartreuse-green);
+  --solid-button-text: #10110b;
+  --tab-muted: rgba(242, 255, 207, 0.4);
+  --text-color-subtle: rgba(255, 255, 255, 0.9);
+  --text-color-muted: rgba(255, 255, 255, 0.9);
+  --text-color-faint: rgba(255, 255, 255, 0.55);
+  --input-placeholder: rgba(255, 255, 255, 0.45);
+  --input-focus-background: rgba(204, 255, 77, 0.14);
+  --text-color: #ffffff;
+  --text-color-dimmed: #ffffff;
+  --base-white: #ffffff;
+  --base-black: #ffffff;
+  --base-slate: #ffffff;
+  --base-stealth: #eef3dd;
+  --base-darker-grey: #c6ccb3;
+  --base-light-grey: #a7ad95;
+  --border-default: 1.5px solid rgba(242, 255, 207, 0.14);
+  --border-solid: 1.5px solid rgba(242, 255, 207, 0.88);
+  --background: #10110b !important;
 }

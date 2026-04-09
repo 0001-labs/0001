@@ -3,8 +3,10 @@
  * Applies shared translations and initializes language state.
  */
 import { applyTranslations, initLanguage, loadTranslations, updatePlaceholders } from '../shared';
+import { initTheme } from '../../utils/theme';
 
 async function init(): Promise<void> {
+  initTheme();
   const translations = await loadTranslations();
 
   const apply = (): void => {

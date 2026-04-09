@@ -68,7 +68,7 @@ class ZeroH1 extends HTMLElement {
           display: block;
         }
         h1 {
-          font-family: var(--typeface-canon, Georgia, serif);
+          font-family: var(--font-canon);
           font-size: 48px;
           letter-spacing: -0.96px;
           color: var(--base-slate, #2a2a2a);

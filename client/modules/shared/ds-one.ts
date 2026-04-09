@@ -1,5 +1,6 @@
 import type { SupportedLanguage } from '../types';
 import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY } from './constants';
+import { toggleTheme } from '../../utils/theme';
 
 function dispatchLanguageChange(lang: SupportedLanguage): void {
   document.documentElement.lang = lang;
@@ -18,7 +19,8 @@ export async function setDSOneLanguage(lang: SupportedLanguage): Promise<void> {
 }
 
 export async function toggleDSOneTheme(): Promise<void> {
-  const event = new CustomEvent('theme-changed', { detail: { theme: 'light' } });
+  const theme = toggleTheme();
+  const event = new CustomEvent('theme-changed', { detail: { theme } });
   window.dispatchEvent(event);
   document.dispatchEvent(event);
 }

@@ -26,8 +26,8 @@ button.button {
   line-height: 16px;
   vertical-align: top;
   text-align: center;
-  color: var(--every-green);
-  background-color: var(--chartreuse-green);
+  color: var(--footer-control-text);
+  background-color: var(--footer-control-background);
   border: none;
   border-radius: 0;
   cursor: pointer;
@@ -68,8 +68,8 @@ a.button:focus-visible {
   font-size: 14px;
   line-height: 16px;
   letter-spacing: -0.28px;
-  color: var(--every-green);
-  background-color: var(--chartreuse-green);
+  color: var(--footer-control-text);
+  background-color: var(--footer-control-background);
   height: 16px;
   max-height: 16px;
   min-height: 0;
@@ -99,8 +99,8 @@ a.button:focus-visible {
   font-size: 14px;
   line-height: 16px;
   letter-spacing: -0.28px;
-  color: var(--every-green);
-  background-color: var(--chartreuse-green);
+  color: var(--footer-control-text);
+  background-color: var(--footer-control-background);
   font-family: var(--font-regular);
   overflow: hidden;
 }
@@ -114,8 +114,8 @@ a.button:focus-visible {
   font-size: 14px;
   line-height: 16px;
   letter-spacing: -0.28px;
-  color: var(--every-green);
-  background-color: var(--chartreuse-green);
+  color: var(--footer-control-text);
+  background-color: var(--footer-control-background);
   font-family: var(--font-regular);
   overflow: hidden;
 }

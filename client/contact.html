@@ -40,9 +40,13 @@
     <script>
       (function () {
         var root = document.documentElement;
-        root.classList.remove("dark-theme");
-        root.classList.add("light-theme");
-        root.setAttribute("data-theme", "light");
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") {
+          theme = "light";
+        }
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
       })();
     </script>
 <!-- Custom styles -->
@@ -66,11 +70,7 @@
         position: absolute;
         top: 115px;
         left: 140px;
-        font-family:
-          var(--font-medium),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-medium);
         font-weight: 500;
         font-size: 24px;
         letter-spacing: -0.48px;
@@ -86,7 +86,7 @@
       }
 
       .contact-title {
-        font-family: var(--typeface-canon), Georgia, serif;
+        font-family: var(--font-canon);
         font-size: 48px;
         letter-spacing: -0.96px;
         color: var(--base-slate);
@@ -95,11 +95,7 @@
       }
 
       .contact-description {
-        font-family:
-          var(--font-regular),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-regular);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-black);
@@ -174,7 +170,7 @@
       }
 
       .contact-option {
-        font-family: var(--typeface-canon), Georgia, serif;
+        font-family: var(--font-canon);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
@@ -200,11 +196,7 @@
       }
 
       .contact-option__selected-text {
-        font-family:
-          var(--font-regular),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-regular);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-black);
@@ -223,11 +215,7 @@
       }
 
       .contact-mode-btn {
-        font-family:
-          var(--font-regular),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-regular);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--tab-muted);
@@ -292,7 +280,7 @@
         font-size: 14px;
         font-weight: 400;
         letter-spacing: -0.28px;
-        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-family: var(--font-regular);
         color: var(--base-white, #fff);
         background-color: var(--base-slate, #1e1e1e);
         border: none;
@@ -323,11 +311,7 @@
       }
 
       .contact-topics-label {
-        font-family:
-          var(--font-medium),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-medium);
         font-weight: 500;
         font-size: 16px;
         letter-spacing: -0.32px;
@@ -342,7 +326,7 @@
       }
 
       .contact-topic-tag {
-        font-family: var(--typeface-canon), Georgia, serif;
+        font-family: var(--font-canon);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
@@ -351,11 +335,7 @@
       }
 
       .contact-topic-label {
-        font-family:
-          var(--font-medium),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-medium);
         font-size: 14px;
         letter-spacing: -0.28px;
         color: var(--base-slate);
@@ -373,11 +353,7 @@
       }
 
       .contact-field__label {
-        font-family:
-          var(--font-medium),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-medium);
         font-weight: 500;
         font-size: 16px;
         letter-spacing: -0.32px;
@@ -385,7 +361,7 @@
       }
 
       .contact-field__input {
-        font-family: var(--typeface-canon), Georgia, serif;
+        font-family: var(--font-canon);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
@@ -408,7 +384,7 @@
       }
 
       .contact-field__textarea {
-        font-family: var(--typeface-canon), Georgia, serif;
+        font-family: var(--font-canon);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
@@ -433,11 +409,7 @@
       }
 
       .contact-field__hint {
-        font-family:
-          var(--font-regular),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-regular);
         font-size: 14px;
         letter-spacing: -0.28px;
         color: var(--text-color-subtle);

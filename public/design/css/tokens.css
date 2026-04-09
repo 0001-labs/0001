@@ -16,22 +16,14 @@
   --base-white: #ffffff;
   --base-black: #000000;
   --base-slate: #1e1e1e;
+  --base-stealth: #554455;
   --base-darker-grey: #797979;
   --base-light-grey: #858585;
 
   /* Typography — GT America family (Grilli Type) */
-  --font-regular:
-    "GT America", "GT America Regular", -apple-system, BlinkMacSystemFont,
-    sans-serif;
-  --font-medium:
-    "GT America", "GT America Medium", -apple-system, BlinkMacSystemFont,
-    sans-serif;
-  --font-compressed:
-    "GT America Compressed", "GT America Compressed Regular", sans-serif;
-  --font-pantheon:
-    "GT Pantheon Text", "GT Pantheon Text Regular", Georgia, serif;
-  --font-pantheon-medium:
-    "GT Pantheon Text", "GT Pantheon Text Medium", Georgia, serif;
+  --font-regular: "GT America";
+  --font-medium: "GT America";
+  --font-canon: "GT-Canon-M-Standard-Medium";
 
   /* Spacing scale */
   --space-xs: 4px;
@@ -44,18 +36,125 @@
   /* Border */
   --border-default: 1.5px solid rgba(0, 0, 0, 0.1);
   --border-solid: 1.5px solid var(--base-black);
+
+  /* Surfaces and controls */
+  --page-background: #fbfcf6;
+  --page-surface: #fcfff6;
+  --page-shell: var(--chartreuse-green);
+  --page-background-accent: var(--tau99-brand);
+  --footer-background: var(--tau99-brand);
+  --panel-background: rgba(115, 217, 248, 0.1);
+  --panel-background-subtle: rgba(115, 217, 248, 0.08);
+  --panel-border: rgba(30, 30, 30, 0.08);
+  --contact-form-panel-bg: rgba(115, 217, 248, 0.1);
+  --contact-form-field-bg: rgba(204, 204, 255, 0.3);
+  --surface-overlay: rgba(255, 255, 255, 0.55);
+  --surface-overlay-strong: rgba(204, 255, 77, 0.55);
+  --surface-overlay-strong-hover: rgba(204, 255, 77, 0.85);
+  --footer-control-background: var(--chartreuse-green);
+  --footer-control-hover: #d9ff69;
+  --footer-control-text: var(--every-green);
+  --footer-control-border: rgba(151, 148, 65, 0.08);
+  --footer-link-color: var(--every-green);
+  --footer-link-dimmed: rgba(151, 148, 65, 0.4);
+  --footer-copyright: rgba(101, 138, 8, 0.3);
+  --subtle-control-background: rgba(0, 0, 0, 0.3);
+  --subtle-control-background-hover: rgba(0, 0, 0, 0.36);
+  --subtle-control-text: var(--base-black);
+  --solid-button-background: var(--base-slate);
+  --solid-button-text: var(--base-white);
+  --tab-muted: #a3a3cc;
+  --text-color-subtle: rgba(30, 30, 30, 0.55);
+  --text-color-muted: rgba(0, 0, 0, 0.6);
+  --text-color-faint: rgba(0, 0, 0, 0.3);
+  --input-placeholder: rgba(30, 30, 30, 0.2);
+  --input-focus-background: rgba(204, 204, 255, 0.2);
+  --text-color: var(--base-black);
+  --text-color-dimmed: var(--base-slate);
+  --background: #ffffff !important;
 }
 
 /* Light theme (default) */
 [data-theme="light"] {
-  --background: var(--base-white);
+  --page-background: #fbfcf6;
+  --page-surface: #fcfff6;
+  --page-shell: var(--chartreuse-green);
+  --page-background-accent: var(--tau99-brand);
+  --footer-background: var(--tau99-brand);
+  --panel-background: rgba(115, 217, 248, 0.1);
+  --panel-background-subtle: rgba(115, 217, 248, 0.08);
+  --panel-border: rgba(30, 30, 30, 0.08);
+  --contact-form-panel-bg: rgba(115, 217, 248, 0.1);
+  --contact-form-field-bg: rgba(204, 204, 255, 0.3);
+  --surface-overlay: rgba(255, 255, 255, 0.55);
+  --surface-overlay-strong: rgba(204, 255, 77, 0.55);
+  --surface-overlay-strong-hover: rgba(204, 255, 77, 0.85);
+  --footer-control-background: var(--chartreuse-green);
+  --footer-control-hover: #d9ff69;
+  --footer-control-text: var(--every-green);
+  --footer-control-border: rgba(151, 148, 65, 0.08);
+  --footer-link-color: var(--every-green);
+  --footer-link-dimmed: rgba(151, 148, 65, 0.4);
+  --footer-copyright: rgba(101, 138, 8, 0.3);
+  --subtle-control-background: rgba(0, 0, 0, 0.3);
+  --subtle-control-background-hover: rgba(0, 0, 0, 0.36);
+  --subtle-control-text: var(--base-black);
+  --solid-button-background: var(--base-slate);
+  --solid-button-text: var(--base-white);
+  --tab-muted: #a3a3cc;
+  --text-color-subtle: rgba(30, 30, 30, 0.55);
+  --text-color-muted: rgba(0, 0, 0, 0.6);
+  --text-color-faint: rgba(0, 0, 0, 0.3);
+  --input-placeholder: rgba(30, 30, 30, 0.2);
+  --input-focus-background: rgba(204, 204, 255, 0.2);
   --text-color: var(--base-black);
   --text-color-dimmed: var(--base-slate);
+  --background: #ffffff !important;
 }
 
 /* Dark theme */
 [data-theme="dark"] {
-  --background: var(--base-slate);
-  --text-color: var(--base-white);
-  --text-color-dimmed: var(--base-light-grey);
+  --chartreuse-green: #2d4216;
+  --every-green: #d7f58a;
+  --page-background: #171913;
+  --page-surface: #1b1d16;
+  --page-shell: #202414;
+  --page-background-accent: #1a1d10;
+  --footer-background: #10110b;
+  --panel-background: rgba(204, 255, 77, 0.07);
+  --panel-background-subtle: rgba(204, 255, 77, 0.05);
+  --panel-border: rgba(242, 255, 207, 0.12);
+  --contact-form-panel-bg: rgba(204, 255, 77, 0.08);
+  --contact-form-field-bg: rgba(255, 255, 255, 0.05);
+  --surface-overlay: rgba(255, 255, 255, 0.07);
+  --surface-overlay-strong: rgba(204, 255, 77, 0.18);
+  --surface-overlay-strong-hover: rgba(204, 255, 77, 0.28);
+  --footer-control-background: #2d4216;
+  --footer-control-hover: #37501b;
+  --footer-control-text: #d7f58a;
+  --footer-control-border: rgba(215, 245, 138, 0.14);
+  --footer-link-color: #eef3dd;
+  --footer-link-dimmed: rgba(238, 243, 221, 0.52);
+  --footer-copyright: rgba(238, 243, 221, 0.36);
+  --subtle-control-background: rgba(255, 255, 255, 0.08);
+  --subtle-control-background-hover: rgba(255, 255, 255, 0.14);
+  --subtle-control-text: #f3f6e7;
+  --solid-button-background: var(--chartreuse-green);
+  --solid-button-text: #10110b;
+  --tab-muted: rgba(242, 255, 207, 0.4);
+  --text-color-subtle: rgba(255, 255, 255, 0.9);
+  --text-color-muted: rgba(255, 255, 255, 0.9);
+  --text-color-faint: rgba(255, 255, 255, 0.55);
+  --input-placeholder: rgba(255, 255, 255, 0.45);
+  --input-focus-background: rgba(204, 255, 77, 0.14);
+  --base-black: #ffffff;
+  --base-slate: #ffffff;
+  --base-stealth: #eef3dd;
+  --base-darker-grey: #c6ccb3;
+  --base-light-grey: #a7ad95;
+  --text-color: #ffffff;
+  --text-color-dimmed: #ffffff;
+  --border-default: 1.5px solid rgba(242, 255, 207, 0.14);
+  --border-solid: 1.5px solid rgba(242, 255, 207, 0.88);
+  --background: #10110b !important;
 }

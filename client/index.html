@@ -20,9 +20,13 @@
     <script>
       (function () {
         var root = document.documentElement;
-        root.classList.remove("dark-theme");
-        root.classList.add("light-theme");
-        root.setAttribute("data-theme", "light");
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") {
+          theme = "light";
+        }
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
       })();
     </script>
 <!-- Custom styles -->
@@ -187,7 +191,8 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-end;
-        padding: 24px 20px 20px;
+        padding: 0;
+        margin: 0;
         gap: 16px;
         background: var(--base-cream);
       }
@@ -197,16 +202,13 @@
       }
 
       .hero__description p {
-        font-family:
-          var(--font-regular),
-          "GT America",
-          -apple-system,
-          sans-serif;
+        font-family: var(--font-regular);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
         line-height: 1.5;
         margin: 0;
+        padding: 0;
       }
 
       .hero__description p + p {
@@ -218,6 +220,8 @@
         height: auto;
         min-height: 0;
         max-width: 100%;
+        margin: 0;
+        padding: 0;
         font: inherit;
         letter-spacing: inherit;
         color: inherit;
@@ -229,10 +233,12 @@
       .hero__buttons {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 12px;
         width: 100%;
-        margin-top: 4px;
+        margin: 20px 0 0;
+        padding: 0;
+        text-align: center;
       }
 
       /* Same 16px bar as footer; wins over any late DS one / link rules */
@@ -245,15 +251,18 @@
         padding: 0;
         line-height: 16px;
         font-size: 14px;
-        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-family: var(--font-regular);
         vertical-align: top;
         overflow: hidden;
       }
 
       .hero__text-link {
-        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-family: var(--font-regular);
         font-size: 14px;
         letter-spacing: -0.28px;
+        color: var(--base-black);
+        margin: 0;
+        padding: 0;
       }
 
       .hero__timer.hidden {
@@ -282,7 +291,7 @@
 
       @media (max-width: 768px) {
         .hero {
-        padding: 30px 20px;
+        padding: 30px 0;
         }
       }
 
@@ -299,6 +308,8 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 6px;
+        padding: 0 20px;
+        box-sizing: border-box;
         }
       }
 
@@ -360,7 +371,7 @@
 
       @media (max-width: 768px) {
         .hero__description {
-        padding: 24px 20px 20px;
+        padding: 0;
         }
       }
 
@@ -373,7 +384,7 @@
 
       @media (max-width: 768px) {
         .hero__buttons {
-        align-items: flex-start;
+        align-items: center;
         gap: 16px;
         margin-top: 20px;
         }

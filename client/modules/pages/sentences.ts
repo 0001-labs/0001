@@ -2,7 +2,8 @@
  * Sentences page module
  * Handles 9999 sentences table with compact mode.
  */
-import { initLanguage, cycleLanguage, toggleDSOneTheme } from '../shared';
+import type { Translations } from '../types';
+import { initLanguage, cycleLanguage, toggleDSOneTheme, getCurrentLanguage, getTranslation, loadTranslations } from '../shared';
 import { getThemeLabel } from '../../utils/theme';
 
 const sentences: Record<number, string> = {
@@ -33,6 +34,7 @@ const EXPANDED_ICON = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3
 
 const rows: RowData[] = [];
 let isCompact = true;
+let translations: Translations = {};
 
 function generateRows(): void {
   const columnNo = document.getElementById('column-no');
@@ -145,7 +147,7 @@ function initThemeToggle(): void {
 
   const updateThemeLabel = (): void => {
     if (themeToggle) {
-      themeToggle.textContent = getThemeLabel();
+      themeToggle.textContent = getTranslation(translations, getThemeLabel(), getCurrentLanguage());
     }
   };
 
@@ -167,6 +169,13 @@ export function initSentences(): void {
 
 function init(): void {
   initSentences();
+  void loadTranslations().then((loadedTranslations) => {
+    translations = loadedTranslations;
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.textContent = getTranslation(translations, getThemeLabel(), getCurrentLanguage());
+    }
+  });
   void initLanguage();
 }
 

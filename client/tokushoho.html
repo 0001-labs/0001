@@ -18,9 +18,13 @@
     <script>
       (function () {
         var root = document.documentElement;
-        root.classList.remove("dark-theme");
-        root.classList.add("light-theme");
-        root.setAttribute("data-theme", "light");
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") {
+          theme = "light";
+        }
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
       })();
     </script>
     <link rel="stylesheet" href="./design/css/tokens.css" />
@@ -41,7 +45,7 @@
         top: 115px;
         left: 140px;
         color: var(--base-slate);
-        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-family: var(--font-medium);
         font-size: 24px;
         font-weight: 500;
         letter-spacing: -0.48px;
@@ -64,7 +68,7 @@
 
       .tokushoho-title {
         color: var(--base-slate);
-        font-family: var(--typeface-canon), Georgia, serif;
+        font-family: var(--font-canon);
         font-size: 48px;
         font-weight: normal;
         letter-spacing: -0.96px;
@@ -76,7 +80,7 @@
       .tokushoho-body,
       .tokushoho-list {
         color: var(--base-black);
-        font-family: var(--font-regular), "GT America", -apple-system, sans-serif;
+        font-family: var(--font-regular);
         font-size: 16px;
         letter-spacing: -0.32px;
         line-height: 1.6;
@@ -103,7 +107,7 @@
 
       .tokushoho-section__title {
         color: var(--base-slate);
-        font-family: var(--font-medium), "GT America", -apple-system, sans-serif;
+        font-family: var(--font-medium);
         font-size: 20px;
         font-weight: 500;
         letter-spacing: -0.4px;
