@@ -1,5 +1,9 @@
 /* Layout and responsive styles */
 
+@view-transition {
+  navigation: auto;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

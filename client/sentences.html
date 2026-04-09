@@ -64,15 +64,15 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: var(--chartreuse-green);
-        mix-blend-mode: screen;
+        background: var(--image-overlay-tint);
+        mix-blend-mode: var(--image-overlay-blend);
       }
 
       .decorative-image::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: var(--surface-overlay-strong);
+        background: var(--image-overlay-wash);
         z-index: 1;
       }
 
@@ -256,6 +256,10 @@
       }
 
       @media (max-width: 768px) {
+        .decorative-image {
+          display: none;
+        }
+
         .sentences-main {
           padding: 96px 20px 48px;
         }

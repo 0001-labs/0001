@@ -134,10 +134,36 @@
       }
 
       .team-member__name {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         font-family: var(--font-medium);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
+      }
+
+      .team-member__linkedin {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 14px;
+        height: 14px;
+        color: var(--text-color-faint);
+        text-decoration: none;
+        transition: color 0.15s ease, opacity 0.15s ease;
+        opacity: 0.8;
+      }
+
+      .team-member__linkedin:hover {
+        color: var(--base-slate);
+        opacity: 1;
+      }
+
+      .team-member__linkedin svg {
+        width: 14px;
+        height: 14px;
+        display: block;
       }
 
       .team-member__role,
@@ -160,6 +186,128 @@
       .team-member__details {
         display: flex;
         flex-direction: column;
+      }
+
+      .team-member__booking {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .team-member__booking-copy {
+        font-family: var(--font-regular);
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        color: var(--base-slate);
+        line-height: 1.5;
+        max-width: 440px;
+        font-variant-ligatures: common-ligatures discretionary-ligatures;
+        font-feature-settings:
+          "liga" 1,
+          "calt" 1,
+          "dlig" 1,
+          "ss01" 1,
+          "ss02" 1,
+          "ss03" 1,
+          "ss04" 1;
+      }
+
+      .team-member__booking-button {
+        display: inline-block;
+        box-sizing: border-box;
+        height: 16px;
+        max-height: 16px;
+        min-height: 0;
+        padding: 0;
+        line-height: 16px;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: -0.28px;
+        font-family: var(--font-regular);
+        vertical-align: top;
+        overflow: hidden;
+        border-radius: 0;
+        width: fit-content;
+      }
+
+      .booking-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        background: rgba(10, 12, 8, 0.35);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
+      .booking-modal.is-open {
+        display: flex;
+      }
+
+      .booking-modal__dialog {
+        position: relative;
+        width: min(760px, calc(100vw - 80px));
+        height: min(700px, calc(100vh - 80px));
+        border: var(--border-default);
+        background: var(--page-surface);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .booking-modal__header {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0 16px;
+        align-items: center;
+        height: 44px;
+        border-bottom: var(--border-default);
+        background: var(--page-surface);
+      }
+
+      .booking-modal__title {
+        color: var(--base-slate);
+        font-family: var(--font-medium);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: -0.28px;
+        line-height: 1;
+      }
+
+      .booking-modal__close {
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: var(--base-slate);
+        font-family: var(--font-regular);
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: -0.28px;
+        line-height: 1;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      .booking-modal__close:hover {
+        text-decoration: underline;
+      }
+
+      .booking-modal__iframe {
+        display: block;
+        width: 100%;
+        height: calc(100% - 44px);
+        border: 0;
+        background: var(--page-surface);
+        flex: 1;
       }
 
       .about-offices {
@@ -299,6 +447,40 @@
       }
 
       @media (max-width: 768px) {
+        .team-member__booking {
+        gap: 12px;
+        margin-top: 12px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .team-member__booking-copy {
+        font-size: 14px;
+        max-width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .booking-modal {
+        padding: 20px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .booking-modal__dialog {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 40px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .booking-modal__close {
+        top: 12px;
+        right: 12px;
+        }
+      }
+
+      @media (max-width: 768px) {
         .about-offices {
         flex-direction: column;
         gap: 30px;
@@ -364,10 +546,29 @@
           <h2 class="section-title"><span data-i18n="Founder">Founder</span></h2>
           <div class="about-team">
             <div class="team-member">
-              <span class="team-member__name">Joachim Aaløkke Sørensen</span>
+              <span class="team-member__name">
+                Joachim Aaløkke Sørensen
+                <a
+                  href="https://www.linkedin.com/in/jaa90/"
+                  class="team-member__linkedin"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Joachim Aaløkke Sørensen on LinkedIn"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6A2.49 2.49 0 0 1 0 3.5 2.49 2.49 0 0 1 2.48 1 2.49 2.49 0 0 1 4.98 3.5ZM.5 8h4V23h-4V8Zm7 0h3.84v2.05h.05c.53-1.01 1.84-2.08 3.79-2.08 4.05 0 4.8 2.67 4.8 6.14V23h-4v-7.8c0-1.86-.03-4.25-2.59-4.25-2.6 0-3 2.03-3 4.12V23h-4V8Z"/>
+                  </svg>
+                </a>
+              </span>
               <div class="team-member__details">
                 <span class="team-member__role">Product @0001</span>
                 <a href="mailto:joachim@0001.dev" class="team-member__email">joachim@0001.dev</a>
+                <div class="team-member__booking">
+                  <p class="team-member__booking-copy" data-i18n="→ Book a meeting to talk through your project.">
+                    → Book a meeting to talk through your project.
+                  </p>
+                  <button type="button" class="button team-member__booking-button" data-booking-open data-i18n="Book a meeting">Book a meeting</button>
+                </div>
               </div>
             </div>
           </div>
@@ -395,5 +596,58 @@
       <!-- Footer -->
       <one-footer></one-footer>
     </div>
+    <div class="booking-modal" data-booking-modal aria-hidden="true">
+      <div class="booking-modal__dialog">
+        <div class="booking-modal__header">
+          <div class="booking-modal__title" data-i18n="Book a 30min meeting">Book a 30min meeting</div>
+          <button type="button" class="booking-modal__close" data-booking-close data-i18n="Close">Close</button>
+        </div>
+        <iframe
+          class="booking-modal__iframe"
+          src="https://calendar.notion.so/meet/joachim-meeting/nz3to4p92"
+          title="Book a meeting with Joachim"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var openButton = document.querySelector("[data-booking-open]");
+        var closeButton = document.querySelector("[data-booking-close]");
+        var modal = document.querySelector("[data-booking-modal]");
+        var page = document.querySelector(".about-page");
+
+        if (!openButton || !closeButton || !modal || !page) return;
+
+        function setOpen(isOpen) {
+          modal.classList.toggle("is-open", isOpen);
+          modal.setAttribute("aria-hidden", isOpen ? "false" : "true");
+          page.style.filter = isOpen ? "blur(10px)" : "";
+          page.style.pointerEvents = isOpen ? "none" : "";
+          document.body.style.overflow = isOpen ? "hidden" : "";
+        }
+
+        openButton.addEventListener("click", function () {
+          setOpen(true);
+        });
+
+        closeButton.addEventListener("click", function () {
+          setOpen(false);
+        });
+
+        modal.addEventListener("click", function (event) {
+          if (event.target === modal) {
+            setOpen(false);
+          }
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            setOpen(false);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

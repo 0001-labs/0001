@@ -359,8 +359,8 @@ class OneFooter extends HTMLElement {
           padding: 0;
           margin: 0;
           line-height: 16px;
-          font-size: 16px;
-          letter-spacing: -0.32px;
+          font-size: 14px;
+          letter-spacing: -0.28px;
           font-weight: 400;
           font-family: var(--font-regular);
           vertical-align: top;

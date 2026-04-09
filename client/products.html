@@ -26,10 +26,8 @@
         root.setAttribute("data-theme", theme);
       })();
     </script>
-<!-- Custom styles -->
     <link rel="stylesheet" href="./design/css/tokens.css" />
     <link rel="stylesheet" href="./design/css/screen.css" />
-<!-- Page module -->
     <script type="module" src="./modules/pages/products.ts"></script>
 
     <style>
@@ -235,13 +233,13 @@
 
       .products-meta__copyright {
         color: var(--text-color-faint);
-        font-family: var(--font-regular);
-        font-size: 12.5px;
-        letter-spacing: -0.25px;
-        line-height: 16px;
+        font-family: var(--font-medium);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: -0.28px;
+        line-height: 20px;
       }
 
-      /* Contact us: same bar as footer; wins over DS one link defaults */
       .products-page .products-meta__links > a.button {
         display: inline-block !important;
         box-sizing: border-box;
@@ -255,8 +253,8 @@
         line-height: 16px !important;
         letter-spacing: -0.32px;
         font-weight: 400;
-        color: var(--every-green) !important;
-        background-color: var(--chartreuse-green) !important;
+        color: var(--footer-control-text) !important;
+        background-color: var(--footer-control-background) !important;
         border: none !important;
         border-radius: 0 !important;
         vertical-align: top;
@@ -273,133 +271,100 @@
 
       @media (max-width: 768px) {
         .products-header {
-        height: auto;
-        padding: 24px 20px 48px;
+          height: auto;
+          padding: 24px 20px 48px;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-header__inner {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 24px;
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 24px;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-header__logo svg {
-        width: 84px;
+          width: 84px;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-header__link {
-        font-size: 14px;
-        letter-spacing: -0.28px;
-        line-height: 1.2;
+          font-size: 14px;
+          letter-spacing: -0.28px;
+          line-height: 1.2;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-header__nav {
-        flex-wrap: wrap;
-        gap: 16px;
+          flex-wrap: wrap;
+          gap: 16px;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-main {
-        min-height: calc(100vh - 120px);
-        min-height: calc(100dvh - 120px);
-        padding: 28px 12px 48px;
+          min-height: calc(100vh - 120px);
+          min-height: calc(100dvh - 120px);
+          padding: 28px 12px 48px;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-main__inner {
-        align-items: stretch;
+          align-items: stretch;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-table-wrap {
-        overflow-x: visible;
+          overflow-x: visible;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-table {
-        min-width: 0;
-        width: 100%;
-        table-layout: fixed;
+          min-width: 0;
+          width: 100%;
+          table-layout: fixed;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-table__header-cell,
-      .products-table__cell {
-        font-size: 11px;
-        letter-spacing: -0.22px;
-        height: 28px;
-        padding: 6px 4px;
+        .products-table__cell {
+          font-size: 11px;
+          letter-spacing: -0.22px;
+          height: 28px;
+          padding: 6px 4px;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-table__header-cell--product {
-        width: 40%;
+          width: 40%;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-table__header-cell--users,
-      .products-table__header-cell--retention,
-      .products-table__header-cell--status {
-        width: 20%;
+        .products-table__header-cell--retention,
+        .products-table__header-cell--status {
+          width: 20%;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-table__product-name {
-        display: block;
-        min-width: 0;
+          display: block;
+          min-width: 0;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-meta {
-        gap: 20px;
-        margin-top: 24px;
-        width: 100%;
+          gap: 20px;
+          margin-top: 24px;
+          width: 100%;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-meta__links {
-        gap: 12px;
-        flex-wrap: wrap;
+          gap: 12px;
+          flex-wrap: wrap;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-meta__copyright {
-        font-size: 12px;
-        letter-spacing: -0.24px;
-        line-height: 16px;
+          font-size: 14px;
+          letter-spacing: -0.28px;
+          line-height: 16px;
         }
-      }
 
-      @media (max-width: 768px) {
         .products-page .products-meta__links > a.button {
-        height: 24px !important;
-        max-height: 24px !important;
-        padding: 0 12px !important;
-        font-size: 16px !important;
-        line-height: 24px !important;
-        letter-spacing: -0.32px;
+          height: 24px !important;
+          max-height: 24px !important;
+          padding: 0 12px !important;
+          font-size: 16px !important;
+          line-height: 24px !important;
+          letter-spacing: -0.32px;
         }
       }
-
     </style>
   </head>
   <body>
@@ -451,9 +416,6 @@
           </div>
 
           <div class="products-meta">
-            <div class="products-meta__links">
-              <a href="/contact" class="button" data-i18n="Contact us">Contact us</a>
-            </div>
             <p class="products-meta__copyright">0001 © <span data-current-year></span></p>
           </div>
         </div>

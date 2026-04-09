@@ -127,7 +127,11 @@
     "Vue": "Vue",
     "Cloudflare": "Cloudflare",
     "Azure": "Azure",
-    "AWS": "AWS"
+    "AWS": "AWS",
+    "→ Book a meeting to talk through your project.": "→ Book a meeting to talk through your project.",
+    "Book a meeting": "Book a meeting",
+    "Book a 30min meeting": "Book a 30min meeting",
+    "Close": "Close"
   },
   "da": {
     "0001": "0001",
@@ -183,7 +187,7 @@
     "delivery-planning-desc": "Strukturerede handlingspunkter og teamdelegering til hurtig levering. Sprintplanlægning, opgavenedbrydning og ansvarligheds-tracking.",
     "Products": "Produkter",
     "Services": "Services",
-    "Founder": "Stifter",
+    "Founder": "Founder",
     "About": "Om os",
     "About us": "Om os",
     "Contact": "Kontakt",
@@ -199,6 +203,7 @@
     "about-p4": "0001 er halvt in-house produkter, halvt konsulentarbejde.",
     "about-p5": "Vi er klar til at tage kontakt, uanset om I har brug for en hurtigere og stærkere online tilstedeværelse, eller vil tage et dybt dyk ned i jeres nuværende stack for at optimere den.",
     "Our offices": "Vores kontorer",
+    "Offices": "Kontorer",
     "Copenhagen": "København",
     "Tokyo": "Tokyo",
     "+45 5094 4434": "+45 5094 4434",
@@ -259,7 +264,11 @@
     "Vue": "Vue",
     "Cloudflare": "Cloudflare",
     "Azure": "Azure",
-    "AWS": "AWS"
+    "AWS": "AWS",
+    "→ Book a meeting to talk through your project.": "→ Book et møde så vi kan vende jeres projekt",
+    "Book a meeting": "Book et møde",
+    "Book a 30min meeting": "Book et 30 min møde",
+    "Close": "Luk"
   },
   "ja": {
     "0001": "0001",
@@ -391,6 +400,10 @@
     "Vue": "Vue",
     "Cloudflare": "Cloudflare",
     "Azure": "Azure",
-    "AWS": "AWS"
+    "AWS": "AWS",
+    "→ Book a meeting to talk through your project.": "→ あなたのプロジェクトについて一緒に話すために、ミーティングをご予約ください。",
+    "Book a meeting": "ミーティングを予約",
+    "Book a 30min meeting": "30分のミーティングを予約",
+    "Close": "閉じる"
   }
 }

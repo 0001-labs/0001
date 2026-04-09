@@ -68,15 +68,15 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: var(--chartreuse-green);
-        mix-blend-mode: screen;
+        background: var(--image-overlay-tint);
+        mix-blend-mode: var(--image-overlay-blend);
       }
 
       .decorative-image::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: var(--surface-overlay-strong);
+        background: var(--image-overlay-wash);
         z-index: 1;
       }
 
@@ -114,7 +114,7 @@
 
       .hero__title-wrapper one-h1 {
         margin-top: 5px;
-        transform: translateY(-2px);
+        transform: translateY(-1px);
       }
 
       .hero__number {
@@ -123,6 +123,7 @@
         right: calc(100% + 10px);
         font-family: var(--font-medium);
         font-size: 48px;
+        font-weight: 500;
         line-height: 1.2;
         letter-spacing: -0.96px;
         color: var(--base-slate);
@@ -316,7 +317,7 @@
       @media (max-width: 768px) {
         .hero__title-wrapper one-h1 {
         margin-top: 0;
-        transform: translateY(-2px);
+        transform: translateY(-1px);
         width: 100%;
         }
       }

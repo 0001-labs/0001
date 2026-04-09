@@ -1,4 +1,30 @@
 /* 0001 Brand Token Overrides */
+
+/* GT America — Grilli Type */
+@font-face {
+  font-family: "GT America";
+  src: url("../fonts/GT-America-Standard-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America";
+  src: url("../fonts/GT-America-Standard-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT-Canon-M-Standard-Medium";
+  src: url("../fonts/GT-Canon-M-Standard-Medium-Trial.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Primary brand colors */
   --chartreuse-green: #ccff4d;
@@ -11,6 +37,7 @@
   --accent-text: var(--every-green);
   --page-background-accent: var(--tau99-brand);
   --status-in-progress: var(--zenith-blue);
+  --contact-accent: var(--zenith-blue);
 
   /* Base colors */
   --base-white: #ffffff;
@@ -51,6 +78,9 @@
   --surface-overlay: rgba(255, 255, 255, 0.55);
   --surface-overlay-strong: rgba(204, 255, 77, 0.55);
   --surface-overlay-strong-hover: rgba(204, 255, 77, 0.85);
+  --image-overlay-tint: var(--chartreuse-green);
+  --image-overlay-wash: var(--surface-overlay-strong);
+  --image-overlay-blend: screen;
   --footer-control-background: var(--chartreuse-green);
   --footer-control-hover: #d9ff69;
   --footer-control-text: var(--every-green);
@@ -116,6 +146,7 @@
 [data-theme="dark"] {
   --chartreuse-green: #2d4216;
   --every-green: #d7f58a;
+  --contact-accent: #8e92d9;
   --page-background: #171913;
   --page-surface: #1b1d16;
   --page-shell: #202414;
@@ -129,6 +160,9 @@
   --surface-overlay: rgba(255, 255, 255, 0.07);
   --surface-overlay-strong: rgba(204, 255, 77, 0.18);
   --surface-overlay-strong-hover: rgba(204, 255, 77, 0.28);
+  --image-overlay-tint: rgba(14, 25, 10, 0.92);
+  --image-overlay-wash: rgba(19, 34, 14, 0.78);
+  --image-overlay-blend: multiply;
   --footer-control-background: #2d4216;
   --footer-control-hover: #37501b;
   --footer-control-text: #d7f58a;
@@ -139,13 +173,13 @@
   --subtle-control-background: rgba(255, 255, 255, 0.08);
   --subtle-control-background-hover: rgba(255, 255, 255, 0.14);
   --subtle-control-text: #f3f6e7;
-  --solid-button-background: var(--chartreuse-green);
+  --solid-button-background: #ffffff;
   --solid-button-text: #10110b;
   --tab-muted: rgba(242, 255, 207, 0.4);
   --text-color-subtle: rgba(255, 255, 255, 0.9);
   --text-color-muted: rgba(255, 255, 255, 0.9);
   --text-color-faint: rgba(255, 255, 255, 0.55);
-  --input-placeholder: rgba(255, 255, 255, 0.45);
+  --input-placeholder: rgba(255, 255, 255, 0.72);
   --input-focus-background: rgba(204, 255, 77, 0.14);
   --base-black: #ffffff;
   --base-slate: #ffffff;
