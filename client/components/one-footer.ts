@@ -295,7 +295,7 @@ class OneFooter extends HTMLElement {
           line-height: 15px;
           min-height: 15px;
           letter-spacing: -0.32px;
-          color: var(--footer-link-color, #979441);
+          color: var(--footer-link-color, #ff4438);
           margin: 0;
           text-decoration: none;
         }
@@ -312,7 +312,7 @@ class OneFooter extends HTMLElement {
           letter-spacing: -0.32px;
           line-height: 20px;
           min-height: 20px;
-          color: var(--footer-link-color, #979441);
+          color: var(--footer-link-color, #ff4438);
           text-decoration: none;
           margin: 0;
           padding: 0;
@@ -365,7 +365,7 @@ class OneFooter extends HTMLElement {
           font-family: var(--font-regular);
           vertical-align: top;
           overflow: hidden;
-          color: var(--footer-control-text, #979441);
+          color: var(--footer-control-text, #ff4438);
           background-color: var(--footer-control-background, #ccff4d);
         }
 
@@ -383,8 +383,8 @@ class OneFooter extends HTMLElement {
           text-decoration: none;
         }
 
-        /* 30px between last company link and Contact */
-        .footer__nav-column--company > a.button {
+        /* 30px between last work link and Contact */
+        .footer__nav-column--work > a.button {
           margin-top: 10px;
         }
 
@@ -393,7 +393,7 @@ class OneFooter extends HTMLElement {
         }
 
         .footer__link--dimmed {
-          color: var(--footer-link-dimmed, rgba(151, 148, 65, 0.4));
+          color: var(--footer-link-dimmed, rgba(255, 68, 56, 0.4));
           font-size: 12px;
         }
 
@@ -418,7 +418,7 @@ class OneFooter extends HTMLElement {
           letter-spacing: -0.28px;
           line-height: 20px;
           min-height: 20px;
-          color: var(--footer-copyright, rgba(101, 138, 8, 0.3));
+          color: var(--footer-copyright, rgba(255, 68, 56, 0.32));
           margin: 0;
           text-align: right;
         }
@@ -428,25 +428,29 @@ class OneFooter extends HTMLElement {
             width: 100%;
             max-width: 100%;
             margin-left: 0;
-            padding: 32px 20px 48px;
-            gap: 32px;
+            padding: calc(32px * var(--sf)) calc(20px * var(--sf)) calc(48px * var(--sf));
+            gap: calc(32px * var(--sf));
           }
 
           .footer__mark {
             position: static;
             order: -1;
+            font-size: calc(16px * var(--sf));
+            letter-spacing: calc(-0.32px * var(--sf));
           }
 
           .footer__top {
             width: 100%;
             flex-direction: column;
             align-items: flex-start;
-            gap: 16px;
+            gap: calc(16px * var(--sf));
           }
 
           .footer__tagline {
             width: 100%;
             max-width: 300px;
+            font-size: calc(16px * var(--sf));
+            letter-spacing: calc(-0.32px * var(--sf));
             line-height: 1.3;
           }
 
@@ -456,8 +460,8 @@ class OneFooter extends HTMLElement {
 
           .footer__nav {
             grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            column-gap: 16px;
-            row-gap: 24px;
+            column-gap: calc(16px * var(--sf));
+            row-gap: calc(24px * var(--sf));
             align-items: start;
             max-width: 400px;
             width: 100%;
@@ -479,7 +483,7 @@ class OneFooter extends HTMLElement {
             align-self: start;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: calc(16px * var(--sf));
             align-items: flex-start;
             text-align: left;
             width: 100%;
@@ -489,7 +493,7 @@ class OneFooter extends HTMLElement {
           .footer__nav-column {
             width: 100%;
             min-width: 0;
-            gap: 16px;
+            gap: calc(16px * var(--sf));
           }
 
           .footer__nav-column--other .footer__link,
@@ -503,39 +507,48 @@ class OneFooter extends HTMLElement {
           }
 
           .footer__nav-heading-group {
-            gap: 24px;
+            gap: calc(24px * var(--sf));
           }
 
           .footer__nav-column--other .footer__controls-mobile {
             display: flex;
-            gap: 12px;
+            gap: calc(12px * var(--sf));
+          }
+
+          .footer__controls-mobile .button {
+            font-size: calc(14px * var(--sf));
+            letter-spacing: calc(-0.28px * var(--sf));
+            height: calc(16px * var(--sf));
+            max-height: calc(16px * var(--sf));
+            min-height: calc(16px * var(--sf));
+            line-height: calc(16px * var(--sf));
           }
 
           .footer__nav-header {
-            font-size: 14px;
-            line-height: 15px;
-            min-height: 15px;
+            font-size: calc(14px * var(--sf));
+            line-height: calc(15px * var(--sf));
+            min-height: calc(15px * var(--sf));
             margin-bottom: 0;
           }
 
           .footer__link {
-            font-size: 14px;
-            letter-spacing: -0.28px;
-            line-height: 20px;
-            min-height: 20px;
+            font-size: calc(14px * var(--sf));
+            letter-spacing: calc(-0.28px * var(--sf));
+            line-height: calc(20px * var(--sf));
+            min-height: calc(20px * var(--sf));
           }
 
           .footer__nav-column > a.button {
-            font-size: 14px;
-            letter-spacing: -0.28px;
-            height: 16px;
-            max-height: 16px;
-            min-height: 16px;
-            line-height: 16px;
+            font-size: calc(14px * var(--sf));
+            letter-spacing: calc(-0.28px * var(--sf));
+            height: calc(16px * var(--sf));
+            max-height: calc(16px * var(--sf));
+            min-height: calc(16px * var(--sf));
+            line-height: calc(16px * var(--sf));
           }
 
-          .footer__nav-column--company > a.button {
-            margin-top: 14px; /* 16px column gap + 14 = 30px to previous link */
+          .footer__nav-column--work > a.button {
+            margin-top: calc(14px * var(--sf)); /* 16px column gap + 14 = 30px to previous link */
           }
 
           .footer__bottom {
@@ -548,8 +561,8 @@ class OneFooter extends HTMLElement {
           }
 
           .footer__copyright {
-            font-size: 12px;
-            color: rgba(101, 138, 8, 0.45);
+            font-size: calc(12px * var(--sf));
+            color: rgba(255, 68, 56, 0.45);
           }
         }
       </style>
@@ -566,15 +579,6 @@ class OneFooter extends HTMLElement {
           </div>
 
           <nav class="footer__nav">
-            <div class="footer__nav-column footer__nav-column--company">
-              <div class="footer__nav-heading-group">
-                <span class="footer__nav-header" data-i18n="Company">Company</span>
-                <a href="/services" class="footer__link" data-i18n="Services">Services</a>
-              </div>
-              <a href="/about" class="footer__link" data-i18n="About us">About us</a>
-              <a href="/sentences" class="footer__link" data-i18n="9999 Sentences">9999 Sentences</a>
-              <a href="/contact" class="button" data-i18n="Contact us">Contact us</a>
-            </div>
             <div class="footer__nav-column footer__nav-column--work">
               <div class="footer__nav-heading-group">
                 <span class="footer__nav-header" data-i18n="Work">Work</span>
@@ -582,6 +586,15 @@ class OneFooter extends HTMLElement {
               </div>
               <a href="/products" class="footer__link footer__link--sans" data-i18n="Products">Products</a>
               <a href="/architecture" class="footer__link footer__link--sans" data-i18n="Architecture">Architecture</a>
+              <a href="/contact" class="button" data-i18n="Contact">Contact</a>
+            </div>
+            <div class="footer__nav-column footer__nav-column--company">
+              <div class="footer__nav-heading-group">
+                <span class="footer__nav-header" data-i18n="Company">Company</span>
+                <a href="/services" class="footer__link" data-i18n="Services">Services</a>
+              </div>
+              <a href="/about" class="footer__link" data-i18n="About">About</a>
+              <a href="/sentences" class="footer__link" data-i18n="9999 Sentences">9999 Sentences</a>
             </div>
 
             <div class="footer__nav-column footer__nav-column--other">
@@ -603,11 +616,31 @@ class OneFooter extends HTMLElement {
                 data-i18n="Instagram"
               >Instagram</a>
               <a
-                href="/tokushoho"
+                href="/terms"
                 class="footer__link footer__link--sans footer__link--poetry"
                 data-i18n="Terms and conditions"
                 data-role="terms-link"
               >Terms and conditions</a>
+              <a
+                href="/privacy"
+                class="footer__link footer__link--sans footer__link--dimmed"
+                data-i18n="Privacy"
+              >Privacy</a>
+              <a
+                href="/data-deletion"
+                class="footer__link footer__link--sans footer__link--dimmed"
+                data-i18n="Data deletion"
+              >Data deletion</a>
+              <a
+                href="/tokushoho"
+                class="footer__link footer__link--sans footer__link--dimmed"
+                data-i18n="Tokushoho"
+              >Tokushoho</a>
+              <a
+                href="/client-login/"
+                class="footer__link footer__link--sans footer__link--dimmed"
+                data-i18n="Client login"
+              >Client login</a>
               <div class="footer__controls-mobile">
                 <button type="button" class="button" data-role="lang">English</button>
                 <button type="button" class="button" data-role="theme">Light</button>

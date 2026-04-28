@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>About</title>
     <meta
       name="description"
@@ -371,37 +371,37 @@
         top: auto;
         left: auto;
         display: block;
-        padding: 28px 20px 0;
-        font-size: 20px;
+        padding: calc(28px * var(--sf)) calc(20px * var(--sf)) 0;
+        font-size: calc(20px * var(--sf));
         line-height: 1;
         }
       }
 
       @media (max-width: 768px) {
         .about-main {
-        padding: 16px 20px 20px;
-        gap: 60px;
+        padding: calc(16px * var(--sf)) calc(20px * var(--sf)) calc(20px * var(--sf));
+        gap: calc(60px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .about-header {
-        gap: 24px;
+        gap: calc(24px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .about-title {
-        font-size: 40px;
+        font-size: calc(40px * var(--sf));
         line-height: 0.94;
-        letter-spacing: -0.8px;
+        letter-spacing: calc(-0.8px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .about-body {
         width: 100%;
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
@@ -410,7 +410,7 @@
         .about-image {
         width: 100vw;
         max-width: none;
-        margin-top: 20px;
+        margin-top: calc(20px * var(--sf));
         margin-left: calc(50% - 50vw);
         margin-right: calc(50% - 50vw);
         height: auto;
@@ -420,21 +420,21 @@
 
       @media (max-width: 768px) {
         .section-title {
-        font-size: 24px;
-        margin-bottom: 20px;
+        font-size: calc(24px * var(--sf));
+        margin-bottom: calc(20px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .about-team {
         flex-direction: column;
-        gap: 30px;
+        gap: calc(30px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .team-member {
-        gap: 12px;
+        gap: calc(12px * var(--sf));
         }
       }
 
@@ -442,67 +442,67 @@
         .team-member__name,
       .team-member__role,
       .team-member__email {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .team-member__booking {
-        gap: 12px;
-        margin-top: 12px;
+        gap: calc(12px * var(--sf));
+        margin-top: calc(12px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .team-member__booking-copy {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         max-width: 100%;
         }
       }
 
       @media (max-width: 768px) {
         .booking-modal {
-        padding: 20px;
+        padding: calc(20px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .booking-modal__dialog {
-        width: calc(100vw - 40px);
-        height: calc(100vh - 40px);
+        width: calc(100vw - (40px * var(--sf)));
+        height: calc(100vh - (40px * var(--sf)));
         }
       }
 
       @media (max-width: 768px) {
         .booking-modal__close {
-        top: 12px;
-        right: 12px;
+        top: calc(12px * var(--sf));
+        right: calc(12px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .about-offices {
         flex-direction: column;
-        gap: 30px;
+        gap: calc(30px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .office {
-        gap: 12px;
+        gap: calc(12px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .office__title,
       .office__address {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .about-contact {
-        margin-top: 40px;
+        margin-top: calc(40px * var(--sf));
         }
       }
 
@@ -516,7 +516,7 @@
       <!-- Main content -->
       <main class="about-main">
         <section class="about-header">
-          <h1 class="about-title" data-i18n="About us">About us</h1>
+          <h1 class="about-title" data-i18n="About">About</h1>
           <div class="about-body">
             <p data-i18n="about-p1">
               0001 was founded in 2026 in Tokyo to build software that scales.
@@ -580,15 +580,14 @@
             <div class="office">
               <span class="office__title">Tokyo</span>
               <address class="office__address">
-                1F, Takagi Building,<br />
-                2-20-7 Azabujuban,<br />
-                Minato-ku,<br />
-                Tokyo 106-0045
+                〒114-0022<br />
+                東京都北区<br />
+                王子本町2丁目15-7
               </address>
             </div>
           </div>
           <div class="about-contact">
-            <a class="button" href="/contact">Contact us</a>
+            <a class="button" href="/contact" data-i18n="Contact">Contact</a>
           </div>
         </section>
       </main>

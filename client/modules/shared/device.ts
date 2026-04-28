@@ -1,6 +1,7 @@
 // device.ts
 // Device detection and --sf (scale factor) responsive scaling
 // Adapted from DS one device.ts for standalone use (no Lit signals)
+import { MOBILE_BREAKPOINT } from './constants';
 
 // ============================================================================
 // Types
@@ -26,6 +27,7 @@ const defaultConfig: ScalingConfig = {
 
 let config: ScalingConfig = { ...defaultConfig };
 let currentFactor = 1;
+let zoomPreventionInitialized = false;
 
 // ============================================================================
 // Device Detection
@@ -46,8 +48,13 @@ export function detectMobileDevice(): boolean {
   const isTouchCapable = (navigator.maxTouchPoints || 0) > 1;
   const narrowViewport =
     Math.min(window.innerWidth || 0, window.innerHeight || 0) <= 820;
+  const viewportWidth = Math.min(
+    window.innerWidth || Number.MAX_SAFE_INTEGER,
+    document.documentElement.clientWidth || Number.MAX_SAFE_INTEGER
+  );
+  const viewportMatchesMobile = viewportWidth <= MOBILE_BREAKPOINT;
 
-  return uaMatchesMobile || (isTouchCapable && narrowViewport);
+  return viewportMatchesMobile || uaMatchesMobile || (isTouchCapable && narrowViewport);
 }
 
 export function getDeviceType(): DeviceType {
@@ -71,10 +78,60 @@ function calculateScalingFactor(viewportWidth: number): number {
   );
 }
 
+function initZoomPrevention(): void {
+  if (zoomPreventionInitialized || typeof document === "undefined") {
+    return;
+  }
+
+  zoomPreventionInitialized = true;
+
+  const viewportMeta = document.querySelector<HTMLMetaElement>('meta[name="viewport"]');
+  if (viewportMeta) {
+    viewportMeta.content =
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
+  }
+
+  let lastTouchEnd = 0;
+
+  document.addEventListener(
+    "gesturestart",
+    (event) => {
+      event.preventDefault();
+    },
+    { passive: false }
+  );
+
+  document.addEventListener(
+    "touchmove",
+    (event: TouchEvent & { scale?: number }) => {
+      if (typeof event.scale === "number" && event.scale !== 1) {
+        event.preventDefault();
+      }
+    },
+    { passive: false }
+  );
+
+  document.addEventListener(
+    "touchend",
+    (event) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    },
+    { passive: false }
+  );
+}
+
 export function updateScalingFactor(): void {
   if (typeof window === "undefined" || typeof document === "undefined") return;
 
   const isMobile = detectMobileDevice();
+
+  if (isMobile) {
+    initZoomPrevention();
+  }
 
   if (!isMobile) {
     currentFactor = 1;

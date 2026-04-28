@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Thank you</title>
     <meta name="description" content="Thank you for contacting 0001. We'll get in touch with you." />
 
@@ -209,69 +209,76 @@
           top: auto;
           left: auto;
           display: block;
-          padding: 28px 20px 0;
-          font-size: 20px;
+          padding: calc(28px * var(--sf)) calc(20px * var(--sf)) 0;
+          font-size: calc(20px * var(--sf));
           line-height: 1;
         }
 
         .thankyou-main {
-          padding: 16px 20px 20px;
-          gap: 32px;
+          padding: calc(16px * var(--sf)) calc(20px * var(--sf)) calc(20px * var(--sf));
+          gap: calc(32px * var(--sf));
         }
 
         .thankyou-header {
           flex-direction: column;
-          gap: 18px;
+          gap: calc(18px * var(--sf));
         }
 
         .thankyou-title {
-          font-size: 40px;
-          letter-spacing: -0.8px;
+          font-size: calc(40px * var(--sf));
+          letter-spacing: calc(-0.8px * var(--sf));
         }
 
         .thankyou-description {
-          font-size: 14px;
+          font-size: calc(14px * var(--sf));
           max-width: 100%;
         }
 
         .thankyou-hint {
-          font-size: 12px;
-          margin-top: 12px;
+          font-size: calc(12px * var(--sf));
+          margin-top: calc(12px * var(--sf));
         }
 
         .home-footer {
-          margin-top: 48px;
-          padding: 32px 20px;
-          gap: 32px;
+          margin-top: calc(48px * var(--sf));
+          padding: calc(32px * var(--sf)) calc(20px * var(--sf));
+          gap: calc(32px * var(--sf));
         }
 
         .home-footer__top {
           flex-direction: column;
           align-items: flex-start;
-          gap: 16px;
+          gap: calc(16px * var(--sf));
         }
 
         .home-footer__brand {
           width: 100%;
           flex-wrap: wrap;
-          gap: 6px;
+          gap: calc(6px * var(--sf));
+        }
+
+        .home-footer__brand-name,
+        .home-footer__tagline,
+        .home-footer__link {
+          font-size: calc(16px * var(--sf));
+          letter-spacing: calc(-0.32px * var(--sf));
         }
 
         .home-footer__controls {
           width: auto;
-          gap: 10px;
+          gap: calc(10px * var(--sf));
         }
 
         .home-footer__nav {
           flex-direction: column;
-          gap: 24px;
+          gap: calc(24px * var(--sf));
           padding-left: 0;
           height: auto;
         }
 
         .home-footer__nav-column {
           width: 100%;
-          gap: 16px;
+          gap: calc(16px * var(--sf));
         }
 
         .home-footer__bottom {
@@ -282,7 +289,13 @@
 
         .home-footer__copyright {
           flex-wrap: wrap;
-          gap: 10px;
+          gap: calc(10px * var(--sf));
+        }
+
+        .home-footer__social-link,
+        .home-footer__copyright {
+          font-size: calc(12px * var(--sf));
+          letter-spacing: calc(-0.24px * var(--sf));
         }
       }
     </style>

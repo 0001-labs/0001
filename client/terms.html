@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Terms of service</title>
+    <meta name="description" content="Terms of service for 0001.dev." />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") {
+          theme = "light";
+        }
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+    <link rel="stylesheet" href="./design/css/legal.css" />
+    <script type="module" src="./components/one-footer.ts"></script>
+    <script type="module" src="./modules/pages/common.ts"></script>
+  </head>
+  <body>
+    <div class="legal-page">
+      <a href="/" class="legal-logo">0001</a>
+
+      <main class="legal-main">
+        <header class="legal-header">
+          <h1 class="legal-title" data-i18n="terms.title">Terms of service</h1>
+          <p class="legal-meta" data-i18n="terms.effectiveDate">Effective date: April 25, 2026</p>
+          <p class="legal-intro" data-i18n="terms.intro">These terms apply to your use of 0001.dev and related tools operated by ヨアキム セレンセン under the trade name イチ.</p>
+        </header>
+
+        <div class="legal-sections">
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="terms.service.title">Service description</h2>
+            <p class="legal-body" data-i18n="terms.service.body">0001.dev provides personal software tools, client portals, integrations, and related development services. Some features may connect to third-party APIs, including Meta Graph API, only after user authorization.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="terms.acceptableUse.title">Acceptable use</h2>
+            <ul class="legal-list">
+              <li data-i18n="terms.acceptableUse.item.legal">Use the service only for lawful purposes and in compliance with applicable platform rules.</li>
+              <li data-i18n="terms.acceptableUse.item.abuse">Do not abuse, disrupt, reverse engineer, scrape, overload, or attempt unauthorized access to the service.</li>
+              <li data-i18n="terms.acceptableUse.item.content">Do not submit content that infringes rights, contains malware, or violates law or third-party terms.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="terms.account.title">Account responsibilities</h2>
+            <p class="legal-body" data-i18n="terms.account.body">You are responsible for keeping your account credentials secure, ensuring submitted information is accurate, and confirming that you have authority to connect third-party accounts or assets.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="terms.termination.title">Termination</h2>
+            <p class="legal-body" data-i18n="terms.termination.body">You may stop using the service at any time. We may suspend or terminate access if required for security, legal compliance, non-payment, platform rule violations, or misuse.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="terms.liability.title">Liability</h2>
+            <p class="legal-body" data-i18n="terms.liability.body">The service is provided as available. To the maximum extent permitted by law, 0001 is not liable for indirect, incidental, special, consequential, or lost-profit damages, or for failures caused by third-party platforms, networks, or services.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="terms.law.title">Governing law</h2>
+            <p class="legal-body" data-i18n="terms.law.body">These terms are governed by the laws of Japan. The Tokyo District Court has exclusive jurisdiction as the court of first instance for disputes related to these terms or the service.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="terms.contact.title">Contact</h2>
+            <p class="legal-body">
+              <span data-i18n="terms.contact.body">For terms or service questions, contact</span>
+              <a class="legal-link" href="mailto:joachim@0001.dev">joachim@0001.dev</a>.
+            </p>
+          </section>
+        </div>
+      </main>
+
+      <one-footer></one-footer>
+    </div>
+  </body>
+</html>

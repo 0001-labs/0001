@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Contact</title>
     <meta
       name="description"
@@ -102,6 +102,119 @@
         line-height: 1.5;
         max-width: 451px;
         margin: 0 0 25px 0;
+      }
+
+      .contact-booking {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin: 0 0 25px 0;
+      }
+
+      .contact-booking__copy {
+        font-family: var(--font-regular);
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        color: var(--base-slate);
+        line-height: 1.5;
+        max-width: 440px;
+        margin: 0;
+        font-variant-ligatures: common-ligatures discretionary-ligatures;
+        font-feature-settings:
+          "liga" 1,
+          "calt" 1,
+          "dlig" 1,
+          "ss01" 1,
+          "ss02" 1,
+          "ss03" 1,
+          "ss04" 1;
+      }
+
+      .contact-booking__button {
+        display: inline-block;
+        box-sizing: border-box;
+        height: 16px;
+        max-height: 16px;
+        min-height: 0;
+        padding: 0;
+        line-height: 16px;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: -0.28px;
+        font-family: var(--font-regular);
+        vertical-align: top;
+        overflow: hidden;
+        border-radius: 0;
+        width: fit-content;
+      }
+
+      .booking-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        background: rgba(10, 12, 8, 0.35);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
+      .booking-modal.is-open {
+        display: flex;
+      }
+
+      .booking-modal__dialog {
+        position: relative;
+        width: min(760px, calc(100vw - 80px));
+        height: min(700px, calc(100vh - 80px));
+        border: var(--border-default);
+        background: var(--page-surface);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .booking-modal__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0 16px;
+        min-height: 44px;
+        border-bottom: var(--border-default);
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .booking-modal__title {
+        font-family: var(--font-medium);
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        color: var(--base-slate);
+      }
+
+      .booking-modal__close {
+        border: none;
+        background: transparent;
+        padding: 0;
+        font-family: var(--font-regular);
+        font-size: 14px;
+        letter-spacing: -0.28px;
+        color: var(--base-slate);
+        cursor: pointer;
+      }
+
+      .booking-modal__close:hover {
+        text-decoration: underline;
+      }
+
+      .booking-modal__iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: var(--base-white);
       }
 
       .contact-description [data-i18n] {
@@ -423,16 +536,16 @@
         top: auto;
         left: auto;
         display: block;
-        padding: 28px 20px 0;
-        font-size: 20px;
+        padding: calc(28px * var(--sf)) calc(20px * var(--sf)) 0;
+        font-size: calc(20px * var(--sf));
         line-height: 1;
         }
       }
 
       @media (max-width: 768px) {
         .contact-main {
-        padding: 16px 20px 20px;
-        gap: 44px;
+        padding: calc(16px * var(--sf)) calc(20px * var(--sf)) calc(20px * var(--sf));
+        gap: calc(44px * var(--sf));
         }
       }
 
@@ -440,62 +553,85 @@
         .contact-heading {
         display: flex;
         flex-direction: column;
-        gap: 18px;
+        gap: calc(18px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-title {
-        font-size: 40px;
+        font-size: calc(40px * var(--sf));
         line-height: 0.94;
-        letter-spacing: -0.8px;
+        letter-spacing: calc(-0.8px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-description {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         max-width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: calc(20px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .contact-booking {
+        gap: calc(12px * var(--sf));
+        margin-bottom: calc(20px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .contact-booking__copy {
+        font-size: calc(14px * var(--sf));
+        max-width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .contact-booking__button {
+        height: calc(16px * var(--sf));
+        max-height: calc(16px * var(--sf));
+        line-height: calc(16px * var(--sf));
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-form-box {
         max-width: 100%;
-        padding: 12px;
-        gap: 24px;
+        padding: calc(12px * var(--sf));
+        gap: calc(24px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-category {
-        gap: 12px;
+        gap: calc(12px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-category__label {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-option {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-mode-toggle {
-        margin-bottom: 16px;
+        margin-bottom: calc(16px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-mode-btn {
-        font-size: 14px;
-        padding: 10px 12px;
+        font-size: calc(14px * var(--sf));
+        padding: calc(10px * var(--sf)) calc(12px * var(--sf));
         }
       }
 
@@ -503,15 +639,15 @@
         .contact-topics-header {
         width: 100%;
         flex-direction: column;
-        gap: 12px;
+        gap: calc(12px * var(--sf));
         align-items: flex-start;
-        margin-bottom: 20px;
+        margin-bottom: calc(20px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-topics-label {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
@@ -523,51 +659,80 @@
 
       @media (max-width: 768px) {
         .contact-topic-tag {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-field {
-        gap: 6px;
+        gap: calc(6px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-field__label {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-field__input,
       .contact-field__textarea {
-        font-size: 14px;
-        padding: 8px 10px;
+        font-size: calc(14px * var(--sf));
+        padding: calc(8px * var(--sf)) calc(10px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-field__textarea {
-        min-height: 150px;
+        min-height: calc(150px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .contact-field__hint {
-        font-size: 12px;
+        font-size: calc(12px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
-        #next-btn,
+        .booking-modal {
+        padding: calc(20px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .booking-modal__dialog {
+        width: calc(100vw - (40px * var(--sf)));
+        height: calc(100vh - (40px * var(--sf)));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .booking-modal__header {
+        gap: calc(16px * var(--sf));
+        padding: 0 calc(16px * var(--sf));
+        min-height: calc(44px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .booking-modal__title,
+      .booking-modal__close {
+        font-size: calc(14px * var(--sf));
+        letter-spacing: calc(-0.28px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+      #next-btn,
       #submit-inquiry-btn {
         height: auto;
         max-height: none;
-        min-height: 24px;
-        padding: 0 10px;
-        line-height: 24px;
-        font-size: 15px;
+        min-height: calc(24px * var(--sf));
+        padding: 0 calc(10px * var(--sf));
+        line-height: calc(24px * var(--sf));
+        font-size: calc(15px * var(--sf));
         }
       }
 
@@ -581,7 +746,7 @@
       <!-- Main content -->
       <main class="contact-main">
         <div class="contact-heading">
-          <h1 class="contact-title" data-i18n="Contact us">Contact us</h1>
+          <h1 class="contact-title" data-i18n="Contact">Contact</h1>
           <div
             class="contact-progress"
             id="contact-progress"
@@ -599,8 +764,11 @@
         <!-- Step 1: Topic Selection -->
         <div class="contact-step active" id="step-1">
           <p class="contact-description">
-            <span data-i18n="Select your focus areas below to help us understand your needs.">Select your focus areas below to help us understand your needs.</span>
+            <span data-i18n="Select your focus areas below to help us understand your needs, or book a meeting to talk through your project.">Select your focus areas below to help us understand your needs, or book a meeting to talk through your project.</span>
           </p>
+          <div class="contact-booking">
+            <button type="button" class="button contact-booking__button" data-booking-open data-i18n="Book a meeting">Book a meeting</button>
+          </div>
 
           <div class="contact-form-box">
             <!-- Mode toggle tabs -->
@@ -945,6 +1113,21 @@
 
       <!-- Footer -->
       <one-footer></one-footer>
+    </div>
+    <div class="booking-modal" data-booking-modal aria-hidden="true">
+      <div class="booking-modal__dialog">
+        <div class="booking-modal__header">
+          <div class="booking-modal__title" data-i18n="Book a 30min meeting">Book a 30min meeting</div>
+          <button type="button" class="booking-modal__close" data-booking-close data-i18n="Close">Close</button>
+        </div>
+        <iframe
+          class="booking-modal__iframe"
+          src="https://calendar.notion.so/meet/joachim-meeting/nz3to4p92"
+          title="Book a meeting with Joachim"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
     </div>
   </body>
 </html>

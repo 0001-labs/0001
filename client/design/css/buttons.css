@@ -148,8 +148,8 @@ a.button:focus-visible {
 
 @media (max-width: 768px) {
   .contact-btn {
-    font-size: 14px;
-    padding: 8px 14px;
-    min-height: 40px;
+    font-size: calc(14px * var(--sf));
+    padding: calc(8px * var(--sf)) calc(14px * var(--sf));
+    min-height: calc(40px * var(--sf));
   }
 }

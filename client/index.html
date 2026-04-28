@@ -2,12 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>0001 We deliver digital products</title>
     <meta
       name="description"
-      content="0001 delivers digital products. Come work with us to leverage your business."
+      content="0001 delivers digital products. Legal business name: ヨアキム セレンセン. Trade name: イチ. Business address: 〒114-0022 東京都北区王子本町2丁目15-7. Disclosure page: https://0001.dev/tokushoho."
     />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "0001",
+        "legalName": "ヨアキム セレンセン",
+        "alternateName": "イチ",
+        "url": "https://0001.dev",
+        "email": "joachim@0001.dev",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "王子本町2丁目15-7",
+          "addressLocality": "北区",
+          "addressRegion": "東京都",
+          "postalCode": "114-0022",
+          "addressCountry": "JP"
+        }
+      }
+    </script>
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -87,6 +106,104 @@
         width: 100%;
       }
 
+      .home-menu {
+        --menu-collapsed-opacity: 1;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        padding-left: 400px;
+        padding-right: 300px;
+        z-index: 5;
+      }
+
+      .home-menu__mobile-toggle,
+      .home-menu__mobile-panel {
+        display: none;
+      }
+
+      .home-menu__nav {
+        --menu-row-opacity: 0.05;
+        --menu-row-blur: 10px;
+        --menu-row-spread: 0;
+        --menu-links-opacity: 0;
+        --menu-collapsed-opacity: 1;
+        --menu-anchor-x: 150px;
+        --menu-left-offset: 150px;
+        --menu-right-offset: 150px;
+        width: min(100%, 400px);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 20px;
+        opacity: var(--menu-row-opacity);
+        filter: blur(var(--menu-row-blur));
+        will-change: opacity, filter;
+      }
+
+      .home-menu__link {
+        position: absolute;
+        left: var(--menu-anchor-x);
+        top: 50%;
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        line-height: 1.25;
+        color: var(--base-black);
+        opacity: var(--menu-links-opacity);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .home-menu__link:nth-of-type(1) {
+        transform: translateY(-50%)
+          translateX(calc(-1 * var(--menu-left-offset) * var(--menu-row-spread)));
+      }
+
+      .home-menu__link:nth-of-type(2) {
+        transform: translateY(-50%);
+      }
+
+      .home-menu__link:nth-of-type(3) {
+        transform: translateY(-50%)
+          translateX(calc(var(--menu-right-offset) * var(--menu-row-spread)));
+      }
+
+      .home-menu__link {
+        will-change: transform, opacity;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .home-menu__collapsed-label {
+        position: absolute;
+        left: 580px;
+        top: 50%;
+        width: 26.67px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(-50%, -50%);
+        background: var(--chartreuse-green);
+        color: var(--every-green);
+        opacity: var(--menu-collapsed-opacity);
+        pointer-events: none;
+        will-change: opacity;
+        transition: opacity 180ms ease;
+        z-index: 6;
+      }
+
+      .home-menu__collapsed-label svg {
+        display: block;
+        width: 23px;
+        height: 13px;
+      }
+
+      .home-menu__link:focus-visible {
+        outline: none;
+      }
+
       .hero {
         padding-left: 400px;
         padding-right: 300px;
@@ -94,16 +211,18 @@
 
       .hero__inner {
         width: min(100%, 400px);
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: auto minmax(300px, 1fr);
         gap: 30px;
+        min-height: calc((48px * 1.2 * 2) + 30px + 300px);
       }
 
       /* Image cover reveals the copy beneath it on both desktop and mobile */
       .hero__visual-wrap {
         position: relative;
         width: 400px;
-        height: 300px;
+        min-height: 300px;
+        height: 100%;
       }
 
       .hero__title-wrapper {
@@ -136,6 +255,7 @@
         position: relative;
         width: 100%;
         height: 100%;
+        min-height: 300px;
         overflow: hidden;
         background: var(--base-cream);
       }
@@ -191,7 +311,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        justify-content: flex-end;
+        justify-content: center;
         padding: 0;
         margin: 0;
         gap: 16px;
@@ -270,6 +390,69 @@
         display: none;
       }
 
+      .home-legal {
+        padding-left: 400px;
+        padding-right: 300px;
+      }
+
+      .home-legal__inner {
+        width: min(100%, 400px);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px;
+        border: 1px solid var(--panel-border);
+        border-radius: 18px;
+        background: var(--panel-background-subtle);
+        box-sizing: border-box;
+      }
+
+      .home-legal__eyebrow,
+      .home-legal__body,
+      .home-legal__list,
+      .home-legal__link {
+        font-family: var(--font-regular);
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        line-height: 1.5;
+        color: var(--base-slate);
+      }
+
+      .home-legal__eyebrow {
+        margin: 0;
+        color: var(--base-black);
+      }
+
+      .home-legal__title {
+        margin: 0;
+        font-family: var(--font-canon);
+        font-size: 28px;
+        font-weight: 400;
+        letter-spacing: -0.56px;
+        line-height: 1.1;
+        color: var(--base-black);
+      }
+
+      .home-legal__list {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .home-legal__list li + li {
+        margin-top: 6px;
+      }
+
+      .home-legal__body {
+        margin: 0;
+      }
+
+      .home-legal__link {
+        color: var(--base-black);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
       @media (max-width: 768px) {
         .home-page {
@@ -286,20 +469,252 @@
 
       @media (max-width: 768px) {
         .home-content {
-        gap: 80px;
+        gap: calc(80px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: auto;
+        display: block;
+        width: auto;
+        padding: 0;
+        z-index: 12;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-toggle {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 12;
+        width: calc(24px * var(--sf));
+        height: calc(24px * var(--sf));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: var(--base-black);
+        padding: 0;
+        margin: 0;
+        line-height: 0;
+        cursor: pointer;
+        }
+      }
+
+      @media (max-width: 768px) {
+        [data-theme='dark'] .home-menu__mobile-toggle {
+        background: var(--page-shell);
+        color: var(--brand-accent);
+        }
+      }
+
+      @media (max-width: 768px) {
+        [data-theme='dark'] .home-menu[data-mobile-open="true"] .home-menu__mobile-toggle {
+        background: #10110b;
+        color: var(--base-darker-grey);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-toggle svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-toggle-icon {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-toggle-icon svg + svg {
+        display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu[data-mobile-open="true"] .home-menu__mobile-toggle-icon svg:first-child {
+        display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu[data-mobile-open="true"] .home-menu__mobile-toggle-icon svg + svg {
+        display: block;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-panel {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        min-width: 100vw;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: calc(14px * var(--sf));
+        padding: calc(72px * var(--sf)) calc(20px * var(--sf)) calc(24px * var(--sf));
+        box-sizing: border-box;
+        background: var(--chartreuse-green);
+        z-index: 11;
+        opacity: 0;
+        transform-origin: 100% 0;
+        transform: translate3d(calc(28px * var(--sf)), calc(-28px * var(--sf)), 0) scale(0.92);
+        pointer-events: none;
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        transition:
+          transform 220ms cubic-bezier(0.2, 0.9, 0.18, 1),
+          opacity 160ms ease,
+          none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-sections {
+        display: flex;
+        flex-direction: column;
+        gap: calc(28px * var(--sf));
+        width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: calc(8px * var(--sf));
+        width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-section-label {
+        font-family: var(--font-regular);
+        font-size: calc(14px * var(--sf));
+        letter-spacing: calc(-0.28px * var(--sf));
+        line-height: 1.1;
+        color: rgba(0, 0, 0, 0.7);
+        margin: 0 0 calc(6px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-socials {
+        margin-top: auto;
+        display: flex;
+        gap: calc(12px * var(--sf));
+        align-items: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-social-link {
+        width: calc(24px * var(--sf));
+        height: calc(24px * var(--sf));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        color: var(--base-stealth);
+        text-decoration: none;
+        line-height: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-social-link svg {
+        display: block;
+        width: calc(13px * var(--sf));
+        height: calc(13px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu[data-mobile-open="true"] .home-menu__mobile-panel {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        pointer-events: auto;
+        transition:
+          transform 220ms cubic-bezier(0.2, 0.9, 0.18, 1),
+          opacity 160ms ease;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-panel[hidden] {
+        display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__mobile-link {
+        font-family: var(--font-canon);
+        font-size: calc(32px * var(--sf));
+        letter-spacing: calc(-0.64px * var(--sf));
+        line-height: 1.05;
+        color: var(--base-black);
+        text-decoration: none;
+        display: block;
+        }
+      }
+
+      @media (max-width: 768px) {
+        [data-theme='dark'] .home-menu__mobile-section-label {
+        color: var(--every-green);
+        opacity: 0.72;
+        }
+      }
+
+      @media (max-width: 768px) {
+        [data-theme='dark'] .home-menu__mobile-link {
+        color: var(--every-green);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__nav {
+        display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-menu__collapsed-label {
+        display: none;
         }
       }
 
       @media (max-width: 768px) {
         .hero {
-        padding: 30px 0;
+        padding: calc(30px * var(--sf)) 0;
         }
       }
 
       @media (max-width: 768px) {
         .hero__inner {
         width: 100%;
-        gap: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: calc(24px * var(--sf));
+        min-height: 0;
         }
       }
 
@@ -308,9 +723,10 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 6px;
-        padding: 0 20px;
+        gap: calc(6px * var(--sf));
+        padding: 0 calc(20px * var(--sf));
         box-sizing: border-box;
+        min-height: calc((32px * var(--sf)) + (6px * var(--sf)) + ((32px * var(--sf)) * 1.2 * 2));
         }
       }
 
@@ -327,7 +743,7 @@
         position: static;
         width: auto;
         height: auto;
-        font-size: 32px;
+        font-size: calc(32px * var(--sf));
         line-height: 1;
         padding: 0;
         margin: 0;
@@ -353,6 +769,7 @@
         margin-right: calc(50% - 50vw);
         height: auto;
         aspect-ratio: 4/3;
+        min-height: clamp(390px, calc(350px + (120px * (var(--sf) - 1))), 500px);
         flex-shrink: 0;
         }
       }
@@ -372,39 +789,72 @@
 
       @media (max-width: 768px) {
         .hero__description {
-        padding: 0;
+        justify-content: flex-start;
+        padding: calc(20px * var(--sf)) calc(20px * var(--sf)) 0;
         }
       }
 
       @media (max-width: 768px) {
         .hero__description p {
-        font-size: 16px;
-        line-height: 1.5;
+        font-size: calc(16px * var(--sf));
+        line-height: 1.45;
         }
       }
 
       @media (max-width: 768px) {
         .hero__buttons {
         align-items: center;
-        gap: 16px;
-        margin-top: 20px;
+        gap: calc(10px * var(--sf));
+        margin-top: calc(12px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .hero__description .hero__buttons a.button {
-        height: 16px;
-        max-height: 16px;
-        line-height: 16px;
-        font-size: 14px;
+        height: calc(16px * var(--sf));
+        max-height: calc(16px * var(--sf));
+        line-height: calc(16px * var(--sf));
+        font-size: calc(14px * var(--sf));
         }
       }
 
       /* Match chartreuse CTA typography — .button uses --sf on mobile; plain link did not */
       @media (max-width: 768px) {
         .hero__description .hero__buttons .hero__text-link {
-        font-size: 14px;
-        letter-spacing: -0.28px;
+        font-size: calc(14px * var(--sf));
+        letter-spacing: calc(-0.28px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-legal {
+        padding: 0 calc(20px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-legal__inner {
+        width: 100%;
+        padding: calc(18px * var(--sf));
+        border-radius: calc(16px * var(--sf));
+        gap: calc(12px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-legal__eyebrow,
+      .home-legal__body,
+      .home-legal__list,
+      .home-legal__link {
+        font-size: calc(14px * var(--sf));
+        letter-spacing: calc(-0.28px * var(--sf));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .home-legal__title {
+        font-size: calc(24px * var(--sf));
+        letter-spacing: calc(-0.48px * var(--sf));
         }
       }
 
@@ -421,6 +871,77 @@
       </div>
       <!-- Main content -->
       <div class="home-content">
+        <nav class="home-menu" aria-label="Primary">
+          <button type="button" class="home-menu__mobile-toggle" id="home-menu-toggle" aria-label="Open menu" aria-controls="home-menu-mobile-panel" aria-expanded="false">
+            <span class="home-menu__mobile-toggle-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" transform="matrix(-1 0 0 1 24 0)" fill="#CCFF4D"/>
+                <path d="M21.06 11.7193V2.9388H12.288L12.2742 4.43454H18.4825L4.43664 18.4852L4.45049 12.2807H2.94V21.0612H11.7119L11.7258 19.5655H5.51754L19.5634 5.51479L19.5495 11.7193H21.06Z" fill="#1E1E1E"/>
+              </svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" transform="matrix(-1 0 0 1 24 0)" fill="#E8E8E8"/>
+                <path d="M11.697 21.0981V12.3176H2.93028L2.91643 13.8133H9.12097L2.88164 20.0412L3.9619 21.1214L10.2012 14.8936L10.1874 21.0981H11.697Z" fill="#1E1E1E"/>
+                <path d="M12.3378 2.90943V11.69H21.1045L21.1184 10.1942H14.9138L21.1184 3.95883L20.0381 2.87858L13.8336 9.11398L13.8474 2.90943H12.3378Z" fill="#1E1E1E"/>
+              </svg>
+            </span>
+          </button>
+          <div class="home-menu__mobile-panel" id="home-menu-mobile-panel" hidden>
+            <div class="home-menu__mobile-sections">
+              <div class="home-menu__mobile-section">
+                <span class="home-menu__mobile-section-label" data-i18n="Work">Work</span>
+                <a href="/0001-projects.html" class="home-menu__mobile-link"><span data-i18n="Projects">Projects</span></a>
+                <a href="/products" class="home-menu__mobile-link"><span data-i18n="Products">Products</span></a>
+              </div>
+              <div class="home-menu__mobile-section">
+                <span class="home-menu__mobile-section-label" data-i18n="Company">Company</span>
+                <a href="/services" class="home-menu__mobile-link"><span data-i18n="Services">Services</span></a>
+                <a href="/about" class="home-menu__mobile-link"><span data-i18n="About">About</span></a>
+              </div>
+            </div>
+            <div class="home-menu__mobile-socials">
+              <a
+                href="https://www.linkedin.com/company/000one/"
+                class="home-menu__mobile-social-link"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6A2.49 2.49 0 0 1 0 3.5 2.49 2.49 0 0 1 2.48 1 2.49 2.49 0 0 1 4.98 3.5ZM.5 8h4V23h-4V8Zm7 0h3.84v2.05h.05c.53-1.01 1.84-2.08 3.79-2.08 4.05 0 4.8 2.67 4.8 6.14V23h-4v-7.8c0-1.86-.03-4.25-2.59-4.25-2.6 0-3 2.03-3 4.12V23h-4V8Z"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.instagram.com/0001hq/"
+                class="home-menu__mobile-social-link"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+              >
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <g clip-path="url(#clip0_mobile_instagram)">
+                    <path d="M3.70479 0.044276C3.03192 0.0760009 2.57244 0.183402 2.17072 0.341182C1.75503 0.503232 1.40263 0.720615 1.05202 1.07249C0.701467 1.42436 0.485507 1.77697 0.324669 2.1934C0.168996 2.59591 0.0634926 3.05581 0.0337704 3.72905C0.00404812 4.40228 -0.00253926 4.61871 0.000780783 6.33607C0.00404812 8.05332 0.0116368 8.26859 0.0442575 8.94325C0.0764039 9.61595 0.183383 10.0753 0.341217 10.4772C0.50353 10.8929 0.72065 11.2451 1.07268 11.5959C1.42466 11.9466 1.777 12.162 2.19438 12.3231C2.59658 12.4786 3.05659 12.5845 3.72971 12.614C4.40284 12.6435 4.61948 12.6504 6.33631 12.647C8.05314 12.6438 8.26931 12.6361 8.94375 12.6041C9.6183 12.5722 10.0752 12.4644 10.4772 12.3073C10.8929 12.1447 11.2454 11.9279 11.5959 11.5758C11.9463 11.2236 12.1621 10.8708 12.3229 10.4541C12.4787 10.0519 12.5846 9.59197 12.6138 8.91932C12.6433 8.2443 12.6502 8.02881 12.647 6.31177C12.6436 4.59468 12.6359 4.3794 12.6039 3.70501C12.5719 3.03062 12.4648 2.57267 12.3071 2.17058C12.1445 1.75483 11.9276 1.40286 11.5758 1.05188C11.2239 0.700906 10.8707 0.485262 10.4543 0.324898C10.0518 0.169173 9.59211 0.0630896 8.91899 0.0339997C8.24586 0.00490985 8.02922 -0.0026261 6.31175 0.000746635C4.59429 0.00401397 4.37928 0.0113918 3.70479 0.044276ZM3.77867 11.4763C3.16209 11.4495 2.82729 11.3471 2.60417 11.2613C2.30874 11.1475 2.09826 11.0099 1.87592 10.7897C1.65353 10.5695 1.51698 10.3583 1.40163 10.0635C1.31499 9.84034 1.21065 9.50591 1.18182 8.88933C1.15046 8.22296 1.14388 8.02286 1.14019 6.33449C1.1365 4.64617 1.14298 4.44628 1.17218 3.77964C1.19852 3.16358 1.3016 2.82842 1.38719 2.6054C1.50102 2.3096 1.63814 2.09949 1.85884 1.87731C2.07955 1.65507 2.29013 1.51822 2.58519 1.40286C2.80811 1.31585 3.14249 1.2124 3.7588 1.18305C4.42571 1.15143 4.62554 1.14511 6.31365 1.14142C8.00176 1.13773 8.20212 1.14405 8.86929 1.17346C9.48534 1.20023 9.82067 1.30231 10.0434 1.38847C10.339 1.5023 10.5493 1.639 10.7715 1.86013C10.9937 2.08115 11.1307 2.29099 11.2461 2.58669C11.3332 2.80892 11.4367 3.14319 11.4658 3.75993C11.4975 4.42683 11.5047 4.62683 11.5077 6.31478C11.5108 8.00273 11.5048 8.20319 11.4756 8.86963C11.4487 9.4862 11.3465 9.82111 11.2606 10.0445C11.1467 10.3398 11.0096 10.5504 10.7887 10.7725C10.5679 10.9946 10.3576 11.1314 10.0623 11.2468C9.83974 11.3337 9.50495 11.4374 8.88916 11.4667C8.2222 11.4981 8.02237 11.5047 6.33362 11.5084C4.64488 11.5121 4.44558 11.5052 3.77867 11.4763ZM8.93406 2.94399C8.93431 3.09409 8.97907 3.24075 9.06268 3.36541C9.14628 3.49007 9.26498 3.58714 9.40376 3.64434C9.54254 3.70153 9.69516 3.71629 9.84233 3.68673C9.98949 3.65718 10.1246 3.58465 10.2305 3.47831C10.3365 3.37198 10.4085 3.23661 10.4375 3.08933C10.4665 2.94206 10.4512 2.78949 10.3934 2.65093C10.3357 2.51237 10.2382 2.39403 10.1132 2.31089C9.98827 2.22775 9.84145 2.18354 9.69134 2.18386C9.49013 2.18428 9.29733 2.26459 9.15532 2.40713C9.01331 2.54967 8.93372 2.74278 8.93406 2.94399ZM3.07682 6.33022C3.08035 8.12367 4.5369 9.57421 6.32994 9.57084C8.12307 9.56741 9.57462 8.11102 9.57124 6.31757C9.56782 4.52412 8.11095 3.07315 6.3176 3.07668C4.52426 3.08021 3.07345 4.53697 3.07682 6.33022ZM4.21591 6.32795C4.21509 5.91104 4.33791 5.50325 4.56885 5.15614C4.79979 4.80903 5.12847 4.5382 5.51333 4.37789C5.89819 4.21758 6.32195 4.175 6.73101 4.25552C7.14007 4.33605 7.51607 4.53606 7.81146 4.83028C8.10685 5.12449 8.30836 5.49969 8.39051 5.90843C8.47266 6.31717 8.43176 6.74109 8.27298 7.12659C8.1142 7.51208 7.84468 7.84184 7.49849 8.07415C7.15231 8.30647 6.745 8.43091 6.32809 8.43175C6.05126 8.43233 5.77702 8.37837 5.52104 8.27296C5.26507 8.16754 5.03236 8.01273 4.83622 7.81737C4.64008 7.62201 4.48435 7.38992 4.37791 7.13436C4.27148 6.87881 4.21643 6.60478 4.21591 6.32795Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_mobile_instagram">
+                      <rect width="12.6478" height="12.6478" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <span class="home-menu__collapsed-label" aria-hidden="true">
+            <svg width="23" height="13" viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.20878 12.4078L0 6.19899L6.19899 0L7.26643 1.04785L2.87915 5.43513L19.51 5.48364L15.1129 1.10616L16.1803 0.0387168L22.3891 6.2475L16.1901 12.4465L15.1227 11.3986L19.51 7.01135L2.87915 6.96284L7.27622 11.3403L6.20878 12.4078Z" fill="currentColor"/>
+            </svg>
+          </span>
+          <div class="home-menu__nav">
+            <a href="/services" class="home-menu__link"><span data-i18n="Services">Services</span></a>
+            <a href="/0001-projects.html" class="home-menu__link"><span data-i18n="Projects">Projects</span></a>
+            <a href="/products" class="home-menu__link"><span data-i18n="Products">Products</span></a>
+          </div>
+        </nav>
+
         <main class="hero">
           <div class="hero__inner">
             <div class="hero__title-wrapper">
@@ -446,6 +967,23 @@
             </div>
           </div>
         </main>
+
+        <section class="home-legal" aria-labelledby="home-legal-title">
+          <div class="home-legal__inner">
+            <p class="home-legal__eyebrow">Legal business information for Meta and compliance review</p>
+            <h2 class="home-legal__title" id="home-legal-title">Legal business name: ヨアキム セレンセン</h2>
+            <ul class="home-legal__list">
+              <li>Trade name: イチ</li>
+              <li>Brand / website name: 0001</li>
+              <li>Business address: 〒114-0022 東京都北区王子本町2丁目15-7</li>
+            </ul>
+            <p class="home-legal__body">
+              This website is operated by ヨアキム セレンセン.
+              Official disclosure page:
+              <a class="home-legal__link" href="/tokushoho">https://0001.dev/tokushoho</a>
+            </p>
+          </div>
+        </section>
 
         <!-- Footer -->
         <one-footer></one-footer>

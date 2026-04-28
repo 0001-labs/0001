@@ -214,6 +214,45 @@ function applyContactDataI18n(translations: Translations): void {
   });
 }
 
+function initBookingModal(): void {
+  const openButton = document.querySelector<HTMLElement>('[data-booking-open]');
+  const closeButton = document.querySelector<HTMLElement>('[data-booking-close]');
+  const modal = document.querySelector<HTMLElement>('[data-booking-modal]');
+  const page = document.querySelector<HTMLElement>('.contact-page');
+
+  if (!openButton || !closeButton || !modal || !page) {
+    return;
+  }
+
+  const setOpen = (isOpen: boolean): void => {
+    modal.classList.toggle('is-open', isOpen);
+    modal.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    page.style.filter = isOpen ? 'blur(10px)' : '';
+    page.style.pointerEvents = isOpen ? 'none' : '';
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  };
+
+  openButton.addEventListener('click', () => {
+    setOpen(true);
+  });
+
+  closeButton.addEventListener('click', () => {
+    setOpen(false);
+  });
+
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  });
+}
+
 /**
  * Placeholders + static labels (h1, Next, …)
  */
@@ -238,6 +277,7 @@ export function initContactForm(): void {
   setContactProgressStep(1);
   initModeToggle();
   initTopicSelection();
+  initBookingModal();
   initStepNavigation();
   initFormSubmission();
   initPlaceholders();

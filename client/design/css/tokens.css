@@ -28,7 +28,8 @@
 :root {
   /* Primary brand colors */
   --chartreuse-green: #ccff4d;
-  --every-green: #979441;
+  --brand-accent: #ff4438;
+  --every-green: var(--brand-accent);
   --tau99-brand: #f2ffcf;
   --zenith-blue: #ccf;
 
@@ -81,10 +82,10 @@
   --footer-control-background: var(--chartreuse-green);
   --footer-control-hover: #d9ff69;
   --footer-control-text: var(--every-green);
-  --footer-control-border: rgba(151, 148, 65, 0.08);
+  --footer-control-border: rgba(255, 68, 56, 0.1);
   --footer-link-color: var(--every-green);
-  --footer-link-dimmed: rgba(151, 148, 65, 0.4);
-  --footer-copyright: rgba(101, 138, 8, 0.3);
+  --footer-link-dimmed: rgba(255, 68, 56, 0.4);
+  --footer-copyright: rgba(255, 68, 56, 0.32);
   --subtle-control-background: rgba(0, 0, 0, 0.3);
   --subtle-control-background-hover: rgba(0, 0, 0, 0.36);
   --subtle-control-text: var(--base-black);
@@ -110,7 +111,8 @@
 
 [data-theme='dark'] {
   --chartreuse-green: #2d4216;
-  --every-green: #d7f58a;
+  --brand-accent: #ff6b61;
+  --every-green: var(--brand-accent);
   --contact-accent: #8e92d9;
   --page-background: #171913;
   --page-surface: #1b1d16;
@@ -130,8 +132,8 @@
   --image-overlay-blend: multiply;
   --footer-control-background: #2d4216;
   --footer-control-hover: #37501b;
-  --footer-control-text: #d7f58a;
-  --footer-control-border: rgba(215, 245, 138, 0.14);
+  --footer-control-text: var(--brand-accent);
+  --footer-control-border: rgba(255, 107, 97, 0.18);
   --footer-link-color: #eef3dd;
   --footer-link-dimmed: rgba(238, 243, 221, 0.52);
   --footer-copyright: rgba(238, 243, 221, 0.36);

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Services</title>
     <meta
       name="description"
@@ -260,85 +260,85 @@
         position: relative;
         top: auto;
         left: auto;
-        padding: 20px;
-        font-size: 20px;
+        padding: calc(20px * var(--sf));
+        font-size: calc(20px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-main {
-        padding: 20px;
-        padding-top: 40px;
-        gap: 50px;
+        padding: calc(20px * var(--sf));
+        padding-top: calc(40px * var(--sf));
+        gap: calc(50px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-title {
-        font-size: 32px;
+        font-size: calc(32px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-category {
-        gap: 16px;
+        gap: calc(16px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-category__label {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-category__list {
         max-width: 100%;
-        gap: 16px;
+        gap: calc(16px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-item__title {
-        font-size: 24px;
+        font-size: calc(24px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-item__chevron {
-        width: 20px;
-        height: 20px;
+        width: calc(20px * var(--sf));
+        height: calc(20px * var(--sf));
         opacity: 0.6;
         }
       }
 
       @media (max-width: 768px) {
         .services-item__chevron svg {
-        width: 10px;
-        height: 10px;
+        width: calc(10px * var(--sf));
+        height: calc(10px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-item__description {
-        font-size: 14px;
+        font-size: calc(14px * var(--sf));
         max-width: 100%;
-        padding-top: 10px;
+        padding-top: calc(10px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-item .button {
-        height: 16px;
-        max-height: 16px;
-        line-height: 16px;
-        font-size: 14px;
+        height: calc(16px * var(--sf));
+        max-height: calc(16px * var(--sf));
+        line-height: calc(16px * var(--sf));
+        font-size: calc(14px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .services-contact {
-        margin-top: 16px;
+        margin-top: calc(16px * var(--sf));
         }
       }
 
@@ -705,8 +705,8 @@
 
         <!-- Contact CTA -->
         <div class="services-contact">
-          <a class="button" href="/contact" data-i18n="Contact us"
-            >Contact us</a
+          <a class="button" href="/contact" data-i18n="Contact"
+            >Contact</a
           >
         </div>
       </main>

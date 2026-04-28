@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Data deletion</title>
+    <meta name="description" content="Data deletion instructions for 0001.dev." />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") {
+          theme = "light";
+        }
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+    <link rel="stylesheet" href="./design/css/legal.css" />
+    <script type="module" src="./components/one-footer.ts"></script>
+    <script type="module" src="./modules/pages/common.ts"></script>
+  </head>
+  <body>
+    <div class="legal-page">
+      <a href="/" class="legal-logo">0001</a>
+
+      <main class="legal-main">
+        <header class="legal-header">
+          <h1 class="legal-title" data-i18n="dataDeletion.title">Data deletion</h1>
+          <p class="legal-meta" data-i18n="dataDeletion.effectiveDate">Effective date: April 25, 2026</p>
+          <p class="legal-intro" data-i18n="dataDeletion.intro">You can request deletion of personal data associated with 0001.dev at any time.</p>
+        </header>
+
+        <div class="legal-sections">
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="dataDeletion.request.title">How to request deletion</h2>
+            <ul class="legal-list">
+              <li data-i18n="dataDeletion.request.item.email">Email joachim@0001.dev with the subject "Data deletion request" and include the account email or Meta app-scoped user ID, if available.</li>
+              <li data-i18n="dataDeletion.request.item.meta">If you remove the app from Meta, Meta may send an automated callback to /api/meta/data-deletion.</li>
+              <li data-i18n="dataDeletion.request.item.confirmation">If you received a confirmation code, include it in your email so we can check the queued request.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="dataDeletion.deleted.title">What we delete</h2>
+            <p class="legal-body" data-i18n="dataDeletion.deleted.body">We delete or anonymize personal account data, Meta-derived identifiers, access tokens, connection records, and feature data associated with the verified request, unless retention is required for law, security, abuse prevention, or accounting.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="dataDeletion.timeline.title">Timeline</h2>
+            <p class="legal-body" data-i18n="dataDeletion.timeline.body">Valid deletion requests are processed within 24 hours. Some operational logs or legally required records may remain for a limited period and are isolated from active product use.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="dataDeletion.developer.title">For Meta</h2>
+            <p class="legal-body" data-i18n="dataDeletion.developer.body">The Meta Data Deletion Request Callback URL is https://0001.dev/api/meta/data-deletion. The endpoint accepts POST requests with signed_request and returns a status URL plus confirmation_code.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="dataDeletion.contact.title">Contact</h2>
+            <p class="legal-body">
+              <span data-i18n="dataDeletion.contact.body">For deletion requests or status checks, contact</span>
+              <a class="legal-link" href="mailto:joachim@0001.dev">joachim@0001.dev</a>.
+            </p>
+          </section>
+        </div>
+      </main>
+
+      <one-footer></one-footer>
+    </div>
+  </body>
+</html>

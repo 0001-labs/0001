@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Privacy policy</title>
+    <meta name="description" content="Privacy policy for 0001.dev." />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") {
+          theme = "light";
+        }
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+    <link rel="stylesheet" href="./design/css/legal.css" />
+    <script type="module" src="./components/one-footer.ts"></script>
+    <script type="module" src="./modules/pages/common.ts"></script>
+  </head>
+  <body>
+    <div class="legal-page">
+      <a href="/" class="legal-logo">0001</a>
+
+      <main class="legal-main">
+        <header class="legal-header">
+          <h1 class="legal-title" data-i18n="privacy.title">Privacy policy</h1>
+          <p class="legal-meta" data-i18n="privacy.effectiveDate">Effective date: April 25, 2026</p>
+          <p class="legal-intro" data-i18n="privacy.intro">0001 is a personal tools suite operated by a sole proprietor in Tokyo, Japan.</p>
+        </header>
+
+        <div class="legal-sections">
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="privacy.data.title">Data we collect</h2>
+            <ul class="legal-list">
+              <li data-i18n="privacy.data.item.account">Account and contact data, such as name, email address, company name, and messages you send to us.</li>
+              <li data-i18n="privacy.data.item.meta">Meta Graph API data that you authorize the app to access, such as app-scoped user identifiers, connected asset identifiers, profile data, permissions, and content or metadata required by the enabled feature.</li>
+              <li data-i18n="privacy.data.item.technical">Technical data, including request metadata, device/browser information, Cloudflare logs, security events, and diagnostic records.</li>
+              <li data-i18n="privacy.data.item.verification">Business verification documents may be reviewed for Meta verification, including tax, bank, or utility documents showing the legal name ヨアキム セレンセン and address 〒114-0022 東京都北区王子本町2丁目15-7.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="privacy.use.title">How we use it</h2>
+            <ul class="legal-list">
+              <li data-i18n="privacy.use.item.operate">Operate, secure, debug, and improve 0001.dev and connected tools.</li>
+              <li data-i18n="privacy.use.item.meta">Provide user-authorized Meta Graph API features and explain each permission during App Review.</li>
+              <li data-i18n="privacy.use.item.support">Respond to support, access, deletion, and export requests.</li>
+              <li data-i18n="privacy.use.item.legal">Meet legal, tax, security, platform, and business verification obligations.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="privacy.thirdParties.title">Third parties</h2>
+            <ul class="legal-list">
+              <li data-i18n="privacy.thirdParties.item.meta">Meta Platforms: OAuth, app review, access verification, and Graph API features authorized by the user.</li>
+              <li data-i18n="privacy.thirdParties.item.convex">Convex: application database, authentication records, queues, and operational storage. Production storage region follows the configured Convex deployment.</li>
+              <li data-i18n="privacy.thirdParties.item.cloudflare">Cloudflare: Pages hosting, routing, security filtering, and logs for requests to 0001.dev.</li>
+              <li data-i18n="privacy.thirdParties.item.notion">Notion: internal task, lead, documentation, and support workflows when you contact us or when operational records are created.</li>
+              <li data-i18n="privacy.thirdParties.item.resend">Resend: transactional email delivery when email is required for a feature or support workflow.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="privacy.retention.title">Retention</h2>
+            <p class="legal-body" data-i18n="privacy.retention.body">We keep personal data only as long as needed to operate the service, satisfy legal or tax obligations, resolve disputes, maintain security, or complete deletion requests. Meta-derived user data is deleted or queued for deletion within 24 hours after a valid deletion request unless retention is legally required.</p>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="privacy.rights.title">User rights</h2>
+            <ul class="legal-list">
+              <li data-i18n="privacy.rights.item.access">You can request access to data associated with you.</li>
+              <li data-i18n="privacy.rights.item.delete">You can request deletion through /data-deletion or by email.</li>
+              <li data-i18n="privacy.rights.item.export">You can request export of data that is reasonably portable.</li>
+              <li data-i18n="privacy.rights.item.limit">Some records may be retained where required for tax, security, abuse prevention, or legal compliance.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h2 class="legal-section__title" data-i18n="privacy.contact.title">Contact</h2>
+            <p class="legal-body">
+              <span data-i18n="privacy.contact.body">For privacy requests, contact</span>
+              <a class="legal-link" href="mailto:joachim@0001.dev">joachim@0001.dev</a>.
+            </p>
+          </section>
+        </div>
+      </main>
+
+      <one-footer></one-footer>
+    </div>
+  </body>
+</html>

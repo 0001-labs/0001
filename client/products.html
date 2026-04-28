@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Products</title>
     <meta name="description" content="Products by 0001 - Our digital products and tools." />
 
@@ -272,34 +272,34 @@
       @media (max-width: 768px) {
         .products-header {
           height: auto;
-          padding: 24px 20px 48px;
+          padding: calc(24px * var(--sf)) calc(20px * var(--sf)) calc(48px * var(--sf));
         }
 
         .products-header__inner {
           align-items: flex-start;
           flex-direction: column;
-          gap: 24px;
+          gap: calc(24px * var(--sf));
         }
 
         .products-header__logo svg {
-          width: 84px;
+          width: calc(84px * var(--sf));
         }
 
         .products-header__link {
-          font-size: 14px;
-          letter-spacing: -0.28px;
+          font-size: calc(14px * var(--sf));
+          letter-spacing: calc(-0.28px * var(--sf));
           line-height: 1.2;
         }
 
         .products-header__nav {
           flex-wrap: wrap;
-          gap: 16px;
+          gap: calc(16px * var(--sf));
         }
 
         .products-main {
           min-height: calc(100vh - 120px);
           min-height: calc(100dvh - 120px);
-          padding: 28px 12px 48px;
+          padding: calc(28px * var(--sf)) calc(12px * var(--sf)) calc(48px * var(--sf));
         }
 
         .products-main__inner {
@@ -318,10 +318,10 @@
 
         .products-table__header-cell,
         .products-table__cell {
-          font-size: 11px;
-          letter-spacing: -0.22px;
-          height: 28px;
-          padding: 6px 4px;
+          font-size: calc(11px * var(--sf));
+          letter-spacing: calc(-0.22px * var(--sf));
+          height: calc(28px * var(--sf));
+          padding: calc(6px * var(--sf)) calc(4px * var(--sf));
         }
 
         .products-table__header-cell--product {
@@ -340,29 +340,29 @@
         }
 
         .products-meta {
-          gap: 20px;
-          margin-top: 24px;
+          gap: calc(20px * var(--sf));
+          margin-top: calc(24px * var(--sf));
           width: 100%;
         }
 
         .products-meta__links {
-          gap: 12px;
+          gap: calc(12px * var(--sf));
           flex-wrap: wrap;
         }
 
         .products-meta__copyright {
-          font-size: 14px;
-          letter-spacing: -0.28px;
-          line-height: 16px;
+          font-size: calc(14px * var(--sf));
+          letter-spacing: calc(-0.28px * var(--sf));
+          line-height: calc(16px * var(--sf));
         }
 
         .products-page .products-meta__links > a.button {
-          height: 24px !important;
-          max-height: 24px !important;
-          padding: 0 12px !important;
-          font-size: 16px !important;
-          line-height: 24px !important;
-          letter-spacing: -0.32px;
+          height: calc(24px * var(--sf)) !important;
+          max-height: calc(24px * var(--sf)) !important;
+          padding: 0 calc(12px * var(--sf)) !important;
+          font-size: calc(16px * var(--sf)) !important;
+          line-height: calc(24px * var(--sf)) !important;
+          letter-spacing: calc(-0.32px * var(--sf));
         }
       }
     </style>

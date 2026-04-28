@@ -115,8 +115,8 @@ class OneH1 extends HTMLElement {
 
         @media (max-width: 768px) {
           h1 {
-            font-size: 32px;
-            letter-spacing: -0.64px;
+            font-size: calc(32px * var(--sf));
+            letter-spacing: calc(-0.64px * var(--sf));
           }
         }
       </style>

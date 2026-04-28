@@ -6,24 +6,16 @@ import type { Translations } from '../types';
 import { initLanguage, cycleLanguage, toggleDSOneTheme, getCurrentLanguage, getTranslation, loadTranslations } from '../shared';
 import { getThemeLabel } from '../../utils/theme';
 
-const sentences: Record<number, string> = {
-  1: 'We deliver digital products',
-  714: 'Small teams, sharp edges',
-  1429: 'Every pixel is a promise',
-  2143: 'Built to outlast trends',
-  2857: 'Shipping beats perfection',
-  3571: 'Details that disappear when done right',
-  4286: 'Systems over pages',
-  5000: 'Craft is in the constraints',
-  5714: 'Making tools feel like instincts',
-  6429: 'Nothing decorative, everything deliberate',
-  7143: 'We delete more than we keep',
-  7857: 'Complexity absorbed, simplicity delivered',
-  1241: 'Telling stories again and again',
-  9999: 'The last sentence is never written',
-};
+const SENTENCE_IDS = [
+  1, 42, 156, 233, 377, 512, 618, 714, 803, 891, 967, 1088, 1241, 1337, 1429, 1555, 1763, 1901,
+  2022, 2143, 2301, 2504, 2689, 2857, 2944, 3102, 3333, 3571, 3819, 4044, 4286, 4501, 4618, 4811,
+  5000, 5199, 5432, 5714, 5888, 6047, 6199, 6429, 6601, 6832, 6944, 7143, 7299, 7511, 7666, 7857,
+  8394, 8571, 8714, 8888, 9047, 9199, 9286, 9429, 9512, 9666, 9811, 9901, 9950, 9999,
+] as const;
+const SENTENCE_ID_SET = new Set<number>(SENTENCE_IDS);
 
 interface RowData {
+  index: number;
   no: HTMLElement;
   sentence: HTMLElement;
   hasSentence: boolean;
@@ -35,6 +27,17 @@ const EXPANDED_ICON = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3
 const rows: RowData[] = [];
 let isCompact = true;
 let translations: Translations = {};
+
+function getSentenceText(index: number): string | null {
+  if (!SENTENCE_ID_SET.has(index)) {
+    return null;
+  }
+
+  const key = `sentence-${index}`;
+  const lang = getCurrentLanguage();
+  const translated = translations[lang]?.[key] || translations.en?.[key];
+  return translated || null;
+}
 
 function generateRows(): void {
   const columnNo = document.getElementById('column-no');
@@ -50,12 +53,13 @@ function generateRows(): void {
 
     const sentenceCell = document.createElement('div');
     sentenceCell.className = 'sentences-table__cell';
+    const sentenceText = getSentenceText(i);
 
-    if (sentences[i]) {
+    if (sentenceText) {
       if (i === 9999) {
         sentenceCell.classList.add('sentences-table__cell--hidden');
       }
-      sentenceCell.textContent = sentences[i];
+      sentenceCell.textContent = sentenceText;
     } else {
       sentenceCell.classList.add('sentences-table__cell--input');
 
@@ -80,7 +84,6 @@ function generateRows(): void {
 
         sentenceCell.classList.remove('sentences-table__cell--input');
         sentenceCell.textContent = input.value.trim();
-        sentences[i] = input.value.trim();
         rows[i - 1].hasSentence = true;
       };
 
@@ -101,7 +104,7 @@ function generateRows(): void {
     }
 
     columnSentence.appendChild(sentenceCell);
-    rows.push({ no: noCell, sentence: sentenceCell, hasSentence: Boolean(sentences[i]) });
+    rows.push({ index: i, no: noCell, sentence: sentenceCell, hasSentence: Boolean(sentenceText) });
   }
 }
 
@@ -160,17 +163,28 @@ function initThemeToggle(): void {
   updateThemeLabel();
 }
 
+function applySentencesI18n(): void {
+  rows.forEach((row) => {
+    const sentenceText = getSentenceText(row.index);
+    if (sentenceText) {
+      row.sentence.textContent = sentenceText;
+    }
+  });
+}
+
 export function initSentences(): void {
   generateRows();
   initCompactToggle();
   initLanguageToggle();
   initThemeToggle();
+  document.addEventListener('language-changed', applySentencesI18n);
+  window.addEventListener('language-changed', applySentencesI18n);
 }
 
 function init(): void {
-  initSentences();
   void loadTranslations().then((loadedTranslations) => {
     translations = loadedTranslations;
+    initSentences();
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
       themeToggle.textContent = getTranslation(translations, getThemeLabel(), getCurrentLanguage());

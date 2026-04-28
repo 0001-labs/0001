@@ -18,6 +18,14 @@ const palette = {
   rose: '#d9b9b0',
   blue: '#b8d9f4',
   teal: '#9fc9c6',
+  tunedRed: '#ff5f5f',
+  pink: '#f5aad1',
+  sharpBlue: '#594dff',
+  orange: '#fec20d',
+  everyGreen: '#979441',
+  appleGreen: '#99ff73',
+  lavender: '#ccccff',
+  yellow: '#ffff00',
 };
 
 function attrs(input) {
@@ -45,6 +53,14 @@ function path(options) {
 
 function group(content, options = {}) {
   return `<g ${attrs(options)}>${content}</g>`;
+}
+
+function repeatSequence(values, count) {
+  return Array.from({ length: count }, (_, index) => values[index % values.length]);
+}
+
+function rotateTransform(rotate, cx, cy) {
+  return rotate ? `rotate(${rotate} ${cx} ${cy})` : undefined;
 }
 
 function card(x, y, width, height, options = {}) {
@@ -132,6 +148,77 @@ function browserFrame(x, y, width, height, options = {}) {
     circle({ cx: x + 30, cy: y + 15, r: 3.5, fill: palette.ink, opacity: 0.12 }),
     circle({ cx: x + 42, cy: y + 15, r: 3.5, fill: palette.ink, opacity: 0.12 }),
   ].join('');
+}
+
+function stripeTile(x, y, size, colors, options = {}) {
+  const { rotate = 0, orientation = 'horizontal' } = options;
+  const band = size / colors.length;
+  let content = '';
+
+  colors.forEach((fill, index) => {
+    if (orientation === 'vertical') {
+      content += rect({ x: x + band * index, y, width: band + 0.25, height: size, fill });
+    } else {
+      content += rect({ x, y: y + band * index, width: size, height: band + 0.25, fill });
+    }
+  });
+
+  return group(content, { transform: rotateTransform(rotate, x + size / 2, y + size / 2) });
+}
+
+function pinwheelTile(x, y, size, colors, rotate = 0) {
+  const cx = x + size / 2;
+  const cy = y + size / 2;
+  const [top, right, bottom, left] = colors;
+  return group(
+    [
+      path({ d: `M${cx} ${cy} L${x} ${y} L${x + size} ${y} Z`, fill: top }),
+      path({ d: `M${cx} ${cy} L${x + size} ${y} L${x + size} ${y + size} Z`, fill: right }),
+      path({ d: `M${cx} ${cy} L${x + size} ${y + size} L${x} ${y + size} Z`, fill: bottom }),
+      path({ d: `M${cx} ${cy} L${x} ${y + size} L${x} ${y} Z`, fill: left }),
+    ].join(''),
+    { transform: rotateTransform(rotate, cx, cy) }
+  );
+}
+
+function diagonalCutTile(x, y, size, colors, rotate = 0) {
+  const [base, slash, accent] = colors;
+  return group(
+    [
+      rect({ x, y, width: size, height: size, fill: base }),
+      path({
+        d: `M${x} ${y + size * 0.82} L${x + size * 0.82} ${y} L${x + size} ${y} L${x} ${y + size} Z`,
+        fill: slash,
+      }),
+      path({
+        d: `M${x + size * 0.56} ${y} L${x + size} ${y} L${x + size} ${y + size * 0.44} Z`,
+        fill: accent,
+      }),
+    ].join(''),
+    { transform: rotateTransform(rotate, x + size / 2, y + size / 2) }
+  );
+}
+
+function cornerBladesTile(x, y, size, colors, rotate = 0) {
+  const [base, bladeA, bladeB, bladeC] = colors;
+  return group(
+    [
+      rect({ x, y, width: size, height: size, fill: base }),
+      path({
+        d: `M${x + size} ${y} L${x + size * 0.58} ${y} L${x + size * 0.84} ${y + size * 0.42} L${x + size} ${y + size * 0.3} Z`,
+        fill: bladeA,
+      }),
+      path({
+        d: `M${x + size * 0.7} ${y} L${x + size * 0.36} ${y} L${x + size * 0.64} ${y + size * 0.48} L${x + size * 0.9} ${y + size * 0.38} Z`,
+        fill: bladeB,
+      }),
+      path({
+        d: `M${x + size * 0.44} ${y} L${x + size * 0.1} ${y} L${x + size * 0.44} ${y + size * 0.52} L${x + size * 0.7} ${y + size * 0.42} Z`,
+        fill: bladeC,
+      }),
+    ].join(''),
+    { transform: rotateTransform(rotate, x + size / 2, y + size / 2) }
+  );
 }
 
 function background(config) {
@@ -424,6 +511,104 @@ const images = {
       ${dotGrid(284, 98, 4, 3, 16, palette.ink, 0.18)}
       ${orb(308, 208, 34)}
       ${chip(36, 226, 92, 14)}
+    `,
+  }),
+  'pattern-badges': compose({
+    bgStart: '#f7f1e8',
+    bgEnd: '#eef2eb',
+    scene: `
+      ${card(30, 36, 256, 188, { fill: '#faf8f2' })}
+      ${stripeTile(52, 60, 28, repeatSequence([palette.tunedRed, palette.paperAlt], 4))}
+      ${stripeTile(92, 60, 28, repeatSequence([palette.orange, palette.appleGreen], 4))}
+      ${pinwheelTile(132, 60, 28, [palette.lavender, palette.pink, palette.paperAlt, palette.tunedRed], 45)}
+      ${diagonalCutTile(172, 60, 28, [palette.everyGreen, palette.appleGreen, palette.orange])}
+      ${cornerBladesTile(212, 60, 28, [palette.ink, palette.appleGreen, palette.lavender, palette.everyGreen])}
+      ${stripeTile(52, 100, 28, repeatSequence([palette.pink, palette.lavender], 4), { orientation: 'vertical' })}
+      ${pinwheelTile(92, 100, 28, [palette.tunedRed, palette.orange, palette.paperAlt, palette.lime], -45)}
+      ${stripeTile(132, 100, 28, repeatSequence([palette.sharpBlue, palette.orange], 8), { orientation: 'vertical' })}
+      ${diagonalCutTile(172, 100, 28, [palette.paperAlt, palette.yellow, palette.tunedRed], -90)}
+      ${pinwheelTile(212, 100, 28, [palette.appleGreen, palette.everyGreen, palette.lavender, palette.orange])}
+      ${cornerBladesTile(52, 140, 28, [palette.paperAlt, palette.lime, palette.orange, palette.tunedRed], -90)}
+      ${stripeTile(92, 140, 28, repeatSequence([palette.everyGreen, palette.appleGreen], 8))}
+      ${diagonalCutTile(132, 140, 28, [palette.lavender, palette.everyGreen, palette.sand], 45)}
+      ${stripeTile(172, 140, 28, repeatSequence([palette.orange, palette.lavender], 8))}
+      ${pinwheelTile(212, 140, 28, [palette.yellow, palette.tunedRed, palette.sharpBlue, palette.lime], 45)}
+      ${card(298, 62, 64, 110, { fill: '#ffffff', rotate: 6 })}
+      ${stripeTile(314, 82, 34, repeatSequence([palette.sharpBlue, palette.orange], 8), { orientation: 'vertical' })}
+      ${cornerBladesTile(314, 126, 34, [palette.ink, palette.appleGreen, palette.lavender, palette.everyGreen], 90)}
+      ${dotGrid(300, 188, 4, 3, 14, palette.ink, 0.14)}
+      ${orb(318, 226, 34)}
+      ${chip(34, 236, 104, 14)}
+    `,
+  }),
+  'pattern-cascade': compose({
+    bgStart: '#f5efe8',
+    bgEnd: '#edf1ef',
+    scene: `
+      ${path({ d: 'M52 200 C98 164 132 136 178 110 C224 84 274 72 340 66', stroke: palette.ink, 'stroke-opacity': 0.14, 'stroke-width': 3, fill: 'none' })}
+      ${stripeTile(54, 178, 44, repeatSequence([palette.everyGreen, palette.appleGreen], 8), { rotate: -8 })}
+      ${pinwheelTile(116, 144, 44, [palette.lavender, palette.pink, palette.paperAlt, palette.tunedRed], 45)}
+      ${diagonalCutTile(180, 110, 44, [palette.paperAlt, palette.yellow, palette.tunedRed], 6)}
+      ${stripeTile(244, 78, 44, repeatSequence([palette.sharpBlue, palette.orange], 8), { orientation: 'vertical', rotate: -10 })}
+      ${cornerBladesTile(308, 48, 44, [palette.ink, palette.appleGreen, palette.lavender, palette.everyGreen], 4)}
+      ${card(40, 42, 112, 86, { fill: '#ffffff', rotate: -6 })}
+      ${stripeTile(62, 68, 30, repeatSequence([palette.tunedRed, palette.paperAlt], 4))}
+      ${pinwheelTile(100, 68, 30, [palette.appleGreen, palette.orange, palette.lavender, palette.everyGreen])}
+      ${card(250, 146, 104, 106, { fill: palette.ink, strokeOpacity: 0, rotate: 8 })}
+      ${stripeTile(274, 170, 40, repeatSequence([palette.orange, palette.appleGreen], 8))}
+      ${outlineRule(270, 214, 52, 0.24)}
+      ${outlineRule(270, 234, 38, 0.18)}
+      ${orb(86, 236, 28)}
+      ${chip(40, 220, 126, 14, palette.lavender)}
+    `,
+  }),
+  'pattern-orbit': compose({
+    bgStart: '#f6f0e8',
+    bgEnd: '#eef2ef',
+    scene: `
+      ${circle({ cx: 168, cy: 144, r: 88, fill: '#ffffff', stroke: palette.ink, 'stroke-opacity': 0.1, 'stroke-width': 2 })}
+      ${circle({ cx: 168, cy: 144, r: 58, fill: 'none', stroke: palette.ink, 'stroke-opacity': 0.08, 'stroke-width': 2 })}
+      ${card(138, 114, 60, 60, { fill: palette.ink, strokeOpacity: 0, rotate: 8, radius: 18 })}
+      ${pinwheelTile(152, 128, 32, [palette.yellow, palette.tunedRed, palette.sharpBlue, palette.lime], 45)}
+      ${stripeTile(152, 46, 32, repeatSequence([palette.pink, palette.lavender], 8))}
+      ${diagonalCutTile(240, 78, 32, [palette.paperAlt, palette.everyGreen, palette.appleGreen], 90)}
+      ${cornerBladesTile(256, 166, 32, [palette.ink, palette.appleGreen, palette.lavender, palette.everyGreen], -90)}
+      ${stripeTile(150, 222, 32, repeatSequence([palette.orange, palette.appleGreen], 8), { orientation: 'vertical' })}
+      ${pinwheelTile(64, 168, 32, [palette.appleGreen, palette.orange, palette.lavender, palette.everyGreen], -45)}
+      ${diagonalCutTile(70, 78, 32, [palette.lavender, palette.tunedRed, palette.yellow], -45)}
+      ${path({ d: 'M168 56 L168 86', stroke: palette.ink, 'stroke-opacity': 0.18, 'stroke-width': 3 })}
+      ${path({ d: 'M238 92 L214 108', stroke: palette.ink, 'stroke-opacity': 0.18, 'stroke-width': 3 })}
+      ${path({ d: 'M244 182 L214 170', stroke: palette.ink, 'stroke-opacity': 0.18, 'stroke-width': 3 })}
+      ${path({ d: 'M168 202 L168 222', stroke: palette.ink, 'stroke-opacity': 0.18, 'stroke-width': 3 })}
+      ${path({ d: 'M94 182 L122 170', stroke: palette.ink, 'stroke-opacity': 0.18, 'stroke-width': 3 })}
+      ${path({ d: 'M98 92 L122 108', stroke: palette.ink, 'stroke-opacity': 0.18, 'stroke-width': 3 })}
+      ${card(284, 54, 70, 90, { fill: '#ffffff', rotate: 6 })}
+      ${stripeTile(302, 74, 34, repeatSequence([palette.sharpBlue, palette.orange], 8), { orientation: 'vertical' })}
+      ${pinwheelTile(302, 118, 34, [palette.pink, palette.lavender, palette.paperAlt, palette.tunedRed])}
+      ${orb(312, 216, 36)}
+      ${chip(38, 232, 112, 14)}
+    `,
+  }),
+  'pattern-sails': compose({
+    bgStart: '#f4efe7',
+    bgEnd: '#edf2ee',
+    scene: `
+      ${card(34, 38, 222, 186, { fill: '#fbfaf4' })}
+      ${stripeTile(56, 64, 42, repeatSequence([palette.everyGreen, palette.appleGreen], 8))}
+      ${stripeTile(108, 64, 42, repeatSequence([palette.orange, palette.appleGreen], 8))}
+      ${stripeTile(160, 64, 42, repeatSequence([palette.sharpBlue, palette.orange], 8), { orientation: 'vertical' })}
+      ${pinwheelTile(56, 118, 42, [palette.lavender, palette.pink, palette.paperAlt, palette.tunedRed], 45)}
+      ${diagonalCutTile(108, 118, 42, [palette.paperAlt, palette.yellow, palette.tunedRed])}
+      ${cornerBladesTile(160, 118, 42, [palette.ink, palette.appleGreen, palette.lavender, palette.everyGreen])}
+      ${diagonalCutTile(66, 172, 32, [palette.lavender, palette.everyGreen, palette.sand], 45)}
+      ${stripeTile(110, 172, 32, repeatSequence([palette.pink, palette.lavender], 8), { orientation: 'vertical' })}
+      ${pinwheelTile(154, 172, 32, [palette.yellow, palette.tunedRed, palette.sharpBlue, palette.lime], -45)}
+      ${path({ d: 'M256 88 C286 66 316 54 352 46', stroke: palette.ink, 'stroke-opacity': 0.16, 'stroke-width': 3, fill: 'none' })}
+      ${diagonalCutTile(276, 58, 58, [palette.paperAlt, palette.orange, palette.appleGreen], -8)}
+      ${cornerBladesTile(286, 128, 58, [palette.ink, palette.appleGreen, palette.lavender, palette.everyGreen], 6)}
+      ${pinwheelTile(274, 202, 42, [palette.pink, palette.tunedRed, palette.orange, palette.yellow], 45)}
+      ${orb(326, 84, 40)}
+      ${chip(36, 236, 92, 14, palette.lime)}
     `,
   }),
 };

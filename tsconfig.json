@@ -13,7 +13,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react-jsx"
   },
-  "include": ["client/**/*.ts", "scripts/**/*.ts", "functions/**/*.ts", "tests/**/*.ts"]
+  "include": [
+    "client/**/*.ts",
+    "client/**/*.tsx",
+    "scripts/**/*.ts",
+    "functions/**/*.ts",
+    "tests/**/*.ts",
+    "convex/**/*.ts"
+  ],
+  "exclude": ["convex/_generated/**"]
 }

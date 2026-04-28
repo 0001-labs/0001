@@ -12,6 +12,7 @@
 }
 
 html {
+  --sf: 1;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -447,71 +448,71 @@ a {
   }
 
   .header {
-    padding: 20px;
+    padding: calc(20px * var(--sf));
     flex-direction: column;
-    gap: 16px;
+    gap: calc(16px * var(--sf));
   }
 
   .header__nav {
-    gap: 12px;
+    gap: calc(12px * var(--sf));
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .header__link {
-    font-size: 16px;
+    font-size: calc(16px * var(--sf));
   }
 
   .section {
-    padding: 20px;
+    padding: calc(20px * var(--sf));
   }
 
   .title {
-    font-size: 32px;
-    letter-spacing: -0.64px;
+    font-size: calc(32px * var(--sf));
+    letter-spacing: calc(-0.64px * var(--sf));
   }
 
   .title--medium {
-    font-size: 28px;
+    font-size: calc(28px * var(--sf));
   }
 
   .title--small {
-    font-size: 22px;
+    font-size: calc(22px * var(--sf));
   }
 
   .footer {
-    padding: 30px 20px;
+    padding: calc(30px * var(--sf)) calc(20px * var(--sf));
   }
 
   .footer__top {
     flex-direction: column;
-    gap: 16px;
+    gap: calc(16px * var(--sf));
     align-items: flex-start;
-    margin-bottom: 40px;
+    margin-bottom: calc(40px * var(--sf));
   }
 
   .footer__nav {
     flex-direction: column;
-    gap: 24px;
+    gap: calc(24px * var(--sf));
     padding-left: 0;
   }
 
   .footer__nav-column {
-    gap: 16px;
+    gap: calc(16px * var(--sf));
   }
 
   .footer__bottom {
-    margin-top: 40px;
+    margin-top: calc(40px * var(--sf));
   }
 
   .offices {
     flex-direction: column;
-    gap: 30px;
+    gap: calc(30px * var(--sf));
   }
 
   .office {
     width: 100%;
-    gap: 12px;
+    gap: calc(12px * var(--sf));
   }
 
   .table {
@@ -532,19 +533,19 @@ a {
   }
 
   .table__cell {
-    font-size: 16px;
-    padding: 6px;
+    font-size: calc(16px * var(--sf));
+    padding: calc(6px * var(--sf));
     height: auto;
-    min-height: 30px;
+    min-height: calc(30px * var(--sf));
   }
 
   .services-list__item {
-    font-size: 24px;
+    font-size: calc(24px * var(--sf));
   }
 
   .services-list__description {
     max-width: 100%;
-    font-size: 14px;
+    font-size: calc(14px * var(--sf));
   }
 
   .contact-heading {
@@ -554,15 +555,15 @@ a {
 
 @media (max-width: 480px) {
   .header__link {
-    font-size: 16px;
+    font-size: calc(16px * var(--sf));
   }
 
   .title {
-    font-size: 28px;
+    font-size: calc(28px * var(--sf));
   }
 
   .services-list__item {
-    font-size: 24px;
+    font-size: calc(24px * var(--sf));
   }
 }
 

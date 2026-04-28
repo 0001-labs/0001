@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Task log</title>
     <meta name="description" content="0001 task log - What we're building and what's done." />
 
@@ -167,41 +167,41 @@
       /* Mobile */
       @media (max-width: 768px) {
         .tasklog-header {
-        height: 60px;
+        height: calc(60px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .tasklog-content {
-        gap: 80px;
+        gap: calc(80px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .tasklog-main {
-        padding: 40px 20px 0;
+        padding: calc(40px * var(--sf)) calc(20px * var(--sf)) 0;
         }
       }
 
       @media (max-width: 768px) {
         .tasklog-tab {
-        font-size: 16px;
-        padding: 6px 8px;
+        font-size: calc(16px * var(--sf));
+        padding: calc(6px * var(--sf)) calc(8px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .tasklog-table__cell {
-        font-size: 16px;
-        padding: 6px;
-        min-height: 30px;
+        font-size: calc(16px * var(--sf));
+        padding: calc(6px * var(--sf));
+        min-height: calc(30px * var(--sf));
         }
       }
 
       @media (max-width: 768px) {
         .tasklog-table__cell--status,
       .tasklog-table__cell--due {
-        width: 90px;
+        width: calc(90px * var(--sf));
         }
       }
 
@@ -239,7 +239,7 @@
 
       @media (max-width: 768px) {
         .tasklog-main {
-          padding: 40px 20px 0;
+          padding: calc(40px * var(--sf)) calc(20px * var(--sf)) 0;
         }
 
         .tasklog-tabs {
@@ -247,18 +247,18 @@
         }
 
         .tasklog-tab {
-          font-size: 16px;
-          padding: 6px 8px;
+          font-size: calc(16px * var(--sf));
+          padding: calc(6px * var(--sf)) calc(8px * var(--sf));
         }
 
         .tasklog-table__cell {
-          font-size: 16px;
-          padding: 6px;
+          font-size: calc(16px * var(--sf));
+          padding: calc(6px * var(--sf));
         }
 
         .tasklog-table__cell--status,
         .tasklog-table__cell--due {
-          width: 90px;
+          width: calc(90px * var(--sf));
         }
       }
     </style>
