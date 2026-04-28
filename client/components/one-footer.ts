@@ -661,10 +661,10 @@ class OneFooter extends HTMLElement {
                 data-i18n="Tokushoho"
               >Tokushoho</a>
               <a
-                href="/client-login/"
+                href="https://link.0001.dev"
                 class="footer__link footer__link--sans footer__link--dimmed"
-                data-i18n="Client login"
-              >Client login</a>
+                data-i18n="Link"
+              >Link</a>
               <div class="footer__controls-mobile">
                 <button type="button" class="button" data-role="lang">English</button>
                 <button type="button" class="button" data-role="theme">Light</button>

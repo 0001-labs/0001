@@ -1,12 +1,10 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
-import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   root: "client",
   envDir: __dirname,
   publicDir: "../public",
-  plugins: [react()],
   build: {
     outDir: "../dist",
     emptyOutDir: true,
@@ -26,13 +24,7 @@ export default defineConfig({
         sentences: resolve(__dirname, "client/sentences.html"),
         thankyou: resolve(__dirname, "client/thank-you.html"),
         architecture: resolve(__dirname, "client/architecture.html"),
-        // "client-login" entry is included below; requires `bunx convex dev` to
-        // have generated convex/_generated/ before vite build can resolve it.
-        "client-login": resolve(__dirname, "client/client-login/index.html"),
       },
     },
-  },
-  server: {
-    open: true,
   },
 });

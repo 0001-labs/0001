@@ -21,8 +21,7 @@
     "client/**/*.tsx",
     "scripts/**/*.ts",
     "functions/**/*.ts",
-    "tests/**/*.ts",
-    "convex/**/*.ts"
+    "tests/**/*.ts"
   ],
-  "exclude": ["convex/_generated/**"]
+  "exclude": []
 }

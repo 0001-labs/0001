@@ -1,0 +1,3 @@
+/client-login https://link.0001.dev 302
+/client-login/ https://link.0001.dev 302
+/client-login/* https://link.0001.dev/:splat 302
