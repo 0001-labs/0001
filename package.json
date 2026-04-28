@@ -4,8 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "bun run fetch-notion && vite build",
+    "build": "bun run fetch-notion && bun run fetch-open-source && vite build",
     "fetch-notion": "bun run scripts/fetch-notion.ts",
+    "fetch-open-source": "bun run scripts/fetch-open-source.ts",
     "auth:keys": "node scripts/setup-convex-auth-keys.mjs",
     "preview": "vite preview",
     "deploy": "bun run build && wrangler pages deploy dist --project-name=0001-website",

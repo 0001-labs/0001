@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Open Source</title>
+    <meta name="description" content="Open source projects by 0001 labs." />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var theme = localStorage.getItem("theme");
+        if (theme !== "dark") theme = "light";
+        root.classList.toggle("light-theme", theme === "light");
+        root.classList.toggle("dark-theme", theme === "dark");
+        root.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <link rel="stylesheet" href="./design/css/tokens.css" />
+    <link rel="stylesheet" href="./design/css/screen.css" />
+    <script type="module" src="./modules/pages/products.ts"></script>
+
+    <style>
+      .open-source-page {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background: var(--page-background);
+      }
+
+      .open-source-header {
+        height: 180px;
+        padding: 40px 60px 0;
+        background: var(--chartreuse-green);
+      }
+
+      .open-source-header__inner {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .open-source-header__logo {
+        color: var(--base-black);
+        font-family: var(--font-medium);
+        font-size: 19.5px;
+        font-weight: 500;
+        letter-spacing: -0.39px;
+        line-height: 15px;
+        text-decoration: none;
+      }
+
+      .open-source-header__nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .open-source-header__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--base-slate);
+        font-family: var(--font-regular);
+        font-size: 19.5px;
+        letter-spacing: -0.39px;
+        line-height: 15px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.2s ease;
+      }
+
+      .open-source-header__link:hover,
+      .open-source-header__link--active {
+        color: var(--every-green);
+      }
+
+      .open-source-header__github {
+        width: 18px;
+        height: 18px;
+        color: inherit;
+        flex: 0 0 auto;
+      }
+
+      .open-source-main {
+        min-height: calc(100vh - 180px);
+        min-height: calc(100dvh - 180px);
+        border-top: var(--border-default);
+        padding: 100px 60px 120px;
+        background: var(--page-background);
+      }
+
+      .open-source-main__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .open-source-table-wrap {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      .open-source-table {
+        width: 880px;
+        min-width: 880px;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background: var(--page-background);
+      }
+
+      .open-source-table__header-cell {
+        height: 20px;
+        padding: 0 1px;
+        color: var(--base-slate);
+        font-family: var(--font-regular);
+        font-size: 13px;
+        font-weight: normal;
+        letter-spacing: -0.26px;
+        line-height: 20px;
+        text-align: left;
+        vertical-align: bottom;
+        white-space: nowrap;
+      }
+
+      .open-source-table__header-cell--project {
+        width: 180px;
+      }
+
+      .open-source-table__header-cell--description {
+        width: 380px;
+      }
+
+      .open-source-table__cell {
+        height: 20px;
+        max-height: 20px;
+        border: 1px solid var(--base-black);
+        padding: 3px;
+        overflow: hidden;
+        color: var(--base-slate);
+        font-family: var(--font-regular);
+        font-size: 13px;
+        letter-spacing: -0.26px;
+        line-height: 1;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+
+      .open-source-table__cell--project {
+        background: var(--chartreuse-green);
+      }
+
+      .open-source-table__cell--project a {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      .open-source-table__cell--description {
+        color: rgba(30, 30, 30, 0.68);
+      }
+
+      .open-source-table__project-name {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .open-source-meta {
+        width: 880px;
+        margin-top: 20px;
+        color: var(--text-color-faint);
+        font-family: var(--font-medium);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: -0.28px;
+        line-height: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .open-source-header {
+          height: auto;
+          padding: calc(24px * var(--sf)) calc(20px * var(--sf)) calc(48px * var(--sf));
+        }
+
+        .open-source-header__inner {
+          flex-direction: column;
+          gap: calc(24px * var(--sf));
+        }
+
+        .open-source-header__nav {
+          flex-wrap: wrap;
+          gap: calc(16px * var(--sf));
+        }
+
+        .open-source-header__link,
+        .open-source-header__logo {
+          font-size: calc(14px * var(--sf));
+          letter-spacing: calc(-0.28px * var(--sf));
+          line-height: 1.2;
+        }
+
+        .open-source-main {
+          min-height: calc(100vh - 120px);
+          min-height: calc(100dvh - 120px);
+          padding: calc(28px * var(--sf)) calc(12px * var(--sf)) calc(48px * var(--sf));
+        }
+
+        .open-source-main__inner {
+          align-items: stretch;
+        }
+
+        .open-source-table-wrap {
+          overflow-x: auto;
+        }
+
+        .open-source-table {
+          width: 720px;
+          min-width: 720px;
+        }
+
+        .open-source-meta {
+          width: 100%;
+          font-size: calc(14px * var(--sf));
+          letter-spacing: calc(-0.28px * var(--sf));
+          line-height: calc(16px * var(--sf));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="open-source-page products-page">
+      <header class="open-source-header">
+        <div class="open-source-header__inner">
+          <a href="/" class="open-source-header__logo">0001</a>
+          <nav class="open-source-header__nav">
+            <a href="/products" class="open-source-header__link"><span data-i18n="Products">Products</span></a>
+            <a href="/open-source" class="open-source-header__link open-source-header__link--active">
+              <span data-i18n="Open Source">Open Source</span>
+              <svg class="open-source-header__github" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.24 3.34.95.1-.74.4-1.24.73-1.53-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.04c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.42.36.78 1.07.78 2.16v3.15c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+              </svg>
+            </a>
+            <a href="/architecture" class="open-source-header__link"><span data-i18n="Architecture">Architecture</span></a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="open-source-main">
+        <div class="open-source-main__inner">
+          <div class="open-source-table-wrap">
+            <table class="open-source-table">
+              <!-- OPEN_SOURCE_TABLE_START -->
+              <thead>
+                <tr>
+                  <th class="open-source-table__header-cell open-source-table__header-cell--project"><ds-text>Project</ds-text></th>
+                  <th class="open-source-table__header-cell open-source-table__header-cell--description"><ds-text>Description</ds-text></th>
+                  <th class="open-source-table__header-cell"><ds-text>Language</ds-text></th>
+                  <th class="open-source-table__header-cell"><ds-text>Stars</ds-text></th>
+                  <th class="open-source-table__header-cell"><ds-text>Updated</ds-text></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="open-source-table__cell open-source-table__cell--project">
+                    <a href="https://github.com/0001-labs/0001-website" target="_blank" rel="noreferrer">
+                      <span class="open-source-table__project-name">0001-website</span>
+                    </a>
+                  </td>
+                  <td class="open-source-table__cell open-source-table__cell--description">A website for 0001</td>
+                  <td class="open-source-table__cell">HTML</td>
+                  <td class="open-source-table__cell">0</td>
+                  <td class="open-source-table__cell">Apr 28, 2026</td>
+                </tr>
+
+                <tr>
+                  <td class="open-source-table__cell open-source-table__cell--project">
+                    <a href="https://github.com/0001-labs/drag" target="_blank" rel="noreferrer">
+                      <span class="open-source-table__project-name">drag</span>
+                    </a>
+                  </td>
+                  <td class="open-source-table__cell open-source-table__cell--description">Framework-agnostic drag-and-drop primitives for TypeScript.</td>
+                  <td class="open-source-table__cell">TypeScript</td>
+                  <td class="open-source-table__cell">0</td>
+                  <td class="open-source-table__cell">Apr 28, 2026</td>
+                </tr>
+
+                <tr>
+                  <td class="open-source-table__cell open-source-table__cell--project">
+                    <a href="https://github.com/0001-labs/ds-one" target="_blank" rel="noreferrer">
+                      <span class="open-source-table__project-name">ds-one</span>
+                    </a>
+                  </td>
+                  <td class="open-source-table__cell open-source-table__cell--description">A plug and play design system</td>
+                  <td class="open-source-table__cell">TypeScript</td>
+                  <td class="open-source-table__cell">0</td>
+                  <td class="open-source-table__cell">Jan 31, 2026</td>
+                </tr>
+
+                <tr>
+                  <td class="open-source-table__cell open-source-table__cell--project">
+                    <a href="https://github.com/0001-labs/openbook" target="_blank" rel="noreferrer">
+                      <span class="open-source-table__project-name">openbook</span>
+                    </a>
+                  </td>
+                  <td class="open-source-table__cell open-source-table__cell--description">A transparent framework for companies</td>
+                  <td class="open-source-table__cell">HTML</td>
+                  <td class="open-source-table__cell">0</td>
+                  <td class="open-source-table__cell">Jan 28, 2026</td>
+                </tr>
+
+                <tr>
+                  <td class="open-source-table__cell open-source-table__cell--project">
+                    <a href="https://github.com/0001-labs/digte" target="_blank" rel="noreferrer">
+                      <span class="open-source-table__project-name">digte</span>
+                    </a>
+                  </td>
+                  <td class="open-source-table__cell open-source-table__cell--description">A poetry collection that can be read online</td>
+                  <td class="open-source-table__cell">-</td>
+                  <td class="open-source-table__cell">0</td>
+                  <td class="open-source-table__cell">Jan 28, 2026</td>
+                </tr>
+
+                <tr>
+                  <td class="open-source-table__cell open-source-table__cell--project">
+                    <a href="https://github.com/0001-labs/blocker" target="_blank" rel="noreferrer">
+                      <span class="open-source-table__project-name">blocker</span>
+                    </a>
+                  </td>
+                  <td class="open-source-table__cell open-source-table__cell--description">A 100% unpassable Screen Time app</td>
+                  <td class="open-source-table__cell">TypeScript</td>
+                  <td class="open-source-table__cell">0</td>
+                  <td class="open-source-table__cell">Jan 28, 2026</td>
+                </tr>
+
+                <tr>
+                  <td class="open-source-table__cell open-source-table__cell--project">
+                    <a href="https://github.com/0001-labs/archcss" target="_blank" rel="noreferrer">
+                      <span class="open-source-table__project-name">archcss</span>
+                    </a>
+                  </td>
+                  <td class="open-source-table__cell open-source-table__cell--description">A CSS-like syntax for creating floorplans and architectural planning</td>
+                  <td class="open-source-table__cell">TypeScript</td>
+                  <td class="open-source-table__cell">0</td>
+                  <td class="open-source-table__cell">Jan 28, 2026</td>
+                </tr>
+              </tbody>
+              <!-- OPEN_SOURCE_TABLE_END -->
+            </table>
+          </div>
+          <p class="open-source-meta">0001-labs on GitHub · <span data-current-year></span></p>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -250,7 +250,12 @@
     "dataDeletion.contact.body": "For deletion requests or status checks, contact",
     "tokushoho.seller": "Seller",
     "tokushoho.address": "Address",
-    "tokushoho.contact": "Contact"
+    "tokushoho.contact": "Contact",
+    "Open Source": "Open Source",
+    "Description": "Description",
+    "Language": "Language",
+    "Stars": "Stars",
+    "Updated": "Updated"
   },
   "da": {
     "0001": "0001",
@@ -505,7 +510,12 @@
     "dataDeletion.contact.body": "For deletion requests or status checks, contact",
     "tokushoho.seller": "Seller",
     "tokushoho.address": "Address",
-    "tokushoho.contact": "Contact"
+    "tokushoho.contact": "Contact",
+    "Open Source": "Open source",
+    "Description": "Beskrivelse",
+    "Language": "Sprog",
+    "Stars": "Stjerner",
+    "Updated": "Opdateret"
   },
   "ja": {
     "0001": "0001",
@@ -759,6 +769,11 @@
     "dataDeletion.contact.body": "削除依頼またはステータス確認は次のメールアドレスまでご連絡ください:",
     "tokushoho.seller": "販売業者",
     "tokushoho.address": "所在地",
-    "tokushoho.contact": "連絡先"
+    "tokushoho.contact": "連絡先",
+    "Open Source": "オープンソース",
+    "Description": "説明",
+    "Language": "言語",
+    "Stars": "スター",
+    "Updated": "更新"
   }
 }
