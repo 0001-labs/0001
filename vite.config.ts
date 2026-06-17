@@ -20,6 +20,7 @@ export default defineConfig({
         services: resolve(__dirname, "client/services.html"),
         contact: resolve(__dirname, "client/contact.html"),
         products: resolve(__dirname, "client/products.html"),
+        "0001-projects": resolve(__dirname, "client/0001-projects.html"),
         "open-source": resolve(__dirname, "client/open-source.html"),
         sentences: resolve(__dirname, "client/sentences.html"),
         thankyou: resolve(__dirname, "client/thank-you.html"),

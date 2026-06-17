@@ -1,0 +1,351 @@
+.client-projects-index,
+.client-project-review {
+  background: var(--base-white);
+  color: var(--base-black);
+  font-family: var(--font-regular);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.client-projects-photo {
+  display: block;
+  height: 150px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 200px;
+}
+
+.client-projects-photo::before,
+.client-projects-photo::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.client-projects-photo::before {
+  background: var(--chartreuse-green);
+  mix-blend-mode: screen;
+}
+
+.client-projects-photo::after {
+  background: rgba(204, 255, 77, 0.3);
+}
+
+.client-projects-photo img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.client-projects-nav {
+  align-items: center;
+  display: flex;
+  gap: 50px;
+  margin-left: clamp(240px, 26.666vw, 400px);
+  padding-top: 40px;
+}
+
+.client-projects-nav a {
+  color: var(--base-black);
+  font-family: var(--font-regular);
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.client-projects-nav a:hover,
+.client-projects-nav a[aria-current="page"] {
+  color: var(--every-green);
+}
+
+.client-projects-main {
+  margin-left: clamp(240px, 26.666vw, 400px);
+  padding-top: 124px;
+  width: min(600px, calc(100vw - clamp(240px, 26.666vw, 400px) - 24px));
+}
+
+.client-projects-title {
+  color: var(--base-slate);
+  font-family: var(--font-canon);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 64px;
+}
+
+.client-projects-title span {
+  color: var(--base-black);
+  font-family: var(--font-medium);
+}
+
+.client-projects-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 34px;
+}
+
+.client-projects-group h2 {
+  color: var(--base-black);
+  font-family: var(--font-medium);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 15px;
+  margin: 0;
+}
+
+.client-projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.client-projects-list__link {
+  align-items: flex-start;
+  color: var(--base-slate);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-canon);
+  gap: 8px;
+  text-decoration: none;
+  width: min(100%, 520px);
+}
+
+.client-projects-list__link span {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.client-projects-list__link small {
+  font-family: var(--font-canon);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  vertical-align: super;
+}
+
+.client-projects-list__link p {
+  color: var(--base-slate);
+  font-family: var(--font-regular);
+  font-size: 16px;
+  letter-spacing: -0.32px;
+  line-height: 1.45;
+  margin: 0;
+  max-width: 470px;
+}
+
+.client-projects-list__link:hover {
+  color: var(--every-green);
+}
+
+.client-projects-list__link:hover p {
+  color: var(--base-black);
+}
+
+.client-projects-index one-footer {
+  display: block;
+  margin-top: 150px;
+}
+
+.client-project-review {
+  --review-measure: min(640px, calc(100vw - 48px));
+}
+
+.project-review-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 60px 0;
+}
+
+.project-review-brand {
+  color: var(--base-black);
+  font-family: var(--font-medium);
+  font-size: 19.5px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.project-review-nav {
+  display: flex;
+  gap: 32px;
+}
+
+.project-review-nav a {
+  color: var(--base-black);
+  font-family: var(--font-regular);
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.project-review-nav a:hover {
+  color: var(--every-green);
+}
+
+.project-review-main {
+  margin: 124px auto 120px;
+  width: var(--review-measure);
+}
+
+.project-review-meta {
+  color: var(--base-black);
+  display: flex;
+  font-family: var(--font-medium);
+  font-size: 16px;
+  gap: 14px;
+  line-height: 15px;
+  margin: 0 0 30px;
+}
+
+.project-review-title {
+  color: var(--base-slate);
+  font-family: var(--font-canon);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0 0 16px;
+}
+
+.project-review-status {
+  background: var(--chartreuse-green);
+  color: var(--every-green);
+  display: inline-flex;
+  font-family: var(--font-regular);
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 90px;
+  padding: 0 4px;
+}
+
+.project-review-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.project-review-section {
+  border-top: 1.5px solid rgba(30, 30, 30, 0.14);
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 160px 1fr;
+  padding-top: 24px;
+}
+
+.project-review-section h2 {
+  color: var(--base-black);
+  font-family: var(--font-medium);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 15px;
+  margin: 0;
+}
+
+.project-review-section p {
+  color: var(--base-slate);
+  font-family: var(--font-canon);
+  font-size: 24px;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.project-review-back {
+  color: var(--every-green);
+  display: inline-flex;
+  font-family: var(--font-regular);
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 80px;
+  text-decoration: none;
+}
+
+.project-review-back:hover {
+  color: var(--base-black);
+}
+
+@media (max-width: 900px) {
+  .client-projects-photo {
+    height: 102px;
+    width: 136px;
+  }
+
+  .client-projects-nav,
+  .client-projects-main {
+    margin-left: 24px;
+    width: min(600px, calc(100vw - 48px));
+  }
+
+  .client-projects-nav {
+    justify-content: flex-end;
+    padding-right: 24px;
+  }
+
+  .client-projects-main {
+    padding-top: 114px;
+  }
+
+}
+
+@media (max-width: 640px) {
+  .client-projects-nav {
+    gap: 20px;
+    padding-top: 28px;
+  }
+
+  .client-projects-nav a {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .client-projects-title {
+    font-size: 38px;
+    line-height: 1.1;
+    margin-bottom: 54px;
+  }
+
+  .client-projects-list__link span {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .client-projects-list__link p {
+    font-size: 14px;
+    letter-spacing: -0.28px;
+  }
+
+  .client-projects-index one-footer {
+    margin-top: 110px;
+  }
+
+  .project-review-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 28px;
+    padding: 28px 24px 0;
+  }
+
+  .project-review-main {
+    margin: 84px auto 88px;
+  }
+
+  .project-review-title {
+    font-size: 44px;
+  }
+
+  .project-review-status {
+    margin-bottom: 64px;
+  }
+
+  .project-review-section {
+    gap: 18px;
+    grid-template-columns: 1fr;
+  }
+
+  .project-review-section p {
+    font-size: 22px;
+  }
+}
