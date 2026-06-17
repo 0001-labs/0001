@@ -174,8 +174,8 @@ class OneFooter extends HTMLElement {
           --font-regular: "GT America";
           --font-medium: "GT America";
           --font-canon: "GT-Canon-M-Standard-Medium";
-          /* Footer nav grid — Figma 150 + 150 + 100 = 400px; tweak gaps here */
-          --footer-nav-cols: 150px 150px 100px;
+          /* Footer nav grid — old spacing plus one inserted Link column */
+          --footer-nav-cols: 150px 150px 150px 100px;
           --footer-nav-column-gap: 0px;
         }
 
@@ -188,8 +188,8 @@ class OneFooter extends HTMLElement {
         .footer__inner {
           position: relative;
           box-sizing: border-box;
-          width: 400px;
-          max-width: 400px;
+          width: 550px;
+          max-width: 550px;
           margin-left: 400px;
           margin-right: 0;
           padding: 80px 0;
@@ -215,7 +215,7 @@ class OneFooter extends HTMLElement {
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
-          width: 100%;
+          width: 400px;
           box-sizing: border-box;
         }
 
@@ -254,6 +254,7 @@ class OneFooter extends HTMLElement {
         }
 
         .footer__nav-column--company,
+        .footer__nav-column--link,
         .footer__nav-column--work {
           width: 100%;
         }
@@ -267,7 +268,7 @@ class OneFooter extends HTMLElement {
           width: 100%;
         }
 
-        /* Other column — third grid track */
+        /* Other column — final grid track */
         .footer__nav-column--other {
           align-items: flex-start;
           text-align: left;
@@ -295,7 +296,7 @@ class OneFooter extends HTMLElement {
           line-height: 15px;
           min-height: 15px;
           letter-spacing: -0.32px;
-          color: var(--footer-link-color, #ff4438);
+          color: var(--footer-link-color, #979441);
           margin: 0;
           text-decoration: none;
         }
@@ -312,7 +313,7 @@ class OneFooter extends HTMLElement {
           letter-spacing: -0.32px;
           line-height: 20px;
           min-height: 20px;
-          color: var(--footer-link-color, #ff4438);
+          color: var(--footer-link-color, #979441);
           text-decoration: none;
           margin: 0;
           padding: 0;
@@ -332,11 +333,15 @@ class OneFooter extends HTMLElement {
         }
 
         .footer__link--with-icon a {
+          display: inline-flex;
+          align-items: center;
           color: inherit;
+          line-height: inherit;
           text-decoration: none;
         }
 
         .footer__link-icon {
+          display: block;
           width: 16px;
           height: 16px;
           flex: 0 0 auto;
@@ -381,7 +386,7 @@ class OneFooter extends HTMLElement {
           font-family: var(--font-regular);
           vertical-align: top;
           overflow: hidden;
-          color: var(--footer-control-text, #ff4438);
+          color: var(--footer-control-text, #979441);
           background-color: var(--footer-control-background, #ccff4d);
         }
 
@@ -409,7 +414,7 @@ class OneFooter extends HTMLElement {
         }
 
         .footer__link--dimmed {
-          color: var(--footer-link-dimmed, rgba(255, 68, 56, 0.4));
+          color: var(--footer-link-dimmed, rgba(151, 148, 65, 0.4));
           font-size: 12px;
         }
 
@@ -434,7 +439,7 @@ class OneFooter extends HTMLElement {
           letter-spacing: -0.28px;
           line-height: 20px;
           min-height: 20px;
-          color: var(--footer-copyright, rgba(255, 68, 56, 0.32));
+          color: var(--footer-copyright, rgba(101, 138, 8, 0.3));
           margin: 0;
           text-align: right;
         }
@@ -485,17 +490,22 @@ class OneFooter extends HTMLElement {
 
           .footer__nav-column--company {
             grid-column: 1;
-            grid-row: 1;
+            grid-row: 2;
           }
 
           .footer__nav-column--work {
             grid-column: 1;
-            grid-row: 2;
+            grid-row: 1;
+          }
+
+          .footer__nav-column--link {
+            grid-column: 2;
+            grid-row: 1;
           }
 
           .footer__nav-column--other {
             grid-column: 2;
-            grid-row: 1 / span 2;
+            grid-row: 2;
             align-self: start;
             display: flex;
             flex-direction: column;
@@ -578,7 +588,7 @@ class OneFooter extends HTMLElement {
 
           .footer__copyright {
             font-size: calc(12px * var(--sf));
-            color: rgba(255, 68, 56, 0.45);
+            color: var(--footer-copyright, rgba(101, 138, 8, 0.3));
           }
         }
       </style>
@@ -602,7 +612,7 @@ class OneFooter extends HTMLElement {
               </div>
               <a href="/products" class="footer__link footer__link--sans" data-i18n="Products">Products</a>
               <span class="footer__link footer__link--sans footer__link--with-icon">
-                <a href="/open-source" data-i18n="Open Source">Open Source</a>
+                <a href="/open-source" data-i18n="Open Source">Open source</a>
                 <a href="https://github.com/0001-labs" target="_blank" rel="noreferrer" aria-label="0001-labs on GitHub">
                 <svg class="footer__link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.24 3.34.95.1-.74.4-1.24.73-1.53-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.04c.98 0 1.96.13 2.88.39 2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.42.36.78 1.07.78 2.16v3.15c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
@@ -611,6 +621,14 @@ class OneFooter extends HTMLElement {
               </span>
               <a href="/architecture" class="footer__link footer__link--sans" data-i18n="Architecture">Architecture</a>
               <a href="/contact" class="button" data-i18n="Contact">Contact</a>
+            </div>
+            <div class="footer__nav-column footer__nav-column--link">
+              <div class="footer__nav-heading-group">
+                <span class="footer__nav-header" data-i18n="Link">Link</span>
+                <a href="https://link.0001.dev/sign-in" class="footer__link footer__link--sans" target="_blank" rel="noreferrer" data-i18n="Sign in">Sign in</a>
+              </div>
+              <a href="https://link.0001.dev/sign-up" class="footer__link footer__link--sans" target="_blank" rel="noreferrer" data-i18n="Sign up">Sign up</a>
+              <a href="https://link.0001.dev" class="footer__link footer__link--sans" target="_blank" rel="noreferrer" data-i18n="What is Link?">What is Link?</a>
             </div>
             <div class="footer__nav-column footer__nav-column--company">
               <div class="footer__nav-heading-group">
@@ -640,31 +658,11 @@ class OneFooter extends HTMLElement {
                 data-i18n="Instagram"
               >Instagram</a>
               <a
-                href="/terms"
+                href="/terms-and-conditions"
                 class="footer__link footer__link--sans footer__link--poetry"
                 data-i18n="Terms and conditions"
                 data-role="terms-link"
               >Terms and conditions</a>
-              <a
-                href="/privacy"
-                class="footer__link footer__link--sans footer__link--dimmed"
-                data-i18n="Privacy"
-              >Privacy</a>
-              <a
-                href="/data-deletion"
-                class="footer__link footer__link--sans footer__link--dimmed"
-                data-i18n="Data deletion"
-              >Data deletion</a>
-              <a
-                href="/tokushoho"
-                class="footer__link footer__link--sans footer__link--dimmed"
-                data-i18n="Tokushoho"
-              >Tokushoho</a>
-              <a
-                href="https://link.0001.dev"
-                class="footer__link footer__link--sans footer__link--dimmed"
-                data-i18n="Link"
-              >Link</a>
               <div class="footer__controls-mobile">
                 <button type="button" class="button" data-role="lang">English</button>
                 <button type="button" class="button" data-role="theme">Light</button>

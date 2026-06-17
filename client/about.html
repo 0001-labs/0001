@@ -143,7 +143,8 @@
         color: var(--base-slate);
       }
 
-      .team-member__linkedin {
+      .team-member__linkedin,
+      .team-member__email-icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -155,32 +156,28 @@
         opacity: 0.8;
       }
 
-      .team-member__linkedin:hover {
+      .team-member__linkedin:hover,
+      .team-member__email-icon:hover {
         color: var(--base-slate);
         opacity: 1;
       }
 
-      .team-member__linkedin svg {
+      .team-member__linkedin svg,
+      .team-member__email-icon svg {
         width: 14px;
         height: 14px;
         display: block;
       }
 
-      .team-member__role,
-      .team-member__email {
+      .team-member__bio {
+        margin: 0;
+        width: 451px;
+        max-width: 100%;
         font-family: var(--font-canon);
         font-size: 16px;
         letter-spacing: -0.32px;
         color: var(--base-slate);
         line-height: 1.5;
-      }
-
-      .team-member__email {
-        text-decoration: none;
-      }
-
-      .team-member__email:hover {
-        text-decoration: underline;
       }
 
       .team-member__details {
@@ -193,24 +190,6 @@
         flex-direction: column;
         gap: 16px;
         margin-top: 16px;
-      }
-
-      .team-member__booking-copy {
-        font-family: var(--font-regular);
-        font-size: 14px;
-        letter-spacing: -0.28px;
-        color: var(--base-slate);
-        line-height: 1.5;
-        max-width: 440px;
-        font-variant-ligatures: common-ligatures discretionary-ligatures;
-        font-feature-settings:
-          "liga" 1,
-          "calt" 1,
-          "dlig" 1,
-          "ss01" 1,
-          "ss02" 1,
-          "ss03" 1,
-          "ss04" 1;
       }
 
       .team-member__booking-button {
@@ -440,8 +419,7 @@
 
       @media (max-width: 768px) {
         .team-member__name,
-      .team-member__role,
-      .team-member__email {
+      .team-member__bio {
         font-size: calc(14px * var(--sf));
         }
       }
@@ -450,13 +428,6 @@
         .team-member__booking {
         gap: calc(12px * var(--sf));
         margin-top: calc(12px * var(--sf));
-        }
-      }
-
-      @media (max-width: 768px) {
-        .team-member__booking-copy {
-        font-size: calc(14px * var(--sf));
-        max-width: 100%;
         }
       }
 
@@ -559,14 +530,22 @@
                     <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6A2.49 2.49 0 0 1 0 3.5 2.49 2.49 0 0 1 2.48 1 2.49 2.49 0 0 1 4.98 3.5ZM.5 8h4V23h-4V8Zm7 0h3.84v2.05h.05c.53-1.01 1.84-2.08 3.79-2.08 4.05 0 4.8 2.67 4.8 6.14V23h-4v-7.8c0-1.86-.03-4.25-2.59-4.25-2.6 0-3 2.03-3 4.12V23h-4V8Z"/>
                   </svg>
                 </a>
+                <a
+                  href="mailto:joachim@0001.dev"
+                  class="team-member__email-icon"
+                  aria-label="Email Joachim Aaløkke Sørensen"
+                >
+                  <svg class="lucide lucide-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  </svg>
+                </a>
               </span>
               <div class="team-member__details">
-                <span class="team-member__role">Product @0001</span>
-                <a href="mailto:joachim@0001.dev" class="team-member__email">joachim@0001.dev</a>
+                <p class="team-member__bio" data-i18n="founder-bio">
+                  I founded 0001 to build useful digital products and help teams turn concrete problems into scalable software. My work combines UX, full-stack engineering, and practical delivery across hardware and software. I hold an MSc in IT from the IT University of Copenhagen.
+                </p>
                 <div class="team-member__booking">
-                  <p class="team-member__booking-copy" data-i18n="→ Book a meeting to talk through your project.">
-                    → Book a meeting to talk through your project.
-                  </p>
                   <button type="button" class="button team-member__booking-button" data-booking-open data-i18n="Book a meeting">Book a meeting</button>
                 </div>
               </div>
@@ -575,14 +554,22 @@
         </section>
 
         <section class="about-offices-section">
-          <h2 class="section-title">Offices</h2>
+          <h2 class="section-title" data-i18n="Offices">Offices</h2>
           <div class="about-offices">
             <div class="office">
-              <span class="office__title">Tokyo</span>
+              <span class="office__title" data-i18n="Copenhagen">Copenhagen</span>
               <address class="office__address">
-                〒114-0022<br />
-                東京都北区<br />
-                王子本町2丁目15-7
+                <span data-i18n="office-copenhagen-address-1">Tomsgårdsvej 22A</span><br />
+                <span data-i18n="office-copenhagen-address-2">DK2400</span><br />
+                <span data-i18n="office-copenhagen-address-3">Copenhagen NV</span>
+              </address>
+            </div>
+            <div class="office">
+              <span class="office__title" data-i18n="Tokyo">Tokyo</span>
+              <address class="office__address">
+                <span data-i18n="office-tokyo-address-1">2-15-7 Oji-Honcho</span><br />
+                <span data-i18n="office-tokyo-address-2">Kita-ku, Tokyo</span><br />
+                <span data-i18n="office-tokyo-address-3">114-0022</span>
               </address>
             </div>
           </div>
