@@ -107,12 +107,11 @@
 .client-projects-list__link {
   align-items: flex-start;
   color: var(--base-slate);
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   font-family: var(--font-canon);
-  gap: 8px;
+  gap: 4px;
   text-decoration: none;
-  width: min(100%, 520px);
+  width: max-content;
 }
 
 .client-projects-list__link span {
@@ -125,25 +124,10 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 16px;
-  vertical-align: super;
-}
-
-.client-projects-list__link p {
-  color: var(--base-slate);
-  font-family: var(--font-regular);
-  font-size: 16px;
-  letter-spacing: -0.32px;
-  line-height: 1.45;
-  margin: 0;
-  max-width: 470px;
 }
 
 .client-projects-list__link:hover {
   color: var(--every-green);
-}
-
-.client-projects-list__link:hover p {
-  color: var(--base-black);
 }
 
 .client-projects-index one-footer {
@@ -310,11 +294,6 @@
   .client-projects-list__link span {
     font-size: 30px;
     line-height: 36px;
-  }
-
-  .client-projects-list__link p {
-    font-size: 14px;
-    letter-spacing: -0.28px;
   }
 
   .client-projects-index one-footer {
