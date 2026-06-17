@@ -177,6 +177,10 @@ class OneFooter extends HTMLElement {
           /* Footer nav grid — old spacing plus one inserted Link column */
           --footer-nav-cols: 150px 150px 150px 100px;
           --footer-nav-column-gap: 0px;
+          --footer-control-text: #979441;
+          --footer-link-color: #979441;
+          --footer-link-dimmed: rgba(151, 148, 65, 0.4);
+          --footer-copyright: rgba(101, 138, 8, 0.3);
         }
 
         .footer {
@@ -233,6 +237,12 @@ class OneFooter extends HTMLElement {
           display: flex;
           gap: 20px;
           align-items: center;
+        }
+
+        .footer__controls .button,
+        .footer__controls-mobile .button {
+          color: var(--footer-control-text, #979441);
+          background-color: var(--footer-control-background, #ccff4d);
         }
 
         .footer__nav {
