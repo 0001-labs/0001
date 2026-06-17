@@ -410,69 +410,6 @@
         display: none;
       }
 
-      .home-legal {
-        padding-left: 400px;
-        padding-right: 300px;
-      }
-
-      .home-legal__inner {
-        width: min(100%, 400px);
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        padding: 24px;
-        border: 1px solid var(--panel-border);
-        border-radius: 18px;
-        background: var(--panel-background-subtle);
-        box-sizing: border-box;
-      }
-
-      .home-legal__eyebrow,
-      .home-legal__body,
-      .home-legal__list,
-      .home-legal__link {
-        font-family: var(--font-regular);
-        font-size: 16px;
-        letter-spacing: -0.32px;
-        line-height: 1.5;
-        color: var(--base-slate);
-      }
-
-      .home-legal__eyebrow {
-        margin: 0;
-        color: var(--base-black);
-      }
-
-      .home-legal__title {
-        margin: 0;
-        font-family: var(--font-canon);
-        font-size: 28px;
-        font-weight: 400;
-        letter-spacing: -0.56px;
-        line-height: 1.1;
-        color: var(--base-black);
-      }
-
-      .home-legal__list {
-        margin: 0;
-        padding-left: 20px;
-      }
-
-      .home-legal__list li + li {
-        margin-top: 6px;
-      }
-
-      .home-legal__body {
-        margin: 0;
-      }
-
-      .home-legal__link {
-        color: var(--base-black);
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 2px;
-      }
-
       /* Mobile styles - using DS one .mobile class and --sf scaling factor */
       @media (max-width: 768px) {
         .home-page {
@@ -849,38 +786,6 @@
         }
       }
 
-      @media (max-width: 768px) {
-        .home-legal {
-        padding: 0 calc(20px * var(--sf));
-        }
-      }
-
-      @media (max-width: 768px) {
-        .home-legal__inner {
-        width: 100%;
-        padding: calc(18px * var(--sf));
-        border-radius: calc(16px * var(--sf));
-        gap: calc(12px * var(--sf));
-        }
-      }
-
-      @media (max-width: 768px) {
-        .home-legal__eyebrow,
-      .home-legal__body,
-      .home-legal__list,
-      .home-legal__link {
-        font-size: calc(14px * var(--sf));
-        letter-spacing: calc(-0.28px * var(--sf));
-        }
-      }
-
-      @media (max-width: 768px) {
-        .home-legal__title {
-        font-size: calc(24px * var(--sf));
-        letter-spacing: calc(-0.48px * var(--sf));
-        }
-      }
-
     </style>
   </head>
   <body>
@@ -998,23 +903,6 @@
             </div>
           </div>
         </main>
-
-        <section class="home-legal" aria-labelledby="home-legal-title">
-          <div class="home-legal__inner">
-            <p class="home-legal__eyebrow">Legal business information for Meta and compliance review</p>
-            <h2 class="home-legal__title" id="home-legal-title">Legal business name: ヨアキム セレンセン</h2>
-            <ul class="home-legal__list">
-              <li>Trade name: イチ</li>
-              <li>Brand / website name: 0001</li>
-              <li>Business address: 〒114-0022 東京都北区王子本町2丁目15-7</li>
-            </ul>
-            <p class="home-legal__body">
-              This website is operated by ヨアキム セレンセン.
-              Official disclosure page:
-              <a class="home-legal__link" href="/tokushoho">https://0001.dev/tokushoho</a>
-            </p>
-          </div>
-        </section>
 
         <!-- Footer -->
         <one-footer></one-footer>
